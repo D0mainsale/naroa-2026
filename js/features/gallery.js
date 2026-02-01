@@ -14,19 +14,20 @@
   let ARTWORKS = [];
   let TAXONOMY = null;
   
-  // Series-based categories from taxonomy
+  // Series-based categories from NotebookLM taxonomy
   const SERIES_LABELS = {
-    'todos': 'Todas',
-    'divinos': 'DiviNos',
-    'iconos': 'Iconos',
-    'retratos': 'Retratos',
-    'enlatas': 'En.lata.das',
-    'espejos': 'Espejos',
-    'mitologia': 'Mitología',
-    'golden': 'Golden',
-    'alegria': 'Alegría',
-    'pajarracas': 'Pajarracas',
-    'otros': 'Otros'
+    'todos': 'Todas 🎨',
+    'rocks': 'Rocks 🤟',
+    'tributos-musicales': 'Tributos 🎤',
+    'espejos-del-alma': 'Espejos 🪞',
+    'enlatas': 'En.lata.das 🥫',
+    'walking-gallery': 'Walking Gallery 🚶',
+    'facefood': 'Facefood 👨‍🍳',
+    'bodas': 'Bodas 💒',
+    'golden': 'Golden ✨',
+    'amor': 'Amor 💕',
+    'retratos': 'Retratos 👤',
+    'naturaleza': 'Naturaleza 🦜'
   };
   
   const CATEGORIES = Object.keys(SERIES_LABELS);

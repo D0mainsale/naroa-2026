@@ -1,90 +1,140 @@
 {
   "meta": {
-    "version": "1.0.0",
-    "generatedBy": "IA Alliance Protocol",
-    "generatedAt": "2026-02-01T09:04:00Z",
-    "source": "NotebookLM Album Titles Master"
+    "version": "3.0.0",
+    "generatedBy": "NotebookLM Analysis + IA Alliance Protocol",
+    "generatedAt": "2026-02-01T09:11:00Z",
+    "source": "NAROA GUTIÉRREZ GIL - ALBUMS LINKS (NotebookLM)"
   },
   "series": {
-    "divinos": {
-      "displayName": "DiviNos",
-      "description": "Iconos del rock y pop reimaginados con técnica mixta",
-      "works": ["amy-rocks", "johnny-rocks", "marilyn-rocks", "james-rocks"]
+    "rocks": {
+      "displayName": "Rocks",
+      "displayNameEs": "Rocks",
+      "description": "Stylized collection dedicated to famous cultural icons with 'Rocks' suffix",
+      "descriptionEs": "Colección estilizada dedicada a iconos culturales famosos con sufijo 'Rocks'",
+      "emoji": "🤟",
+      "color": "#D4AF37",
+      "works": ["Amy Rocks", "Johnny Rocks", "Marilyn Rocks", "James Rocks"]
     },
-    "iconos": {
-      "displayName": "Iconos",
-      "description": "Retratos de figuras culturales icónicas",
-      "works": ["audrey-hepburn", "mr-fahrenheit", "baroque-farrokh", "celia-cruz-asucar", "celia-cruz-cantinflowers", "mario-moreno"]
+    "tributos-musicales": {
+      "displayName": "Musical Tributes",
+      "displayNameEs": "Tributos Musicales",
+      "description": "Queen, Bowie and other music legends",
+      "descriptionEs": "Queen, Bowie y otras leyendas de la música",
+      "emoji": "🎤",
+      "color": "#FFD700",
+      "works": ["Baroque Farrokh", "Mr. Fahrenheit", "Tedás Queen", "Can-dy Queen", "Los Clarinetes de Bowie", "Bowie Shhh..till Alive", "Starchild", "The Starchild"]
     },
-    "retratos": {
-      "displayName": "Retratos",
-      "description": "Comisiones y retratos personales",
-      "works": ["hugo-box", "peter-rowan", "denis", "infusion-de-berto", "buena-fuente", "starchild"]
+    "espejos-del-alma": {
+      "displayName": "Espejos del Alma",
+      "displayNameEs": "Espejos del Alma",
+      "description": "Recurring introspective project exploring identity and reflection",
+      "descriptionEs": "Proyecto introspectivo recurrente explorando identidad y reflexión",
+      "emoji": "🪞",
+      "color": "#7B68EE",
+      "works": ["Espejos del Alma"]
     },
     "enlatas": {
       "displayName": "En.lata.das",
-      "description": "Serie de collage en latas de conserva",
-      "works": ["amor-en-conserva", "dar-la-lata", "hammock-in-tin"]
-    },
-    "espejos": {
-      "displayName": "Espejos del Alma",
-      "description": "Serie introspectiva sobre la identidad",
-      "works": ["espejos-del-alma", "espejos-del-alma-var3"]
-    },
-    "mitologia": {
-      "displayName": "Mitología",
-      "description": "Figuras míticas y leyendas",
-      "works": ["la-llorona", "monster-dragon"]
-    },
-    "golden": {
-      "displayName": "The Golden Couple",
-      "description": "Serie dorada con técnicas de pan de oro",
-      "works": ["the-golden-couple-and-balloons", "lagrimas-de-oro", "pink-and-sparkles"]
-    },
-    "alegria": {
-      "displayName": "Alegría",
-      "description": "Obras vibrantes con mensaje optimista",
-      "works": ["smile-world-smiles-back", "me-parto-de-risa", "soy-un-amor-y-tengo-alas", "love", "multidimensional-love"]
-    },
-    "pajarracas": {
-      "displayName": "Pajarracas",
-      "description": "Serie de aves estilizadas",
-      "works": ["pajarraca-azul", "wild-not"]
+      "displayNameEs": "En.lata.das",
+      "description": "Sardine tin art and canned food collage series",
+      "descriptionEs": "Arte en latas de conserva y collages de conservas",
+      "emoji": "🥫",
+      "color": "#C41E3A",
+      "works": ["En.lata.das", "En.lata.2", "Dar la Lata", "Amor en Conserva", "Temuri en-caja", "en-caja"]
     },
     "walking-gallery": {
       "displayName": "Walking Gallery",
-      "description": "Arte urbano itinerante",
-      "works": ["walking-gallery-plumas"]
-    }
-  },
-  "techniques": {
-    "mixed-media": {
-      "displayName": "Técnica Mixta",
-      "description": "Acrílico, collage, pan de oro"
+      "displayNameEs": "Walking Gallery",
+      "description": "Urban art exhibitions in Bilbao streets (2013-2022)",
+      "descriptionEs": "Exposiciones de arte urbano en las calles de Bilbao (2013-2022)",
+      "emoji": "�",
+      "color": "#4169E1",
+      "works": ["Walking Gallery Bilbao November 2013", "Walking Gallery Bilbao Art District 2017", "VI Aniversario Walking Gallery Bilbao", "Walking Gallery Bilbao Fair Saturday 2021", "Walking Gallery Bilbao 23 Octubre 2022"]
     },
-    "pencil": {
-      "displayName": "Grafito/Lápiz",
-      "description": "Dibujo a lápiz"
+    "facefood": {
+      "displayName": "Facefood & Gastronomy",
+      "displayNameEs": "Facefood y Gastronomía",
+      "description": "Chef jackets and culinary-themed art",
+      "descriptionEs": "Chaquetas de chef y arte de temática culinaria",
+      "emoji": "👨‍🍳",
+      "color": "#FF6347",
+      "works": ["facefood: expos de quita y pon", "facefood en Algorta", "Chaqueta de Cocinero Goiri Eder", "Chaqueta de Cocinera Yolanda", "Diego's Soul Kitchen Cook Jacket", "Piel de Chef", "El Cocinero Emplatado"]
     },
-    "collage": {
-      "displayName": "Collage",
-      "description": "Papeles, recortes, texturas"
+    "bodas": {
+      "displayName": "Weddings",
+      "displayNameEs": "Bodas",
+      "description": "Wedding celebrations and Candy Wedding series",
+      "descriptionEs": "Celebraciones nupciales y serie Candy Wedding",
+      "emoji": "💒",
+      "color": "#FFB6C1",
+      "works": ["Candy Wedding -original-", "Candy Wedding ft. Nissma de Benito", "Cuadro-Álbum Bodorrio (Susana)", "Cuadro-Álbum Bodorrio (Denis)", "La Boda de Mi Mejor Amigo", "¡Viva la Novia!"]
     },
-    "digital": {
-      "displayName": "Arte Digital",
-      "description": "Ilustración digital"
+    "artivismos": {
+      "displayName": "Artivismos",
+      "displayNameEs": "Artivismos",
+      "description": "Art activism pieces",
+      "descriptionEs": "Piezas de activismo artístico",
+      "emoji": "✊",
+      "color": "#228B22",
+      "works": ["Artivismos", "Artivismos viejunos"]
+    },
+    "munsters": {
+      "displayName": "The Munsters",
+      "displayNameEs": "The Munsters",
+      "description": "Tribute to the classic family",
+      "descriptionEs": "Tributo a la familia clásica",
+      "emoji": "�",
+      "color": "#2F4F4F",
+      "works": ["The Munsters", "The Munsters (with their new) Family"]
+    },
+    "retratos": {
+      "displayName": "Portraits",
+      "displayNameEs": "Retratos",
+      "description": "Personal and commissioned portraits",
+      "descriptionEs": "Retratos personales y por encargo",
+      "emoji": "�",
+      "color": "#8B7355"
+    },
+    "golden": {
+      "displayName": "Golden Series",
+      "displayNameEs": "Serie Dorada",
+      "description": "Works featuring gold leaf and metallic textures",
+      "descriptionEs": "Obras con pan de oro y texturas metálicas",
+      "emoji": "✨",
+      "color": "#FFD700",
+      "works": ["The Golden Couple", "The Golden Couple & Balloons", "Lágrimas de Oro"]
+    },
+    "amor": {
+      "displayName": "Love & Joy",
+      "displayNameEs": "Amor y Alegría",
+      "description": "Vibrant pieces celebrating love and positive energy",
+      "descriptionEs": "Obras vibrantes celebrando el amor y la energía positiva",
+      "emoji": "💕",
+      "color": "#FF1493",
+      "works": ["LoVe", "More Amor", "Multidimensional Love", "Smile & the World Smiles Back", "Soy un Amor y tengo Alas", "el Amor que nos Une", "Love in the Air"]
+    },
+    "naturaleza": {
+      "displayName": "Nature & Fantasy",
+      "displayNameEs": "Naturaleza y Fantasía",
+      "description": "Birds, dragons and natural elements",
+      "descriptionEs": "Aves, dragones y elementos naturales",
+      "emoji": "🦜",
+      "color": "#00CED1",
+      "works": ["Pajarraca Azul", "Wild Not?", "Into the Wild", "Monster Dragon", "Flying Dragon", "Jaguar", "La Llorona"]
     }
   },
   "filters": [
-    { "id": "all", "label": "Todas", "count": 64 },
-    { "id": "divinos", "label": "DiviNos", "count": 4 },
-    { "id": "iconos", "label": "Iconos", "count": 6 },
-    { "id": "retratos", "label": "Retratos", "count": 6 },
-    { "id": "enlatas", "label": "En.lata.das", "count": 3 },
-    { "id": "espejos", "label": "Espejos", "count": 2 },
-    { "id": "mitologia", "label": "Mitología", "count": 2 },
-    { "id": "golden", "label": "Golden", "count": 3 },
-    { "id": "alegria", "label": "Alegría", "count": 5 },
-    { "id": "otros", "label": "Otros", "count": 33 }
+    { "id": "todos", "label": "Todas", "labelEn": "All", "emoji": "🎨" },
+    { "id": "rocks", "label": "Rocks", "emoji": "🤟" },
+    { "id": "tributos-musicales", "label": "Tributos", "emoji": "🎤" },
+    { "id": "espejos-del-alma", "label": "Espejos", "emoji": "🪞" },
+    { "id": "enlatas", "label": "En.lata.das", "emoji": "🥫" },
+    { "id": "walking-gallery", "label": "Walking Gallery", "emoji": "�" },
+    { "id": "facefood", "label": "Facefood", "emoji": "👨‍🍳" },
+    { "id": "bodas", "label": "Bodas", "emoji": "💒" },
+    { "id": "golden", "label": "Golden", "emoji": "✨" },
+    { "id": "amor", "label": "Amor", "emoji": "�" },
+    { "id": "retratos", "label": "Retratos", "emoji": "👤" },
+    { "id": "naturaleza", "label": "Naturaleza", "emoji": "🦜" }
   ]
 }
