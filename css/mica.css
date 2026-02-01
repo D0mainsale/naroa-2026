@@ -1,0 +1,290 @@
+/* ==========================================================================
+   MICA - Mineral Intelligence Creative Assistant
+   Naroa's AI companion - Phase 1: Floating Chat Widget
+   ========================================================================== */
+
+/* Toggle Button */
+.mica-toggle {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  border: 2px solid rgba(255, 215, 0, 0.3);
+  cursor: pointer;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 
+    0 4px 20px rgba(0, 0, 0, 0.4),
+    0 0 30px rgba(255, 215, 0, 0.1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: mica-pulse 3s ease-in-out infinite;
+}
+
+.mica-toggle:hover {
+  transform: scale(1.1);
+  border-color: rgba(255, 215, 0, 0.6);
+  box-shadow: 
+    0 6px 30px rgba(0, 0, 0, 0.5),
+    0 0 40px rgba(255, 215, 0, 0.2);
+}
+
+.mica-toggle__icon {
+  font-size: 28px;
+  filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.4));
+}
+
+.mica-toggle--active .mica-toggle__icon {
+  display: none;
+}
+
+.mica-toggle--active::after {
+  content: '×';
+  font-size: 32px;
+  color: #fff;
+}
+
+@keyframes mica-pulse {
+  0%, 100% { box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 30px rgba(255, 215, 0, 0.1); }
+  50% { box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 50px rgba(255, 215, 0, 0.25); }
+}
+
+/* Chat Panel */
+.mica-panel {
+  position: fixed;
+  bottom: 100px;
+  right: 24px;
+  width: 380px;
+  max-width: calc(100vw - 48px);
+  height: 500px;
+  max-height: calc(100vh - 150px);
+  background: rgba(20, 20, 20, 0.95);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  box-shadow: 
+    0 10px 50px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  z-index: 9998;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(20px) scale(0.95);
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mica-panel--open {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+/* Header */
+.mica-header {
+  padding: 16px 20px;
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, transparent 100%);
+  border-bottom: 1px solid rgba(255, 215, 0, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.mica-header__avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ffd700 0%, #b8860b 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+}
+
+.mica-header__info {
+  flex: 1;
+}
+
+.mica-header__name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  margin: 0;
+}
+
+.mica-header__status {
+  font-size: 12px;
+  color: rgba(255, 215, 0, 0.8);
+  margin: 0;
+}
+
+/* Messages */
+.mica-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mica-message {
+  max-width: 85%;
+  padding: 12px 16px;
+  border-radius: 16px;
+  font-size: 14px;
+  line-height: 1.5;
+  animation: mica-fade-in 0.3s ease-out;
+}
+
+@keyframes mica-fade-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.mica-message--mica {
+  background: rgba(255, 215, 0, 0.1);
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  color: #fff;
+  align-self: flex-start;
+  border-bottom-left-radius: 4px;
+}
+
+.mica-message--user {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  align-self: flex-end;
+  border-bottom-right-radius: 4px;
+}
+
+.mica-message--typing {
+  display: flex;
+  gap: 4px;
+  padding: 16px;
+}
+
+.mica-message--typing span {
+  width: 8px;
+  height: 8px;
+  background: rgba(255, 215, 0, 0.6);
+  border-radius: 50%;
+  animation: mica-typing 1.4s ease-in-out infinite;
+}
+
+.mica-message--typing span:nth-child(2) { animation-delay: 0.2s; }
+.mica-message--typing span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes mica-typing {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+  30% { transform: translateY(-8px); opacity: 1; }
+}
+
+/* Quick Actions */
+.mica-quick-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0 16px 12px;
+}
+
+.mica-quick-action {
+  padding: 8px 14px;
+  background: rgba(255, 215, 0, 0.1);
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  border-radius: 20px;
+  color: rgba(255, 215, 0, 0.9);
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.mica-quick-action:hover {
+  background: rgba(255, 215, 0, 0.2);
+  border-color: rgba(255, 215, 0, 0.4);
+}
+
+/* Input */
+.mica-input-container {
+  padding: 16px;
+  border-top: 1px solid rgba(255, 215, 0, 0.1);
+  display: flex;
+  gap: 12px;
+}
+
+.mica-input {
+  flex: 1;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  color: #fff;
+  font-size: 14px;
+  outline: none;
+  transition: all 0.2s;
+}
+
+.mica-input:focus {
+  border-color: rgba(255, 215, 0, 0.4);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.mica-input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.mica-send {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ffd700 0%, #b8860b 100%);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  transition: all 0.2s;
+}
+
+.mica-send:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+}
+
+/* Scrollbar */
+.mica-messages::-webkit-scrollbar {
+  width: 6px;
+}
+
+.mica-messages::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.mica-messages::-webkit-scrollbar-thumb {
+  background: rgba(255, 215, 0, 0.3);
+  border-radius: 3px;
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .mica-panel {
+    right: 12px;
+    bottom: 88px;
+    width: calc(100vw - 24px);
+    height: calc(100vh - 120px);
+  }
+  
+  .mica-toggle {
+    right: 16px;
+    bottom: 16px;
+    width: 56px;
+    height: 56px;
+  }
+}
