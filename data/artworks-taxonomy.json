@@ -1,0 +1,90 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "generatedBy": "IA Alliance Protocol",
+    "generatedAt": "2026-02-01T09:04:00Z",
+    "source": "NotebookLM Album Titles Master"
+  },
+  "series": {
+    "divinos": {
+      "displayName": "DiviNos",
+      "description": "Iconos del rock y pop reimaginados con técnica mixta",
+      "works": ["amy-rocks", "johnny-rocks", "marilyn-rocks", "james-rocks"]
+    },
+    "iconos": {
+      "displayName": "Iconos",
+      "description": "Retratos de figuras culturales icónicas",
+      "works": ["audrey-hepburn", "mr-fahrenheit", "baroque-farrokh", "celia-cruz-asucar", "celia-cruz-cantinflowers", "mario-moreno"]
+    },
+    "retratos": {
+      "displayName": "Retratos",
+      "description": "Comisiones y retratos personales",
+      "works": ["hugo-box", "peter-rowan", "denis", "infusion-de-berto", "buena-fuente", "starchild"]
+    },
+    "enlatas": {
+      "displayName": "En.lata.das",
+      "description": "Serie de collage en latas de conserva",
+      "works": ["amor-en-conserva", "dar-la-lata", "hammock-in-tin"]
+    },
+    "espejos": {
+      "displayName": "Espejos del Alma",
+      "description": "Serie introspectiva sobre la identidad",
+      "works": ["espejos-del-alma", "espejos-del-alma-var3"]
+    },
+    "mitologia": {
+      "displayName": "Mitología",
+      "description": "Figuras míticas y leyendas",
+      "works": ["la-llorona", "monster-dragon"]
+    },
+    "golden": {
+      "displayName": "The Golden Couple",
+      "description": "Serie dorada con técnicas de pan de oro",
+      "works": ["the-golden-couple-and-balloons", "lagrimas-de-oro", "pink-and-sparkles"]
+    },
+    "alegria": {
+      "displayName": "Alegría",
+      "description": "Obras vibrantes con mensaje optimista",
+      "works": ["smile-world-smiles-back", "me-parto-de-risa", "soy-un-amor-y-tengo-alas", "love", "multidimensional-love"]
+    },
+    "pajarracas": {
+      "displayName": "Pajarracas",
+      "description": "Serie de aves estilizadas",
+      "works": ["pajarraca-azul", "wild-not"]
+    },
+    "walking-gallery": {
+      "displayName": "Walking Gallery",
+      "description": "Arte urbano itinerante",
+      "works": ["walking-gallery-plumas"]
+    }
+  },
+  "techniques": {
+    "mixed-media": {
+      "displayName": "Técnica Mixta",
+      "description": "Acrílico, collage, pan de oro"
+    },
+    "pencil": {
+      "displayName": "Grafito/Lápiz",
+      "description": "Dibujo a lápiz"
+    },
+    "collage": {
+      "displayName": "Collage",
+      "description": "Papeles, recortes, texturas"
+    },
+    "digital": {
+      "displayName": "Arte Digital",
+      "description": "Ilustración digital"
+    }
+  },
+  "filters": [
+    { "id": "all", "label": "Todas", "count": 64 },
+    { "id": "divinos", "label": "DiviNos", "count": 4 },
+    { "id": "iconos", "label": "Iconos", "count": 6 },
+    { "id": "retratos", "label": "Retratos", "count": 6 },
+    { "id": "enlatas", "label": "En.lata.das", "count": 3 },
+    { "id": "espejos", "label": "Espejos", "count": 2 },
+    { "id": "mitologia", "label": "Mitología", "count": 2 },
+    { "id": "golden", "label": "Golden", "count": 3 },
+    { "id": "alegria", "label": "Alegría", "count": 5 },
+    { "id": "otros", "label": "Otros", "count": 33 }
+  ]
+}

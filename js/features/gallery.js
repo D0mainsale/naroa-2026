@@ -1,27 +1,84 @@
 /**
  * Gallery - Image grid with lazy loading for Naroa 2026
  * @module features/gallery
+ * @version 2.0.0 - IA Alliance Protocol Integration
  */
 
 (function() {
   'use strict';
 
   // ===========================================
-  // SAMPLE ARTWORK DATA (replace with real data)
+  // DYNAMIC ARTWORK DATA LOADING
   // ===========================================
   
-  const ARTWORKS = [
-    { id: 1, title: 'Amy Rocks', file: 'amy-rocks.webp', category: 'divinos' },
-    { id: 2, title: 'Beatriz de Pandora', file: 'beatriz-de-pandora.webp', category: 'retratos' },
-    { id: 3, title: 'Celia Cruz', file: 'celia-cruz.png', category: 'iconos' },
-    { id: 4, title: 'Divinos Amy', file: 'divinos-amy.webp', category: 'divinos' },
-    { id: 5, title: 'Divinos James', file: 'divinos-james.webp', category: 'divinos' },
-    { id: 6, title: 'Divinos Johnny', file: 'divinos-johnny.webp', category: 'divinos' },
-    { id: 7, title: 'Divinos Marilyn', file: 'divinos-marilyn.webp', category: 'divinos' },
-    { id: 8, title: 'Flying Dragon', file: 'flying-dragon.webp', category: 'fantasia' },
-  ];
+  let ARTWORKS = [];
+  let TAXONOMY = null;
+  
+  // Series-based categories from taxonomy
+  const SERIES_LABELS = {
+    'todos': 'Todas',
+    'divinos': 'DiviNos',
+    'iconos': 'Iconos',
+    'retratos': 'Retratos',
+    'enlatas': 'En.lata.das',
+    'espejos': 'Espejos',
+    'mitologia': 'Mitología',
+    'golden': 'Golden',
+    'alegria': 'Alegría',
+    'pajarracas': 'Pajarracas',
+    'otros': 'Otros'
+  };
+  
+  const CATEGORIES = Object.keys(SERIES_LABELS);
 
-  const CATEGORIES = ['todos', 'divinos', 'retratos', 'iconos', 'fantasia'];
+  /**
+   * Load artwork metadata from JSON
+   */
+  async function loadArtworkData() {
+    try {
+      const [metadataRes, taxonomyRes] = await Promise.all([
+        fetch('./data/artworks-metadata.json'),
+        fetch('./data/artworks-taxonomy.json')
+      ]);
+      
+      if (metadataRes.ok) {
+        const data = await metadataRes.json();
+        ARTWORKS = data.artworks.map((art, index) => ({
+          id: index + 1,
+          title: art.title,
+          file: `${art.id}.webp`,
+          category: art.series,
+          technique: art.technique,
+          year: art.year
+        }));
+        console.log(`[Gallery] Loaded ${ARTWORKS.length} artworks from metadata`);
+      }
+      
+      if (taxonomyRes.ok) {
+        TAXONOMY = await taxonomyRes.json();
+        console.log(`[Gallery] Loaded taxonomy with ${Object.keys(TAXONOMY.series).length} series`);
+      }
+      
+      return true;
+    } catch (err) {
+      console.warn('[Gallery] Using fallback data:', err);
+      return false;
+    }
+  }
+
+  // Fallback data if JSON fails to load
+  const FALLBACK_ARTWORKS = [
+    { id: 1, title: 'Amy Rocks', file: 'amy-rocks.webp', category: 'divinos' },
+    { id: 2, title: 'James Dean', file: 'james-dean.webp', category: 'iconos' },
+    { id: 3, title: 'Johnny Depp', file: 'johnny-depp.webp', category: 'iconos' },
+    { id: 4, title: 'Marilyn Monroe', file: 'marilyn-monroe.webp', category: 'iconos' },
+    { id: 5, title: 'Audrey Hepburn', file: 'audrey-hepburn.webp', category: 'iconos' },
+    { id: 6, title: 'Mr. Fahrenheit', file: 'mr-fahrenheit.webp', category: 'iconos' },
+    { id: 7, title: 'Espejos del Alma', file: 'espejos-del-alma.webp', category: 'espejos' },
+    { id: 8, title: 'La Llorona', file: 'la-llorona.webp', category: 'mitologia' },
+    { id: 9, title: 'Amor en Conserva', file: 'amor-en-conserva.webp', category: 'enlatas' },
+    { id: 10, title: 'The Golden Couple', file: 'the-golden-couple.webp', category: 'golden' }
+  ];
 
   // ===========================================
   // LAZY LOADING
@@ -113,25 +170,32 @@
   }
 
   // ===========================================
+  // FEATURED ARTWORKS (Curated selection)
+  // ===========================================
+  
+  // IDs of the 15 most impactful pieces for "Obra Destacada"
+  const FEATURED_IDS = [1, 2, 4, 5, 7, 11, 12, 15, 21, 25, 31, 32, 36, 42, 44];
+
+  // ===========================================
   // PUBLIC API
   // ===========================================
 
   window.Gallery = {
-    loadPortfolio() {
-      const container = document.getElementById('portfolio-gallery');
+    loadFeatured() {
+      const container = document.getElementById('featured-gallery');
       if (!container) return;
 
       container.innerHTML = '';
       
-      // Show featured items for portfolio
-      const featured = ARTWORKS.slice(0, 6);
+      // Show curated featured items (15 masterpieces)
+      const featured = ARTWORKS.filter(a => FEATURED_IDS.includes(a.id));
       featured.forEach(artwork => {
         container.appendChild(renderGalleryItem(artwork));
       });
     },
 
-    loadGallery() {
-      const container = document.getElementById('galeria-grid');
+    loadArchive() {
+      const container = document.getElementById('archivo-grid');
       const filtersContainer = document.getElementById('gallery-filters');
       
       if (!container) return;
@@ -148,11 +212,31 @@
       });
     },
 
+    // Legacy aliases for compatibility
+    loadPortfolio() { this.loadFeatured(); },
+    loadGallery() { this.loadArchive(); },
+
     // Allow external data injection
     setArtworks(artworks) {
       ARTWORKS.length = 0;
       ARTWORKS.push(...artworks);
+    },
+
+    // Async initialization - loads data from JSON
+    async init() {
+      const loaded = await loadArtworkData();
+      if (!loaded || ARTWORKS.length === 0) {
+        console.log('[Gallery] Using fallback artworks');
+        ARTWORKS = FALLBACK_ARTWORKS.slice();
+      }
+      console.log(`[Gallery] Initialized with ${ARTWORKS.length} artworks`);
+    },
+
+    // Get series labels for UI
+    getSeriesLabels() {
+      return SERIES_LABELS;
     }
   };
 
 })();
+

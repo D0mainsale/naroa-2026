@@ -1,0 +1,84 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "generatedBy": "IA Alliance Protocol",
+    "generatedAt": "2026-02-01T09:04:30Z",
+    "totalArtworks": 64
+  },
+  "artworks": [
+    { "id": "amy-rocks", "title": "Amy Rocks", "series": "divinos", "technique": "mixed-media", "year": 2023 },
+    { "id": "johnny-rocks-hq-1", "title": "Johnny Rocks (Var 1)", "series": "divinos", "technique": "mixed-media", "year": 2023, "parent": "johnny-rocks" },
+    { "id": "johnny-rocks-hq-2", "title": "Johnny Rocks (Var 2)", "series": "divinos", "technique": "mixed-media", "year": 2023, "parent": "johnny-rocks" },
+    { "id": "johnny-rocks-hq-3", "title": "Johnny Rocks (Var 3)", "series": "divinos", "technique": "mixed-media", "year": 2023, "parent": "johnny-rocks" },
+    { "id": "johnny-rocks-hq-4", "title": "Johnny Rocks (Var 4)", "series": "divinos", "technique": "mixed-media", "year": 2023, "parent": "johnny-rocks" },
+    { "id": "johnny-rocks-hq-5", "title": "Johnny Rocks (Var 5)", "series": "divinos", "technique": "mixed-media", "year": 2023, "parent": "johnny-rocks" },
+    { "id": "johnny-rocks-hq-6", "title": "Johnny Rocks (Var 6)", "series": "divinos", "technique": "mixed-media", "year": 2023, "parent": "johnny-rocks" },
+    { "id": "johnny-rocks-hq-7", "title": "Johnny Rocks (Var 7)", "series": "divinos", "technique": "mixed-media", "year": 2023, "parent": "johnny-rocks" },
+    { "id": "marilyn-rocks-hq-1", "title": "Marilyn Rocks (Var 1)", "series": "divinos", "technique": "mixed-media", "year": 2023, "parent": "marilyn-rocks" },
+    { "id": "marilyn-rocks-hq-2", "title": "Marilyn Rocks (Var 2)", "series": "divinos", "technique": "mixed-media", "year": 2023, "parent": "marilyn-rocks" },
+    { "id": "marilyn-rocks-hq-3", "title": "Marilyn Rocks (Var 3)", "series": "divinos", "technique": "mixed-media", "year": 2023, "parent": "marilyn-rocks" },
+    { "id": "marilyn-rocks-hq-4", "title": "Marilyn Rocks (Var 4)", "series": "divinos", "technique": "mixed-media", "year": 2023, "parent": "marilyn-rocks" },
+    { "id": "marilyn-rocks-hq-5", "title": "Marilyn Rocks (Var 5)", "series": "divinos", "technique": "mixed-media", "year": 2023, "parent": "marilyn-rocks" },
+    { "id": "james-rocks-hq-1", "title": "James Rocks (Var 1)", "series": "divinos", "technique": "mixed-media", "year": 2023, "parent": "james-rocks" },
+    { "id": "james-rocks-hq-2", "title": "James Rocks (Var 2)", "series": "divinos", "technique": "mixed-media", "year": 2023, "parent": "james-rocks" },
+    { "id": "james-rocks-hq-3", "title": "James Rocks (Var 3)", "series": "divinos", "technique": "mixed-media", "year": 2023, "parent": "james-rocks" },
+    { "id": "james-rocks-hq-4", "title": "James Rocks (Var 4)", "series": "divinos", "technique": "mixed-media", "year": 2023, "parent": "james-rocks" },
+    { "id": "james-rocks-hq-5", "title": "James Rocks (Var 5)", "series": "divinos", "technique": "mixed-media", "year": 2023, "parent": "james-rocks" },
+    
+    { "id": "audrey-hepburn", "title": "Audrey's Lightning", "series": "iconos", "technique": "mixed-media", "year": 2022 },
+    { "id": "mr-fahrenheit", "title": "Mr. Fahrenheit", "series": "iconos", "technique": "mixed-media", "year": 2021 },
+    { "id": "baroque-farrokh", "title": "Baroque Farrokh", "series": "iconos", "technique": "mixed-media", "year": 2021 },
+    { "id": "celia-cruz-asucar", "title": "Celia Cruz Azúcar", "series": "iconos", "technique": "mixed-media", "year": 2020 },
+    { "id": "celia-cruz-cantinflowers", "title": "Celia Cruz Cantinflowers", "series": "iconos", "technique": "mixed-media", "year": 2020 },
+    { "id": "marilyn-monroe", "title": "Marilyn Monroe", "series": "iconos", "technique": "mixed-media", "year": 2019 },
+    { "id": "johnny-depp", "title": "Johnny Depp", "series": "iconos", "technique": "mixed-media", "year": 2019 },
+    { "id": "james-dean", "title": "James Dean", "series": "iconos", "technique": "mixed-media", "year": 2019 },
+    
+    { "id": "hugo-box", "title": "Hugo Box", "series": "retratos", "technique": "mixed-media", "year": 2024 },
+    { "id": "peter-rowan-hq", "title": "Peter Rowan", "series": "retratos", "technique": "pencil", "year": 2023 },
+    { "id": "infusion-de-berto", "title": "Infusión de Berto", "series": "retratos", "technique": "mixed-media", "year": 2022 },
+    { "id": "buena-fuente", "title": "Buena Fuente", "series": "retratos", "technique": "mixed-media", "year": 2021 },
+    { "id": "beatriz-de-pandora", "title": "Beatriz de Pandora", "series": "retratos", "technique": "mixed-media", "year": 2020 },
+    { "id": "my-tiny-face", "title": "My Tiny Face", "series": "retratos", "technique": "pencil", "year": 2019 },
+    { "id": "el-cocinero-emplatado", "title": "El Cocinero Emplatado", "series": "retratos", "technique": "mixed-media", "year": 2021 },
+    
+    { "id": "amor-en-conserva", "title": "Amor en Conserva", "series": "enlatas", "technique": "collage", "year": 2022 },
+    { "id": "dar-la-lata", "title": "Dar la Lata", "series": "enlatas", "technique": "collage", "year": 2022 },
+    { "id": "hammock-in-tin", "title": "Hammock in Tin", "series": "enlatas", "technique": "collage", "year": 2022 },
+    { "id": "sardine-tin-collage", "title": "Sardine Tin Collage", "series": "enlatas", "technique": "collage", "year": 2021 },
+    
+    { "id": "espejos-del-alma", "title": "Espejos del Alma", "series": "espejos", "technique": "mixed-media", "year": 2023 },
+    { "id": "espejos-del-alma-var3", "title": "Espejos del Alma (Var 3)", "series": "espejos", "technique": "mixed-media", "year": 2023, "parent": "espejos-del-alma" },
+    
+    { "id": "la-llorona", "title": "La Llorona", "series": "mitologia", "technique": "mixed-media", "year": 2021 },
+    { "id": "monster-dragon", "title": "Monster Dragon", "series": "mitologia", "technique": "mixed-media", "year": 2020 },
+    
+    { "id": "the-golden-couple", "title": "The Golden Couple", "series": "golden", "technique": "mixed-media", "year": 2020 },
+    { "id": "the-golden-couple-and-balloons", "title": "The Golden Couple & Balloons", "series": "golden", "technique": "mixed-media", "year": 2020, "parent": "the-golden-couple" },
+    { "id": "lagrimas-de-oro", "title": "Lágrimas de Oro", "series": "golden", "technique": "mixed-media", "year": 2021 },
+    { "id": "pink-and-sparkles", "title": "Pink & Sparkles", "series": "golden", "technique": "mixed-media", "year": 2022 },
+    
+    { "id": "smile-world-smiles-back", "title": "Smile & the World Smiles Back", "series": "alegria", "technique": "mixed-media", "year": 2022 },
+    { "id": "me-parto-de-risa", "title": "Me Parto de Risa", "series": "alegria", "technique": "mixed-media", "year": 2021 },
+    { "id": "soy-un-amor-y-tengo-alas", "title": "Soy un Amor y tengo Alas", "series": "alegria", "technique": "mixed-media", "year": 2021 },
+    { "id": "love", "title": "LoVe", "series": "alegria", "technique": "mixed-media", "year": 2020 },
+    { "id": "multidimensional-love", "title": "Multidimensional Love", "series": "alegria", "technique": "mixed-media", "year": 2023 },
+    
+    { "id": "pajarraca-azul", "title": "Pajarraca Azul", "series": "pajarracas", "technique": "mixed-media", "year": 2022 },
+    { "id": "wild-not", "title": "Wild Not?", "series": "pajarracas", "technique": "mixed-media", "year": 2021 },
+    { "id": "into-the-wild", "title": "Into the Wild", "series": "pajarracas", "technique": "mixed-media", "year": 2020 },
+    
+    { "id": "walking-gallery-plumas", "title": "Walking Gallery Plumas", "series": "walking-gallery", "technique": "mixed-media", "year": 2022 },
+    
+    { "id": "a-lapiz-y-un-algo", "title": "A Lápiz y un Algo", "series": "otros", "technique": "pencil", "year": 2019 },
+    { "id": "aquellos-maravillosos-anos", "title": "Aquellos Maravillosos Años", "series": "otros", "technique": "mixed-media", "year": 2020 },
+    { "id": "candy-wedding", "title": "Candy Wedding", "series": "otros", "technique": "mixed-media", "year": 2019 },
+    { "id": "cincuenta-conmigo", "title": "Cincuenta Conmigo", "series": "otros", "technique": "mixed-media", "year": 2022 },
+    { "id": "el-gran-dakari", "title": "El Gran Dakari", "series": "otros", "technique": "mixed-media", "year": 2021 },
+    { "id": "el-gran-dakari-var2", "title": "El Gran Dakari (Var 2)", "series": "otros", "technique": "mixed-media", "year": 2021, "parent": "el-gran-dakari" },
+    { "id": "en-caja", "title": "En-caja", "series": "otros", "technique": "collage", "year": 2020 },
+    { "id": "blonde-embroidery", "title": "Blonde Embroidery", "series": "otros", "technique": "mixed-media", "year": 2021 },
+    { "id": "i-know-love-stripes", "title": "I Know Love Stripes", "series": "otros", "technique": "mixed-media", "year": 2022 },
+    { "id": "tedas-queen", "title": "Tedás Queen", "series": "otros", "technique": "mixed-media", "year": 2023 }
+  ]
+}
