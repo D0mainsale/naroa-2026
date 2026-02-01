@@ -21,6 +21,16 @@ class MICA {
       endpoint: 'http://api.brainshop.ai/get'
     };
     
+    // NotebookLM Knowledge Base - MICA can reference these for deep research
+    this.notebooks = {
+      naroaAlbums: {
+        id: '5686048e-8cec-4af7-90dc-90125f22519a',
+        url: 'https://notebooklm.google.com/notebook/5686048e-8cec-4af7-90dc-90125f22519a',
+        description: 'Álbumes de Facebook con todas las obras de Naroa'
+      }
+      // Future: MICA puede crear sus propios cuadernos para temas específicos
+    };
+    
     this.personality = {
       name: 'MICA',
       greeting: '¡Ey, solete! Soy MICA, el brillo mineral de Naroa. ¿Qué te apetece descubrir hoy?',
@@ -49,7 +59,8 @@ class MICA {
       { regex: /sorprender|aleatori|random|suerte/i, action: 'random', response: 'Te voy a sorprender con algo especial...' },
       { regex: /hola|hey|buenas|saludos/i, action: 'greet', response: '¡Hola, cariño! ¿En qué te puedo ayudar? Puedo mostrarte mis Rocks, retratos, exposiciones... o simplemente charlar de arte.' },
       { regex: /gracias|thank|genial|perfecto/i, action: 'info', response: '¡De nada, solete! Aquí estoy para lo que necesites. El arte es un salvavidas universal.' },
-      { regex: /adi[oó]s|chao|bye|hasta/i, action: 'info', response: '¡Hasta pronto! Recuerda: tienes una brújula integrada para encontrar tu tesoro. 💛' }
+      { regex: /adi[oó]s|chao|bye|hasta/i, action: 'info', response: '¡Hasta pronto! Recuerda: tienes una brújula integrada para encontrar tu tesoro. 💛' },
+      { regex: /investiga|notebook|cuaderno|busca info/i, action: 'research', response: 'Tengo acceso a un cuaderno NotebookLM con todos los álbumes de Facebook de Naroa. ¿Qué quieres que investigue?' }
     ];
     
     this.quickActions = [

@@ -18,6 +18,7 @@
 
   /**
    * Load artwork metadata and taxonomy from JSON
+   * Only includes artworks that have corresponding images
    */
   async function loadArtworkData() {
     try {
@@ -28,7 +29,9 @@
       
       if (metadataRes.ok) {
         const data = await metadataRes.json();
-        ARTWORKS = data.artworks.map((art, index) => ({
+        
+        // Map all artworks from metadata
+        const allArtworks = data.artworks.map((art, index) => ({
           id: index + 1,
           title: art.title,
           file: `${art.id}.webp`,
@@ -36,7 +39,46 @@
           technique: art.technique,
           year: art.year
         }));
-        console.log(`[Gallery] Loaded ${ARTWORKS.length} artworks from metadata`);
+        
+        // Filter to only artworks with available images
+        // We use HEAD requests to check if images exist
+        const validArtworks = [];
+        const seenFiles = new Set(); // Prevent duplicates
+        const seenBaseNames = new Set(); // Track base artwork names to skip variants
+        
+        for (const artwork of allArtworks) {
+          // Skip duplicates
+          if (seenFiles.has(artwork.file)) {
+            continue;
+          }
+          
+          // Skip HQ variants and other variants (keep only primary version)
+          // Pattern: name-hq-1, name-hq-2, name-var2, name-var3, etc.
+          const baseName = artwork.file
+            .replace('.webp', '')
+            .replace(/-hq-\d+$/, '')
+            .replace(/-var\d*$/, '');
+          
+          // If we've already seen this base artwork, skip this variant
+          if (seenBaseNames.has(baseName) && artwork.file !== `${baseName}.webp`) {
+            continue;
+          }
+          
+          seenFiles.add(artwork.file);
+          
+          try {
+            const response = await fetch(`images/artworks/${artwork.file}`, { method: 'HEAD' });
+            if (response.ok) {
+              validArtworks.push(artwork);
+              seenBaseNames.add(baseName); // Mark this artwork as seen
+            }
+          } catch (err) {
+            // Image doesn't exist, skip
+          }
+        }
+        
+        ARTWORKS = validArtworks;
+        console.log(`[Gallery] Loaded ${ARTWORKS.length} artworks with valid images (from ${allArtworks.length} total)`);
       }
       
       if (taxonomyRes.ok) {
@@ -286,11 +328,29 @@
   }
 
   // ===========================================
-  // FEATURED ARTWORKS (Curated selection)
+  // FEATURED ARTWORKS (IA Alliance Curated Selection)
+  // Criteria: featured:true in metadata + available webp + series diversity
   // ===========================================
   
-  // IDs of the 15 most impactful pieces for "Obra Destacada"
-  const FEATURED_IDS = [1, 2, 4, 5, 7, 11, 12, 15, 21, 25, 31, 32, 36, 42, 44];
+  // Curated by IA Alliance Protocol - Feb 2026
+  // Covering: rocks, tributos-musicales, espejos-del-alma, enlatas, golden, amor, retratos, naturaleza
+  const FEATURED_ARTWORK_IDS = [
+    'amy-rocks',                    // Rocks - iconic series opener
+    'marilyn-rocks-hq-1',           // Rocks - Marilyn variant
+    'james-rocks-hq-1',             // Rocks - James Dean
+    'mr-fahrenheit',                // Tributos Musicales - Freddie Mercury
+    'audrey-hepburn',               // Tributos - Audrey Lightning
+    'espejos-del-alma',             // Espejos del Alma - signature piece
+    'amor-en-conserva',             // En.lata.das - conceptual collage
+    'hugo-box',                     // En.lata.das - 2024 recent work
+    'the-golden-couple-and-balloons', // Golden series
+    'lagrimas-de-oro',              // Golden - emotional impact
+    'love',                         // Amor series - universal theme
+    'smile-world-smiles-back',      // Amor - optimistic message
+    'el-gran-dakari',               // Retratos - powerful portrait
+    'peter-rowan-hq',               // Retratos - pencil mastery
+    'pajarraca-azul'                // Naturaleza - vibrant wildlife
+  ];
 
   // ===========================================
   // PUBLIC API
@@ -303,8 +363,21 @@
 
       container.innerHTML = '';
       
-      // Show curated featured items (15 masterpieces)
-      const featured = ARTWORKS.filter(a => FEATURED_IDS.includes(a.id));
+      // Match by artwork file ID (without .webp extension)
+      const featured = ARTWORKS.filter(a => {
+        const fileId = a.file.replace('.webp', '');
+        return FEATURED_ARTWORK_IDS.includes(fileId);
+      });
+      
+      // Sort by the order in FEATURED_ARTWORK_IDS for intentional curation
+      featured.sort((a, b) => {
+        const aIndex = FEATURED_ARTWORK_IDS.indexOf(a.file.replace('.webp', ''));
+        const bIndex = FEATURED_ARTWORK_IDS.indexOf(b.file.replace('.webp', ''));
+        return aIndex - bIndex;
+      });
+      
+      console.log(`[Gallery] Showing ${featured.length} featured artworks`);
+      
       featured.forEach(artwork => {
         container.appendChild(renderGalleryItem(artwork));
       });
