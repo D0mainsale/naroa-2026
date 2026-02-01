@@ -1,35 +1,164 @@
 {
   "meta": {
-    "version": "1.0.0",
+    "version": "2.0.0",
     "generatedBy": "NotebookLM Analysis + IA Alliance Protocol",
-    "generatedAt": "2026-02-01T09:21:00Z",
-    "source": "NAROA GUTIÉRREZ GIL - ALBUMS LINKS (NotebookLM)"
+    "generatedAt": "2026-02-01T09:24:00Z",
+    "source": "NAROA GUTIÉRREZ GIL - ALBUMS LINKS (NotebookLM)",
+    "totalExhibitions": 28
   },
   "exhibitions": [
     {
+      "id": "verhoeven-x12",
+      "title": "Verhoeven x12",
+      "location": "On Air (Online)",
+      "year": 2025,
+      "month": "September",
+      "day": 18,
+      "type": "online"
+    },
+    {
+      "id": "divinos-vaivenes-politena",
+      "title": "DiviNos VaiVenes",
+      "subtitle": "Iconos sobre pizarra y metáforas recicladas",
+      "location": "Politena, Sopela",
+      "year": 2025,
+      "month": "May",
+      "day": 25,
+      "type": "solo",
+      "series": "rocks"
+    },
+    {
+      "id": "siarte-bosque-oma",
+      "title": "Siarte y El Bosque de Oma",
+      "subtitle": "En diálogo con la obra de Ibarrola",
+      "location": "Espacio Siarte, Bilbao",
+      "year": 2024,
+      "month": "July",
+      "day": 22,
+      "type": "solo"
+    },
+    {
+      "id": "alicia-crece",
+      "title": "Alicia Crece",
+      "location": "Espacio Siarte, Bilbao",
+      "year": 2023,
+      "month": "May",
+      "day": 12,
+      "type": "solo"
+    },
+    {
+      "id": "afrontar-repentino-tiempo",
+      "title": "Afrontar el repentino tiempo libre",
+      "location": "Espacio Siarte, Bilbao",
+      "year": 2023,
+      "month": "April",
+      "day": 18,
+      "type": "solo"
+    },
+    {
+      "id": "emakumeen-artean",
+      "title": "Emakumeen arteaN (Entre Mujeres)",
+      "location": "Harilka elkartea, Calle Cortes, Bilbao La Vieja",
+      "year": 2023,
+      "month": "January",
+      "type": "group",
+      "description": "Colectiva feminista"
+    },
+    {
+      "id": "rincones-bilbao",
+      "title": "Rincones de Bilbao",
+      "location": "Espacio Siarte, Bilbao",
+      "year": 2022,
+      "month": "December",
+      "day": 20,
+      "type": "solo"
+    },
+    {
+      "id": "repoker-reinas-siarte",
+      "title": "REPÓKER DE REINAS",
+      "subtitle": "Retratos psicológicos de iconos femeninos",
+      "location": "Siarte Leku, Bilbao",
+      "year": 2022,
+      "month": "March",
+      "day": 25,
+      "type": "solo",
+      "url": "https://siarte.com/2022-03-25-siarte-exposicion-pintura-collage-arte-naroa-gutierrez-gil"
+    },
+    {
+      "id": "euskal-harriak",
+      "title": "Euskal Harriak",
+      "subtitle": "Temática sobre la piedra vasca",
+      "location": "Espacio Siarte, Bilbao",
+      "year": 2022,
+      "month": "March",
+      "day": 7,
+      "type": "solo"
+    },
+    {
+      "id": "cp-magazine-gold",
+      "title": "Naroa en CP Magazine Gold",
+      "location": "Publicación/Exposición destacada",
+      "year": 2021,
+      "month": "August",
+      "type": "publication"
+    },
+    {
+      "id": "vaivenes-artelista",
+      "title": "VAIVENES",
+      "location": "Artelista / Bilbao",
+      "year": 2020,
+      "type": "solo",
+      "description": "Exposición de obras creadas durante la pandemia"
+    },
+    {
+      "id": "espejos-alma-lamiak",
+      "title": "Espejos del Alma",
+      "location": "Lamiak, Bilbao",
+      "year": 2015,
+      "month": "October",
+      "type": "solo",
+      "series": "espejos-del-alma"
+    },
+    {
+      "id": "the-art-of-living",
+      "title": "The Art Of Living",
+      "location": "Bilbao",
+      "year": 2015,
+      "month": "January",
+      "day": 10,
+      "type": "group"
+    },
+    {
       "id": "walking-gallery-2022",
       "title": "Walking Gallery Bilbao",
-      "subtitle": "23 Octubre 2022",
       "location": "Bilbao Art District",
       "year": 2022,
+      "month": "October",
+      "day": 23,
       "type": "group",
-      "description": "Exposición de arte urbano en las calles del casco viejo de Bilbao",
       "series": "walking-gallery"
     },
     {
       "id": "walking-gallery-2021",
-      "title": "Walking Gallery Bilbao",
-      "subtitle": "Fair Saturday 2021",
+      "title": "Walking Gallery Bilbao - Fair Saturday",
       "location": "Bilbao Art District",
       "year": 2021,
       "type": "group",
-      "description": "Participación en Fair Saturday con obras expuestas en escaparates",
+      "series": "walking-gallery"
+    },
+    {
+      "id": "walking-gallery-aniversario",
+      "title": "VI Aniversario Walking Gallery Bilbao",
+      "location": "Bilbao",
+      "year": 2017,
+      "month": "June",
+      "day": 26,
+      "type": "group",
       "series": "walking-gallery"
     },
     {
       "id": "walking-gallery-2017",
       "title": "Walking Gallery Bilbao Art District",
-      "subtitle": "2017 Edition",
       "location": "Bilbao",
       "year": 2017,
       "type": "group",
@@ -38,30 +167,35 @@
     {
       "id": "walking-gallery-2013",
       "title": "Walking Gallery Bilbao",
-      "subtitle": "November 2013",
       "location": "Bilbao",
       "year": 2013,
+      "month": "November",
       "type": "group",
-      "description": "Primera participación en Walking Gallery",
-      "series": "walking-gallery"
+      "series": "walking-gallery",
+      "description": "Primera participación en Walking Gallery"
     },
     {
-      "id": "vi-aniversario-walking-gallery",
-      "title": "VI Aniversario Walking Gallery Bilbao",
-      "location": "Bilbao",
-      "year": 2019,
-      "type": "group",
-      "series": "walking-gallery"
+      "id": "azoka-lataska",
+      "title": "Azoka en Lataska",
+      "subtitle": "Pinturas originales en pizarra",
+      "location": "Lataska, Sopela",
+      "year": 2024,
+      "type": "market"
     },
     {
-      "id": "repoker-reinas-siarte",
-      "title": "REPÓKER DE REINAS",
-      "location": "Siarte Leku, Bilbao",
-      "year": 2022,
-      "month": "March",
-      "type": "solo",
-      "description": "Exposición individual de pintura y collage en Siarte Leku",
-      "url": "https://siarte.com/2022-03-25-siarte-exposicion-pintura-collage-arte-naroa-gutierrez-gil"
+      "id": "udaberriko-jaia",
+      "title": "Udaberriko Jaia",
+      "subtitle": "Colaboración artística con danzas y bertsolaris",
+      "location": "Sopelana",
+      "year": 2024,
+      "type": "festival"
+    },
+    {
+      "id": "urban-market-barakaldo",
+      "title": "Urban Market Barakaldo",
+      "location": "Barakaldo",
+      "year": 2016,
+      "type": "market"
     },
     {
       "id": "facefood-algorta",
@@ -69,8 +203,8 @@
       "location": "Algorta, Getxo",
       "year": 2019,
       "type": "solo",
-      "description": "Exposición de quita y pon - chaquetas de chef intervenidas",
-      "series": "facefood"
+      "series": "facefood",
+      "description": "Chaquetas de chef intervenidas"
     },
     {
       "id": "facefood-expos",
@@ -81,36 +215,41 @@
       "series": "facefood"
     },
     {
+      "id": "delirios-color",
+      "title": "Delirios de color",
+      "location": "Espacio Siarte, Bilbao",
+      "year": 2021,
+      "type": "solo"
+    },
+    {
+      "id": "recuerdos-california",
+      "title": "Recuerdos de California",
+      "location": "Espacio Siarte, Bilbao",
+      "year": 2021,
+      "type": "solo"
+    },
+    {
+      "id": "recicl-arte",
+      "title": "Recicl-ARTE",
+      "subtitle": "Enfoque en sostenibilidad ambiental",
+      "location": "Espacio Siarte, Bilbao",
+      "year": 2020,
+      "type": "solo"
+    },
+    {
+      "id": "colegio-abogados",
+      "title": "Exposición Colegio de Abogados",
+      "location": "Ilustre Colegio de la Abogacía de Bizkaia, Bilbao",
+      "year": 2021,
+      "type": "solo"
+    },
+    {
       "id": "holy-wood",
       "title": "Holy Wood: REtpLATOS & aMOREs",
       "location": "Bilbao",
       "year": 2017,
       "type": "solo",
       "description": "Serie de retratos y amores inspirados en Hollywood"
-    },
-    {
-      "id": "urban-market-barakaldo",
-      "title": "Urban Market Barakaldo",
-      "location": "Barakaldo",
-      "year": 2016,
-      "type": "market"
-    },
-    {
-      "id": "the-art-of-living",
-      "title": "The Art Of Living",
-      "location": "Bilbao",
-      "year": 2015,
-      "month": "January",
-      "type": "group"
-    },
-    {
-      "id": "artivismos",
-      "title": "Artivismos",
-      "location": "Bilbao",
-      "year": 2020,
-      "type": "group",
-      "description": "Exposición colectiva de arte activista",
-      "series": "artivismos"
     }
   ],
   "upcoming": []
