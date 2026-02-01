@@ -114,8 +114,14 @@
   // INITIALIZATION
   // ===========================================
 
-  function init() {
+  async function init() {
     console.log('[Naroa 2026] Initializing...');
+    
+    // CRITICAL: Initialize Gallery BEFORE routes so data is ready
+    if (window.Gallery) {
+      await window.Gallery.init();
+      console.log('[Naroa 2026] Gallery initialized with artwork data');
+    }
     
     registerRoutes();
     initMobileNav();
