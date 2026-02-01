@@ -28,13 +28,13 @@
       .register('#/', () => {
         router.showView('view-home');
       })
-      .register('#/portfolio', () => {
-        router.showView('view-portfolio');
-        loadPortfolio();
+      .register('#/destacada', () => {
+        router.showView('view-destacada');
+        loadFeatured();
       })
-      .register('#/galeria', () => {
-        router.showView('view-galeria');
-        loadGallery();
+      .register('#/archivo', () => {
+        router.showView('view-archivo');
+        loadArchive();
       })
       .register('#/about', () => {
         router.showView('view-about');
@@ -96,19 +96,17 @@
   // PLACEHOLDER LOADERS (to be expanded)
   // ===========================================
 
-  function loadPortfolio() {
-    console.log('[App] Loading portfolio...');
-    // Gallery module will handle this
+  function loadFeatured() {
+    console.log('[App] Loading Obra Destacada...');
     if (window.Gallery) {
-      window.Gallery.loadPortfolio();
+      window.Gallery.loadFeatured();
     }
   }
 
-  function loadGallery() {
-    console.log('[App] Loading gallery...');
-    // Gallery module will handle this
+  function loadArchive() {
+    console.log('[App] Loading Archivo...');
     if (window.Gallery) {
-      window.Gallery.loadGallery();
+      window.Gallery.loadArchive();
     }
   }
 

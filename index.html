@@ -21,6 +21,7 @@
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/gallery.css">
   <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/soty-effects.css">
   
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="assets/favicon.png">
@@ -30,8 +31,8 @@
   <nav class="nav" id="main-nav">
     <a href="#/" class="nav__logo">Naroa Gutiérrez Gil</a>
     <ul class="nav__menu">
-      <li><a href="#/portfolio">Portfolio</a></li>
-      <li><a href="#/galeria">Galería</a></li>
+      <li><a href="#/destacada">Obra Destacada</a></li>
+      <li><a href="#/archivo">Archivo</a></li>
       <li><a href="#/about">Sobre mí</a></li>
       <li><a href="#/contacto">Contacto</a></li>
     </ul>
@@ -47,36 +48,36 @@
     <!-- Home View -->
     <section id="view-home" class="view view--home active">
       <div class="hero">
-        <h1 class="hero__title">
+        <h1 class="hero__title kinetic-text">
           <span class="hero__line">Naroa</span>
           <span class="hero__line">Gutiérrez</span>
           <span class="hero__line">Gil</span>
         </h1>
         <p class="hero__subtitle">Artista Visual · Bilbao</p>
-        <a href="#/portfolio" class="hero__cta">Ver Obra</a>
+        <a href="#/destacada" class="hero__cta magnetic-btn">Ver Obra</a>
       </div>
     </section>
 
-    <!-- Portfolio View -->
-    <section id="view-portfolio" class="view view--portfolio">
+    <!-- Obra Destacada View (Curated 15 pieces) -->
+    <section id="view-destacada" class="view view--destacada reveal-on-scroll">
       <header class="view__header">
-        <h2>Portfolio</h2>
+        <h2>Obra Destacada</h2>
       </header>
-      <div class="gallery" id="portfolio-gallery">
-        <!-- Dynamically populated -->
+      <div class="gallery gallery--featured" id="featured-gallery">
+        <!-- Dynamically populated with 15 curated pieces -->
       </div>
     </section>
 
-    <!-- Gallery View -->
-    <section id="view-galeria" class="view view--galeria">
+    <!-- Archivo View (Complete 44+ works) -->
+    <section id="view-archivo" class="view view--archivo reveal-stagger">
       <header class="view__header">
-        <h2>Galería</h2>
-        <div class="gallery__filters" id="gallery-filters">
+        <h2>Archivo</h2>
+        <div class="gallery-filters" id="gallery-filters">
           <!-- Filters populated by JS -->
         </div>
       </header>
-      <div class="gallery gallery--masonry" id="galeria-grid">
-        <!-- Dynamically populated -->
+      <div class="gallery gallery--masonry" id="archivo-grid">
+        <!-- Dynamically populated with all works -->
       </div>
     </section>
 
@@ -118,5 +119,6 @@
   <script src="js/core/app.js"></script>
   <script src="js/features/gallery.js"></script>
   <script src="js/features/lightbox.js"></script>
+  <script src="js/core/soty-effects.js"></script>
 </body>
 </html>

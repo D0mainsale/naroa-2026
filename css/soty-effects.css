@@ -1,0 +1,208 @@
+/**
+ * SOTY 2026 Premium Effects
+ * Includes: Magnetic cursors, kinetic typography, scroll reveals
+ * With full prefers-reduced-motion accessibility support
+ */
+
+/* ===================================
+   DESIGN TOKENS
+   =================================== */
+
+:root {
+  --soty-gold: #c9a227;
+  --soty-gold-soft: #d4b896;
+  --soty-void: #000000;
+  --soty-bone: #f5f3ef;
+  
+  /* Animation timing */
+  --soty-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --soty-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --soty-duration-fast: 0.2s;
+  --soty-duration-normal: 0.4s;
+  --soty-duration-slow: 0.8s;
+}
+
+/* ===================================
+   MAGNETIC CURSOR EFFECTS
+   =================================== */
+
+.magnetic-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform var(--soty-duration-normal) var(--soty-ease-spring);
+  will-change: transform;
+}
+
+.magnetic-btn:hover {
+  transform: scale(1.05);
+}
+
+.magnetic-btn::after {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  border: 1px solid transparent;
+  border-radius: inherit;
+  transition: border-color var(--soty-duration-fast) var(--soty-ease-out);
+}
+
+.magnetic-btn:hover::after {
+  border-color: var(--soty-gold);
+}
+
+/* ===================================
+   KINETIC TYPOGRAPHY
+   =================================== */
+
+.kinetic-text {
+  display: inline-block;
+  transition: transform var(--soty-duration-normal) var(--soty-ease-out),
+              letter-spacing var(--soty-duration-slow) var(--soty-ease-out);
+  will-change: transform, letter-spacing;
+}
+
+.kinetic-text:hover {
+  letter-spacing: 0.08em;
+}
+
+/* Liquid distortion effect via CSS (fallback for non-WebGL) */
+.kinetic-text--liquid {
+  filter: url(#liquid-distort);
+  transition: filter var(--soty-duration-slow) var(--soty-ease-out);
+}
+
+/* ===================================
+   SCROLL-TRIGGERED REVEAL ANIMATIONS
+   =================================== */
+
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity var(--soty-duration-slow) var(--soty-ease-out),
+              transform var(--soty-duration-slow) var(--soty-ease-out);
+}
+
+.reveal-on-scroll.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered children */
+.reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity var(--soty-duration-normal) var(--soty-ease-out),
+              transform var(--soty-duration-normal) var(--soty-ease-out);
+}
+
+.reveal-stagger.revealed > *:nth-child(1) { transition-delay: 0.05s; }
+.reveal-stagger.revealed > *:nth-child(2) { transition-delay: 0.1s; }
+.reveal-stagger.revealed > *:nth-child(3) { transition-delay: 0.15s; }
+.reveal-stagger.revealed > *:nth-child(4) { transition-delay: 0.2s; }
+.reveal-stagger.revealed > *:nth-child(5) { transition-delay: 0.25s; }
+.reveal-stagger.revealed > *:nth-child(6) { transition-delay: 0.3s; }
+.reveal-stagger.revealed > *:nth-child(n+7) { transition-delay: 0.35s; }
+
+.reveal-stagger.revealed > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===================================
+   GALLERY DEPTH EFFECT (Museumcore)
+   =================================== */
+
+.gallery__item {
+  --depth-offset: 0;
+  transform: translateZ(calc(var(--depth-offset) * 1px)) rotateY(calc(var(--depth-offset) * 0.1deg));
+  transition: transform var(--soty-duration-normal) var(--soty-ease-spring),
+              box-shadow var(--soty-duration-normal) var(--soty-ease-out);
+}
+
+.gallery__item:hover {
+  --depth-offset: 20;
+  box-shadow: 
+    0 8px 24px rgba(0, 0, 0, 0.4),
+    0 16px 48px rgba(0, 0, 0, 0.2);
+}
+
+/* Floating animation for Museumcore */
+@keyframes float-gentle {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(0.5deg); }
+}
+
+.gallery__item--floating {
+  animation: float-gentle 8s ease-in-out infinite;
+}
+
+/* ===================================
+   PREMIUM CURSOR TRAIL (Golden Particles)
+   =================================== */
+
+.cursor-trail-particle {
+  position: fixed;
+  pointer-events: none;
+  width: 6px;
+  height: 6px;
+  background: var(--soty-gold);
+  border-radius: 50%;
+  opacity: 0.8;
+  z-index: 9999;
+  mix-blend-mode: screen;
+  animation: particle-fade 0.6s var(--soty-ease-out) forwards;
+}
+
+@keyframes particle-fade {
+  0% { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(0); opacity: 0; }
+}
+
+/* ===================================
+   ACCESSIBILITY: REDUCED MOTION
+   =================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .reveal-on-scroll,
+  .reveal-stagger > * {
+    opacity: 1;
+    transform: none;
+  }
+  
+  .gallery__item--floating {
+    animation: none;
+  }
+  
+  .kinetic-text:hover {
+    letter-spacing: inherit;
+  }
+  
+  .cursor-trail-particle {
+    display: none;
+  }
+}
+
+/* ===================================
+   LIQUID DISTORTION SVG FILTER (Fallback)
+   =================================== */
+
+/* 
+  This SVG filter should be added to the HTML body:
+  <svg style="position:absolute;width:0;height:0">
+    <filter id="liquid-distort">
+      <feTurbulence type="fractalNoise" baseFrequency="0.01" numOctaves="3" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </svg>
+*/
