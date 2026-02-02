@@ -236,6 +236,14 @@
       console.log('Intro: skipped (already seen)');
       return;
     }
+    
+    // Skip if navigating directly to a specific route (not home)
+    const hash = window.location.hash;
+    if (hash && hash !== '#/' && hash !== '#') {
+      console.log('Intro: skipped (deep link to ' + hash + ')');
+      sessionStorage.setItem('naroa-intro-seen', 'true');
+      return;
+    }
 
     await loadIntroArtworks();
     
