@@ -1,47 +1,45 @@
 /**
- * NAROA GUTIÉRREZ GIL - TRITONE PALETTE 2026
- * REGLA ABSOLUTA: SOLO 3 TONOS. ELEGANCIA + ACENTO CÁLIDO.
+ * NAROA GUTIÉRREZ GIL - DUOTONE PALETTE 2026
+ * REGLA ABSOLUTA: SOLO 2 COLORES. NEGRO + ROSA CHICLE.
  * 
- * 1. CREMA - Luz (fondo, espacios respiro)
- * 2. NEGRO SUAVE - Sombra (texto, elementos, contraste)
- * 3. NARANJA DESERT TITANIUM - Acento cálido (iPhone 17 Pro)
+ * 1. NEGRO MATE - Fondo absoluto
+ * 2. ROSA CHICLE - Texto, acentos, todo
  */
 
 :root {
   /* ==========================================
-     TRITONO ESENCIAL - The Only 3
+     DUOTONO ESENCIAL - The Only 2
      ========================================== */
   
-  /* 1. CREMA ORGÁNICO - Light tone */
-  --naroa-cream: #faf7f2;
+  /* 1. NEGRO MATE ABSOLUTO - Fondo */
+  --naroa-cream: #0a0a0a;
+  --naroa-black: #0a0a0a;
   
-  /* 2. NEGRO SUAVE - Dark tone */
-  --naroa-black: #2c2c2c;
-  
-  /* 3. NARANJA DESERT TITANIUM - Warm accent (iPhone 17 Pro) */
-  --naroa-orange: #E5A47B;
+  /* 2. ROSA CHICLE VIBRANTE - Acento */
+  --naroa-pink: #ff69b4;
+  --naroa-orange: #ff69b4;
 
   /* ==========================================
-     SEMANTIC MAPPING (Tritone)
+     SEMANTIC MAPPING (Duotone)
      ========================================== */
   
-  --bg-primary: var(--naroa-cream);
-  --bg-secondary: var(--naroa-cream);
-  --bg-elevated: var(--naroa-cream);
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #0f0f0f;
+  --bg-elevated: #141414;
   
-  --text-primary: var(--naroa-black);
-  --text-secondary: var(--naroa-black);
+  --text-primary: var(--naroa-pink);
+  --text-secondary: var(--naroa-pink);
   
-  --accent: var(--naroa-orange);
-  --highlight: var(--naroa-orange);
+  --accent: var(--naroa-pink);
+  --highlight: var(--naroa-pink);
 
   /* ==========================================
-     GRADIENTS (Tritone)
+     GRADIENTS (Duotone)
      ========================================== */
   
-  --gradient-subtle: linear-gradient(135deg, var(--naroa-cream) 0%, rgba(44, 44, 44, 0.03) 100%);
-  --gradient-dark: linear-gradient(135deg, var(--naroa-black) 0%, rgba(44, 44, 44, 0.8) 100%);
-  --gradient-warm: linear-gradient(135deg, var(--naroa-orange) 0%, rgba(229, 164, 123, 0.6) 100%);
+  --gradient-subtle: linear-gradient(135deg, #0a0a0a 0%, #141414 100%);
+  --gradient-dark: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+  --gradient-warm: linear-gradient(135deg, var(--naroa-pink) 0%, rgba(255, 105, 180, 0.6) 100%);
   
   /* ==========================================
      ORGANIC GEOMETRY
@@ -82,10 +80,10 @@ input, .btn, .tag {
   border-radius: var(--radius-circle) !important;
 }
 
-/* Organic Body */
+/* Organic Body - DUOTONE DARK */
 body {
-  background: var(--naroa-cream);
-  color: var(--naroa-black);
+  background: #0a0a0a;
+  color: #ff69b4;
 }
 
 /**
