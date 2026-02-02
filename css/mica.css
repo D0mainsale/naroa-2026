@@ -288,3 +288,74 @@
     height: 56px;
   }
 }
+
+/* ==========================================================================
+   MICA NEBLINA - Black Background with Fog Effect
+   ========================================================================== */
+
+.view--mica {
+  background: #0a0a0a;
+  position: relative;
+  overflow: hidden;
+}
+
+.view--mica::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(ellipse at 20% 30%, rgba(255, 215, 0, 0.05) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 70%, rgba(255, 215, 0, 0.03) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.view--mica::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='fog'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.015' numOctaves='3' seed='5'/%3E%3CfeDisplacementMap in='SourceGraphic' scale='50'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23fog)' opacity='0.03'/%3E%3C/svg%3E");
+  animation: mica-fog-drift 30s ease-in-out infinite alternate;
+  pointer-events: none;
+  opacity: 0.6;
+  z-index: 1;
+}
+
+@keyframes mica-fog-drift {
+  0% { transform: translateX(-5%) translateY(-5%) scale(1.1); }
+  100% { transform: translateX(5%) translateY(5%) scale(1); }
+}
+
+/* Neblina particles */
+.mica-fog-particles {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.mica-fog-particle {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.03) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: mica-particle-float 20s ease-in-out infinite;
+}
+
+.mica-fog-particle:nth-child(1) { left: 10%; top: 20%; animation-delay: 0s; }
+.mica-fog-particle:nth-child(2) { left: 60%; top: 50%; animation-delay: 5s; }
+.mica-fog-particle:nth-child(3) { left: 30%; top: 70%; animation-delay: 10s; }
+.mica-fog-particle:nth-child(4) { left: 80%; top: 20%; animation-delay: 15s; }
+
+@keyframes mica-particle-float {
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.3; }
+  50% { transform: translate(30px, -20px) scale(1.2); opacity: 0.5; }
+}
+
+/* Ensure game content is above fog */
+.view--mica .game-container {
+  position: relative;
+  z-index: 10;
+}

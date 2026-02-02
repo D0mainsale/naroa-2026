@@ -284,3 +284,24 @@
     transform: none;
   }
 }
+
+/* Strategy Games Cards */
+.game-card--strategy {
+  background: linear-gradient(135deg, rgba(20, 20, 20, 0.95), rgba(30, 30, 30, 0.9));
+  border: 2px solid rgba(212, 175, 55, 0.4);
+  box-shadow: 
+    0 4px 20px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.game-card--strategy:hover {
+  border-color: rgba(212, 175, 55, 0.8);
+  box-shadow: 
+    0 8px 30px rgba(0, 0, 0, 0.5),
+    0 0 30px rgba(212, 175, 55, 0.2);
+  transform: translateY(-4px);
+}
+
+.game-card--strategy .game-card__icon {
+  filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.5));
+}

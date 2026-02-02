@@ -130,7 +130,7 @@
     <section id="view-juegos" class="view view--juegos games-hub">
       <header class="games-hub__header">
         <h1 class="games-hub__title">🎮 Sala de Juegos</h1>
-        <p class="games-hub__subtitle">17 minijuegos con las obras de Naroa</p>
+        <p class="games-hub__subtitle">21 minijuegos con las obras de Naroa</p>
       </header>
       <div class="games-grid">
         <a href="#/juego" class="game-card">
@@ -217,6 +217,26 @@
           <div class="game-card__icon">⌨️</div>
           <h3 class="game-card__title">Typing Artístico</h3>
           <p class="game-card__desc">Escribe palabras de arte</p>
+        </a>
+        <a href="#/chess" class="game-card game-card--strategy">
+          <div class="game-card__icon">♟️</div>
+          <h3 class="game-card__title">Ajedrez Artístico</h3>
+          <p class="game-card__desc">Estrategia clásica con estilo</p>
+        </a>
+        <a href="#/checkers" class="game-card game-card--strategy">
+          <div class="game-card__icon">🔴</div>
+          <h3 class="game-card__title">Damas</h3>
+          <p class="game-card__desc">Captura todas las piezas</p>
+        </a>
+        <a href="#/connect4" class="game-card game-card--strategy">
+          <div class="game-card__icon">🔵</div>
+          <h3 class="game-card__title">Cuatro en Raya</h3>
+          <p class="game-card__desc">Conecta cuatro para ganar</p>
+        </a>
+        <a href="#/reversi" class="game-card game-card--strategy">
+          <div class="game-card__icon">⚫</div>
+          <h3 class="game-card__title">Reversi</h3>
+          <p class="game-card__desc">Voltea y conquista</p>
         </a>
       </div>
     </section>
@@ -310,6 +330,30 @@
       <header class="view__header"><h2>⌨️ Typing Artístico</h2></header>
       <div class="game-container" id="typing-container"></div>
     </section>
+
+    <!-- Chess View -->
+    <section id="view-chess" class="view view--chess game-view">
+      <header class="view__header"><h2>♟️ Ajedrez Artístico</h2></header>
+      <div class="game-container" id="chess-container"></div>
+    </section>
+
+    <!-- Checkers View -->
+    <section id="view-checkers" class="view view--checkers game-view">
+      <header class="view__header"><h2>🔴 Damas</h2></header>
+      <div class="game-container" id="checkers-container"></div>
+    </section>
+
+    <!-- Connect4 View -->
+    <section id="view-connect4" class="view view--connect4 game-view">
+      <header class="view__header"><h2>🔵 Cuatro en Raya</h2></header>
+      <div class="game-container" id="connect4-container"></div>
+    </section>
+
+    <!-- Reversi View -->
+    <section id="view-reversi" class="view view--reversi game-view">
+      <header class="view__header"><h2>⚫ Reversi</h2></header>
+      <div class="game-container" id="reversi-container"></div>
+    </section>
   </main>
 
   <!-- Lightbox -->
@@ -355,5 +399,10 @@
   <script src="js/features/reaction-game.js"></script>
   <script src="js/features/typing-game.js"></script>
   <script src="js/features/intro.js"></script>
+  <!-- Strategy Games (21 total) -->
+  <script src="js/features/chess-game.js"></script>
+  <script src="js/features/checkers-game.js"></script>
+  <script src="js/features/connect4-game.js"></script>
+  <script src="js/features/reversi-game.js"></script>
 </body>
 </html>

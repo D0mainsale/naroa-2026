@@ -112,6 +112,26 @@
       .register('#/typing', () => {
         router.showView('view-typing');
         if (window.TypingGame) window.TypingGame.init();
+      })
+      .register('#/chess', () => {
+        router.showView('view-chess');
+        const container = document.getElementById('chess-container');
+        if (container && window.initChessGame) window.initChessGame(container);
+      })
+      .register('#/checkers', () => {
+        router.showView('view-checkers');
+        const container = document.getElementById('checkers-container');
+        if (container && window.initCheckersGame) window.initCheckersGame(container);
+      })
+      .register('#/connect4', () => {
+        router.showView('view-connect4');
+        const container = document.getElementById('connect4-container');
+        if (container && window.initConnect4Game) window.initConnect4Game(container);
+      })
+      .register('#/reversi', () => {
+        router.showView('view-reversi');
+        const container = document.getElementById('reversi-container');
+        if (container && window.initReversiGame) window.initReversiGame(container);
       });
 
     // Lifecycle hooks
