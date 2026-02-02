@@ -24,6 +24,9 @@
   <link rel="stylesheet" href="css/soty-effects.css">
   <link rel="stylesheet" href="css/mica.css">
   <link rel="stylesheet" href="css/wow-effects.css">
+  <link rel="stylesheet" href="css/oca-game.css">
+  <link rel="stylesheet" href="css/tetris-game.css">
+  <link rel="stylesheet" href="css/games-hub.css">
   
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="assets/favicon.png">
@@ -37,6 +40,7 @@
       <li><a href="#/archivo">Archivo</a></li>
       <li><a href="#/about">Sobre mí</a></li>
       <li><a href="#/contacto">Contacto</a></li>
+      <li><a href="#/juegos" class="nav__game">🎮 Juegos</a></li>
     </ul>
     <button class="nav__toggle" aria-label="Menú" id="nav-toggle">
       <span></span>
@@ -103,6 +107,209 @@
         <a href="mailto:info@naroa.online" class="contact__email">info@naroa.online</a>
       </div>
     </section>
+
+    <!-- Juego de la Oca View -->
+    <section id="view-juego" class="view view--juego">
+      <header class="view__header">
+        <h2>🎲 Juego de la Oca 🦆</h2>
+        <p class="view__subtitle">Descubre mi obra jugando</p>
+      </header>
+      <div id="oca-board"></div>
+    </section>
+
+    <!-- Tetris View -->
+    <section id="view-tetris" class="view view--tetris">
+      <header class="view__header">
+        <h2>🕹️ Tetris Artístico 🎨</h2>
+        <p class="view__subtitle">Juega Tetris con mis obras</p>
+      </header>
+      <div id="tetris-container"></div>
+    </section>
+
+    <!-- Games Hub View -->
+    <section id="view-juegos" class="view view--juegos games-hub">
+      <header class="games-hub__header">
+        <h1 class="games-hub__title">🎮 Sala de Juegos</h1>
+        <p class="games-hub__subtitle">17 minijuegos con las obras de Naroa</p>
+      </header>
+      <div class="games-grid">
+        <a href="#/juego" class="game-card">
+          <div class="game-card__icon">🎲</div>
+          <h3 class="game-card__title">Juego de la Oca</h3>
+          <p class="game-card__desc">Recorre el tablero descubriendo obras</p>
+        </a>
+        <a href="#/tetris" class="game-card">
+          <div class="game-card__icon">🕹️</div>
+          <h3 class="game-card__title">Tetris Artístico</h3>
+          <p class="game-card__desc">Bloques con texturas de arte</p>
+        </a>
+        <a href="#/memory" class="game-card">
+          <div class="game-card__icon">🧠</div>
+          <h3 class="game-card__title">Memory</h3>
+          <p class="game-card__desc">Encuentra las parejas de obras</p>
+        </a>
+        <a href="#/puzzle" class="game-card">
+          <div class="game-card__icon">🧩</div>
+          <h3 class="game-card__title">Puzzle Deslizante</h3>
+          <p class="game-card__desc">Reconstruye la imagen</p>
+        </a>
+        <a href="#/snake" class="game-card">
+          <div class="game-card__icon">🐍</div>
+          <h3 class="game-card__title">Snake</h3>
+          <p class="game-card__desc">Recoge piezas de arte</p>
+        </a>
+        <a href="#/breakout" class="game-card">
+          <div class="game-card__icon">🧱</div>
+          <h3 class="game-card__title">Breakout</h3>
+          <p class="game-card__desc">Rompe bloques artísticos</p>
+        </a>
+        <a href="#/whack" class="game-card">
+          <div class="game-card__icon">🔨</div>
+          <h3 class="game-card__title">Whack Art</h3>
+          <p class="game-card__desc">Golpea obras emergentes</p>
+        </a>
+        <a href="#/simon" class="game-card">
+          <div class="game-card__icon">🎵</div>
+          <h3 class="game-card__title">Simon Dice</h3>
+          <p class="game-card__desc">Memoriza la secuencia visual</p>
+        </a>
+        <a href="#/quiz" class="game-card">
+          <div class="game-card__icon">❓</div>
+          <h3 class="game-card__title">Quiz Artístico</h3>
+          <p class="game-card__desc">Adivina título y serie</p>
+        </a>
+        <a href="#/catch" class="game-card">
+          <div class="game-card__icon">🧺</div>
+          <h3 class="game-card__title">Atrapa Arte</h3>
+          <p class="game-card__desc">Recoge obras que caen</p>
+        </a>
+        <a href="#/collage" class="game-card game-card--featured">
+          <div class="game-card__icon">🎨</div>
+          <h3 class="game-card__title">Collage Alquímico</h3>
+          <p class="game-card__desc">Compón con materiales de Naroa</p>
+        </a>
+        <a href="#/reinas" class="game-card game-card--featured">
+          <div class="game-card__icon">👑</div>
+          <h3 class="game-card__title">Repóker de Reinas</h3>
+          <p class="game-card__desc">Trivia de mujeres poderosas</p>
+        </a>
+        <a href="#/mica" class="game-card game-card--spectacular">
+          <div class="game-card__icon">✨</div>
+          <h3 class="game-card__title">MICA VIVA</h3>
+          <p class="game-card__desc">Retratos que te miran</p>
+        </a>
+        <a href="#/kintsugi" class="game-card game-card--spectacular">
+          <div class="game-card__icon">🥇</div>
+          <h3 class="game-card__title">Kintsugi Emocional</h3>
+          <p class="game-card__desc">Repara grietas con oro</p>
+        </a>
+        <a href="#/pong" class="game-card game-card--new">
+          <div class="game-card__icon">🏓</div>
+          <h3 class="game-card__title">Pong Artístico</h3>
+          <p class="game-card__desc">Pelota con obras de arte</p>
+        </a>
+        <a href="#/reaction" class="game-card game-card--new">
+          <div class="game-card__icon">⚡</div>
+          <h3 class="game-card__title">Test Reflejos</h3>
+          <p class="game-card__desc">Reacciona cuando veas la obra</p>
+        </a>
+        <a href="#/typing" class="game-card game-card--new">
+          <div class="game-card__icon">⌨️</div>
+          <h3 class="game-card__title">Typing Artístico</h3>
+          <p class="game-card__desc">Escribe palabras de arte</p>
+        </a>
+      </div>
+    </section>
+
+    <!-- Memory View -->
+    <section id="view-memory" class="view view--memory game-view">
+      <header class="view__header"><h2>🧠 Memory</h2></header>
+      <div class="game-container" id="memory-container"></div>
+    </section>
+
+    <!-- Puzzle View -->
+    <section id="view-puzzle" class="view view--puzzle game-view">
+      <header class="view__header"><h2>🧩 Puzzle</h2></header>
+      <div class="game-container" id="puzzle-container"></div>
+    </section>
+
+    <!-- Snake View -->
+    <section id="view-snake" class="view view--snake game-view">
+      <header class="view__header"><h2>🐍 Snake</h2></header>
+      <div class="game-container" id="snake-container"></div>
+    </section>
+
+    <!-- Breakout View -->
+    <section id="view-breakout" class="view view--breakout game-view">
+      <header class="view__header"><h2>🧱 Breakout</h2></header>
+      <div class="game-container" id="breakout-container"></div>
+    </section>
+
+    <!-- Whack View -->
+    <section id="view-whack" class="view view--whack game-view">
+      <header class="view__header"><h2>🔨 Whack Art</h2></header>
+      <div class="game-container" id="whack-container"></div>
+    </section>
+
+    <!-- Simon View -->
+    <section id="view-simon" class="view view--simon game-view">
+      <header class="view__header"><h2>🎵 Simon Dice</h2></header>
+      <div class="game-container" id="simon-container"></div>
+    </section>
+
+    <!-- Quiz View -->
+    <section id="view-quiz" class="view view--quiz game-view">
+      <header class="view__header"><h2>❓ Quiz Artístico</h2></header>
+      <div class="game-container" id="quiz-container"></div>
+    </section>
+
+    <!-- Catch View -->
+    <section id="view-catch" class="view view--catch game-view">
+      <header class="view__header"><h2>🧺 Atrapa Arte</h2></header>
+      <div class="game-container" id="catch-container"></div>
+    </section>
+
+    <!-- Collage Alquímico View -->
+    <section id="view-collage" class="view view--collage game-view">
+      <header class="view__header"><h2>🎨 Collage Alquímico</h2></header>
+      <div class="game-container" id="collage-container"></div>
+    </section>
+
+    <!-- Repóker de Reinas View -->
+    <section id="view-reinas" class="view view--reinas game-view">
+      <header class="view__header"><h2>👑 Repóker de Reinas</h2></header>
+      <div class="game-container" id="reinas-container"></div>
+    </section>
+
+    <!-- MICA VIVA View -->
+    <section id="view-mica" class="view view--mica game-view">
+      <header class="view__header"><h2>✨ MICA VIVA: Retratos que Laten</h2></header>
+      <div class="game-container" id="mica-container"></div>
+    </section>
+
+    <!-- Kintsugi Emocional View -->
+    <section id="view-kintsugi" class="view view--kintsugi game-view">
+      <header class="view__header"><h2>🥇 Kintsugi Emocional</h2></header>
+      <div class="game-container" id="kintsugi-container"></div>
+    </section>
+
+    <!-- Pong View -->
+    <section id="view-pong" class="view view--pong game-view">
+      <header class="view__header"><h2>🏓 Pong Artístico</h2></header>
+      <div class="game-container" id="pong-container"></div>
+    </section>
+
+    <!-- Reaction View -->
+    <section id="view-reaction" class="view view--reaction game-view">
+      <header class="view__header"><h2>⚡ Test de Reflejos</h2></header>
+      <div class="game-container" id="reaction-container"></div>
+    </section>
+
+    <!-- Typing View -->
+    <section id="view-typing" class="view view--typing game-view">
+      <header class="view__header"><h2>⌨️ Typing Artístico</h2></header>
+      <div class="game-container" id="typing-container"></div>
+    </section>
   </main>
 
   <!-- Lightbox -->
@@ -118,6 +325,7 @@
 
   <!-- Scripts -->
   <script src="js/core/router.js"></script>
+  <script src="js/core/ranking-system.js"></script>
   <script src="js/features/gallery.js"></script>
   <script src="js/features/lightbox.js"></script>
   <script src="js/core/app.js"></script>
@@ -129,5 +337,23 @@
   <script src="js/effects/magnetic-button.js"></script>
   <script src="js/effects/reveal-observer.js"></script>
   <script src="js/effects/cursor-trail.js"></script>
+  <script src="js/features/oca-game.js"></script>
+  <script src="js/features/tetris-game.js"></script>
+  <script src="js/features/memory-game.js"></script>
+  <script src="js/features/puzzle-game.js"></script>
+  <script src="js/features/snake-game.js"></script>
+  <script src="js/features/breakout-game.js"></script>
+  <script src="js/features/whack-game.js"></script>
+  <script src="js/features/simon-game.js"></script>
+  <script src="js/features/quiz-game.js"></script>
+  <script src="js/features/catch-game.js"></script>
+  <script src="js/features/collage-game.js"></script>
+  <script src="js/features/reinas-game.js"></script>
+  <script src="js/features/mica-game.js"></script>
+  <script src="js/features/kintsugi-game.js"></script>
+  <script src="js/features/pong-game.js"></script>
+  <script src="js/features/reaction-game.js"></script>
+  <script src="js/features/typing-game.js"></script>
+  <script src="js/features/intro.js"></script>
 </body>
 </html>

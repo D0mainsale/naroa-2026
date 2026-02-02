@@ -334,11 +334,12 @@
   
   // Curated by IA Alliance Protocol - Feb 2026
   // Covering: rocks, tributos-musicales, espejos-del-alma, enlatas, golden, amor, retratos, naturaleza
+  // VERIFIED: All IDs match existing .webp files in images/artworks/
   const FEATURED_ARTWORK_IDS = [
     'amy-rocks',                    // Rocks - iconic series opener
-    'marilyn-rocks-hq-1',           // Rocks - Marilyn variant
-    'james-rocks-hq-1',             // Rocks - James Dean
-    'mr-fahrenheit',                // Tributos Musicales - Freddie Mercury
+    'marilyn-rocks-hq-5',           // Rocks - Marilyn variant (verified)
+    'james-rocks-hq-3',             // Rocks - James Dean (verified)
+    'baroque-farrokh',              // Tributos Musicales - Freddie Mercury variant
     'audrey-hepburn',               // Tributos - Audrey Lightning
     'espejos-del-alma',             // Espejos del Alma - signature piece
     'amor-en-conserva',             // En.lata.das - conceptual collage
@@ -348,7 +349,7 @@
     'love',                         // Amor series - universal theme
     'smile-world-smiles-back',      // Amor - optimistic message
     'el-gran-dakari',               // Retratos - powerful portrait
-    'peter-rowan-hq',               // Retratos - pencil mastery
+    'peter-rowan',                   // Retratos - pencil mastery (now converted to webp)
     'pajarraca-azul'                // Naturaleza - vibrant wildlife
   ];
 
