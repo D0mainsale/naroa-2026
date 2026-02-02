@@ -10,6 +10,7 @@ class SpotifyRotator {
     // Álbumes y playlists de Borja Moskv - Colección completa
     this.embeds = [
       // Álbumes principales
+      { type: 'album', id: '7HTxaYpcYV5sVDlj2kzx7y', name: 'Nuevo Álbum' },
       { type: 'album', id: '3Kx5S9L4U8XdU8nHrWgZuT', name: 'Lo Inmanente' },
       { type: 'album', id: '4rN3VvCVqG4RfCqbFZKnqT', name: 'Álbum 2' },
       
@@ -33,13 +34,18 @@ class SpotifyRotator {
     this.container = document.querySelector('.hero__spotify');
     if (!this.container) return;
     
-    // Aplicar embed inicial
+    // Calcular semana del año para rotación semanal
+    const now = new Date();
+    const startOfYear = new Date(now.getFullYear(), 0, 1);
+    const weekNumber = Math.ceil((((now - startOfYear) / 86400000) + startOfYear.getDay() + 1) / 7);
+    
+    // Seleccionar embed basado en semana del año
+    this.currentIndex = weekNumber % this.embeds.length;
+    
+    // Aplicar embed de esta semana
     this.applyEmbed();
     
-    // Rotar cada minuto
-    setInterval(() => this.rotate(), 60000);
-    
-    console.log('🎵 Spotify Rotator activo:', this.embeds[this.currentIndex].name);
+    console.log(`🎵 Spotify Semanal (Semana ${weekNumber}):`, this.embeds[this.currentIndex].name);
   }
   
   rotate() {
