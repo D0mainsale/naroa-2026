@@ -66,10 +66,11 @@ class MICA {
     ];
     
     this.quickActions = [
-      { label: '🎸 Rocks', query: 'muéstrame los Rocks' },
-      { label: '🖼️ Galería', query: 'ver galería' },
-      { label: '👑 Queen', query: 'obras de Queen' },
-      { label: '🎨 Sorpréndeme', query: 'sorpréndeme' }
+      { label: '🎸 Rocks', query: 'ver los Rocks', target: '#/archivo' },
+      { label: '🖼️ Galería', query: 'ver galería completa', target: '#/galeria' },
+      { label: '👑 Destacada', query: 'obra destacada', target: '#/destacada' },
+      { label: '🎮 Juegos', query: 'jugar', target: '#/juegos' },
+      { label: '✨ Sorpréndeme', query: 'sorpréndeme' }
     ];
     
     this.init();
