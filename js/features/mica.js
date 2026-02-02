@@ -84,6 +84,32 @@ Cuando mencionen una obra o categoría, sugiere navegar.`
       { label: '✨ Sorpréndeme', query: 'sorpréndeme' }
     ];
     
+    // Placeholders dinámicos (nunca se repiten)
+    this.placeholders = [
+      'Cuéntame sobre los Rocks...',
+      '¿Quién es Amy Winehouse?',
+      'Muéstrame retratos con mica',
+      '¿Qué significa Kintsugi?',
+      'Sorpréndeme con algo',
+      '¿Tienes cuadros de naturaleza?',
+      'Háblame de Freddie Mercury',
+      '¿Dónde expones?',
+      '¿Qué técnica usas?',
+      'Quiero ver bodas lúdicas',
+      '¿Qué es En.lata?',
+      'Muéstrame los DiviNos',
+      '¿Tienes chefs pintados?',
+      'Cuéntame de Bowie',
+      '¿Cuánto cuesta un original?',
+      '¿Quién es Naroa?',
+      'Ver tributos musicales',
+      '¿Qué es la mica mineral?',
+      'Muéstrame amor en el arte',
+      '¿Tienes obras de Johnny Cash?'
+    ];
+    this.usedPlaceholders = [];
+    this.placeholderInterval = null;
+    
     this.init();
   }
   
@@ -91,6 +117,43 @@ Cuando mencionen una obra o categoría, sugiere navegar.`
     this.createDOM();
     this.bindEvents();
     this.addMessage(this.personality.greeting, 'mica');
+    this.startPlaceholderRotation();
+  }
+  
+  // Placeholder rotation system - nunca repite
+  getNextPlaceholder() {
+    if (this.placeholders.length === 0) {
+      this.placeholders = [...this.usedPlaceholders];
+      this.usedPlaceholders = [];
+    }
+    const idx = Math.floor(Math.random() * this.placeholders.length);
+    const placeholder = this.placeholders.splice(idx, 1)[0];
+    this.usedPlaceholders.push(placeholder);
+    return placeholder;
+  }
+  
+  startPlaceholderRotation() {
+    if (this.placeholderInterval) return;
+    this.rotatePlaceholder();
+    this.placeholderInterval = setInterval(() => this.rotatePlaceholder(), 3500);
+  }
+  
+  stopPlaceholderRotation() {
+    if (this.placeholderInterval) {
+      clearInterval(this.placeholderInterval);
+      this.placeholderInterval = null;
+    }
+  }
+  
+  rotatePlaceholder() {
+    if (!this.elements?.input) return;
+    const input = this.elements.input;
+    input.style.transition = 'opacity 0.3s ease';
+    input.style.opacity = '0.3';
+    setTimeout(() => {
+      input.placeholder = this.getNextPlaceholder();
+      input.style.opacity = '1';
+    }, 300);
   }
   
   createDOM() {
