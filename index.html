@@ -8,28 +8,33 @@
   
   <title>Naroa Gutiérrez Gil | Artista Visual</title>
   
-  <!-- LCP Optimization: Preload critical fonts -->
+  <!-- Fonts 2026: Satoshi (body) + Switzer (display) from Fontshare -->
   <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
-  <link rel="preload" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,700&f[]=switzer@500,700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,700&f[]=switzer@500,700&display=swap" rel="stylesheet"></noscript>
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700&f[]=switzer@300,400,500,600,700&display=swap" rel="stylesheet">
   
-  <!-- Preload LCP hero background (gradient will be inline) -->
-  <link rel="preload" href="images/artworks/Webps/espejos-del-alma.webp" as="image" fetchpriority="high">
-  
-  <!-- Critical CSS inline for LCP -->
-  <style>
-    /* Critical CSS - Above the fold */
-    *{margin:0;padding:0;box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{font-family:'Satoshi',-apple-system,sans-serif;background:#0a0a0a;color:#fff;overflow-x:hidden}
-    .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;position:relative;padding:2rem}
-    .hero__title{font-family:'Switzer',sans-serif;font-size:clamp(3rem,12vw,10rem);font-weight:700;text-align:center;line-height:0.9}
-    .hero__gradient-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(255,20,147,.15) 0%,transparent 70%);z-index:-1}
-    .view{min-height:100vh;opacity:0;visibility:hidden;position:absolute;width:100%}
-    .view.active{opacity:1;visibility:visible;position:relative}
-  </style>
-  
-  <!-- Non-critical CSS loaded async by Vite -->
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/naroa-palette.css">
+  <link rel="stylesheet" href="css/typography-2026.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/gallery.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/soty-effects.css">
+  <link rel="stylesheet" href="css/mica.css">
+  <link rel="stylesheet" href="css/wow-effects.css">
+  <link rel="stylesheet" href="css/oca-game.css">
+  <link rel="stylesheet" href="css/tetris-game.css">
+  <link rel="stylesheet" href="css/games-hub.css">
+  <link rel="stylesheet" href="css/arcade-leaderboard.css">
+  <link rel="stylesheet" href="css/about-contact.css">
+  <link rel="stylesheet" href="css/audio-controls.css">
+  <link rel="stylesheet" href="css/audio-reactive.css">
+  <link rel="stylesheet" href="css/gallery-disruptive.css">
+  <link rel="stylesheet" href="css/scroll-to-top.css">
+  <link rel="stylesheet" href="css/video-showcase.css">
   
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="assets/favicon.png">
@@ -141,21 +146,7 @@
     <section id="view-destacada" class="view view--destacada">
       <header class="view__header">
         <h2>Obra Destacada</h2>
-        <p class="view__subtitle">Seleccion curada de mi trabajo mas reciente</p>
-        
-        <!-- Spotify Player: Lo Inmanente - Borja Moskv -->
-        <div class="destacada__spotify">
-          <iframe 
-            src="https://open.spotify.com/embed/album/3Kx5S9L4U8XdU8nHrWgZuT?utm_source=generator&theme=0" 
-            width="100%" 
-            height="152" 
-            frameBorder="0" 
-            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
-            loading="lazy"
-            title="Lo Inmanente - Borja Moskv"
-            style="border-radius: 12px; max-width: 400px; margin: 1rem auto;">
-          </iframe>
-        </div>
+        <p class="view__subtitle">Selección curada de mi trabajo más reciente</p>
       </header>
 
       <!-- HERO: Obra Protagonista Colosal -->
@@ -703,8 +694,67 @@
   </div>
 
   <!-- Scripts -->
-  <!-- Main Bundle (Vite) -->
-  <script type="module" src="/js/main.js"></script>
+  <script src="js/core/router.js"></script>
+  <script src="js/core/ranking-system.js"></script>
+  <script src="js/features/gallery.js"></script>
+  <script src="js/features/lightbox.js"></script>
+  <script src="js/core/app.js"></script>
+  <script src="js/core/soty-effects.js"></script>
+  <script src="js/features/blog-engine.js"></script>
+  <script src="js/features/mica.js"></script>
+  
+  <!-- SOTY 2026 WOW Effects (IA Alliance Sprint Feb 2026) -->
+  <script src="js/effects/kinetic-text.js"></script>
+  <script src="js/effects/magnetic-button.js"></script>
+  <script src="js/effects/reveal-observer.js"></script>
+  <script src="js/effects/cursor-trail.js"></script>
+  <script src="js/features/oca-game.js"></script>
+  <script src="js/features/tetris-game.js"></script>
+  <script src="js/features/memory-game.js"></script>
+  <script src="js/features/puzzle-game.js"></script>
+  <script src="js/features/snake-game.js"></script>
+  <script src="js/features/breakout-game.js"></script>
+  <script src="js/features/whack-game.js"></script>
+  <script src="js/features/simon-game.js"></script>
+  <script src="js/features/quiz-game.js"></script>
+  <script src="js/features/catch-game.js"></script>
+  <script src="js/features/collage-game.js"></script>
+  <script src="js/features/reinas-game.js"></script>
+  <script src="js/features/mica-game.js"></script>
+  <script src="js/features/kintsugi-game.js"></script>
+  <script src="js/features/pong-game.js"></script>
+  <script src="js/features/reaction-game.js"></script>
+  <script src="js/features/typing-game.js"></script>
+  <script src="js/features/intro.js"></script>
+  <!-- Arcade Leaderboard System -->
+  <script src="js/core/arcade-leaderboard.js"></script>
+  <!-- Strategy Games (21 total) -->
+  <script src="js/features/chess-game.js"></script>
+  <script src="js/features/checkers-game.js"></script>
+  <script src="js/features/connect4-game.js"></script>
+  <script src="js/features/reversi-game.js"></script>
+  <!-- Immersive 3D Spatial Audio Engine -->
+  <script src="js/audio/audio-synth.js"></script>
+  <script src="js/audio/immersive-audio.js"></script>
+  <script src="js/audio/audio-hooks.js"></script>
+  <script src="js/audio/audio-visual-sync.js"></script>
+  <!-- Disruptive Gallery Engine -->
+  <script src="js/features/gallery-disruptive.js"></script>
+  <script src="js/features/scroll-to-top.js"></script>
+  <script src="js/features/video-showcase.js"></script>
+  <!-- Eyes Follow Effect - Los retratos te miran -->
+  <script src="js/effects/eyes-follow.js"></script>
+  <!-- Clima Palette - Colores según el clima de tu ciudad -->
+  <script src="js/effects/clima-palette.js"></script>
+  <script src="js/effects/wave-background.js"></script>
+  <!-- Organic Particles - Polvo de pigmento flotante -->
+  <script src="js/effects/organic-particles.js"></script>
+  <!-- Palindrome Hero Generator -->
+  <script src="js/effects/palindrome-hero.js"></script>
+  <!-- MICA Cursor - Puntero Mineral Personalizado -->
+  <script src="js/mica-cursor.js"></script>
+  <!-- Spotify Rotator -->
+  <script src="js/spotify-rotator.js"></script>
   
   <!-- Gallery Disruptive 2.0: SVG Filters for Chromatic Aberration -->
   <svg style="position: absolute; width: 0; height: 0; overflow: hidden;" aria-hidden="true">
@@ -729,3 +779,12 @@
   </svg>
 </body>
 </html>
+<!-- Naroa Cursor Variants -->
+<script src="js/naroa-cursor-variants.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    if (window.NaroaCursors) {
+      window.NaroaCursors.setVariant('gallery_spotlight');
+    }
+  });
+</script>

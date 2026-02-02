@@ -3,7 +3,7 @@
  * @module core/router
  */
 
-export class Router {
+class Router {
   constructor() {
     this.routes = new Map();
     this.currentRoute = null;
@@ -109,6 +109,5 @@ export class Router {
   }
 }
 
-// Export singleton instance
-export const router = new Router();
-
+// Export singleton
+window.Router = new Router();

@@ -14,11 +14,11 @@ class MICA {
     this.conversationHistory = this.loadConversationHistory();
     this.useAI = true; // Enable AI fallback when regex doesn't match
     
-    // Gemini API configuration - UPGRADED to Pro
+    // Gemini API configuration
     this.gemini = {
       apiKey: 'AIzaSyBBJepjrEX3L-eSXZNvSdGLfJbwv4lhcC0', // Free tier key
-      model: 'gemini-2.5-pro',
-      endpoint: 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent',
+      model: 'gemini-2.5-flash-preview-05-20',
+      endpoint: 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent',
       systemPrompt: `Eres MICA, curadora digital de Naroa Studio. Combinas la agudeza de una galerista del siglo XXI con la pasión barroca de Velázquez y el color pop de Agatha.
 
 **TU ACTITUD ANTE LA VENTA:**
@@ -331,9 +331,9 @@ Responde SIEMPRE en español, breve (2-3 oraciones), artístico y comercial sin 
           ...this.conversationHistory
         ],
         generationConfig: {
-          maxOutputTokens: 300,
-          temperature: 0.9,
-          topP: 0.95
+          maxOutputTokens: 150,
+          temperature: 0.8,
+          topP: 0.9
         }
       };
       
