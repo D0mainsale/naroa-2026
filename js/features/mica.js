@@ -17,8 +17,8 @@ class MICA {
     // Gemini API configuration
     this.gemini = {
       apiKey: 'AIzaSyBBJepjrEX3L-eSXZNvSdGLfJbwv4lhcC0', // Free tier key
-      model: 'gemini-2.0-flash',
-      endpoint: 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent',
+      model: 'gemini-2.5-flash-preview-05-20',
+      endpoint: 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent',
       systemPrompt: `Eres MICA, curadora digital de Naroa Studio. Combinas la agudeza de una galerista del siglo XXI con la pasión barroca de Velázquez y el color pop de Agatha.
 
 **TU ACTITUD ANTE LA VENTA:**
@@ -313,11 +313,20 @@ Responde SIEMPRE en español, breve (2-3 oraciones), artístico y comercial sin 
       });
       
       // Build request with system prompt and conversation history
+      // Check for relevant blog post to enrich context
+      let blogContext = '';
+      if (window.BlogEngine) {
+        const suggestedPost = window.BlogEngine.suggestPost(text);
+        if (suggestedPost) {
+          blogContext = `\n\n[CONTEXTO BLOG: Hay un artículo relevante "${suggestedPost.title}" que puedes mencionar. Sugiere leerlo con: "Te cuento más en mi artículo sobre..."]`;
+        }
+      }
+      
       const requestBody = {
         contents: [
           {
             role: 'user',
-            parts: [{ text: this.gemini.systemPrompt + '\n\nConversación actual:' }]
+            parts: [{ text: this.gemini.systemPrompt + blogContext + '\n\nConversación actual:' }]
           },
           ...this.conversationHistory
         ],

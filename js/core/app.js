@@ -132,6 +132,9 @@
         router.showView('view-reversi');
         const container = document.getElementById('reversi-container');
         if (container && window.initReversiGame) window.initReversiGame(container);
+      })
+      .register('#/videos', () => {
+        router.showView('view-videos');
       });
 
     // Lifecycle hooks
