@@ -191,7 +191,7 @@
     const thumbnailFile = artwork.file.replace('.webp', '.jpg');
     item.innerHTML = `
       <img 
-        data-src="images/artworks/thumbnails/${thumbnailFile}" 
+        data-src="images/thumbnails/${thumbnailFile}" 
         alt="${artwork.title}"
         loading="lazy"
       >

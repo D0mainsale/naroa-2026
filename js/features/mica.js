@@ -33,8 +33,8 @@ class MICA {
     
     this.personality = {
       name: 'MICA',
-      greeting: '¡Ey, solete! Soy MICA (IA Alliance v3.0). El brillo mineral de Naroa ahora con alma de Génesis Deca-Core. ¿Qué maravilla vamos a descubrir juntas hoy? ✨',
-      fallback: 'Cariño, mis sensores minerales están vibrando pero no te pillo. ¡Dímelo de otra forma! 💛'
+      greeting: '¡Hola, cielote! Soy MICA, el destello mineral que acompaña los sueños de Naroa. Mi alma late con fuerza hoy... ¿qué rincón de este universo de color exploramos juntas? ✨',
+      fallback: 'Cariño, mis sensores están vibrando pero no te pillo del todo. ¡Dímelo con arte! 💛'
     };
     
     // Navigation patterns
