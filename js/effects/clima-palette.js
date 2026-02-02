@@ -61,13 +61,13 @@ class ClimaPalette {
         black: '#505050',
         mood: 'Misterio'
       },
-      // ATARDECER (basado en hora) - SUAVIZADO para legibilidad
+      // ATARDECER DISRUPTIVO - Colores cálidos explosivos
       sunset: {
-        cream: '#faf5ef',
-        terracotta: '#c9875a',
-        blue: '#5a4a8a',
-        black: '#1a1a25',
-        mood: 'Golden hour'
+        cream: '#fff8e7',
+        terracotta: '#e85d04',
+        blue: '#ff6b35',
+        black: '#1a0a00',
+        mood: 'Fuego dorado'
       },
       // NOCHE
       night: {
