@@ -40,8 +40,8 @@
       <div class="intro-canvas">
         <div class="intro-portraits"></div>
         <div class="intro-title">
-          <h1 class="intro-name">Naroa Gutiérrez Gil</h1>
-          <p class="intro-tagline">Arte en Collage</p>
+          <h1 class="intro-name">NAROA GUTIÉRREZ GIL</h1>
+          <p class="intro-tagline">Hiperrealismo POP</p>
         </div>
         <button class="intro-skip" aria-label="Saltar intro">Entrar</button>
       </div>
