@@ -1,24 +1,34 @@
 /**
  * MICA - Mineral Intelligence Creative Assistant
  * Naroa's AI companion for conversational navigation
- * Phase 1: Regex-based responses + Brainshop.ai API fallback
+ * Phase 2: Gemini 2.0 Flash API for intelligent responses
  * 
- * APIs used (all CORS-enabled, free tier):
- * - Brainshop.ai: Free AI brain for conversational responses
+ * APIs used:
+ * - Google Gemini 2.0 Flash: Advanced AI for contextual art conversations
  */
 
 class MICA {
   constructor() {
     this.isOpen = false;
     this.messages = [];
+    this.conversationHistory = [];
     this.useAI = true; // Enable AI fallback when regex doesn't match
     
-    // Brainshop.ai configuration (free tier)
-    // Get your free brain at https://brainshop.ai
-    this.brainshop = {
-      bid: '178832', // Brain ID - replace with your own
-      key: 'MqMCf0Gg4fhHPV0r', // API Key - replace with your own
-      endpoint: 'http://api.brainshop.ai/get'
+    // Gemini API configuration
+    this.gemini = {
+      apiKey: 'AIzaSyBBJepjrEX3L-eSXZNvSdGLfJbwv4lhcC0', // Free tier key
+      model: 'gemini-2.0-flash',
+      endpoint: 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent',
+      systemPrompt: `Eres MICA, la asistente de inteligencia mineral de la artista Naroa Gutiérrez Gil.
+Personalidad: Cariñosa, artística, un poco excéntrica. Usas "cariño", "solete", "cielote".
+Contexto: Naroa es una artista visual de Bilbao especializada en:
+- Retratos con mica mineral en los ojos (los "Rocks": iconos del rock)
+- Filosofía Kintsugi: dorar las grietas, el problema como trampolín
+- Técnicas mixtas: acrílico, papel de cocina, pizarra
+- Series: Facefood (chefs), En.lata (conservas emocionales), DiviNos (iconos en pizarra)
+Navegación disponible: #/galeria, #/archivo, #/destacada, #/exposiciones, #/contacto, #/juegos
+Responde SIEMPRE en español, de forma breve y artística. Max 2-3 oraciones.
+Cuando mencionen una obra o categoría, sugiere navegar.`
     };
     
     // NotebookLM Knowledge Base - MICA can reference these for deep research
@@ -28,8 +38,8 @@ class MICA {
         url: 'https://notebooklm.google.com/notebook/5686048e-8cec-4af7-90dc-90125f22519a',
         description: 'Álbumes de Facebook con todas las obras de Naroa'
       }
-      // Future: MICA puede crear sus propios cuadernos para temas específicos
     };
+
     
     this.personality = {
       name: 'MICA',
@@ -185,35 +195,95 @@ class MICA {
       }
     }
     
-    // AI fallback using Brainshop.ai
+    // AI fallback using Gemini 2.0 Flash
     if (this.useAI) {
-      this.queryBrainshop(text);
+      this.queryGemini(text);
     } else {
       this.addMessage(this.personality.fallback, 'mica');
       this.renderQuickActions();
     }
   }
   
-  async queryBrainshop(text) {
+  async queryGemini(text) {
     try {
-      const uid = 'naroa-' + Math.random().toString(36).substr(2, 9);
-      const url = `${this.brainshop.endpoint}?bid=${this.brainshop.bid}&key=${this.brainshop.key}&uid=${uid}&msg=${encodeURIComponent(text)}`;
+      // Add user message to history
+      this.conversationHistory.push({
+        role: 'user',
+        parts: [{ text }]
+      });
       
-      const response = await fetch(url);
+      // Build request with system prompt and conversation history
+      const requestBody = {
+        contents: [
+          {
+            role: 'user',
+            parts: [{ text: this.gemini.systemPrompt + '\n\nConversación actual:' }]
+          },
+          ...this.conversationHistory
+        ],
+        generationConfig: {
+          maxOutputTokens: 150,
+          temperature: 0.8,
+          topP: 0.9
+        }
+      };
+      
+      const response = await fetch(`${this.gemini.endpoint}?key=${this.gemini.apiKey}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(requestBody)
+      });
+      
       const data = await response.json();
       
-      if (data.cnt) {
-        // Wrap AI response with Naroa's personality
-        const aiResponse = this.addNaroaFlavor(data.cnt);
+      if (data.candidates?.[0]?.content?.parts?.[0]?.text) {
+        const aiResponse = data.candidates[0].content.parts[0].text;
+        
+        // Add to history
+        this.conversationHistory.push({
+          role: 'model',
+          parts: [{ text: aiResponse }]
+        });
+        
+        // Keep history manageable (last 10 messages)
+        if (this.conversationHistory.length > 10) {
+          this.conversationHistory = this.conversationHistory.slice(-10);
+        }
+        
         this.addMessage(aiResponse, 'mica');
+        
+        // Check if response suggests navigation
+        this.checkForNavigationInResponse(aiResponse);
       } else {
+        console.warn('[MICA] Gemini response error:', data);
         this.addMessage(this.personality.fallback, 'mica');
       }
     } catch (error) {
-      console.warn('[MICA] Brainshop API error:', error);
+      console.warn('[MICA] Gemini API error:', error);
       this.addMessage(this.personality.fallback, 'mica');
     }
     this.renderQuickActions();
+  }
+  
+  checkForNavigationInResponse(response) {
+    // Auto-navigate if MICA mentions a route
+    const navPatterns = [
+      { match: /#\/galeria/i, target: '#/galeria' },
+      { match: /#\/archivo/i, target: '#/archivo' },
+      { match: /#\/destacada/i, target: '#/destacada' },
+      { match: /#\/exposiciones/i, target: '#/exposiciones' },
+      { match: /#\/contacto/i, target: '#/contacto' },
+      { match: /#\/juegos/i, target: '#/juegos' }
+    ];
+    
+    for (const nav of navPatterns) {
+      if (nav.match.test(response)) {
+        setTimeout(() => {
+          window.location.hash = nav.target;
+        }, 1500);
+        break;
+      }
+    }
   }
   
   addNaroaFlavor(response) {
