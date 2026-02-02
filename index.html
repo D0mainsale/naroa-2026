@@ -6,10 +6,25 @@
   <meta name="description" content="Naroa Gutiérrez Gil — Artista visual. Retratos, murales y obra gráfica desde Bilbao.">
   <meta name="theme-color" content="#0a0a0a">
   
+  <!-- Open Graph -->
+  <meta property="og:title" content="Naroa Gutiérrez Gil | Artista Visual">
+  <meta property="og:description" content="Hiperrealismo POP. Retratos, murales y obra gráfica desde Bilbao.">
+  <meta property="og:image" content="https://naroa.online/images/artworks/Webps/espejos-del-alma.webp">
+  <meta property="og:url" content="https://naroa.online">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_ES">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Naroa Gutiérrez Gil | Artista Visual">
+  <meta name="twitter:description" content="Hiperrealismo POP. Retratos, murales y obra gráfica desde Bilbao.">
+  <meta name="twitter:image" content="https://naroa.online/images/artworks/Webps/espejos-del-alma.webp">
+  
   <title>Naroa Gutiérrez Gil | Artista Visual</title>
   
-  <!-- Fonts 2026: Satoshi (body) + Switzer (display) from Fontshare -->
+  <!-- Fonts 2026: Preload + Preconnect for LCP boost -->
   <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+  <link rel="preload" href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700&f[]=switzer@300,400,500,600,700&display=swap" as="style">
   <link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700&f[]=switzer@300,400,500,600,700&display=swap" rel="stylesheet">
   
   <!-- Styles -->
@@ -708,31 +723,32 @@
   <script src="js/effects/magnetic-button.js"></script>
   <script src="js/effects/reveal-observer.js"></script>
   <script src="js/effects/cursor-trail.js"></script>
-  <script src="js/features/oca-game.js"></script>
-  <script src="js/features/tetris-game.js"></script>
-  <script src="js/features/memory-game.js"></script>
-  <script src="js/features/puzzle-game.js"></script>
-  <script src="js/features/snake-game.js"></script>
-  <script src="js/features/breakout-game.js"></script>
-  <script src="js/features/whack-game.js"></script>
-  <script src="js/features/simon-game.js"></script>
-  <script src="js/features/quiz-game.js"></script>
-  <script src="js/features/catch-game.js"></script>
-  <script src="js/features/collage-game.js"></script>
-  <script src="js/features/reinas-game.js"></script>
-  <script src="js/features/mica-game.js"></script>
-  <script src="js/features/kintsugi-game.js"></script>
-  <script src="js/features/pong-game.js"></script>
-  <script src="js/features/reaction-game.js"></script>
-  <script src="js/features/typing-game.js"></script>
-  <script src="js/features/intro.js"></script>
+  <!-- Games: Deferred for performance (load after DOM) -->
+  <script src="js/features/oca-game.js" defer></script>
+  <script src="js/features/tetris-game.js" defer></script>
+  <script src="js/features/memory-game.js" defer></script>
+  <script src="js/features/puzzle-game.js" defer></script>
+  <script src="js/features/snake-game.js" defer></script>
+  <script src="js/features/breakout-game.js" defer></script>
+  <script src="js/features/whack-game.js" defer></script>
+  <script src="js/features/simon-game.js" defer></script>
+  <script src="js/features/quiz-game.js" defer></script>
+  <script src="js/features/catch-game.js" defer></script>
+  <script src="js/features/collage-game.js" defer></script>
+  <script src="js/features/reinas-game.js" defer></script>
+  <script src="js/features/mica-game.js" defer></script>
+  <script src="js/features/kintsugi-game.js" defer></script>
+  <script src="js/features/pong-game.js" defer></script>
+  <script src="js/features/reaction-game.js" defer></script>
+  <script src="js/features/typing-game.js" defer></script>
+  <script src="js/features/intro.js" defer></script>
   <!-- Arcade Leaderboard System -->
-  <script src="js/core/arcade-leaderboard.js"></script>
+  <script src="js/core/arcade-leaderboard.js" defer></script>
   <!-- Strategy Games (21 total) -->
-  <script src="js/features/chess-game.js"></script>
-  <script src="js/features/checkers-game.js"></script>
-  <script src="js/features/connect4-game.js"></script>
-  <script src="js/features/reversi-game.js"></script>
+  <script src="js/features/chess-game.js" defer></script>
+  <script src="js/features/checkers-game.js" defer></script>
+  <script src="js/features/connect4-game.js" defer></script>
+  <script src="js/features/reversi-game.js" defer></script>
   <!-- Immersive 3D Spatial Audio Engine -->
   <script src="js/audio/audio-synth.js"></script>
   <script src="js/audio/immersive-audio.js"></script>
