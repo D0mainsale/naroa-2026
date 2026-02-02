@@ -24,7 +24,7 @@
   text-align: center;
 }
 
-/* Hero - PREMIUM 2026 */
+/* Hero - PREMIUM 2026 - HILOS ROJOS DE BORDAR */
 .hero {
   position: relative;
   display: flex;
@@ -38,27 +38,25 @@
 }
 
 .hero--premium {
-  background: #0a0a0a;
+  background: #050505;
 }
 
-/* Animated gradient background */
+/* Red Embroidery Threads Background */
 .hero__gradient-bg {
   position: absolute;
   inset: 0;
   background: 
-    radial-gradient(ellipse at 20% 50%, rgba(139, 92, 246, 0.08) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 20%, rgba(59, 130, 246, 0.06) 0%, transparent 40%),
-    radial-gradient(ellipse at 40% 80%, rgba(236, 72, 153, 0.05) 0%, transparent 40%);
-  animation: gradient-shift 15s ease-in-out infinite alternate;
+    /* Gold accent */
+    radial-gradient(ellipse at 70% 20%, rgba(255, 215, 0, 0.05) 0%, transparent 35%),
+    /* Red embroidery glow */
+    radial-gradient(ellipse at 20% 80%, rgba(220, 38, 38, 0.08) 0%, transparent 40%),
+    radial-gradient(ellipse at 80% 70%, rgba(185, 28, 28, 0.06) 0%, transparent 35%),
+    /* Deep black vignette */
+    radial-gradient(ellipse at 50% 50%, transparent 40%, rgba(0, 0, 0, 0.8) 100%);
   pointer-events: none;
 }
 
-@keyframes gradient-shift {
-  0% { transform: scale(1) rotate(0deg); opacity: 0.8; }
-  100% { transform: scale(1.1) rotate(5deg); opacity: 1; }
-}
-
-/* Floating orbs */
+/* Animated embroidery threads */
 .hero__floating {
   position: absolute;
   inset: 0;
@@ -66,45 +64,98 @@
   overflow: hidden;
 }
 
+/* Red thread lines - like embroidery stitches */
 .hero__orb {
   position: absolute;
-  border-radius: 50%;
-  filter: blur(60px);
-  animation: float-orb 20s ease-in-out infinite;
+  background: transparent;
 }
 
 .hero__orb--1 {
-  width: 300px;
+  width: 2px;
   height: 300px;
-  background: rgba(139, 92, 246, 0.15);
-  top: 10%;
-  left: 10%;
-  animation-delay: 0s;
+  top: 5%;
+  left: 15%;
+  background: linear-gradient(to bottom, 
+    transparent 0%, 
+    rgba(220, 38, 38, 0.6) 20%, 
+    rgba(185, 28, 28, 0.8) 50%, 
+    rgba(220, 38, 38, 0.6) 80%, 
+    transparent 100%);
+  transform: rotate(-15deg);
+  animation: thread-sway 8s ease-in-out infinite;
+  box-shadow: 0 0 15px rgba(220, 38, 38, 0.4);
 }
 
 .hero__orb--2 {
-  width: 200px;
-  height: 200px;
-  background: rgba(236, 72, 153, 0.12);
-  top: 60%;
-  right: 15%;
-  animation-delay: -7s;
+  width: 1px;
+  height: 250px;
+  top: 15%;
+  right: 20%;
+  background: linear-gradient(to bottom, 
+    transparent 0%, 
+    rgba(255, 215, 0, 0.4) 30%, 
+    rgba(255, 193, 7, 0.6) 50%, 
+    rgba(255, 215, 0, 0.4) 70%, 
+    transparent 100%);
+  transform: rotate(20deg);
+  animation: thread-sway 10s ease-in-out infinite reverse;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
 }
 
 .hero__orb--3 {
-  width: 250px;
-  height: 250px;
-  background: rgba(59, 130, 246, 0.1);
-  bottom: 20%;
-  left: 30%;
-  animation-delay: -14s;
+  width: 2px;
+  height: 280px;
+  bottom: 10%;
+  left: 25%;
+  background: linear-gradient(to bottom, 
+    transparent 0%, 
+    rgba(185, 28, 28, 0.5) 25%, 
+    rgba(220, 38, 38, 0.7) 50%, 
+    rgba(185, 28, 28, 0.5) 75%, 
+    transparent 100%);
+  transform: rotate(10deg);
+  animation: thread-sway 12s ease-in-out infinite;
+  box-shadow: 0 0 12px rgba(220, 38, 38, 0.35);
 }
 
-@keyframes float-orb {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  25% { transform: translate(30px, -20px) scale(1.05); }
-  50% { transform: translate(-20px, 30px) scale(0.95); }
-  75% { transform: translate(20px, 20px) scale(1.02); }
+/* Additional decorative threads */
+.hero__floating::before,
+.hero__floating::after {
+  content: '';
+  position: absolute;
+  width: 1px;
+  background: linear-gradient(to bottom, 
+    transparent, 
+    rgba(220, 38, 38, 0.4), 
+    transparent);
+  box-shadow: 0 0 8px rgba(220, 38, 38, 0.3);
+}
+
+.hero__floating::before {
+  height: 200px;
+  top: 30%;
+  right: 10%;
+  transform: rotate(-25deg);
+  animation: thread-sway 9s ease-in-out infinite 1s;
+}
+
+.hero__floating::after {
+  height: 180px;
+  bottom: 25%;
+  right: 30%;
+  transform: rotate(15deg);
+  animation: thread-sway 11s ease-in-out infinite 2s;
+}
+
+@keyframes thread-sway {
+  0%, 100% { 
+    transform: rotate(var(--rotate, -15deg)) translateX(0); 
+    opacity: 0.7;
+  }
+  50% { 
+    transform: rotate(var(--rotate, -15deg)) translateX(10px); 
+    opacity: 1;
+  }
 }
 
 .hero__title {
