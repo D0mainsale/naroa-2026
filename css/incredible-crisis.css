@@ -1,0 +1,233 @@
+/* MICA Incredible Crisis - Estilos */
+
+:root {
+  --crisis-bg: #1a1a2e;
+  --crisis-accent: #e94560;
+  --crisis-gold: #FFD700;
+  --crisis-text: #faf7f2;
+}
+
+.menu-incredible {
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--crisis-bg), #16213e);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--crisis-text);
+}
+
+.menu-incredible h1 {
+  font-size: 3rem;
+  text-shadow: 0 0 20px var(--crisis-accent);
+  animation: pulse 2s infinite;
+}
+
+.menu-incredible h2 {
+  color: var(--crisis-gold);
+  margin-bottom: 2rem;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+  max-width: 1200px;
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.menu-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid var(--crisis-accent);
+  border-radius: 12px;
+  padding: 1rem;
+  color: var(--crisis-text);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.menu-btn:hover {
+  background: var(--crisis-accent);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(233, 69, 96, 0.4);
+}
+
+.menu-btn .num {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--crisis-gold);
+}
+
+.menu-btn .titulo {
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.play-all-btn {
+  background: var(--crisis-gold);
+  color: var(--crisis-bg);
+  border: none;
+  padding: 1.5rem 3rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.play-all-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 40px var(--crisis-gold);
+}
+
+/* Minigame Wrapper */
+.minigame-wrapper {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  background: var(--crisis-bg);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.minigame-header {
+  background: linear-gradient(90deg, var(--crisis-accent), #ff6b6b);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.minigame-titulo {
+  margin: 0;
+  font-size: 1.5rem;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.minigame-stats {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.minigame-stats span {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: white;
+}
+
+.timer {
+  color: var(--crisis-gold) !important;
+}
+
+.combo {
+  color: #ff6b6b !important;
+}
+
+/* Canvas */
+.minigame-wrapper canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* MICA Bubble */
+.mica-bubble {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: rgba(255, 255, 255, 0.95);
+  padding: 1rem 2rem;
+  border-radius: 20px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--crisis-bg);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease;
+  z-index: 1000;
+}
+
+.mica-bubble.visible {
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Resultado Final */
+.resultado-final {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+  color: white;
+  text-align: center;
+}
+
+.resultado-final h1 {
+  font-size: 4rem;
+  color: var(--crisis-gold);
+  text-shadow: 0 0 30px var(--crisis-gold);
+  animation: pulse 1s infinite;
+}
+
+.resultado-final h2 {
+  font-size: 2rem;
+  margin: 2rem 0;
+}
+
+.resultado-final button {
+  background: var(--crisis-accent);
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.resultado-final button:hover {
+  transform: scale(1.1);
+}
+
+/* Controls Hint */
+.controls-hint {
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 0.5rem 1rem;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .menu-incredible h1 {
+    font-size: 2rem;
+  }
+  
+  .menu-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .minigame-header {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .minigame-stats {
+    gap: 1rem;
+  }
+}
