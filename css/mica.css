@@ -370,7 +370,7 @@
    Textura laminar brillante - "El brillo de los ojos de MICA"
    ========================================================================== */
 
-/* Cursor MICA global */
+/* Cursor MICA global - Usando Risitas temporalmente */
 html.mica-cursor,
 html.mica-cursor *,
 html.mica-cursor a,
@@ -378,7 +378,7 @@ html.mica-cursor button,
 html.mica-cursor input,
 html.mica-cursor textarea,
 html.mica-cursor select {
-  cursor: url('../assets/cursors/mica-pointer-32.png') 4 0, auto !important;
+  cursor: url('../assets/cursors/risitas-32.png') 4 0, auto !important;
 }
 
 /* Cursor hover para elementos interactivos */
@@ -388,7 +388,7 @@ html.mica-cursor [role="button"]:hover,
 html.mica-cursor .gallery-item:hover,
 html.mica-cursor .mica-toggle:hover,
 html.mica-cursor .game-card:hover {
-  cursor: url('../assets/cursors/mica-pointer-48.png') 6 0, pointer !important;
+  cursor: url('../assets/cursors/risitas-48.png') 6 0, pointer !important;
 }
 
 /* Estela dorada del cursor MICA */
