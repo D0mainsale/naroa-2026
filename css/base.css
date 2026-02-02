@@ -1,13 +1,15 @@
-/* Base Styles - Naroa 2026 */
+/* Base Styles - Naroa 2026 - ORGÁNICO PASTEL */
 
 body {
   font-family: var(--font-family-main);
   font-size: var(--font-size-base);
   font-weight: var(--font-weight-normal);
   line-height: var(--line-height-normal);
-  color: var(--color-text);
-  background-color: var(--color-bg);
+  color: var(--text-primary);
+  background: var(--gradient-cream);
+  background-attachment: fixed;
   overflow-x: hidden;
+  min-height: 100vh;
 }
 
 /* Typography */
@@ -16,6 +18,7 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: var(--font-weight-light);
   line-height: var(--line-height-tight);
   letter-spacing: var(--letter-spacing-tight);
+  color: var(--naroa-terracotta);
 }
 
 h1 { font-size: var(--font-size-hero); }
@@ -25,26 +28,30 @@ h4 { font-size: var(--font-size-lg); }
 
 p {
   max-width: 65ch;
+  color: var(--naroa-sienna);
 }
 
 a {
-  transition: opacity var(--duration-fast) var(--ease-default);
+  color: var(--naroa-terracotta);
+  transition: all var(--duration-fast) var(--ease-default);
 }
 
 a:hover {
-  opacity: 0.7;
+  color: var(--naroa-rose);
+  opacity: 1;
 }
 
 /* Focus states for accessibility */
 :focus-visible {
-  outline: 2px solid var(--color-text);
-  outline-offset: 2px;
+  outline: 2px solid var(--naroa-sage);
+  outline-offset: 3px;
+  border-radius: var(--radius-organic);
 }
 
-/* Selection */
+/* Selection - Rosa empolvado */
 ::selection {
-  background-color: var(--color-text);
-  color: var(--color-bg);
+  background-color: var(--naroa-blush);
+  color: var(--naroa-black);
 }
 
 /* Smooth scroll container */
@@ -52,22 +59,24 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Hide scrollbar but keep functionality */
+/* Organic scrollbar */
 body::-webkit-scrollbar {
-  width: 8px;
+  width: 10px;
 }
 
 body::-webkit-scrollbar-track {
-  background: transparent;
+  background: var(--naroa-linen);
+  border-radius: var(--radius-circle);
 }
 
 body::-webkit-scrollbar-thumb {
-  background: var(--color-gray-700);
-  border-radius: var(--radius-full);
+  background: var(--gradient-blush);
+  border-radius: var(--radius-circle);
+  border: 2px solid var(--naroa-linen);
 }
 
 body::-webkit-scrollbar-thumb:hover {
-  background: var(--color-gray-600);
+  background: var(--naroa-rose);
 }
 
 /* Reduced motion */
@@ -82,3 +91,15 @@ body::-webkit-scrollbar-thumb:hover {
     scroll-behavior: auto;
   }
 }
+
+/* Organic texture overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 10000;
+  opacity: 0.4;
+}
+
