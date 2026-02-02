@@ -41,6 +41,76 @@
   background: linear-gradient(180deg, #0a0a0f 0%, #0d0d14 50%, #0a0a0f 100%);
 }
 
+/* =================================================================
+   PALÍNDROMO GIGANTE OVERSIZED - LETRAS MÁS GRANDES QUE LA PANTALLA
+   ================================================================= */
+.hero__palindrome {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+  pointer-events: none;
+  white-space: nowrap;
+  overflow: visible;
+  width: 300vw; /* Sobrepasa la pantalla */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero__palindrome-text {
+  font-family: var(--font-display);
+  font-size: clamp(30vh, 50vw, 60vh); /* GIGANTE */
+  font-weight: 100;
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(139, 92, 246, 0.08);
+  background: linear-gradient(
+    135deg,
+    rgba(139, 92, 246, 0.04) 0%,
+    rgba(236, 72, 153, 0.03) 30%,
+    rgba(255, 215, 0, 0.02) 60%,
+    rgba(59, 130, 246, 0.03) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: palindrome-drift 30s linear infinite;
+  filter: blur(0.5px);
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Versión con más contraste en hover del hero */
+.hero--premium:hover .hero__palindrome-text {
+  -webkit-text-stroke: 1px rgba(139, 92, 246, 0.15);
+  background: linear-gradient(
+    135deg,
+    rgba(139, 92, 246, 0.08) 0%,
+    rgba(236, 72, 153, 0.06) 30%,
+    rgba(255, 215, 0, 0.04) 60%,
+    rgba(59, 130, 246, 0.06) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  filter: blur(0px);
+  transition: all 2s ease;
+}
+
+@keyframes palindrome-drift {
+  0% { transform: translateX(-5%); }
+  50% { transform: translateX(5%); }
+  100% { transform: translateX(-5%); }
+}
+
+/* Mobile: Ajustar escala */
+@media (max-width: 768px) {
+  .hero__palindrome-text {
+    font-size: clamp(20vh, 40vw, 40vh);
+  }
+}
+
 /* Aurora Borealis Background - Elegante y relajante */
 .hero__gradient-bg {
   position: absolute;
@@ -176,10 +246,12 @@
 
 .hero__line {
   display: block;
-  font-size: clamp(3rem, 12vw, 8rem);
+  font-size: clamp(4rem, 15vw, 12rem);
   font-weight: var(--font-weight-light);
-  line-height: 0.95;
+  line-height: 0.9;
   letter-spacing: var(--letter-spacing-tight);
+  white-space: nowrap;
+  text-align: center;
 }
 
 .hero__subtitle {
