@@ -186,9 +186,12 @@
       item.classList.add('gallery__item--enter');
     }
 
+    // Use optimized thumbnails for grid (350px JPG ~25KB)
+    // Full WebP loaded only in lightbox on click
+    const thumbnailFile = artwork.file.replace('.webp', '.jpg');
     item.innerHTML = `
       <img 
-        data-src="images/artworks/${artwork.file}" 
+        data-src="images/artworks/thumbnails/${thumbnailFile}" 
         alt="${artwork.title}"
         loading="lazy"
       >
@@ -362,6 +365,21 @@
       const container = document.getElementById('featured-gallery');
       if (!container) return;
 
+      // DISRUPTIVE GALLERY 2026: Respect static layout if present
+      // Check if we have the new massive grid layout with existing items
+      const hasDisruptiveLayout = container.classList.contains('gallery-massive') &&
+                                  container.querySelectorAll('.gallery-massive__item').length > 0;
+      
+      if (hasDisruptiveLayout) {
+        console.log('[Gallery] Disruptive layout detected - preserving static content');
+        // Initialize the disruptive gallery engine instead
+        if (window.GalleryDisruptive) {
+          window.GalleryDisruptive.init();
+        }
+        return;
+      }
+
+      // Fallback: Legacy dynamic loading for non-disruptive layouts
       container.innerHTML = '';
       
       // Match by artwork file ID (without .webp extension)

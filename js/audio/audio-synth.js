@@ -321,8 +321,203 @@ const AudioSynth = {
       osc.start(t);
       osc.stop(t + 0.4);
     });
+  },
+
+  // ==========================================
+  // NAROA-SPECIFIC SOUNDS (from 026 standalone)
+  // ==========================================
+
+  // Viento de Sopela - Coastal breeze ambient
+  createSopelaWind() {
+    if (!this.ctx) return null;
+    
+    const bufferSize = 2 * this.ctx.sampleRate;
+    const buffer = this.ctx.createBuffer(1, bufferSize, this.ctx.sampleRate);
+    const output = buffer.getChannelData(0);
+    
+    for (let i = 0; i < bufferSize; i++) {
+      output[i] = Math.random() * 2 - 1;
+    }
+    
+    const windNode = this.ctx.createBufferSource();
+    windNode.buffer = buffer;
+    windNode.loop = true;
+    
+    const filter = this.ctx.createBiquadFilter();
+    filter.type = 'lowpass';
+    filter.frequency.value = 400;
+    
+    const windGain = this.ctx.createGain();
+    windGain.gain.value = 0.08;
+    
+    windNode.connect(filter);
+    filter.connect(windGain);
+    windGain.connect(this.ctx.destination);
+    
+    return {
+      start: () => windNode.start(),
+      stop: () => windNode.stop(),
+      setVolume: (v) => { windGain.gain.value = v; },
+      node: windNode
+    };
+  },
+
+  // Latido 026 - Heartbeat rhythm (lub-dub)
+  heartbeat026() {
+    if (!this.ctx) return;
+    
+    const now = this.ctx.currentTime;
+    
+    // LUB
+    const lub = this.ctx.createOscillator();
+    lub.type = 'sine';
+    lub.frequency.setValueAtTime(60, now);
+    lub.frequency.exponentialRampToValueAtTime(40, now + 0.1);
+    
+    const lubGain = this.ctx.createGain();
+    lubGain.gain.setValueAtTime(0.4, now);
+    lubGain.gain.exponentialRampToValueAtTime(0.001, now + 0.15);
+    
+    lub.connect(lubGain);
+    lubGain.connect(this.ctx.destination);
+    lub.start(now);
+    lub.stop(now + 0.2);
+    
+    // DUB
+    const dub = this.ctx.createOscillator();
+    dub.type = 'sine';
+    dub.frequency.setValueAtTime(80, now + 0.25);
+    dub.frequency.exponentialRampToValueAtTime(40, now + 0.35);
+    
+    const dubGain = this.ctx.createGain();
+    dubGain.gain.setValueAtTime(0.3, now + 0.25);
+    dubGain.gain.exponentialRampToValueAtTime(0.001, now + 0.4);
+    
+    dub.connect(dubGain);
+    dubGain.connect(this.ctx.destination);
+    dub.start(now + 0.25);
+    dub.stop(now + 0.5);
+  },
+
+  // Paper Crumple - Tissukaldeko material sound
+  paperCrumple(x, y, panner) {
+    if (!this.ctx) return;
+    
+    const gain = this.ctx.createGain();
+    gain.gain.setValueAtTime(0.25, this.ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.3);
+    
+    const filter = this.ctx.createBiquadFilter();
+    filter.type = 'bandpass';
+    filter.frequency.value = 800 + Math.random() * 1000;
+    filter.Q.value = 1;
+    
+    const noise = this.ctx.createBufferSource();
+    const buffer = this.ctx.createBuffer(1, this.ctx.sampleRate * 0.3, this.ctx.sampleRate);
+    const data = buffer.getChannelData(0);
+    for (let i = 0; i < data.length; i++) {
+      data[i] = (Math.random() * 2 - 1) * Math.exp(-i / (data.length * 0.1));
+    }
+    noise.buffer = buffer;
+    
+    noise.connect(filter);
+    filter.connect(gain);
+    
+    if (panner) {
+      gain.connect(panner);
+      panner.connect(this.ctx.destination);
+    } else {
+      gain.connect(this.ctx.destination);
+    }
+    
+    noise.start();
+  },
+
+  // Tear/Rip - Acrílico vs Pegamento (material struggle)
+  tear(panner) {
+    if (!this.ctx) return;
+    
+    const osc = this.ctx.createOscillator();
+    osc.type = 'sawtooth';
+    osc.frequency.setValueAtTime(100, this.ctx.currentTime);
+    osc.frequency.linearRampToValueAtTime(50, this.ctx.currentTime + 0.2);
+    
+    const gain = this.ctx.createGain();
+    gain.gain.setValueAtTime(0.2, this.ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.2);
+    
+    const filter = this.ctx.createBiquadFilter();
+    filter.type = 'lowpass';
+    filter.frequency.setValueAtTime(800, this.ctx.currentTime);
+    filter.frequency.linearRampToValueAtTime(100, this.ctx.currentTime + 0.2);
+    
+    osc.connect(filter);
+    filter.connect(gain);
+    
+    if (panner) {
+      gain.connect(panner);
+      panner.connect(this.ctx.destination);
+    } else {
+      gain.connect(this.ctx.destination);
+    }
+    
+    osc.start();
+    osc.stop(this.ctx.currentTime + 0.2);
+  },
+
+  // Jackpot 026 - Victory golden chord
+  jackpot() {
+    if (!this.ctx) return;
+    
+    const now = this.ctx.currentTime;
+    
+    // D major 7 chord (golden, triumphant)
+    const frequencies = [293.66, 369.99, 440.00, 554.37]; // D4, F#4, A4, C#5
+    
+    frequencies.forEach((freq, i) => {
+      const osc = this.ctx.createOscillator();
+      osc.type = 'sine';
+      osc.frequency.value = freq;
+      
+      const gain = this.ctx.createGain();
+      gain.gain.setValueAtTime(0, now);
+      gain.gain.linearRampToValueAtTime(0.2, now + 0.1 + i * 0.05);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 2);
+      
+      osc.connect(gain);
+      gain.connect(this.ctx.destination);
+      
+      osc.start(now);
+      osc.stop(now + 2);
+    });
+  },
+
+  // Terminal click - Mechanical keyboard
+  terminalClick(panner) {
+    if (!this.ctx) return;
+    
+    const osc = this.ctx.createOscillator();
+    osc.type = 'square';
+    osc.frequency.value = 800;
+    
+    const gain = this.ctx.createGain();
+    gain.gain.setValueAtTime(0.08, this.ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.05);
+    
+    osc.connect(gain);
+    
+    if (panner) {
+      gain.connect(panner);
+      panner.connect(this.ctx.destination);
+    } else {
+      gain.connect(this.ctx.destination);
+    }
+    
+    osc.start();
+    osc.stop(this.ctx.currentTime + 0.05);
   }
 };
 
 // Expose globally
 window.AudioSynth = AudioSynth;
+

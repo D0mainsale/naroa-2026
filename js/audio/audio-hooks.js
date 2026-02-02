@@ -38,6 +38,12 @@ const AudioHooks = {
     
     // Scroll reveals
     this.hookScrollReveals();
+    
+    // === NAROA-SPECIFIC HOOKS ===
+    this.hookAboutSection();
+    this.hookTissueCards();
+    this.hookTournamentEvents();
+    this.hookArtworkTear();
   },
 
   hookGameCards() {
@@ -175,6 +181,89 @@ const AudioHooks = {
         toX: 2, toY: 0, toZ: -4
       });
     }
+  },
+
+  // ==========================================
+  // NAROA-SPECIFIC HOOKS (026 Premium)
+  // ==========================================
+
+  // Hook About section for heartbeat effect
+  hookAboutSection() {
+    const aboutSection = document.querySelector('#about, .about-section');
+    if (!aboutSection) return;
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && window.AudioSynth && !ImmersiveAudio?.isMuted) {
+          // Subtle heartbeat as user enters emotional about section
+          AudioSynth.heartbeat026();
+        }
+      });
+    }, { threshold: 0.6 });
+    
+    observer.observe(aboutSection);
+  },
+
+  // Hook Tissukaldeko-style cards for paper sounds
+  hookTissueCards() {
+    document.querySelectorAll('.tissukaldeko-card, [data-material="paper"]').forEach(card => {
+      card.addEventListener('mouseenter', (e) => {
+        if (window.AudioSynth && !ImmersiveAudio?.isMuted) {
+          const rect = card.getBoundingClientRect();
+          const panner = ImmersiveAudio?.create3DPanner?.(
+            (rect.left / window.innerWidth) * 4 - 2,
+            0,
+            -3
+          );
+          AudioSynth.paperCrumple(rect.x, rect.y, panner);
+        }
+      });
+    });
+  },
+
+  // Hook tournament jackpot wins
+  hookTournamentEvents() {
+    document.addEventListener('tournament:jackpot', () => {
+      if (window.AudioSynth && !ImmersiveAudio?.isMuted) {
+        AudioSynth.jackpot();
+      }
+    });
+    
+    // Also trigger on arcade TOP 1 score
+    document.addEventListener('score:top1', () => {
+      if (window.AudioSynth && !ImmersiveAudio?.isMuted) {
+        AudioSynth.jackpot();
+      }
+    });
+  },
+
+  // Start Sopela ambient wind (coastal Basque atmosphere)
+  startSopelaAmbient() {
+    if (window.AudioSynth && !ImmersiveAudio?.isMuted && !this.sopelaWind) {
+      this.sopelaWind = AudioSynth.createSopelaWind();
+      if (this.sopelaWind) {
+        this.sopelaWind.start();
+      }
+    }
+  },
+
+  stopSopelaAmbient() {
+    if (this.sopelaWind) {
+      this.sopelaWind.stop();
+      this.sopelaWind = null;
+    }
+  },
+
+  // Hook tear sound for artwork interactions
+  hookArtworkTear() {
+    document.querySelectorAll('.artwork-frame, .gallery-tear-effect').forEach(el => {
+      el.addEventListener('click', () => {
+        if (window.AudioSynth && !ImmersiveAudio?.isMuted) {
+          const panner = ImmersiveAudio?.create3DPanner?.(0, 0, -2);
+          AudioSynth.tear(panner);
+        }
+      });
+    });
   }
 };
 

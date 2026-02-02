@@ -32,6 +32,7 @@
   <link rel="stylesheet" href="css/about-contact.css">
   <link rel="stylesheet" href="css/audio-controls.css">
   <link rel="stylesheet" href="css/audio-reactive.css">
+  <link rel="stylesheet" href="css/gallery-disruptive.css">
   
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="assets/favicon.png">
@@ -94,13 +95,125 @@
       </div>
     </section>
 
-    <!-- Obra Destacada View (Curated 15 pieces) -->
-    <section id="view-destacada" class="view view--destacada reveal-on-scroll">
+    <!-- Obra Destacada View (DISRUPTIVE GALLERY 2026) -->
+    <section id="view-destacada" class="view view--destacada">
       <header class="view__header">
         <h2>Obra Destacada</h2>
+        <p class="view__subtitle">Selección curada de mi trabajo más reciente</p>
       </header>
-      <div class="gallery gallery--featured" id="featured-gallery">
-        <!-- Dynamically populated with 15 curated pieces -->
+
+      <!-- HERO: Obra Protagonista Colosal -->
+      <div class="gallery-hero" id="gallery-hero">
+        <div class="gallery-hero__artwork gallery-lazy">
+          <img 
+            data-src="images/artworks/Webps/espejos-del-alma.webp"
+            alt="Espejos del Alma - Naroa Gutiérrez Gil"
+            class="gallery-hero__image"
+          >
+          <div class="gallery-hero__info">
+            <h2 class="gallery-hero__title">Espejos del Alma</h2>
+            <span class="gallery-hero__year">2024</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- GRID MASIVO con tamaños variables -->
+      <div class="gallery-massive" id="featured-gallery">
+        <!-- Obra COLOSAL -->
+        <div class="gallery-massive__item gallery-massive__item--colossal gallery-lazy gallery-reveal">
+          <img data-src="images/artworks/Webps/marilyn-rocks-hq-5.webp" alt="Marilyn Rocks" class="gallery-massive__img">
+          <div class="gallery-massive__overlay">
+            <h3 class="gallery-massive__title">Marilyn Rocks</h3>
+          </div>
+        </div>
+
+        <!-- Obras GRANDES -->
+        <div class="gallery-massive__item gallery-massive__item--large gallery-lazy gallery-reveal">
+          <img data-src="images/artworks/Webps/amy-rocks.webp" alt="Amy Rocks" class="gallery-massive__img">
+          <div class="gallery-massive__overlay">
+            <h3 class="gallery-massive__title">Amy Rocks</h3>
+          </div>
+        </div>
+        <div class="gallery-massive__item gallery-massive__item--large gallery-lazy gallery-reveal">
+          <img data-src="images/artworks/Webps/baroque-farrokh.webp" alt="Baroque Farrokh" class="gallery-massive__img">
+          <div class="gallery-massive__overlay">
+            <h3 class="gallery-massive__title">Baroque Farrokh</h3>
+          </div>
+        </div>
+
+        <!-- Obras MEDIANAS -->
+        <div class="gallery-massive__item gallery-massive__item--medium gallery-lazy gallery-reveal">
+          <img data-src="images/artworks/Webps/el-gran-dakari.webp" alt="El Gran Dakari" class="gallery-massive__img">
+          <div class="gallery-massive__overlay">
+            <h3 class="gallery-massive__title">El Gran Dakari</h3>
+          </div>
+        </div>
+        <div class="gallery-massive__item gallery-massive__item--medium gallery-lazy gallery-reveal">
+          <img data-src="images/artworks/Webps/audrey-hepburn.webp" alt="Audrey Hepburn" class="gallery-massive__img">
+          <div class="gallery-massive__overlay">
+            <h3 class="gallery-massive__title">Audrey Hepburn</h3>
+          </div>
+        </div>
+        <div class="gallery-massive__item gallery-massive__item--medium gallery-lazy gallery-reveal">
+          <img data-src="images/artworks/Webps/amor-en-conserva.webp" alt="Amor en Conserva" class="gallery-massive__img">
+          <div class="gallery-massive__overlay">
+            <h3 class="gallery-massive__title">Amor en Conserva</h3>
+          </div>
+        </div>
+
+        <!-- Obras PEQUEÑAS -->
+        <div class="gallery-massive__item gallery-massive__item--small gallery-lazy gallery-reveal">
+          <img data-src="images/artworks/Webps/lagrimas-de-oro.webp" alt="Lágrimas de Oro" class="gallery-massive__img">
+          <div class="gallery-massive__overlay">
+            <h3 class="gallery-massive__title">Lágrimas de Oro</h3>
+          </div>
+        </div>
+        <div class="gallery-massive__item gallery-massive__item--small gallery-lazy gallery-reveal">
+          <img data-src="images/artworks/Webps/love.webp" alt="Love" class="gallery-massive__img">
+          <div class="gallery-massive__overlay">
+            <h3 class="gallery-massive__title">Love</h3>
+          </div>
+        </div>
+        <div class="gallery-massive__item gallery-massive__item--small gallery-lazy gallery-reveal">
+          <img data-src="images/artworks/Webps/pajarraca-azul.webp" alt="Pajarraca Azul" class="gallery-massive__img">
+          <div class="gallery-massive__overlay">
+            <h3 class="gallery-massive__title">Pajarraca Azul</h3>
+          </div>
+        </div>
+
+        <!-- Segunda fila COLOSAL -->
+        <div class="gallery-massive__item gallery-massive__item--colossal gallery-lazy gallery-reveal">
+          <img data-src="images/artworks/Webps/james-rocks-hq-3.webp" alt="James Rocks" class="gallery-massive__img">
+          <div class="gallery-massive__overlay">
+            <h3 class="gallery-massive__title">James Rocks</h3>
+          </div>
+        </div>
+
+        <!-- Tercera fila: Variedad premium -->
+        <div class="gallery-massive__item gallery-massive__item--large gallery-lazy gallery-reveal">
+          <img data-src="images/artworks/Webps/johnny-rocks-hq-4.webp" alt="Johnny Rocks" class="gallery-massive__img">
+          <div class="gallery-massive__overlay">
+            <h3 class="gallery-massive__title">Johnny Rocks</h3>
+          </div>
+        </div>
+        <div class="gallery-massive__item gallery-massive__item--medium gallery-lazy gallery-reveal">
+          <img data-src="images/artworks/Webps/geisha.webp" alt="Geisha" class="gallery-massive__img">
+          <div class="gallery-massive__overlay">
+            <h3 class="gallery-massive__title">Geisha</h3>
+          </div>
+        </div>
+        <div class="gallery-massive__item gallery-massive__item--medium gallery-lazy gallery-reveal">
+          <img data-src="images/artworks/Webps/la-pensadora.webp" alt="La Pensadora" class="gallery-massive__img">
+          <div class="gallery-massive__overlay">
+            <h3 class="gallery-massive__title">La Pensadora</h3>
+          </div>
+        </div>
+        <div class="gallery-massive__item gallery-massive__item--small gallery-lazy gallery-reveal">
+          <img data-src="images/artworks/Webps/tedas-queen.webp" alt="Tedas Queen" class="gallery-massive__img">
+          <div class="gallery-massive__overlay">
+            <h3 class="gallery-massive__title">Tedas Queen</h3>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -131,7 +244,7 @@
           <!-- Main Bio Card -->
           <article class="about__card about__card--main glass">
             <div class="about__avatar">
-              <img src="images/artworks/naroa-portrait.webp" alt="Naroa Gutiérrez Gil" loading="lazy" onerror="this.src='images/artworks/retrato-hombre-barba.webp'">
+              <img src="images/artworks/Webps/mujer-collar-perlas.webp" alt="Naroa Gutiérrez Gil" loading="lazy">
             </div>
             <div class="about__bio">
               <h3>Naroa Gutiérrez Gil</h3>
@@ -531,5 +644,29 @@
   <script src="js/audio/immersive-audio.js"></script>
   <script src="js/audio/audio-hooks.js"></script>
   <script src="js/audio/audio-visual-sync.js"></script>
+  <!-- Disruptive Gallery Engine -->
+  <script src="js/features/gallery-disruptive.js"></script>
+  
+  <!-- Gallery Disruptive 2.0: SVG Filters for Chromatic Aberration -->
+  <svg style="position: absolute; width: 0; height: 0; overflow: hidden;" aria-hidden="true">
+    <defs>
+      <!-- Red channel shift -->
+      <filter id="chromatic-red" x="-20%" y="-20%" width="140%" height="140%">
+        <feColorMatrix type="matrix" values="
+          1 0 0 0 0
+          0 0 0 0 0
+          0 0 0 0 0
+          0 0 0 1 0"/>
+      </filter>
+      <!-- Blue channel shift -->
+      <filter id="chromatic-blue" x="-20%" y="-20%" width="140%" height="140%">
+        <feColorMatrix type="matrix" values="
+          0 0 0 0 0
+          0 0 0 0 0
+          0 0 1 0 0
+          0 0 0 1 0"/>
+      </filter>
+    </defs>
+  </svg>
 </body>
 </html>

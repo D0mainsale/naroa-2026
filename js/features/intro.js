@@ -23,11 +23,11 @@
     } catch (e) {
       console.warn('Intro artworks not found, using fallback');
       introState.artworks = [
-        { file: 'amy-rocks.png' },
-        { file: 'marilyn-rocks.png' },
-        { file: 'johnny-rocks.png' },
-        { file: 'james-rocks.png' },
-        { file: 'starchild.png' }
+        { file: 'amy-rocks.webp' },
+        { file: 'marilyn-rocks.webp' },
+        { file: 'johnny-rocks.webp' },
+        { file: 'james-rocks.webp' },
+        { file: 'starchild.webp' }
       ];
     }
   }
