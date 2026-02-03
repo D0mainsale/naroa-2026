@@ -10,8 +10,8 @@ class SpotifyRotator {
     // Álbumes y playlists de Borja Moskv - Colección completa
     this.embeds = [
       // Álbumes principales
-      { type: 'album', id: '7HTxaYpcYV5sVDlj2kzx7y', name: 'Nuevo Álbum' },
-      { type: 'album', id: '3Kx5S9L4U8XdU8nHrWgZuT', name: 'Lo Inmanente' },
+      { type: 'album', id: '7HTxaYpcYV5sVDlj2kzx7y', name: 'Lo Inmanente - Borja Moskv' },
+      { type: 'album', id: '3Kx5S9L4U8XdU8nHrWgZuT', name: 'Lo Inmanente (Alt)' },
       { type: 'album', id: '4rN3VvCVqG4RfCqbFZKnqT', name: 'Álbum 2' },
       
       // Playlists curadas
