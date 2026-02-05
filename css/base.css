@@ -1,118 +1,271 @@
-/* Base Styles - Naroa 2026 - BOSQUE ORGÁNICO MINIMALISTA */
+/* ==========================================================================
+   BASE STYLES - MICA NOIR EDITION
+   95% Negro + Filtro MICA + Verde Láser + Rojo Sangre
+   ========================================================================== */
 
+/* Reset Mínimo */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* HTML Base */
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Body - NEGRO ABSOLUTO */
 body {
   font-family: var(--font-family-main);
   font-size: var(--font-size-base);
   font-weight: var(--font-weight-normal);
   line-height: var(--line-height-normal);
   color: var(--color-text);
-  background: var(--forest-night);
+  background: var(--negro-absoluto);
   overflow-x: hidden;
   min-height: 100vh;
 }
 
-/* Typography - ORGÁNICO */
+/* Tipografía Base */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-family-display);
-  font-weight: var(--font-weight-light);
+  font-weight: var(--font-weight-semibold);
   line-height: var(--line-height-tight);
-  letter-spacing: var(--letter-spacing-wide);
-  color: var(--mist-white);
+  letter-spacing: var(--letter-spacing-tight);
+  color: var(--blanco-mica);
 }
 
 h1 { font-size: var(--font-size-hero); }
-h2 { font-size: var(--font-size-2xl); }
-h3 { font-size: var(--font-size-xl); }
-h4 { font-size: var(--font-size-lg); }
+h2 { font-size: var(--font-size-4xl); }
+h3 { font-size: var(--font-size-3xl); }
+h4 { font-size: var(--font-size-2xl); }
 
 p {
-  max-width: 60ch;
-  color: var(--mist-light);
-  line-height: var(--line-height-relaxed);
+  color: var(--gris-ceniza);
+  margin-bottom: var(--space-md);
 }
 
+/* Links - Verde Láser */
 a {
-  color: var(--lichen-gold);
+  color: var(--verde-laser);
   text-decoration: none;
-  transition: all var(--duration-base) var(--ease-organic);
+  transition: all var(--duration-fast) var(--ease-default);
 }
 
 a:hover {
-  color: var(--mist-white);
+  color: var(--verde-laser-soft);
+  text-shadow: var(--shadow-laser);
 }
 
-/* Focus states - Organic */
-:focus-visible {
-  outline: 2px solid var(--moss-medium);
-  outline-offset: 4px;
-  border-radius: var(--radius-organic);
+a:focus-visible {
+  outline: 2px solid var(--verde-laser);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
 }
 
-/* Selection - Lichen Gold */
+/* Botones - Rojo Sangre */
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: var(--rojo-sangre);
+  color: var(--blanco-mica);
+  padding: var(--space-sm) var(--space-lg);
+  border-radius: var(--radius-md);
+  font-weight: var(--font-weight-medium);
+  transition: all var(--duration-normal) var(--ease-default);
+}
+
+button:hover {
+  background: var(--rojo-sangre-vivo);
+  box-shadow: var(--shadow-blood);
+  transform: translateY(-2px);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+button:focus-visible {
+  outline: 2px solid var(--rojo-sangre-vivo);
+  outline-offset: 3px;
+}
+
+/* Imágenes */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Selección - Verde Láser */
 ::selection {
-  background-color: rgba(184, 163, 112, 0.3);
-  color: var(--mist-white);
+  background: var(--verde-laser);
+  color: var(--negro-absoluto);
 }
 
-/* Smooth scroll */
-html {
-  scroll-behavior: smooth;
+::-moz-selection {
+  background: var(--verde-laser);
+  color: var(--negro-absoluto);
 }
 
-/* Forest Scrollbar */
-body::-webkit-scrollbar {
+/* Scrollbar MICA */
+::-webkit-scrollbar {
   width: 8px;
+  height: 8px;
 }
 
-body::-webkit-scrollbar-track {
-  background: var(--forest-deep);
+::-webkit-scrollbar-track {
+  background: var(--negro-absoluto);
 }
 
-body::-webkit-scrollbar-thumb {
-  background: var(--moss-medium);
-  border-radius: var(--radius-organic);
+::-webkit-scrollbar-thumb {
+  background: var(--negro-grafito);
+  border-radius: var(--radius-full);
+  border: 2px solid var(--negro-absoluto);
 }
 
-body::-webkit-scrollbar-thumb:hover {
-  background: var(--moss-light);
+::-webkit-scrollbar-thumb:hover {
+  background: var(--verde-laser-dark);
 }
 
-/* Reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-  
-  html {
-    scroll-behavior: auto;
-  }
+/* Firefox Scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--negro-grafito) var(--negro-absoluto);
 }
 
-/* Subtle noise texture overlay - minimal for pure black */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.02'/%3E%3C/svg%3E");
-  pointer-events: none;
-  z-index: 10000;
-  opacity: 0.15;
+/* Focus Ring Global - Verde Láser */
+:focus {
+  outline: none;
 }
 
-/* HIDDEN ELEMENTS (MICA is the only interface) */
-.nav--hidden {
-  display: none !important;
-  visibility: hidden;
-  pointer-events: none;
+:focus-visible {
+  outline: 2px solid var(--verde-laser);
+  outline-offset: 2px;
 }
 
-/* SVG Filters container */
-.svg-filters {
-  position: fixed;
-  width: 0;
-  height: 0;
-  pointer-events: none;
+/* Code/Pre - Estilo Terminal */
+code, pre {
+  font-family: var(--font-family-mono);
+  background: var(--negro-carbon);
+  color: var(--verde-laser);
+  border-radius: var(--radius-sm);
+}
+
+code {
+  padding: 0.2em 0.4em;
+  font-size: 0.9em;
+}
+
+pre {
+  padding: var(--space-md);
+  overflow-x: auto;
+  border: 1px solid var(--verde-laser-neon);
+}
+
+/* Listas */
+ul, ol {
+  padding-left: var(--space-xl);
+  color: var(--gris-ceniza);
+}
+
+li {
+  margin-bottom: var(--space-xs);
+}
+
+li::marker {
+  color: var(--verde-laser);
+}
+
+/* HR - Línea Láser */
+hr {
+  border: none;
+  height: 1px;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    var(--verde-laser-dark) 20%, 
+    var(--verde-laser) 50%, 
+    var(--verde-laser-dark) 80%, 
+    transparent 100%);
+  margin: var(--space-2xl) 0;
+}
+
+/* Blockquote */
+blockquote {
+  border-left: 3px solid var(--rojo-sangre);
+  padding-left: var(--space-lg);
+  margin: var(--space-lg) 0;
+  color: var(--gris-ceniza);
+  font-style: italic;
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: var(--space-sm) var(--space-md);
+  text-align: left;
+  border-bottom: 1px solid var(--color-border);
+}
+
+th {
+  color: var(--verde-laser);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Forms */
+input, textarea, select {
+  font-family: inherit;
+  font-size: inherit;
+  background: var(--negro-carbon);
+  color: var(--blanco-mica);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-sm) var(--space-md);
+  transition: border-color var(--duration-fast) var(--ease-default);
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: var(--verde-laser);
+  box-shadow: 0 0 0 3px var(--verde-laser-neon);
+}
+
+input::placeholder, textarea::placeholder {
+  color: var(--gris-humo);
+}
+
+/* Utility Classes */
+.text-laser { color: var(--verde-laser); }
+.text-blood { color: var(--rojo-sangre); }
+.text-mica { color: var(--blanco-mica); }
+.text-muted { color: var(--gris-ceniza); }
+
+.bg-absolute { background: var(--negro-absoluto); }
+.bg-mica { background: var(--negro-mica); }
+.bg-carbon { background: var(--negro-carbon); }
+
+.glow-laser { text-shadow: var(--shadow-laser); }
+.glow-blood { text-shadow: var(--shadow-blood); }
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
   overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }

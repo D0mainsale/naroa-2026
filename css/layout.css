@@ -1,13 +1,10 @@
-/* Layout - Naroa 2026 - BOSQUE ORGÁNICO MINIMALISTA */
+/* ==========================================================================
+   LAYOUT - MICA NOIR Edition
+   95% Negro Absoluto + Verde Láser + Rojo Sangre
+   ========================================================================== */
 
-/* Variables - TIERRA Y BOSQUE */
+/* Variable Overrides - MICA NOIR */
 :root {
-  --color-bg-beach: var(--forest-night);
-  --color-sand: var(--forest-deep);
-  --color-text-deep: var(--mist-white);
-  --color-blue-ocean: var(--moss-light);
-  --color-gold-mica: var(--lichen-gold);
-  
   --font-display-size: clamp(3rem, 10vw, 7rem);
 }
 
@@ -19,8 +16,8 @@ html {
 }
 
 body {
-  background-color: #0a0a0f !important;
-  color: var(--mist-white);
+  background-color: var(--negro-absoluto) !important;
+  color: var(--blanco-mica);
   height: 100%;
   overflow-x: hidden;
 }
@@ -33,7 +30,7 @@ body {
   padding-inline: var(--container-padding);
 }
 
-/* Views - MINIMALISTA */
+/* Views - NEGRO COMPLETO */
 .view {
   display: block !important;
   min-height: 100vh;
@@ -45,9 +42,10 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background: var(--negro-absoluto);
 }
 
-/* Hero - BOSQUE ORGÁNICO MINIMALISTA */
+/* Hero - MICA NOIR */
 .hero {
   position: relative;
   display: flex;
@@ -58,41 +56,19 @@ body {
   text-align: center;
   padding: var(--space-8);
   overflow: hidden;
-  background: #0a0a0f !important;
+  background: var(--negro-absoluto) !important;
 }
 
-/* Noise Overlay for Hero Images */
-.hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-  opacity: 0.04;
-  pointer-events: none;
-  z-index: 1;
-  mix-blend-mode: overlay;
-}
+/* NOTA: Filtro MICA desactivado - causa parpadeo en producción */
 
-/* Hero Images with Grain Effect */
+/* Hero Images with subtle contrast */
 .hero img,
 .hero__image {
   position: relative;
-  filter: 
-    contrast(1.02) 
-    saturate(0.9);
+  filter: contrast(1.1) saturate(0.95);
 }
 
-.hero img::after,
-.hero__image::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)' opacity='0.15'/%3E%3C/svg%3E");
-  pointer-events: none;
-  mix-blend-mode: overlay;
-}
-
-/* Palíndromo Watermark - Sutil */
+/* Palíndromo Watermark - Verde Láser muy sutil */
 .hero__palindrome {
   position: absolute;
   top: 50%;
@@ -104,19 +80,19 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  opacity: 0.03;
+  opacity: 0.015;
 }
 
 .hero__palindrome-text {
   font-family: var(--font-family-display);
   font-size: 70vw;
   font-weight: 300;
-  color: var(--moss-medium);
+  color: var(--verde-laser);
   letter-spacing: 0.05em;
   white-space: nowrap;
 }
 
-/* Hero Title - Elegante, Respirando */
+/* Hero Title - Blanco MICA */
 .hero__title {
   position: relative;
   z-index: 2;
@@ -131,10 +107,11 @@ body {
   font-size: var(--font-display-size);
   font-weight: var(--font-weight-light);
   letter-spacing: 0.05em;
-  color: var(--mist-white);
+  color: var(--blanco-mica);
+  text-shadow: 0 0 60px rgba(255, 255, 255, 0.1);
 }
 
-/* Subtitle - Sutil */
+/* Subtitle - Gris con destello láser */
 .hero__subtitle {
   position: relative;
   z-index: 2;
@@ -146,10 +123,10 @@ body {
   font-size: var(--font-size-sm);
   letter-spacing: var(--letter-spacing-widest);
   text-transform: uppercase;
-  color: var(--moss-sage);
+  color: var(--gris-humo);
 }
 
-/* CTA - Minimal, Orgánico */
+/* CTA - Verde Láser Primario, Rojo Sangre Secundario */
 .hero__cta-group {
   position: relative;
   z-index: 2;
@@ -160,26 +137,27 @@ body {
 
 .hero__cta {
   font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-normal);
+  font-weight: var(--font-weight-medium);
   letter-spacing: var(--letter-spacing-wide);
   text-transform: uppercase;
-  color: var(--mist-light);
+  color: var(--verde-laser);
   text-decoration: none;
   position: relative;
   padding-bottom: 4px;
-  transition: all var(--duration-base) var(--ease-organic);
+  transition: all var(--duration-normal) var(--ease-smooth);
 }
 
-/* Underline effect */
+/* Underline effect - Verde Láser */
 .hero__cta::after {
   content: '';
   position: absolute;
   bottom: 0;
   left: 0;
   width: 0;
-  height: 1px;
-  background: var(--lichen-gold);
-  transition: width var(--duration-base) var(--ease-organic);
+  height: 2px;
+  background: var(--verde-laser);
+  box-shadow: var(--shadow-laser);
+  transition: width var(--duration-normal) var(--ease-smooth);
 }
 
 .hero__cta:hover::after {
@@ -187,40 +165,57 @@ body {
 }
 
 .hero__cta:hover {
-  color: var(--lichen-gold);
+  color: var(--verde-laser);
+  text-shadow: var(--shadow-laser);
 }
 
-/* Spotify - Visible Minimal Pill - LARGER */
+/* CTA Secundario - Rojo Sangre */
+.hero__cta--secondary {
+  color: var(--rojo-sangre);
+}
+
+.hero__cta--secondary::after {
+  background: var(--rojo-sangre);
+  box-shadow: var(--shadow-blood);
+}
+
+.hero__cta--secondary:hover {
+  color: var(--rojo-sangre-vivo);
+  text-shadow: var(--shadow-blood);
+}
+
+/* Spotify - NOIR style */
 .hero__spotify {
   position: absolute;
   bottom: 2rem;
   left: 2rem;
   z-index: 10;
-  opacity: 0.95;
+  opacity: 0.8;
   transform: scale(1.2);
   transform-origin: bottom left;
   transition: all 0.3s ease;
-  filter: none;
+  filter: grayscale(30%);
 }
 
 .hero__spotify:hover {
   opacity: 1;
   transform: scale(1.4);
+  filter: grayscale(0%);
 }
 
-/* Visit Counter */
+/* Visit Counter - Verde Láser */
 .hero__counter {
   position: absolute;
   top: 2rem;
   right: 2rem;
-  font-family: var(--font-mono);
+  font-family: var(--font-family-mono);
   font-size: 0.9rem;
-  color: #fefefe;
-  opacity: 0.5;
+  color: var(--verde-laser);
+  opacity: 0.6;
   letter-spacing: 0.1em;
 }
 
-/* Scroll indicator - Minimal Gold Line */
+/* Scroll indicator - Línea Láser */
 .hero__scroll-indicator {
   position: absolute;
   bottom: 2rem;
@@ -229,13 +224,13 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  opacity: 0.4;
+  opacity: 0.5;
 }
 
 .hero__scroll-line {
-  width: 1px;
+  width: 2px;
   height: 60px;
-  background: var(--color-gold-mica);
+  background: linear-gradient(180deg, var(--verde-laser) 0%, transparent 100%);
   animation: scroll-grow 2s ease-in-out infinite;
 }
 
@@ -265,83 +260,85 @@ body {
   }
 }
 
-/* DARK MODE ADDITIONS */
+/* ==========================================================================
+   NOIR MODE SECTIONS
+   ========================================================================== */
 
-/* Chiquitocrates Badge - Dark Mode */
+/* Chiquitocrates Badge - NOIR */
 .chiquitocrates-badge {
-    margin-top: 1rem;
-    font-size: 0.9rem;
-    color: #fefefe;
-    opacity: 0.7;
-    font-style: italic;
-    border: 1px dashed var(--color-gold-mica);
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    background: rgba(20, 20, 20, 0.8);
-    cursor: help;
-    transition: all 0.3s ease;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: var(--verde-laser);
+  opacity: 0.8;
+  font-style: italic;
+  border: 1px solid var(--verde-laser-neon);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  background: rgba(0, 0, 0, 0.9);
+  cursor: help;
+  transition: all 0.3s ease;
 }
 
 .chiquitocrates-badge:hover {
-    transform: scale(1.05) rotate(-1deg);
-    background: rgba(30, 30, 30, 0.95);
-    opacity: 1;
-    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+  transform: scale(1.05) rotate(-1deg);
+  background: var(--negro-carbon);
+  opacity: 1;
+  box-shadow: var(--shadow-laser);
 }
 
-/* Gallery Layout - Dark Mode */
+/* Gallery Layout - NOIR */
 .view--gallery {
-    flex-direction: row !important;
-    justify-content: flex-start !important;
-    background: #0a0a0a;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    width: 100vw;
+  flex-direction: row !important;
+  justify-content: flex-start !important;
+  background: var(--negro-absoluto);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  width: 100vw;
 }
 
 .gallery-container-horizontal {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    height: 100vh;
-    padding-left: 10vw;
-    width: max-content; /* Permitir que crezca */
-    gap: 4rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 100vh;
+  padding-left: 10vw;
+  width: max-content;
+  gap: 4rem;
 }
 
 .gallery-intro {
-    min-width: 40vw;
-    scroll-snap-align: start;
+  min-width: 40vw;
+  scroll-snap-align: start;
 }
 
 .gallery-track {
-    display: flex;
-    gap: 2rem;
-    padding-right: 10vw;
+  display: flex;
+  gap: 2rem;
+  padding-right: 10vw;
 }
 
-/* Chiquitocres Manifesto Section */
+/* Manifesto Section - NOIR */
 .view--manifesto {
-    background: #1a1a1a;
-    color: #f2efe9;
-    text-align: center;
-    scroll-snap-align: start;
+  background: var(--negro-mica);
+  color: var(--blanco-mica);
+  text-align: center;
+  scroll-snap-align: start;
 }
 
 .chiquito-quote {
-    font-family: var(--font-display);
-    font-size: clamp(2rem, 5vw, 4rem);
-    line-height: 1.1;
-    max-width: 900px;
-    margin: 0 auto 2rem;
-    background: linear-gradient(to right, #d4af37, #f2efe9);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+  font-family: var(--font-family-display);
+  font-size: clamp(2rem, 5vw, 4rem);
+  line-height: 1.1;
+  max-width: 900px;
+  margin: 0 auto 2rem;
+  background: linear-gradient(to right, var(--rojo-sangre), var(--verde-laser));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .view--manifesto cite {
-    font-size: 1.2rem;
-    color: #888;
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
+  font-size: 1.2rem;
+  color: var(--gris-humo);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
 }
