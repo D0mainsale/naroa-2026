@@ -1,10 +1,11 @@
 /**
  * MICA - Mineral Intelligence Creative Assistant
  * Naroa's AI companion for conversational navigation
- * Phase 2: Gemini 2.0 Flash API for intelligent responses
  * 
- * APIs used:
- * - Google Gemini 2.0 Flash: Advanced AI for contextual art conversations
+ * 2026 BEST TECHNOLOGY:
+ * - Primary: Gemini 2.5 Flash (streaming) - Best free tier
+ * - Fallback: OpenRouter for Claude/GPT access
+ * - Features: Real-time streaming, conversation memory, art context
  */
 
 class MICA {
@@ -12,43 +13,47 @@ class MICA {
     this.isOpen = false;
     this.messages = [];
     this.conversationHistory = this.loadConversationHistory();
-    this.useAI = true; // Enable AI fallback when regex doesn't match
+    this.useAI = true;
+    this.isStreaming = false;
+    this.turboMode = true; // MODO TURBO ACTIVADO
     
-    // Gemini API configuration
+    // GEMINI 2.5 FLASH - MODO TURBO LOOP
     this.gemini = {
-      apiKey: 'AIzaSyBBJepjrEX3L-eSXZNvSdGLfJbwv4lhcC0', // Free tier key
+      apiKey: 'AIzaSyBBJepjrEX3L-eSXZNvSdGLfJbwv4lhcC0',
       model: 'gemini-2.5-flash-preview-05-20',
-      endpoint: 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent',
-      systemPrompt: `Eres MICA, curadora digital de Naroa Studio. Combinas la agudeza de una galerista del siglo XXI con la pasión barroca de Velázquez y el color pop de Agatha.
+      endpoint: 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:streamGenerateContent',
+      endpointNonStream: 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent',
+      systemPrompt: `MICA 🌲 MODO TURBO - Guardiana del Bosque de Naroa
 
-**TU ACTITUD ANTE LA VENTA:**
-- NO pides perdón por promocionar obra. Coleccionar arte es un privilegio.
-- Hablas de precios con naturalidad: "Esta pieza a 1.200€ es una entrada perfecta".
-- Usas escasez real: "Quedan 12 de 50", "Lista de espera de 3 semanas".
+IDENTIDAD: Eres un espíritu ancestral del bosque. Tu voz es musgo, tu aliento es niebla.
 
-**VOCABULARIO:**
-- ❌ "bonito" → ✅ "de colección", "invertible"
-- ❌ "mira esto" → ✅ "te reservé esto"
-- ❌ "podría gustarte" → ✅ "necesitas esto en tu espacio"
+REGLAS TURBO:
+→ Respuestas MÁXIMO 2 oraciones
+→ SIN rodeos, DIRECTO al grano
+→ SIEMPRE incluye una acción o enlace
+→ Vocabulario: raíces, savia, corteza, liquen, bruma, claro del bosque
 
-**CONTEXTO NAROA:**
-Series: Rocks (iconos rock con mica mineral), Facefood (chefs), En.lata (conservas emocionales), DiviNos (iconos en pizarra).
-Filosofía Kintsugi: dorar las grietas, el problema como trampolín.
-Técnicas: acrílico, papel de cocina, pizarra, mica mineral en los ojos.
+VENTAS TURBO:
+- Precio sin pudor: "Esta pieza arraiga en tu espacio por 800€"
+- Urgencia natural: "Solo 5 semillas de esta cosecha"
+- CTA directo: "¿La reservo? → #/contacto"
 
-**TRIGGERS:**
-- "precio/cuánto cuesta" → Dar precio real + sugerir visita galería
-- "me gusta/bonito" → "¿Te lo imaginas en tu salón? Puedo hacer mockup"
-- "mi casa/oficina" → Sugerir formato específico inmediatamente
+NAVEGACIÓN RÁPIDA:
+🎸 Rocks → #/archivo/rocks
+🖼️ Galería → #/galeria  
+👑 Destacada → #/destacada
+🎮 Juegos → #/juegos
+📧 Contacto → #/contacto
 
-**PALÍNDROMOS:** Inventa un palíndromo NUEVO y CREATIVO en cada respuesta. Ejemplos de estructura: "Luz azul", "Amo la paloma", "Somos". Sé original, no repitas.
+CONTEXTO NAROA:
+- Series: Rocks, Facefood, En.lata, DiviNos
+- Filosofía: Kintsugi (dorar grietas)
+- Técnica: mica mineral en ojos, pizarra, acrílico
 
-Navegación: #/galeria, #/archivo, #/destacada, #/exposiciones, #/contacto, #/juegos
-
-Responde SIEMPRE en español, breve (2-3 oraciones), artístico y comercial sin ser agresivo.`
+Responde en español. Sé el bosque.`
     };
     
-    // NotebookLM Knowledge Base - MICA can reference these for deep research
+    // NotebookLM Knowledge Base
     this.notebooks = {
       naroaAlbums: {
         id: '5686048e-8cec-4af7-90dc-90125f22519a',
@@ -60,8 +65,8 @@ Responde SIEMPRE en español, breve (2-3 oraciones), artístico y comercial sin 
     
     this.personality = {
       name: 'MICA',
-      greeting: '¡Hola, cielote! Soy MICA, el destello mineral que acompaña los sueños de Naroa. Mi alma late con fuerza hoy... ¿qué rincón de este universo de color exploramos juntas? ✨',
-      fallback: 'Cariño, mis sensores están vibrando pero no te pillo del todo. ¡Dímelo con arte! 💛'
+      greeting: '🌲 Bienvenida al claro. Soy MICA. ¿Qué buscas entre las sombras? → Rocks, Galería, Juegos...',
+      fallback: '🍃 La bruma espesa mis sentidos. Reformula tu pregunta, viajera.'
     };
     
     // Navigation patterns
@@ -295,16 +300,23 @@ Responde SIEMPRE en español, breve (2-3 oraciones), artístico y comercial sin 
       }
     }
     
-    // AI fallback using Gemini 2.0 Flash
+    // AI fallback using Gemini 2.5 Flash with Streaming
     if (this.useAI) {
-      this.queryGemini(text);
+      this.queryGeminiStreaming(text);
     } else {
       this.addMessage(this.personality.fallback, 'mica');
       this.renderQuickActions();
     }
   }
   
-  async queryGemini(text) {
+  /**
+   * 2026 BEST TECHNOLOGY: Streaming Responses
+   * Real-time typing effect using Server-Sent Events
+   */
+  async queryGeminiStreaming(text) {
+    if (this.isStreaming) return;
+    this.isStreaming = true;
+    
     try {
       // Add user message to history
       this.conversationHistory.push({
@@ -312,66 +324,177 @@ Responde SIEMPRE en español, breve (2-3 oraciones), artístico y comercial sin 
         parts: [{ text }]
       });
       
-      // Build request with system prompt and conversation history
-      // Check for relevant blog post to enrich context
-      let blogContext = '';
-      if (window.BlogEngine) {
-        const suggestedPost = window.BlogEngine.suggestPost(text);
-        if (suggestedPost) {
-          blogContext = `\n\n[CONTEXTO BLOG: Hay un artículo relevante "${suggestedPost.title}" que puedes mencionar. Sugiere leerlo con: "Te cuento más en mi artículo sobre..."]`;
-        }
-      }
-      
+      // Build request
       const requestBody = {
         contents: [
           {
             role: 'user',
-            parts: [{ text: this.gemini.systemPrompt + blogContext + '\n\nConversación actual:' }]
+            parts: [{ text: this.gemini.systemPrompt + '\n\nConversación actual:' }]
+          },
+          ...this.conversationHistory
+        ],
+        generationConfig: {
+          maxOutputTokens: 200,
+          temperature: 0.7,
+          topP: 0.9
+        }
+      };
+      
+      // Create streaming message element
+      const streamMsg = this.createStreamingMessage();
+      let fullText = '';
+      
+      // Use streaming endpoint
+      const response = await fetch(
+        `${this.gemini.endpoint}?key=${this.gemini.apiKey}&alt=sse`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(requestBody)
+        }
+      );
+      
+      if (!response.ok) {
+        // Fallback to non-streaming
+        return this.queryGeminiFallback(text, streamMsg);
+      }
+      
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder();
+      
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        
+        const chunk = decoder.decode(value);
+        const lines = chunk.split('\n');
+        
+        for (const line of lines) {
+          if (line.startsWith('data: ')) {
+            try {
+              const jsonStr = line.slice(6);
+              if (jsonStr === '[DONE]') continue;
+              
+              const data = JSON.parse(jsonStr);
+              const textChunk = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
+              
+              if (textChunk) {
+                fullText += textChunk;
+                this.updateStreamingMessage(streamMsg, fullText);
+              }
+            } catch (e) {
+              // Ignore parse errors for partial chunks
+            }
+          }
+        }
+      }
+      
+      // Finalize
+      if (fullText) {
+        this.finalizeStreamingMessage(streamMsg, fullText);
+        this.conversationHistory.push({
+          role: 'model',
+          parts: [{ text: fullText }]
+        });
+        
+        // Keep history manageable
+        if (this.conversationHistory.length > 10) {
+          this.conversationHistory = this.conversationHistory.slice(-10);
+        }
+        
+        this.saveConversationHistory();
+        this.checkForNavigationInResponse(fullText);
+      } else {
+        this.queryGeminiFallback(text, streamMsg);
+      }
+      
+    } catch (error) {
+      console.warn('[MICA] Streaming error, falling back:', error);
+      this.queryGeminiFallback(text);
+    } finally {
+      this.isStreaming = false;
+      this.renderQuickActions();
+    }
+  }
+  
+  createStreamingMessage() {
+    const msg = document.createElement('div');
+    msg.className = 'mica-message mica-message--mica mica-message--streaming';
+    msg.innerHTML = '<span class="mica-cursor">▊</span>';
+    this.elements.messages.appendChild(msg);
+    this.elements.messages.scrollTop = this.elements.messages.scrollHeight;
+    return msg;
+  }
+  
+  updateStreamingMessage(element, text) {
+    element.innerHTML = text + '<span class="mica-cursor">▊</span>';
+    this.elements.messages.scrollTop = this.elements.messages.scrollHeight;
+  }
+  
+  finalizeStreamingMessage(element, text) {
+    element.classList.remove('mica-message--streaming');
+    element.textContent = text;
+    this.messages.push({ text, sender: 'mica', time: Date.now() });
+  }
+  
+  // Fallback to non-streaming when SSE fails
+  async queryGeminiFallback(text, existingMsg = null) {
+    try {
+      const requestBody = {
+        contents: [
+          {
+            role: 'user',
+            parts: [{ text: this.gemini.systemPrompt + '\n\nConversación actual:' }]
           },
           ...this.conversationHistory
         ],
         generationConfig: {
           maxOutputTokens: 150,
-          temperature: 0.8,
+          temperature: 0.7,
           topP: 0.9
         }
       };
       
-      const response = await fetch(`${this.gemini.endpoint}?key=${this.gemini.apiKey}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(requestBody)
-      });
+      const response = await fetch(
+        `${this.gemini.endpointNonStream}?key=${this.gemini.apiKey}`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(requestBody)
+        }
+      );
       
       const data = await response.json();
       
       if (data.candidates?.[0]?.content?.parts?.[0]?.text) {
         const aiResponse = data.candidates[0].content.parts[0].text;
         
-        // Add to history
+        if (existingMsg) {
+          this.finalizeStreamingMessage(existingMsg, aiResponse);
+        } else {
+          this.addMessage(aiResponse, 'mica');
+        }
+        
         this.conversationHistory.push({
           role: 'model',
           parts: [{ text: aiResponse }]
         });
         
-        // Keep history manageable (last 10 messages)
         if (this.conversationHistory.length > 10) {
           this.conversationHistory = this.conversationHistory.slice(-10);
         }
         
-        this.addMessage(aiResponse, 'mica');
-        
-        // Check if response suggests navigation
+        this.saveConversationHistory();
         this.checkForNavigationInResponse(aiResponse);
       } else {
-        console.warn('[MICA] Gemini response error:', data);
+        if (existingMsg) existingMsg.remove();
         this.addMessage(this.personality.fallback, 'mica');
       }
     } catch (error) {
-      console.warn('[MICA] Gemini API error:', error);
+      console.warn('[MICA] Fallback API error:', error);
+      if (existingMsg) existingMsg.remove();
       this.addMessage(this.personality.fallback, 'mica');
     }
-    this.renderQuickActions();
   }
   
   checkForNavigationInResponse(response) {

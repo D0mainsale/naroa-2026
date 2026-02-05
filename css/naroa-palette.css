@@ -82,9 +82,9 @@ input, .btn, .tag {
   border-radius: var(--radius-circle) !important;
 }
 
-/* Organic Body - Dark Mode */
+/* Organic Body - Dark Mode FORCED */
 body {
-  background: var(--bg-primary);
+  background: #0a0a0f !important;
   color: var(--text-primary);
 }
 

@@ -19,7 +19,7 @@ html {
 }
 
 body {
-  background-color: var(--forest-night);
+  background-color: #0a0a0f !important;
   color: var(--mist-white);
   height: 100%;
   overflow-x: hidden;
@@ -58,7 +58,7 @@ body {
   text-align: center;
   padding: var(--space-8);
   overflow: hidden;
-  background: var(--forest-night);
+  background: #0a0a0f !important;
 }
 
 /* Noise Overlay for Hero Images */
