@@ -1,24 +1,24 @@
-/* Base Styles - Naroa 2026 - ORGÁNICO PASTEL */
+/* Base Styles - Naroa 2026 - PURE BLACK EDITION */
 
 body {
   font-family: var(--font-family-main);
   font-size: var(--font-size-base);
   font-weight: var(--font-weight-normal);
   line-height: var(--line-height-normal);
-  color: var(--text-primary);
-  background: var(--gradient-cream);
+  color: #fefefe;
+  background: #000000;
   background-attachment: fixed;
   overflow-x: hidden;
   min-height: 100vh;
 }
 
-/* Typography */
+/* Typography - DARK MODE */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-family-display);
   font-weight: var(--font-weight-light);
   line-height: var(--line-height-tight);
   letter-spacing: var(--letter-spacing-tight);
-  color: var(--naroa-terracotta);
+  color: #fefefe;
 }
 
 h1 { font-size: var(--font-size-hero); }
@@ -28,7 +28,7 @@ h4 { font-size: var(--font-size-lg); }
 
 p {
   max-width: 65ch;
-  color: var(--naroa-black);
+  color: #e0e0e0;
 }
 
 a {
@@ -48,10 +48,10 @@ a:hover {
   border-radius: var(--radius-organic);
 }
 
-/* Selection - Rosa empolvado */
+/* Selection - Gold on Black */
 ::selection {
-  background-color: var(--naroa-blush);
-  color: var(--naroa-black);
+  background-color: rgba(212, 175, 55, 0.4);
+  color: #fefefe;
 }
 
 /* Smooth scroll container */
@@ -59,24 +59,24 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Organic scrollbar */
+/* Dark Scrollbar */
 body::-webkit-scrollbar {
   width: 10px;
 }
 
 body::-webkit-scrollbar-track {
-  background: var(--naroa-linen);
+  background: #0a0a0a;
   border-radius: var(--radius-circle);
 }
 
 body::-webkit-scrollbar-thumb {
-  background: var(--gradient-blush);
+  background: linear-gradient(180deg, #d4af37, #8b6914);
   border-radius: var(--radius-circle);
-  border: 2px solid var(--naroa-linen);
+  border: 2px solid #0a0a0a;
 }
 
 body::-webkit-scrollbar-thumb:hover {
-  background: var(--naroa-rose);
+  background: #d4af37;
 }
 
 /* Reduced motion */
@@ -92,15 +92,15 @@ body::-webkit-scrollbar-thumb:hover {
   }
 }
 
-/* Organic texture overlay */
+/* Subtle noise texture overlay - minimal for pure black */
 body::before {
   content: '';
   position: fixed;
   inset: 0;
-  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.02'/%3E%3C/svg%3E");
   pointer-events: none;
   z-index: 10000;
-  opacity: 0.4;
+  opacity: 0.15;
 }
 
 /* HIDDEN ELEMENTS (MICA is the only interface) */

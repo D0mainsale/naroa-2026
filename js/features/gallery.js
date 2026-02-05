@@ -142,7 +142,7 @@
       }
     });
   }, {
-    rootMargin: '200px'
+    rootMargin: '50px' // Reduced for faster perceived load
   });
 
   // ===========================================

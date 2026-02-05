@@ -127,27 +127,18 @@
   --z-max: 9999;
 }
 
-/* Dark mode (default for Naroa aesthetic) */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-bg: var(--color-black);
-    --color-text: var(--color-white);
-    --color-text-muted: var(--color-gray-400);
-  }
-}
-
-/* Light mode override */
-@media (prefers-color-scheme: light) {
-  :root {
-    --color-bg: var(--color-white);
-    --color-text: var(--color-black);
-    --color-text-muted: var(--color-gray-600);
-  }
-}
-
-/* Default to dark */
+/* Dark Mode ONLY - Forced Premium Experience */
 :root {
   --color-bg: var(--color-black);
   --color-text: var(--color-white);
   --color-text-muted: var(--color-gray-400);
+}
+
+/* Default to dark - PURE BLACK ENFORCED */
+:root {
+  --color-bg: #000000;
+  --color-black: #000000;
+  --color-text: #ffffff;
+  --color-text-muted: #a3a3a3;
+  --color-accent-dark: #111111;
 }

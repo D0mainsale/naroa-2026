@@ -132,3 +132,23 @@
 [data-magnetic] {
   transition: transform var(--duration-fast) var(--ease-out);
 }
+
+/* === PERFORMANCE: Reduce animations on low-power devices === */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .animate-fade-in,
+  .animate-fade-in-up,
+  .animate-scale-in,
+  .animate-reveal,
+  .hero__line,
+  .hero__subtitle,
+  .hero__cta {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

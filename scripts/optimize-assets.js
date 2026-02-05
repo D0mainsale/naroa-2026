@@ -3,15 +3,15 @@
  * Genera variantes AVIF/WebP/JPEG responsive con filtros emocionales
  */
 
-const sharp = require('sharp');
-const fs = require('fs').promises;
-const path = require('path');
-const { glob } = require('glob');
+import sharp from 'sharp';
+import { promises as fs } from 'fs';
+import path from 'path';
+import { glob } from 'glob';
 
 class AssetOptimizer {
   constructor() {
-    this.inputDir = './src/assets/raw';
-    this.outputDir = './public/optimized';
+    this.inputDir = './images/artworks';
+    this.outputDir = './images/optimized';
     this.qualities = {
       low: { webp: 60, avif: 50, jpg: 70 },
       medium: { webp: 75, avif: 65, jpg: 80 },
@@ -20,7 +20,7 @@ class AssetOptimizer {
   }
 
   async processAll() {
-    const files = await glob(`${this.inputDir}/**/*.{jpg,png}`);
+    const files = await glob(`${this.inputDir}/**/*.{jpg,png,webp}`);
     
     console.log(`🖼️ Procesando ${files.length} imágenes...`);
     

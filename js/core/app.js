@@ -244,6 +244,7 @@
     
     registerRoutes();
     initFluidSystems();
+    initUIControls();
 
     // Initialize other modules when ready
     if (window.Lightbox) {
@@ -251,6 +252,22 @@
     }
 
     console.log('[Naroa 2026] Ready ✨');
+  }
+
+  function initUIControls() {
+    const chaosBtn = document.getElementById('chaos-toggle');
+    if (chaosBtn && window.ChaosEngine) {
+      chaosBtn.addEventListener('click', () => {
+        const isActive = window.ChaosEngine.toggle();
+        if (isActive) {
+          chaosBtn.classList.add('active');
+          chaosBtn.textContent = '⚡ CAOS ACTIVO';
+        } else {
+          chaosBtn.classList.remove('active');
+          chaosBtn.textContent = '⚡ MODO CAOS';
+        }
+      });
+    }
   }
 
   // Boot when DOM ready

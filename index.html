@@ -9,7 +9,7 @@
   <!-- Open Graph -->
   <meta property="og:title" content="Naroa Gutiérrez Gil | Artista Visual">
   <meta property="og:description" content="Hiperrealismo POP. Retratos, murales y obra gráfica desde Bilbao.">
-  <meta property="og:image" content="https://naroa.online/images/artworks/Webps/espejos-del-alma.webp">
+  <meta property="og:image" content="https://naroa.online/images/artworks/espejos-del-alma.webp">
   <meta property="og:url" content="https://naroa.online">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="es_ES">
@@ -18,7 +18,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Naroa Gutiérrez Gil | Artista Visual">
   <meta name="twitter:description" content="Hiperrealismo POP. Retratos, murales y obra gráfica desde Bilbao.">
-  <meta name="twitter:image" content="https://naroa.online/images/artworks/Webps/espejos-del-alma.webp">
+  <meta name="twitter:image" content="https://naroa.online/images/artworks/espejos-del-alma.webp">
   
   <title>Naroa Gutiérrez Gil | Artista Visual</title>
   
@@ -28,7 +28,7 @@
   <link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700&f[]=switzer@300,400,500,600,700&display=swap" rel="stylesheet">
   
   <!-- LCP Preload: Hero image -->
-  <link rel="preload" as="image" href="images/artworks/Webps/espejos-del-alma.webp" fetchpriority="high">
+  <link rel="preload" as="image" href="images/artworks/espejos-del-alma.webp" fetchpriority="high">
   
   <!-- Critical CSS (inline for FCP) -->
   <style>
@@ -41,7 +41,7 @@
     a { color: inherit; text-decoration: none; }
     /* Core Variables */
     :root {
-      --color-bg: #0a0a0a; --color-text: #fefefe; --color-accent: #1a1a1a;
+      --color-bg: #000000; --color-text: #fefefe; --color-accent: #111111;
       --font-family-main: 'Outfit', -apple-system, sans-serif;
       --font-size-hero: clamp(4rem, 3rem + 5vw, 12rem);
       --space-4: 1rem; --space-6: 2rem; --space-8: 3rem;
@@ -51,6 +51,7 @@
   
   <!-- Core Styles -->
   <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/custom-cursor.css">
   <link rel="stylesheet" href="css/variables.css">
   <link rel="stylesheet" href="css/naroa-palette.css">
   <link rel="stylesheet" href="css/typography-2026.css">
@@ -62,6 +63,8 @@
   <link rel="stylesheet" href="css/soty-effects.css">
   <link rel="stylesheet" href="css/mica.css">
   <link rel="stylesheet" href="css/wow-effects.css">
+  <link rel="stylesheet" href="css/wow-effects-2026.css">
+  <link rel="stylesheet" href="css/gallery-chaos.css">
   
   <!-- Deferred Game Styles (load after interaction) -->
   <link rel="stylesheet" href="css/oca-game.css" media="print" onload="this.media='all'">
@@ -124,7 +127,7 @@
             "creator": {"@id": "https://naroa.online/#artist"},
             "artMedium": "Mixed Media",
             "dateCreated": "2023",
-            "image": "https://naroa.online/images/artworks/Webps/espejos-del-alma.webp"
+            "image": "https://naroa.online/images/artworks/espejos-del-alma.webp"
           },
           {
             "@type": "VisualArtwork",
@@ -133,7 +136,7 @@
             "creator": {"@id": "https://naroa.online/#artist"},
             "artMedium": "Mixed Media",
             "dateCreated": "2023",
-            "image": "https://naroa.online/images/artworks/Webps/marilyn-rocks-hq-5.webp"
+            "image": "https://naroa.online/images/artworks/marilyn-rocks-hq-5.webp"
           },
           {
             "@type": "VisualArtwork",
@@ -142,7 +145,7 @@
             "creator": {"@id": "https://naroa.online/#artist"},
             "artMedium": "Mixed Media",
             "dateCreated": "2023",
-            "image": "https://naroa.online/images/artworks/Webps/amy-rocks.webp"
+            "image": "https://naroa.online/images/artworks/amy-rocks.webp"
           },
           {
             "@type": "VisualArtwork",
@@ -151,7 +154,7 @@
             "creator": {"@id": "https://naroa.online/#artist"},
             "artMedium": "Mixed Media",
             "dateCreated": "2021",
-            "image": "https://naroa.online/images/artworks/Webps/lagrimas-de-oro.webp"
+            "image": "https://naroa.online/images/artworks/lagrimas-de-oro.webp"
           },
           {
             "@type": "VisualArtwork",
@@ -160,7 +163,7 @@
             "creator": {"@id": "https://naroa.online/#artist"},
             "artMedium": "Mixed Media",
             "dateCreated": "2021",
-            "image": "https://naroa.online/images/artworks/Webps/el-gran-dakari.webp"
+            "image": "https://naroa.online/images/artworks/el-gran-dakari.webp"
           }
         ]
       }
@@ -170,7 +173,7 @@
 </head>
 <body>
   <!-- Navigation - HIDDEN (MICA is the interface) -->
-  <nav class="nav nav--hidden" aria-hidden="true"></nav>
+  <nav class="nav nav--hidden liquid-glass" aria-hidden="true"></nav>
 
   <!-- TRINITY OVERLAYS -->
   <div class="page-transition-overlay" id="page-curtain">
@@ -203,7 +206,7 @@
     <section id="view-home" class="view view--home active">
       <div class="hero hero--premium">
         <!-- Animated gradient background -->
-        <div class="hero__gradient-bg"></div>
+        <div class="hero__gradient-bg aurora-bg"></div>
 
         <!-- PALÍNDROMO GIGANTE (Fondo) -->
         <div class="hero__palindrome" aria-hidden="true">
@@ -220,11 +223,7 @@
           <span class="hero__tag">Hiperrealismo POP</span>
         </p>
 
-        <!-- CHIQUITÓCRATES SECRET QUOTE (Reemplaza al WIP badge) -->
-        <div class="chiquitocrates-badge reveal reveal-delay-2" title="Filosofía del Taller">
-          <span class="chiquito-icon">🏛️</span>
-          <span class="chiquito-text">"Si es Templo, sacerdotes. Si es Taller, GENTE."</span>
-        </div>
+
 
         <div class="hero__cta-group reveal reveal-delay-2">
           <span class="hero__cta">Desliza</span>
@@ -247,6 +246,7 @@
         <div class="gallery-intro">
           <h2 class="section-title">O·M·O</h2>
           <p class="section-subtitle">Obra · Mirada · Obra</p>
+          <button id="chaos-toggle" class="btn-chaos magnetic-btn" data-tooltip="Activar Caos">⚡ MODO CAOS</button>
         </div>
         <!-- El contenido de la galería se inyectará aquí verticalmente para convertirlo en horizontal con CSS -->
         <div id="gallery-grid" class="gallery-track"></div>
@@ -282,7 +282,7 @@
       <div class="gallery-hero" id="gallery-hero">
         <div class="gallery-hero__artwork gallery-lazy">
           <img 
-            data-src="images/artworks/Webps/espejos-del-alma.webp"
+            data-src="images/artworks/espejos-del-alma.webp"
             alt="Espejos del Alma - Naroa Gutiérrez Gil"
             class="gallery-hero__image"
           >
@@ -297,7 +297,7 @@
       <div class="gallery-massive" id="featured-gallery">
         <!-- Obra COLOSAL -->
         <div class="gallery-massive__item gallery-massive__item--colossal gallery-lazy gallery-reveal">
-          <img data-src="images/artworks/Webps/marilyn-rocks-hq-5.webp" alt="Marilyn Rocks" class="gallery-massive__img">
+          <img data-src="images/artworks/marilyn-rocks-hq-5.webp" alt="Marilyn Rocks" class="gallery-massive__img">
           <div class="gallery-massive__overlay">
             <h3 class="gallery-massive__title">Marilyn Rocks</h3>
           </div>
@@ -305,13 +305,13 @@
 
         <!-- Obras GRANDES -->
         <div class="gallery-massive__item gallery-massive__item--large gallery-lazy gallery-reveal">
-          <img data-src="images/artworks/Webps/amy-rocks.webp" alt="Amy Rocks" class="gallery-massive__img">
+          <img data-src="images/artworks/amy-rocks.webp" alt="Amy Rocks" class="gallery-massive__img">
           <div class="gallery-massive__overlay">
             <h3 class="gallery-massive__title">Amy Rocks</h3>
           </div>
         </div>
         <div class="gallery-massive__item gallery-massive__item--large gallery-lazy gallery-reveal">
-          <img data-src="images/artworks/Webps/baroque-farrokh.webp" alt="Baroque Farrokh" class="gallery-massive__img">
+          <img data-src="images/artworks/baroque-farrokh.webp" alt="Baroque Farrokh" class="gallery-massive__img">
           <div class="gallery-massive__overlay">
             <h3 class="gallery-massive__title">Baroque Farrokh</h3>
           </div>
@@ -319,19 +319,19 @@
 
         <!-- Obras MEDIANAS -->
         <div class="gallery-massive__item gallery-massive__item--medium gallery-lazy gallery-reveal">
-          <img data-src="images/artworks/Webps/el-gran-dakari.webp" alt="El Gran Dakari" class="gallery-massive__img">
+          <img data-src="images/artworks/el-gran-dakari.webp" alt="El Gran Dakari" class="gallery-massive__img">
           <div class="gallery-massive__overlay">
             <h3 class="gallery-massive__title">El Gran Dakari</h3>
           </div>
         </div>
         <div class="gallery-massive__item gallery-massive__item--medium gallery-lazy gallery-reveal">
-          <img data-src="images/artworks/Webps/audrey-hepburn.webp" alt="Audrey Hepburn" class="gallery-massive__img">
+          <img data-src="images/artworks/audrey-hepburn.webp" alt="Audrey Hepburn" class="gallery-massive__img">
           <div class="gallery-massive__overlay">
             <h3 class="gallery-massive__title">Audrey Hepburn</h3>
           </div>
         </div>
         <div class="gallery-massive__item gallery-massive__item--medium gallery-lazy gallery-reveal">
-          <img data-src="images/artworks/Webps/amor-en-conserva.webp" alt="Amor en Conserva" class="gallery-massive__img">
+          <img data-src="images/artworks/amor-en-conserva.webp" alt="Amor en Conserva" class="gallery-massive__img">
           <div class="gallery-massive__overlay">
             <h3 class="gallery-massive__title">Amor en Conserva</h3>
           </div>
@@ -339,19 +339,19 @@
 
         <!-- Obras PEQUEÑAS -->
         <div class="gallery-massive__item gallery-massive__item--small gallery-lazy gallery-reveal">
-          <img data-src="images/artworks/Webps/lagrimas-de-oro.webp" alt="Lágrimas de Oro" class="gallery-massive__img">
+          <img data-src="images/artworks/lagrimas-de-oro.webp" alt="Lágrimas de Oro" class="gallery-massive__img">
           <div class="gallery-massive__overlay">
             <h3 class="gallery-massive__title">Lágrimas de Oro</h3>
           </div>
         </div>
         <div class="gallery-massive__item gallery-massive__item--small gallery-lazy gallery-reveal">
-          <img data-src="images/artworks/Webps/love.webp" alt="Love" class="gallery-massive__img">
+          <img data-src="images/artworks/love.webp" alt="Love" class="gallery-massive__img">
           <div class="gallery-massive__overlay">
             <h3 class="gallery-massive__title">Love</h3>
           </div>
         </div>
         <div class="gallery-massive__item gallery-massive__item--small gallery-lazy gallery-reveal">
-          <img data-src="images/artworks/Webps/pajarraca-azul.webp" alt="Pajarraca Azul" class="gallery-massive__img">
+          <img data-src="images/artworks/pajarraca-azul.webp" alt="Pajarraca Azul" class="gallery-massive__img">
           <div class="gallery-massive__overlay">
             <h3 class="gallery-massive__title">Pajarraca Azul</h3>
           </div>
@@ -359,7 +359,7 @@
 
         <!-- Segunda fila COLOSAL -->
         <div class="gallery-massive__item gallery-massive__item--colossal gallery-lazy gallery-reveal">
-          <img data-src="images/artworks/Webps/james-rocks-hq-3.webp" alt="James Rocks" class="gallery-massive__img">
+          <img data-src="images/artworks/james-rocks-hq-3.webp" alt="James Rocks" class="gallery-massive__img">
           <div class="gallery-massive__overlay">
             <h3 class="gallery-massive__title">James Rocks</h3>
           </div>
@@ -367,25 +367,25 @@
 
         <!-- Tercera fila: Variedad premium -->
         <div class="gallery-massive__item gallery-massive__item--large gallery-lazy gallery-reveal">
-          <img data-src="images/artworks/Webps/johnny-rocks-hq-4.webp" alt="Johnny Rocks" class="gallery-massive__img">
+          <img data-src="images/artworks/johnny-rocks-hq-4.webp" alt="Johnny Rocks" class="gallery-massive__img">
           <div class="gallery-massive__overlay">
             <h3 class="gallery-massive__title">Johnny Rocks</h3>
           </div>
         </div>
         <div class="gallery-massive__item gallery-massive__item--medium gallery-lazy gallery-reveal">
-          <img data-src="images/artworks/Webps/geisha.webp" alt="Geisha" class="gallery-massive__img">
+          <img data-src="images/artworks/geisha.webp" alt="Geisha" class="gallery-massive__img">
           <div class="gallery-massive__overlay">
             <h3 class="gallery-massive__title">Geisha</h3>
           </div>
         </div>
         <div class="gallery-massive__item gallery-massive__item--medium gallery-lazy gallery-reveal">
-          <img data-src="images/artworks/Webps/la-pensadora.webp" alt="La Pensadora" class="gallery-massive__img">
+          <img data-src="images/artworks/la-pensadora.webp" alt="La Pensadora" class="gallery-massive__img">
           <div class="gallery-massive__overlay">
             <h3 class="gallery-massive__title">La Pensadora</h3>
           </div>
         </div>
         <div class="gallery-massive__item gallery-massive__item--small gallery-lazy gallery-reveal">
-          <img data-src="images/artworks/Webps/tedas-queen.webp" alt="Tedas Queen" class="gallery-massive__img">
+          <img data-src="images/artworks/tedas-queen.webp" alt="Tedas Queen" class="gallery-massive__img">
           <div class="gallery-massive__overlay">
             <h3 class="gallery-massive__title">Tedas Queen</h3>
           </div>
@@ -401,7 +401,7 @@
       </header>
       <div class="video-grid">
         <div class="video-card video-card--featured">
-          <video class="video-card__video" poster="videos/living-photograph-poster.jpg" loop muted playsinline>
+          <video class="video-card__video" poster="videos/living-photograph-poster.jpg" loop muted playsinline preload="none">
             <source src="videos/living-photograph.webm" type="video/webm">
           </video>
           <div class="video-card__play"></div>
@@ -410,7 +410,7 @@
           </div>
         </div>
         <div class="video-card">
-          <video class="video-card__video" poster="videos/hot-scene-love-poster.jpg" loop muted playsinline>
+          <video class="video-card__video" poster="videos/hot-scene-love-poster.jpg" loop muted playsinline preload="none">
             <source src="videos/hot-scene-love.webm" type="video/webm">
           </video>
           <div class="video-card__play"></div>
@@ -419,7 +419,7 @@
           </div>
         </div>
         <div class="video-card">
-          <video class="video-card__video" poster="videos/scene-dramatic-poster.jpg" loop muted playsinline>
+          <video class="video-card__video" poster="videos/scene-dramatic-poster.jpg" loop muted playsinline preload="none">
             <source src="videos/scene-dramatic.webm" type="video/webm">
           </video>
           <div class="video-card__play"></div>
@@ -428,7 +428,7 @@
           </div>
         </div>
         <div class="video-card">
-          <video class="video-card__video" poster="videos/wardrobe-swap-poster.jpg" loop muted playsinline>
+          <video class="video-card__video" poster="videos/wardrobe-swap-poster.jpg" loop muted playsinline preload="none">
             <source src="videos/wardrobe-swap.webm" type="video/webm">
           </video>
           <div class="video-card__play"></div>
@@ -466,7 +466,7 @@
           <!-- Main Bio Card -->
           <article class="about__card about__card--main glass">
             <div class="about__avatar">
-              <img src="images/artworks/Webps/mujer-collar-perlas.webp" alt="Naroa Gutiérrez Gil" loading="lazy">
+              <img src="images/artworks/mujer-collar-perlas.webp" alt="Naroa Gutiérrez Gil" loading="lazy">
             </div>
             <div class="about__bio">
               <h3>Naroa Gutiérrez Gil</h3>
@@ -696,8 +696,8 @@
         <a href="#/restaurador" class="game-card game-card--spectacular game-card--web3">
           <div class="game-card__icon">🎨💀</div>
           <h3 class="game-card__title">El Restaurador Desastroso</h3>
-          <p class="game-card__desc">"Restaura" retratos en 15s + Mint NFT gratis</p>
-          <span class="game-card__badge">🪙 Web3</span>
+          <p class="game-card__desc">"Restaura" retratos en 15s</p>
+          <span class="game-card__badge">🔥 Viral</span>
         </a>
       </div>
     </section>
@@ -839,15 +839,20 @@
   <script src="js/features/gallery.js"></script>
   <script src="js/features/lightbox.js"></script>
   <script src="js/core/app.js"></script>
+  <script src="js/features/gallery-chaos.js" type="module"></script>
   <script src="js/core/soty-effects.js"></script>
   <script src="js/features/blog-engine.js"></script>
   <script src="js/features/mica.js"></script>
+  <!-- MICA v5.0 Orchestrator (Zero-Menu Navigation) -->
+  <script src="js/core/mica-orchestrator.js" defer></script>
+  <!-- WOW Effects 2026 Premium Library -->
+  <script src="js/core/wow-effects-2026.js" defer></script>
   
-  <!-- SOTY 2026 WOW Effects (IA Alliance Sprint Feb 2026) -->
-  <script src="js/effects/kinetic-text.js"></script>
-  <script src="js/effects/magnetic-button.js"></script>
-  <script src="js/effects/reveal-observer.js"></script>
-  <script src="js/effects/cursor-trail.js"></script>
+  <!-- SOTY 2026 WOW Effects (IA Alliance Sprint Feb 2026) - Deferred -->
+  <script src="js/effects/kinetic-text.js" defer></script>
+  <script src="js/effects/magnetic-button.js" defer></script>
+  <script src="js/effects/reveal-observer.js" defer></script>
+  <script src="js/effects/cursor-trail.js" defer></script>
   <!-- Games: Deferred for performance (load after DOM) -->
   <script src="js/features/oca-game.js" defer></script>
   <script src="js/features/tetris-game.js" defer></script>
@@ -874,7 +879,8 @@
   <script src="js/features/checkers-game.js" defer></script>
   <script src="js/features/connect4-game.js" defer></script>
   <script src="js/features/reversi-game.js" defer></script>
-  <!-- El Restaurador Desastroso (Web3 Game) -->
+  <!-- El Restaurador Desastroso (Web3 Game + AI Rival v2.0) -->
+  <script src="js/services/k25-vision-service.js" defer></script>
   <script src="js/features/restaurador-game.js" defer></script>
   <script src="js/features/restaurador-web3.js" defer></script>
   <!-- Immersive 3D Spatial Audio Engine -->
@@ -883,16 +889,24 @@
   <script src="js/audio/audio-hooks.js"></script>
   <script src="js/audio/audio-visual-sync.js"></script>
   <!-- Disruptive Gallery Engine -->
-  <script src="js/features/gallery-disruptive.js"></script>
+  <!-- <script src="js/features/gallery-disruptive.js"></script> -->
   <script src="js/features/scroll-to-top.js"></script>
   <script src="js/features/video-showcase.js"></script>
   <!-- Eyes Follow Effect - Los retratos te miran -->
   <script src="js/effects/eyes-follow.js"></script>
+  <!-- Infinite Canvas 360° Gallery -->
+  <link rel="stylesheet" href="css/infinite-canvas-360.css">
+  <script src="js/features/infinite-canvas-360.js"></script>
+  <!-- Parallax 3D Depth Engine -->
+  <link rel="stylesheet" href="css/parallax-3d-depth.css">
+  <script src="js/effects/parallax-3d-depth.js"></script>
+  <!-- Audio Reactive System -->
+  <script src="js/effects/audio-reactive.js"></script>
   <!-- Clima Palette - Colores según el clima de tu ciudad -->
   <script src="js/effects/clima-palette.js"></script>
-  <script src="js/effects/wave-background.js"></script>
+  <script src="js/effects/wave-background.js" defer></script>
   <!-- Organic Particles - Polvo de pigmento flotante -->
-  <script src="js/effects/organic-particles.js"></script>
+  <script src="js/effects/organic-particles.js" defer></script>
   <!-- Palindrome Hero Generator -->
   <script src="js/effects/palindrome-hero.js"></script>
   <!-- MICA Cursor - Puntero Mineral Personalizado -->

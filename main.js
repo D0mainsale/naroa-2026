@@ -6,6 +6,9 @@
  * Kimi debe convertir los scripts síncronos en imports ES modules
  */
 
+// MICA v5.0 Orchestrator (must load first)
+import './js/mica-unified.js';
+
 // =============================================================================
 // CORE (Critical Path - Load First)
 // =============================================================================

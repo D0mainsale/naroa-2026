@@ -22,15 +22,15 @@
   --naroa-orange: #E5A47B;
 
   /* ==========================================
-     SEMANTIC MAPPING (Tritone)
+     SEMANTIC MAPPING (Dark Mode Enforced)
      ========================================== */
   
-  --bg-primary: var(--naroa-cream);
-  --bg-secondary: var(--naroa-cream);
-  --bg-elevated: var(--naroa-cream);
+  --bg-primary: var(--naroa-black);
+  --bg-secondary: #222222;
+  --bg-elevated: #333333;
   
-  --text-primary: var(--naroa-black);
-  --text-secondary: var(--naroa-black);
+  --text-primary: var(--naroa-cream);
+  --text-secondary: rgba(250, 247, 242, 0.7);
   
   --accent: var(--naroa-orange);
   --highlight: var(--naroa-orange);
@@ -82,10 +82,10 @@ input, .btn, .tag {
   border-radius: var(--radius-circle) !important;
 }
 
-/* Organic Body */
+/* Organic Body - Dark Mode */
 body {
-  background: var(--naroa-cream);
-  color: var(--naroa-black);
+  background: var(--bg-primary);
+  color: var(--text-primary);
 }
 
 /**

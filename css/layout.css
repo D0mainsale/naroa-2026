@@ -1,11 +1,11 @@
-/* Layout - Naroa 2026 - MICA BEACH EDITION (Kimi Redesign) */
+/* Layout - Naroa 2026 - PURE BLACK EDITION */
 
-/* Variables Redefinition for "Playa Minimal" */
+/* Variables - DARK MODE */
 :root {
-  --color-bg-beach: #fdfcf8; /* Sand/Bone White */
-  --color-sand: #f2efe9;
-  --color-text-deep: #1a1a1a;
-  --color-blue-ocean: #2c5282;
+  --color-bg-beach: #000000; /* Pure Black */
+  --color-sand: #0a0a0a;
+  --color-text-deep: #fefefe;
+  --color-blue-ocean: #5a9bd6;
   --color-gold-mica: #d4af37;
   
   --font-display-size: clamp(4rem, 15vw, 16rem);
@@ -20,8 +20,8 @@ html {
 }
 
 body {
-  background-color: var(--color-bg-beach);
-  color: var(--color-text-deep);
+  background-color: #000000;
+  color: #fefefe;
   height: 100%;
   overflow-x: hidden;
 }
@@ -50,7 +50,7 @@ body {
   align-items: center;
 }
 
-/* Hero - MICA BEACH MINIMAL */
+/* Hero - PURE BLACK EDITION */
 .hero {
   position: relative;
   display: flex;
@@ -61,10 +61,10 @@ body {
   text-align: center;
   padding: var(--space-8);
   overflow: hidden;
-  background: var(--color-bg-beach);
+  background: #000000;
 }
 
-/* Palíndromo "Watermark" - Subtle like footprints in sand */
+/* Palíndromo "Watermark" - Subtle gold on black */
 .hero__palindrome {
   position: absolute;
   top: 50%;
@@ -76,7 +76,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  opacity: 0.05; /* Barely visible */
+  opacity: 0.08;
 }
 
 .hero__palindrome-text {
@@ -100,13 +100,13 @@ body {
 .hero__line {
   display: block;
   font-size: var(--font-display-size);
-  font-weight: 300; /* MINIMALISMO: Light weight */
-  letter-spacing: -0.02em; /* Más abierto */
-  color: var(--color-text-deep);
-  mix-blend-mode: multiply;
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  color: #fefefe;
+  mix-blend-mode: normal;
 }
 
-/* Subtitle - Elegant Serif or Clean Sans */
+/* Subtitle - Gold on Black */
 .hero__subtitle {
   position: relative;
   z-index: 2;
@@ -118,8 +118,8 @@ body {
   font-size: 1.2rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--color-blue-ocean);
-  opacity: 0.8;
+  color: var(--color-gold-mica);
+  opacity: 0.9;
 }
 
 /* CTA - Minimal Text Links (No buttons) */
@@ -136,7 +136,7 @@ body {
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--color-text-deep);
+  color: #fefefe;
   text-decoration: none;
   position: relative;
   padding-bottom: 5px;
@@ -163,37 +163,37 @@ body {
   color: var(--color-gold-mica);
 }
 
-/* Spotify - Visible Minimal Pill */
+/* Spotify - Visible Minimal Pill - LARGER */
 .hero__spotify {
   position: absolute;
   bottom: 2rem;
   left: 2rem;
   z-index: 10;
-  opacity: 0.9; /* Más visible */
-  transform: scale(0.9);
+  opacity: 0.95;
+  transform: scale(1.2);
   transform-origin: bottom left;
   transition: all 0.3s ease;
-  filter: none; /* Sin filtro */
+  filter: none;
 }
 
 .hero__spotify:hover {
   opacity: 1;
-  transform: scale(1);
+  transform: scale(1.4);
 }
 
-/* Visit Counter - Palindrome Number */
+/* Visit Counter */
 .hero__counter {
   position: absolute;
   top: 2rem;
   right: 2rem;
-  font-family: var(--font-mono); /* Monospace */
+  font-family: var(--font-mono);
   font-size: 0.9rem;
-  color: var(--color-text-deep);
+  color: #fefefe;
   opacity: 0.5;
   letter-spacing: 0.1em;
 }
 
-/* Scroll indicator - Minimal Line */
+/* Scroll indicator - Minimal Gold Line */
 .hero__scroll-indicator {
   position: absolute;
   bottom: 2rem;
@@ -208,7 +208,7 @@ body {
 .hero__scroll-line {
   width: 1px;
   height: 60px;
-  background: var(--color-text-deep);
+  background: var(--color-gold-mica);
   animation: scroll-grow 2s ease-in-out infinite;
 }
 
@@ -231,43 +231,43 @@ body {
   }
   
   .hero__spotify {
-    display: block; /* Visible en móvil también */
+    display: block;
     bottom: 1rem;
     left: 50%;
     transform: translateX(-50%) scale(0.85);
   }
 }
 
-/* MICA BEACH & CHIQUITOCRATES ADDITIONS */
+/* DARK MODE ADDITIONS */
 
-/* Chiquitocrates Badge */
+/* Chiquitocrates Badge - Dark Mode */
 .chiquitocrates-badge {
     margin-top: 1rem;
     font-size: 0.9rem;
-    color: var(--color-text-deep);
+    color: #fefefe;
     opacity: 0.7;
     font-style: italic;
     border: 1px dashed var(--color-gold-mica);
     padding: 0.5rem 1rem;
     border-radius: 20px;
-    background: rgba(253, 252, 248, 0.5);
+    background: rgba(20, 20, 20, 0.8);
     cursor: help;
     transition: all 0.3s ease;
 }
 
 .chiquitocrates-badge:hover {
     transform: scale(1.05) rotate(-1deg);
-    background: #fff;
+    background: rgba(30, 30, 30, 0.95);
     opacity: 1;
-    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.2);
+    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
 }
 
-/* Horizontal Gallery Layout */
+/* Gallery Layout - Dark Mode */
 .view--gallery {
     flex-direction: row !important;
     justify-content: flex-start !important;
-    background: var(--color-sand);
-    overflow-x: auto; /* Scroll horizontal nativo */
+    background: #0a0a0a;
+    overflow-x: auto;
     scroll-snap-type: x mandatory;
     width: 100vw;
 }
