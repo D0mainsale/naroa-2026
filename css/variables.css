@@ -1,144 +1,138 @@
-/* Design Tokens - Naroa 2026 */
+/* Design Tokens - Naroa 2026 - BOSQUE ORGÁNICO MINIMALISTA */
 :root {
   /* ============================================
-     COLOR PALETTE - "Piel Bajo Carboncillo"
+     COLOR PALETTE - "BOSQUE PROFUNDO"
+     Inspiración: Musgo, tierra húmeda, corteza, niebla
      ============================================ */
   
-  /* Neutrals */
-  --color-white: #fefefe;
-  --color-black: #0a0a0a;
-  --color-gray-100: #f8f8f8;
-  --color-gray-200: #e8e8e8;
-  --color-gray-300: #d4d4d4;
-  --color-gray-400: #a3a3a3;
-  --color-gray-500: #737373;
-  --color-gray-600: #525252;
-  --color-gray-700: #404040;
-  --color-gray-800: #262626;
-  --color-gray-900: #171717;
+  /* Fondos Naturales */
+  --forest-deep: #1a1f1c;       /* Sombra del bosque */
+  --forest-night: #141816;      /* Noche entre árboles */
+  --forest-bark: #2a2f2c;       /* Corteza oscura */
   
-  /* Accent - Charcoal tones */
-  --color-accent: #1a1a1a;
-  --color-accent-light: #2d2d2d;
-  --color-accent-dark: #0d0d0d;
+  /* Verdes Musgo */
+  --moss-dark: #2d3a2f;         /* Musgo profundo */
+  --moss-medium: #4a5d4c;       /* Musgo húmedo */
+  --moss-light: #6b7d6d;        /* Musgo iluminado */
+  --moss-sage: #8a9a8c;         /* Salvia */
   
-  /* Warm touches (for eventual ritual mode) */
-  --color-warm-100: #fef7f0;
-  --color-warm-200: #fdeee0;
-  --color-warm-300: #f5d0b0;
+  /* Tierras y Maderas */
+  --earth-dark: #3d3428;        /* Tierra mojada */
+  --earth-warm: #5c4d3c;        /* Madera antigua */
+  --earth-clay: #7a6b5a;        /* Arcilla seca */
+  
+  /* Niebla y Luz */
+  --mist-white: #f5f4f2;        /* Niebla matinal */
+  --mist-light: #e8e6e3;        /* Luz filtrada */
+  --mist-warm: #d9d5cf;         /* Niebla cálida */
+  
+  /* Acentos Naturales */
+  --lichen-gold: #b8a370;       /* Liquen dorado */
+  --fern-accent: #5a8060;       /* Helecho */
+  --stone-gray: #6b6f6c;        /* Piedra de río */
   
   /* ============================================
-     TYPOGRAPHY - 2026 NEO-ARTESANAL (Trinity Edition)
-     Outfit: Hyper-rounded geometric sans (Anti-linear UI)
-     Cinzel: Modern classical (Premium Gold Display)
+     SEMANTIC COLORS
      ============================================ */
-  --font-family-main: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-family-display: 'Cinzel', serif;
+  --color-bg: var(--forest-night);
+  --color-bg-soft: var(--forest-deep);
+  --color-bg-elevated: var(--forest-bark);
+  
+  --color-text: var(--mist-white);
+  --color-text-soft: var(--mist-light);
+  --color-text-muted: var(--moss-sage);
+  
+  --color-accent: var(--lichen-gold);
+  --color-accent-soft: var(--moss-medium);
+  
+  /* ============================================
+     TYPOGRAPHY - MINIMALISTA ORGÁNICO
+     ============================================ */
+  --font-family-main: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-family-display: 'Cinzel', Georgia, serif;
   --font-family-mono: 'JetBrains Mono', ui-monospace, monospace;
   
-  /* Font Sizes - GIGANTIC 2026 (user requested MUY MUY MUY grandes) */
-  --font-size-xs: clamp(0.9rem, 0.8rem + 0.4vw, 1.1rem);
-  --font-size-sm: clamp(1rem, 0.9rem + 0.5vw, 1.25rem);
-  --font-size-base: clamp(1.1rem, 1rem + 0.5vw, 1.4rem);
-  --font-size-lg: clamp(1.3rem, 1.1rem + 0.8vw, 1.75rem);
-  --font-size-xl: clamp(1.75rem, 1.5rem + 1.2vw, 2.5rem);
-  --font-size-2xl: clamp(2.25rem, 1.75rem + 2vw, 3.5rem);
-  --font-size-3xl: clamp(3rem, 2.25rem + 3vw, 5rem);
-  --font-size-hero: clamp(4rem, 3rem + 5vw, 12rem);
+  /* Font Sizes - RESPIRANDO, ESPACIADO */
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.5rem;
+  --font-size-2xl: 2rem;
+  --font-size-3xl: 3rem;
+  --font-size-hero: clamp(3rem, 8vw, 8rem);
   
-  /* Font Weights */
+  /* Font Weights - LIGEROS */
   --font-weight-light: 300;
   --font-weight-normal: 400;
   --font-weight-medium: 500;
-  --font-weight-semibold: 600;
   
-  /* Line Heights */
-  --line-height-tight: 1.1;
-  --line-height-snug: 1.25;
-  --line-height-normal: 1.5;
-  --line-height-relaxed: 1.75;
+  /* Line Heights - AIREADOS */
+  --line-height-tight: 1.15;
+  --line-height-normal: 1.6;
+  --line-height-relaxed: 1.8;
   
-  /* Letter Spacing */
-  --letter-spacing-tight: -0.025em;
-  --letter-spacing-normal: 0;
-  --letter-spacing-wide: 0.025em;
-  --letter-spacing-wider: 0.05em;
-  --letter-spacing-widest: 0.1em;
+  /* Letter Spacing - EXPANDIDO */
+  --letter-spacing-tight: -0.01em;
+  --letter-spacing-normal: 0.02em;
+  --letter-spacing-wide: 0.08em;
+  --letter-spacing-widest: 0.15em;
   
   /* ============================================
-     SPACING
+     SPACING - GENEROSO, ORGÁNICO
      ============================================ */
-  --space-1: 0.25rem;  /* 4px */
-  --space-2: 0.5rem;   /* 8px */
-  --space-3: 0.75rem;  /* 12px */
-  --space-4: 1rem;     /* 16px */
-  --space-5: 1.5rem;   /* 24px */
-  --space-6: 2rem;     /* 32px */
-  --space-8: 3rem;     /* 48px */
-  --space-10: 4rem;    /* 64px */
-  --space-12: 5rem;    /* 80px */
-  --space-16: 8rem;    /* 128px */
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2rem;
+  --space-5: 3rem;
+  --space-6: 4rem;
+  --space-8: 6rem;
+  --space-10: 8rem;
+  --space-12: 10rem;
+  --space-16: 14rem;
   
   /* ============================================
-     LAYOUT
+     LAYOUT - AMPLIO
      ============================================ */
-  --container-max: 1400px;
-  --container-padding: clamp(1rem, 3vw, 3rem);
-  
-  --grid-gap: clamp(1rem, 2vw, 2rem);
-  --gallery-gap: clamp(0.5rem, 1vw, 1rem);
+  --container-max: 1200px;
+  --container-padding: clamp(2rem, 5vw, 6rem);
+  --grid-gap: 2rem;
+  --gallery-gap: 1.5rem;
   
   /* ============================================
-     EFFECTS
+     EFFECTS - SUAVES, NATURALES
      ============================================ */
   
-  /* Timing */
-  --duration-fast: 150ms;
-  --duration-base: 300ms;
-  --duration-slow: 500ms;
-  --duration-slower: 800ms;
+  /* Timing - LENTOS, CONTEMPLATIVOS */
+  --duration-fast: 200ms;
+  --duration-base: 400ms;
+  --duration-slow: 700ms;
+  --duration-slower: 1200ms;
   
-  /* Easing */
-  --ease-default: cubic-bezier(0.4, 0, 0.2, 1);
-  --ease-in: cubic-bezier(0.4, 0, 1, 1);
-  --ease-out: cubic-bezier(0, 0, 0.2, 1);
-  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
-  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+  /* Easing - ORGÁNICOS */
+  --ease-default: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ease-in: cubic-bezier(0.42, 0, 1, 1);
+  --ease-out: cubic-bezier(0, 0, 0.58, 1);
+  --ease-organic: cubic-bezier(0.22, 1, 0.36, 1);
   
-  /* Shadows */
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-  --shadow-base: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.15);
-  --shadow-xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  /* Shadows - SUTILES, NATURALES */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-base: 0 4px 16px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.16);
+  --shadow-glow: 0 0 40px rgba(184, 163, 112, 0.1);
   
-  /* Border Radius */
-  --radius-sm: 0.25rem;
-  --radius-base: 0.5rem;
-  --radius-lg: 1rem;
-  --radius-full: 9999px;
+  /* Border Radius - ORGÁNICOS */
+  --radius-sm: 4px;
+  --radius-base: 8px;
+  --radius-lg: 16px;
+  --radius-organic: 24px;
+  --radius-circle: 50%;
   
-  /* Z-Index Scale */
+  /* Z-Index */
   --z-base: 0;
   --z-overlay: 100;
   --z-modal: 200;
   --z-nav: 300;
-  --z-toast: 400;
   --z-max: 9999;
-}
-
-/* Dark Mode ONLY - Forced Premium Experience */
-:root {
-  --color-bg: var(--color-black);
-  --color-text: var(--color-white);
-  --color-text-muted: var(--color-gray-400);
-}
-
-/* Default to dark - PURE BLACK ENFORCED */
-:root {
-  --color-bg: #000000;
-  --color-black: #000000;
-  --color-text: #ffffff;
-  --color-text-muted: #a3a3a3;
-  --color-accent-dark: #111111;
 }

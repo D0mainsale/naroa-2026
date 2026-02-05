@@ -1,24 +1,23 @@
-/* Base Styles - Naroa 2026 - PURE BLACK EDITION */
+/* Base Styles - Naroa 2026 - BOSQUE ORGÁNICO MINIMALISTA */
 
 body {
   font-family: var(--font-family-main);
   font-size: var(--font-size-base);
   font-weight: var(--font-weight-normal);
   line-height: var(--line-height-normal);
-  color: #fefefe;
-  background: #000000;
-  background-attachment: fixed;
+  color: var(--color-text);
+  background: var(--forest-night);
   overflow-x: hidden;
   min-height: 100vh;
 }
 
-/* Typography - DARK MODE */
+/* Typography - ORGÁNICO */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-family-display);
   font-weight: var(--font-weight-light);
   line-height: var(--line-height-tight);
-  letter-spacing: var(--letter-spacing-tight);
-  color: #fefefe;
+  letter-spacing: var(--letter-spacing-wide);
+  color: var(--mist-white);
 }
 
 h1 { font-size: var(--font-size-hero); }
@@ -27,56 +26,55 @@ h3 { font-size: var(--font-size-xl); }
 h4 { font-size: var(--font-size-lg); }
 
 p {
-  max-width: 65ch;
-  color: #e0e0e0;
+  max-width: 60ch;
+  color: var(--mist-light);
+  line-height: var(--line-height-relaxed);
 }
 
 a {
-  color: var(--naroa-blue);
-  transition: all var(--duration-fast) var(--ease-default);
+  color: var(--lichen-gold);
+  text-decoration: none;
+  transition: all var(--duration-base) var(--ease-organic);
 }
 
 a:hover {
-  color: var(--naroa-terracotta);
-  opacity: 1;
+  color: var(--mist-white);
 }
 
-/* Focus states for accessibility */
+/* Focus states - Organic */
 :focus-visible {
-  outline: 2px solid var(--naroa-sage);
-  outline-offset: 3px;
+  outline: 2px solid var(--moss-medium);
+  outline-offset: 4px;
   border-radius: var(--radius-organic);
 }
 
-/* Selection - Gold on Black */
+/* Selection - Lichen Gold */
 ::selection {
-  background-color: rgba(212, 175, 55, 0.4);
-  color: #fefefe;
+  background-color: rgba(184, 163, 112, 0.3);
+  color: var(--mist-white);
 }
 
-/* Smooth scroll container */
+/* Smooth scroll */
 html {
   scroll-behavior: smooth;
 }
 
-/* Dark Scrollbar */
+/* Forest Scrollbar */
 body::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
 }
 
 body::-webkit-scrollbar-track {
-  background: #0a0a0a;
-  border-radius: var(--radius-circle);
+  background: var(--forest-deep);
 }
 
 body::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #d4af37, #8b6914);
-  border-radius: var(--radius-circle);
-  border: 2px solid #0a0a0a;
+  background: var(--moss-medium);
+  border-radius: var(--radius-organic);
 }
 
 body::-webkit-scrollbar-thumb:hover {
-  background: #d4af37;
+  background: var(--moss-light);
 }
 
 /* Reduced motion */
