@@ -1,215 +1,225 @@
 /**
- * GALERÍA RUNNER - Endless runner por los pasillos de la galería
- * Esquiva obstáculos y recoge obras de arte
+ * Art Runner - Naroa 2026
+ * @description Parallax infinite runner avoiding crowds in a museum
+ * Agent A05: Parallax scrolling layers, dust particles, art collectible glow
  */
 (function() {
   'use strict';
 
-  const RUNNER_CONFIG = {
-    gravity: 0.8,
-    jumpForce: -15,
-    speed: 5,
-    artworks: []
+  const W = 600, H = 300;
+  let state = {
+    canvas: null, ctx: null,
+    player: { x: 50, y: 0, w: 30, h: 50, vy: 0, grounded: false },
+    obstacles: [], collectibles: [],
+    score: 0, speed: 4, gravity: 0.6,
+    bgLayer1: 0, bgLayer2: 0,
+    artworks: [], particles: [], running: false
   };
 
-  let runnerState = {
-    canvas: null,
-    ctx: null,
-    player: { x: 80, y: 200, vy: 0, width: 40, height: 60, jumping: false },
-    obstacles: [],
-    collectibles: [],
-    score: 0,
-    distance: 0,
-    gameOver: false,
-    animFrame: null
-  };
+  async function init() {
+    const container = document.getElementById('runner-container');
+    if (!container) return;
 
-  async function loadArtworks() {
     try {
       const res = await fetch('data/artworks-metadata.json');
       const data = await res.json();
-      RUNNER_CONFIG.artworks = (data.artworks || data).slice(0, 10);
-    } catch(e) {
-      RUNNER_CONFIG.artworks = [{ image: 'images/optimized/amy-rocks.webp' }];
-    }
-  }
-
-  function initGame(container) {
-    runnerState = {
-      ...runnerState,
-      obstacles: [],
-      collectibles: [],
-      score: 0,
-      distance: 0,
-      gameOver: false,
-      player: { x: 80, y: 200, vy: 0, width: 40, height: 60, jumping: false }
-    };
+      state.artworks = data.artworks;
+    } catch (e) {}
 
     container.innerHTML = `
-      <div class="runner-game">
-        <div class="runner-header">
-          <span>Puntos: <strong id="runner-score">0</strong></span>
-          <span>Distancia: <strong id="runner-distance">0</strong>m</span>
-        </div>
-        <canvas id="runner-canvas" width="600" height="300"></canvas>
-        <p class="runner-hint">⬆️ Pulsa ESPACIO o toca para saltar</p>
-        <button class="game-btn" id="runner-restart" style="display:none;">Reintentar</button>
+      <div class="runner-ui">
+        <div class="runner-score">SCORE: <span id="runner-score">0</span></div>
+        <canvas id="runner-canvas" width="${W}" height="${H}"></canvas>
+        <button class="game-btn" id="runner-start">RUN!</button>
       </div>
-      <style>
-        .runner-game { text-align: center; padding: 1rem; }
-        .runner-header { display: flex; justify-content: space-around; margin-bottom: 1rem; font-size: 1.1rem; }
-        #runner-canvas { background: linear-gradient(#1a1a2e, #2d2d44); border-radius: 12px; max-width: 100%; }
-        .runner-hint { color: rgba(255,255,255,0.6); margin: 1rem 0; }
-        .game-btn { background: var(--color-accent, #d4a574); border: none; padding: 0.75rem 2rem; border-radius: 8px; cursor: pointer; font-size: 1rem; margin-top: 1rem; }
-      </style>
     `;
 
-    const canvas = document.getElementById('runner-canvas');
-    const ctx = canvas.getContext('2d');
-    runnerState.canvas = canvas;
-    runnerState.ctx = ctx;
+    state.canvas = document.getElementById('runner-canvas');
+    state.ctx = state.canvas.getContext('2d');
 
-    // Controls
+    document.getElementById('runner-start').addEventListener('click', startGame);
+    
+    // Controls: Jump (Space / Click)
     const jump = () => {
-      if (!runnerState.player.jumping && !runnerState.gameOver) {
-        runnerState.player.vy = RUNNER_CONFIG.jumpForce;
-        runnerState.player.jumping = true;
-      }
+        if (!state.running) return;
+        if (state.player.grounded) {
+            state.player.vy = -12;
+            state.player.grounded = false;
+            spawnParticles(state.player.x + 15, H-20, 5, '#fff'); // Dust
+        }
     };
+    document.addEventListener('keydown', e => { if(e.code === 'Space') jump(); });
+    state.canvas.addEventListener('touchstart', jump, {passive:true});
+    state.canvas.addEventListener('mousedown', jump);
+  }
 
-    document.addEventListener('keydown', (e) => {
-      if (e.code === 'Space') { e.preventDefault(); jump(); }
-    });
-    canvas.addEventListener('click', jump);
-    canvas.addEventListener('touchstart', (e) => { e.preventDefault(); jump(); });
-
-    document.getElementById('runner-restart').addEventListener('click', () => initGame(container));
-
-    gameLoop();
+  function startGame() {
+    state.running = true;
+    state.score = 0;
+    state.obstacles = [];
+    state.collectibles = [];
+    state.particles = [];
+    state.player.y = H - 50;
+    state.player.vy = 0;
+    document.getElementById('runner-start').style.display = 'none';
+    loop();
   }
 
   function spawnObstacle() {
-    const { canvas } = runnerState;
-    runnerState.obstacles.push({
-      x: canvas.width,
-      y: canvas.height - 60,
-      width: 30,
-      height: 40 + Math.random() * 30
-    });
+    if (Math.random() < 0.02) {
+        state.obstacles.push({
+            x: W, y: H - 40, w: 30, h: 40,
+            color: '#ff003c' // Security guard or rope
+        });
+    }
   }
 
   function spawnCollectible() {
-    const { canvas } = runnerState;
-    const art = RUNNER_CONFIG.artworks[Math.floor(Math.random() * RUNNER_CONFIG.artworks.length)];
-    runnerState.collectibles.push({
-      x: canvas.width,
-      y: 100 + Math.random() * 100,
-      width: 40,
-      height: 40,
-      image: art.image
-    });
+    if (Math.random() < 0.01) {
+        const art = state.artworks[Math.floor(Math.random()*state.artworks.length)];
+        state.collectibles.push({
+            x: W, y: H - 100 - Math.random()*50, w: 25, h: 25,
+            hue: Math.random()*360
+        });
+    }
   }
 
-  function gameLoop() {
-    const { canvas, ctx, player } = runnerState;
-    
-    if (runnerState.gameOver) return;
+  function spawnParticles(x, y, count, color) {
+    for(let i=0; i<count; i++) {
+        state.particles.push({
+            x, y, vx: (Math.random()-0.5)*4, vy: (Math.random()-1)*4,
+            life: 1.0, color: color || '#fff', size: Math.random()*3
+        });
+    }
+  }
 
-    // Clear
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    
-    // Draw floor
-    ctx.fillStyle = '#3d3d5c';
-    ctx.fillRect(0, canvas.height - 20, canvas.width, 20);
+  function loop() {
+    if (!state.running) return;
 
-    // Physics
-    player.vy += RUNNER_CONFIG.gravity;
-    player.y += player.vy;
-    
-    const ground = canvas.height - 20 - player.height;
-    if (player.y >= ground) {
-      player.y = ground;
-      player.vy = 0;
-      player.jumping = false;
+    // Logic
+    state.speed += 0.001; // Accel
+    state.player.vy += state.gravity;
+    state.player.y += state.player.vy;
+
+    // Ground collision
+    if (state.player.y >= H - 50) {
+        state.player.y = H - 50;
+        state.player.vy = 0;
+        state.player.grounded = true;
     }
 
-    // Draw player (simple rectangle with emoji)
-    ctx.fillStyle = '#ffd700';
-    ctx.fillRect(player.x, player.y, player.width, player.height);
-    ctx.font = '30px sans-serif';
-    ctx.fillText('🏃', player.x + 5, player.y + 40);
+    // Parallax
+    state.bgLayer1 -= state.speed * 0.5;
+    state.bgLayer2 -= state.speed * 0.2;
+    if (state.bgLayer1 < -W) state.bgLayer1 = 0;
+    if (state.bgLayer2 < -W) state.bgLayer2 = 0;
 
-    // Spawn
-    if (Math.random() < 0.02) spawnObstacle();
-    if (Math.random() < 0.01) spawnCollectible();
+    spawnObstacle();
+    spawnCollectible();
 
-    // Update obstacles
-    runnerState.obstacles = runnerState.obstacles.filter(obs => {
-      obs.x -= RUNNER_CONFIG.speed;
-      
-      // Draw
-      ctx.fillStyle = '#e74c3c';
-      ctx.fillRect(obs.x, obs.y - obs.height, obs.width, obs.height);
-      
-      // Collision
-      if (player.x < obs.x + obs.width &&
-          player.x + player.width > obs.x &&
-          player.y + player.height > obs.y - obs.height) {
-        gameEnd();
-      }
-      
-      return obs.x > -obs.width;
+    // Move & Collide Obstacles
+    state.obstacles.forEach(o => o.x -= state.speed);
+    state.obstacles = state.obstacles.filter(o => o.x > -50);
+    state.obstacles.forEach(o => {
+        if (rectIntersect(state.player, o)) {
+            gameOver();
+        }
     });
 
-    // Update collectibles
-    runnerState.collectibles = runnerState.collectibles.filter(col => {
-      col.x -= RUNNER_CONFIG.speed;
-      
-      // Draw
-      ctx.fillStyle = '#4ade80';
-      ctx.fillRect(col.x, col.y, col.width, col.height);
-      ctx.font = '25px sans-serif';
-      ctx.fillText('🖼️', col.x + 8, col.y + 30);
-      
-      // Collect
-      if (player.x < col.x + col.width &&
-          player.x + player.width > col.x &&
-          player.y < col.y + col.height &&
-          player.y + player.height > col.y) {
-        runnerState.score += 50;
-        document.getElementById('runner-score').textContent = runnerState.score;
-        return false;
-      }
-      
-      return col.x > -col.width;
+    // Move & Collide Collectibles
+    state.collectibles.forEach(c => c.x -= state.speed);
+    state.collectibles = state.collectibles.filter(c => !c.collected && c.x > -50);
+    state.collectibles.forEach(c => {
+        if (rectIntersect(state.player, c)) {
+            c.collected = true;
+            state.score += 100;
+            spawnParticles(c.x, c.y, 10, `hsl(${c.hue}, 100%, 50%)`);
+            if (window.GameEffects) GameEffects.scorePopAnimation(document.getElementById('runner-score'), '+100');
+        }
     });
 
-    // Score
-    runnerState.distance++;
-    document.getElementById('runner-distance').textContent = Math.floor(runnerState.distance / 10);
+    state.score++;
+    document.getElementById('runner-score').textContent = Math.floor(state.score);
 
-    runnerState.animFrame = requestAnimationFrame(gameLoop);
+    // Particles
+    state.particles = state.particles.filter(p => {
+        p.x += p.vx; p.y += p.vy; p.life -= 0.05;
+        return p.life > 0;
+    });
+
+    draw();
+    requestAnimationFrame(loop);
   }
 
-  function gameEnd() {
-    runnerState.gameOver = true;
-    cancelAnimationFrame(runnerState.animFrame);
-    
-    const finalScore = runnerState.score + Math.floor(runnerState.distance / 10);
-    
-    document.getElementById('runner-restart').style.display = 'inline-block';
-    
-    setTimeout(() => {
-      alert(`💥 ¡Game Over!\nPuntuación: ${finalScore}`);
-      
-      if (window.RankingSystem) {
-        window.RankingSystem.submitScore('runner', finalScore);
-      }
-    }, 100);
+  function rectIntersect(r1, r2) {
+      return !(r2.x > r1.x + r1.w || 
+               r2.x + r2.w < r1.x || 
+               r2.y > r1.y + r1.h || 
+               r2.y + r2.h < r1.y);
   }
 
-  window.initRunnerGame = async function(container) {
-    await loadArtworks();
-    initGame(container);
-  };
+  function gameOver() {
+    state.running = false;
+    if (window.GameEffects) GameEffects.cameraShake(state.canvas, 10);
+    alert(`Game Over! Score: ${Math.floor(state.score)}`);
+    document.getElementById('runner-start').style.display = 'inline-block';
+  }
+
+  function draw() {
+    const ctx = state.ctx;
+    const bg1 = state.bgLayer1;
+    const bg2 = state.bgLayer2;
+
+    // Clear
+    ctx.clearRect(0,0,W,H);
+
+    // BG Layer 2 (Far) - Dark museum
+    ctx.fillStyle = '#100a1a';
+    ctx.fillRect(0,0,W,H);
+    ctx.fillStyle = '#1a102a';
+    // Draw repeating pillars or arches
+    for(let i=0; i<W*2; i+=200) {
+        ctx.fillRect(bg2 + i, 50, 40, H-50);
+    }
+
+    // BG Layer 1 (Mid) - Paintings
+    ctx.fillStyle = '#222';
+    ctx.fillRect(0, H-20, W, 20); // Floor
+
+    // Player
+    ctx.fillStyle = '#ccff00';
+    ctx.shadowColor = '#ccff00';
+    ctx.shadowBlur = 10;
+    ctx.fillRect(state.player.x, state.player.y, state.player.w, state.player.h);
+    ctx.shadowBlur = 0;
+
+    // Obstacles
+    state.obstacles.forEach(o => {
+        ctx.fillStyle = o.color;
+        ctx.fillRect(o.x, o.y, o.w, o.h);
+    });
+
+    // Collectibles
+    state.collectibles.forEach(c => {
+        ctx.fillStyle = `hsl(${c.hue}, 100%, 60%)`;
+        ctx.shadowColor = `hsl(${c.hue}, 100%, 50%)`;
+        ctx.shadowBlur = 10;
+        ctx.beginPath();
+        ctx.arc(c.x + c.w/2, c.y + c.h/2, c.w/2, 0, Math.PI*2);
+        ctx.fill();
+        ctx.shadowBlur = 0;
+    });
+
+    // Particles
+    state.particles.forEach(p => {
+        ctx.globalAlpha = p.life;
+        ctx.fillStyle = p.color;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI*2);
+        ctx.fill();
+    });
+    ctx.globalAlpha = 1.0;
+  }
+
+  window.RunnerGame = { init };
 })();

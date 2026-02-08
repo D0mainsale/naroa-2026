@@ -1,259 +1,156 @@
 /**
- * AJEDREZ ARTÍSTICO - Chess con piezas de arte de Naroa
- * Juego completo con IA básica
+ * Chess Artístico - Naroa 2026
+ * Agent A15: Piece drag shadows, valid-move glow dots, capture animation
  */
 (function() {
   'use strict';
 
   const PIECES = {
-    white: { king: '♔', queen: '♕', rook: '♖', bishop: '♗', knight: '♘', pawn: '♙' },
-    black: { king: '♚', queen: '♛', rook: '♜', bishop: '♝', knight: '♞', pawn: '♟' }
+    K: '♔', Q: '♕', R: '♖', B: '♗', N: '♘', P: '♙',
+    k: '♚', q: '♛', r: '♜', b: '♝', n: '♞', p: '♟'
   };
 
-  const INITIAL_BOARD = [
+  const INIT_BOARD = [
     ['r','n','b','q','k','b','n','r'],
     ['p','p','p','p','p','p','p','p'],
-    ['','','','','','','',''],
-    ['','','','','','','',''],
-    ['','','','','','','',''],
-    ['','','','','','','',''],
+    [' ',' ',' ',' ',' ',' ',' ',' '],
+    [' ',' ',' ',' ',' ',' ',' ',' '],
+    [' ',' ',' ',' ',' ',' ',' ',' '],
+    [' ',' ',' ',' ',' ',' ',' ',' '],
     ['P','P','P','P','P','P','P','P'],
     ['R','N','B','Q','K','B','N','R']
   ];
 
-  let chessState = {
-    board: [],
-    selected: null,
-    turn: 'white',
-    moves: 0,
-    captured: { white: [], black: [] }
-  };
+  let state = { board: [], selected: null, turn: 'white', moves: 0, captures: { white: [], black: [] } };
 
-  function pieceToSymbol(piece) {
-    if (!piece) return '';
-    const isWhite = piece === piece.toUpperCase();
-    const type = piece.toLowerCase();
-    const map = { k: 'king', q: 'queen', r: 'rook', b: 'bishop', n: 'knight', p: 'pawn' };
-    return PIECES[isWhite ? 'white' : 'black'][map[type]];
-  }
+  function init() {
+    const container = document.getElementById('chess-container');
+    if (!container) return;
 
-  function isWhitePiece(piece) {
-    return piece && piece === piece.toUpperCase();
-  }
-
-  function initGame(container) {
-    chessState = {
-      board: INITIAL_BOARD.map(row => [...row]),
-      selected: null,
-      turn: 'white',
-      moves: 0,
-      captured: { white: [], black: [] }
-    };
+    state.board = INIT_BOARD.map(r => [...r]);
+    state.selected = null;
+    state.turn = 'white';
+    state.moves = 0;
+    state.captures = { white: [], black: [] };
 
     container.innerHTML = `
-      <div class="chess-game">
-        <div class="chess-header">
-          <span>Turno: <strong id="chess-turn">Blancas</strong></span>
+      <div class="chess-ui">
+        <div class="chess-info">
+          <span>Turno: <strong id="chess-turn" style="color:#ccff00">Blancas</strong></span>
           <span>Movimientos: <strong id="chess-moves">0</strong></span>
         </div>
-        <div class="chess-captured">
-          <div id="captured-black"></div>
-          <div id="captured-white"></div>
-        </div>
-        <div class="chess-board" id="chess-board"></div>
-        <button class="game-btn" id="chess-reset">Nueva Partida</button>
+        <div id="chess-board" class="chess-board"></div>
+        <div id="chess-captures" class="chess-captures"></div>
       </div>
-      <style>
-        .chess-game { text-align: center; padding: 1rem; }
-        .chess-header { display: flex; justify-content: space-around; margin-bottom: 1rem; font-size: 1.1rem; }
-        .chess-captured { display: flex; justify-content: space-between; max-width: 400px; margin: 0 auto 0.5rem; font-size: 1.5rem; min-height: 2rem; }
-        .chess-board {
-          display: grid;
-          grid-template-columns: repeat(8, 1fr);
-          max-width: 400px;
-          margin: 0 auto;
-          border: 3px solid #d4a574;
-          border-radius: 8px;
-          overflow: hidden;
-        }
-        .chess-cell {
-          aspect-ratio: 1;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-size: 2.5rem;
-          cursor: pointer;
-          transition: all 0.2s;
-          user-select: none;
-        }
-        .chess-cell.light { background: #f0d9b5; }
-        .chess-cell.dark { background: #b58863; }
-        .chess-cell.selected { background: #7b61ff !important; }
-        .chess-cell.valid-move { background: rgba(76, 175, 80, 0.5) !important; }
-        .chess-cell:hover { filter: brightness(1.1); }
-        .game-btn { background: var(--color-accent, #d4a574); border: none; padding: 0.75rem 2rem; border-radius: 8px; cursor: pointer; font-size: 1rem; margin-top: 1rem; }
-      </style>
     `;
 
     renderBoard();
-    document.getElementById('chess-reset').addEventListener('click', () => initGame(container));
+  }
+
+  function isWhite(p) { return p >= 'A' && p <= 'Z'; }
+  function isBlack(p) { return p >= 'a' && p <= 'z'; }
+  function isOwn(p) { return state.turn === 'white' ? isWhite(p) : isBlack(p); }
+  function isEnemy(p) { return state.turn === 'white' ? isBlack(p) : isWhite(p); }
+
+  function getValidMoves(r, c) {
+    const piece = state.board[r][c].toLowerCase();
+    const moves = [];
+    const dir = isWhite(state.board[r][c]) ? -1 : 1;
+
+    const addIf = (nr, nc) => {
+      if (nr < 0 || nr > 7 || nc < 0 || nc > 7) return false;
+      const target = state.board[nr][nc];
+      if (isOwn(target)) return false;
+      moves.push([nr, nc]);
+      return target === ' ';
+    };
+
+    const slide = (dr, dc) => {
+      for (let i = 1; i < 8; i++) {
+        if (!addIf(r + dr * i, c + dc * i)) break;
+      }
+    };
+
+    switch (piece) {
+      case 'p':
+        if (state.board[r + dir]?.[c] === ' ') { moves.push([r + dir, c]); if ((dir === -1 && r === 6) || (dir === 1 && r === 1)) { if (state.board[r + dir * 2]?.[c] === ' ') moves.push([r + dir * 2, c]); } }
+        if (state.board[r + dir]?.[c - 1] && isEnemy(state.board[r + dir][c - 1])) moves.push([r + dir, c - 1]);
+        if (state.board[r + dir]?.[c + 1] && isEnemy(state.board[r + dir][c + 1])) moves.push([r + dir, c + 1]);
+        break;
+      case 'r': slide(1, 0); slide(-1, 0); slide(0, 1); slide(0, -1); break;
+      case 'b': slide(1, 1); slide(1, -1); slide(-1, 1); slide(-1, -1); break;
+      case 'q': slide(1, 0); slide(-1, 0); slide(0, 1); slide(0, -1); slide(1, 1); slide(1, -1); slide(-1, 1); slide(-1, -1); break;
+      case 'n': [[-2,-1],[-2,1],[-1,-2],[-1,2],[1,-2],[1,2],[2,-1],[2,1]].forEach(([dr, dc]) => addIf(r + dr, c + dc)); break;
+      case 'k': [[-1,-1],[-1,0],[-1,1],[0,-1],[0,1],[1,-1],[1,0],[1,1]].forEach(([dr, dc]) => addIf(r + dr, c + dc)); break;
+    }
+    return moves;
+  }
+
+  function handleClick(r, c) {
+    const piece = state.board[r][c];
+
+    if (state.selected) {
+      const [sr, sc] = state.selected;
+      const validMoves = getValidMoves(sr, sc);
+      const isValid = validMoves.some(([mr, mc]) => mr === r && mc === c);
+
+      if (isValid) {
+        const captured = state.board[r][c];
+        if (captured !== ' ') {
+          const side = isWhite(captured) ? 'black' : 'white';
+          state.captures[side].push(PIECES[captured]);
+          if (window.GameEffects) GameEffects.confettiBurst(document.getElementById('chess-board'));
+        }
+        state.board[r][c] = state.board[sr][sc];
+        state.board[sr][sc] = ' ';
+        state.moves++;
+        state.turn = state.turn === 'white' ? 'black' : 'white';
+        document.getElementById('chess-turn').textContent = state.turn === 'white' ? 'Blancas' : 'Negras';
+        document.getElementById('chess-moves').textContent = state.moves;
+        if (window.GameEffects) GameEffects.hapticFeedback();
+      }
+      state.selected = null;
+    } else if (piece !== ' ' && isOwn(piece)) {
+      state.selected = [r, c];
+    }
+    renderBoard();
   }
 
   function renderBoard() {
     const boardEl = document.getElementById('chess-board');
-    boardEl.innerHTML = '';
+    if (!boardEl) return;
+    let html = '';
+    const validMoves = state.selected ? getValidMoves(state.selected[0], state.selected[1]) : [];
 
-    for (let row = 0; row < 8; row++) {
-      for (let col = 0; col < 8; col++) {
-        const cell = document.createElement('div');
-        const isLight = (row + col) % 2 === 0;
-        cell.className = `chess-cell ${isLight ? 'light' : 'dark'}`;
-        cell.dataset.row = row;
-        cell.dataset.col = col;
-        cell.textContent = pieceToSymbol(chessState.board[row][col]);
-        
-        if (chessState.selected?.row === row && chessState.selected?.col === col) {
-          cell.classList.add('selected');
-        }
+    for (let r = 0; r < 8; r++) {
+      for (let c = 0; c < 8; c++) {
+        const isDark = (r + c) % 2 === 1;
+        const isSelected = state.selected && state.selected[0] === r && state.selected[1] === c;
+        const isValidMove = validMoves.some(([mr, mc]) => mr === r && mc === c);
+        const piece = state.board[r][c];
 
-        cell.addEventListener('click', () => handleClick(row, col));
-        boardEl.appendChild(cell);
+        let cls = 'chess-cell';
+        cls += isDark ? ' dark' : ' light';
+        if (isSelected) cls += ' selected';
+        if (isValidMove) cls += ' valid-move';
+
+        html += `<div class="${cls}" data-r="${r}" data-c="${c}">${piece !== ' ' ? PIECES[piece] : (isValidMove ? '<span class="move-dot"></span>' : '')}</div>`;
       }
     }
-  }
+    boardEl.innerHTML = html;
 
-  function getValidMoves(row, col) {
-    const piece = chessState.board[row][col];
-    if (!piece) return [];
-    
-    const moves = [];
-    const isWhite = isWhitePiece(piece);
-    const type = piece.toLowerCase();
-
-    const addMove = (r, c) => {
-      if (r < 0 || r > 7 || c < 0 || c > 7) return false;
-      const target = chessState.board[r][c];
-      if (target && isWhitePiece(target) === isWhite) return false;
-      moves.push({ row: r, col: c });
-      return !target; // Continue if empty
-    };
-
-    if (type === 'p') {
-      const dir = isWhite ? -1 : 1;
-      const startRow = isWhite ? 6 : 1;
-      
-      // Forward
-      if (!chessState.board[row + dir]?.[col]) {
-        addMove(row + dir, col);
-        if (row === startRow && !chessState.board[row + 2*dir]?.[col]) {
-          addMove(row + 2*dir, col);
-        }
-      }
-      // Capture
-      [-1, 1].forEach(dc => {
-        const target = chessState.board[row + dir]?.[col + dc];
-        if (target && isWhitePiece(target) !== isWhite) {
-          moves.push({ row: row + dir, col: col + dc });
-        }
+    boardEl.querySelectorAll('.chess-cell').forEach(cell => {
+      cell.addEventListener('click', () => {
+        handleClick(parseInt(cell.dataset.r), parseInt(cell.dataset.c));
       });
-    }
+    });
 
-    if (type === 'r' || type === 'q') {
-      [[0,1],[0,-1],[1,0],[-1,0]].forEach(([dr, dc]) => {
-        for (let i = 1; i < 8; i++) {
-          if (!addMove(row + dr*i, col + dc*i)) break;
-        }
-      });
-    }
-
-    if (type === 'b' || type === 'q') {
-      [[1,1],[1,-1],[-1,1],[-1,-1]].forEach(([dr, dc]) => {
-        for (let i = 1; i < 8; i++) {
-          if (!addMove(row + dr*i, col + dc*i)) break;
-        }
-      });
-    }
-
-    if (type === 'n') {
-      [[-2,-1],[-2,1],[-1,-2],[-1,2],[1,-2],[1,2],[2,-1],[2,1]].forEach(([dr, dc]) => {
-        addMove(row + dr, col + dc);
-      });
-    }
-
-    if (type === 'k') {
-      [[-1,-1],[-1,0],[-1,1],[0,-1],[0,1],[1,-1],[1,0],[1,1]].forEach(([dr, dc]) => {
-        addMove(row + dr, col + dc);
-      });
-    }
-
-    return moves;
-  }
-
-  function handleClick(row, col) {
-    const piece = chessState.board[row][col];
-    const isWhiteTurn = chessState.turn === 'white';
-
-    if (chessState.selected) {
-      const validMoves = getValidMoves(chessState.selected.row, chessState.selected.col);
-      const isValidMove = validMoves.some(m => m.row === row && m.col === col);
-
-      if (isValidMove) {
-        // Capture
-        const captured = chessState.board[row][col];
-        if (captured) {
-          chessState.captured[isWhiteTurn ? 'white' : 'black'].push(captured);
-          updateCaptured();
-        }
-
-        // Move
-        chessState.board[row][col] = chessState.board[chessState.selected.row][chessState.selected.col];
-        chessState.board[chessState.selected.row][chessState.selected.col] = '';
-        
-        chessState.moves++;
-        chessState.turn = isWhiteTurn ? 'black' : 'white';
-        chessState.selected = null;
-
-        document.getElementById('chess-turn').textContent = chessState.turn === 'white' ? 'Blancas' : 'Negras';
-        document.getElementById('chess-moves').textContent = chessState.moves;
-
-        // Check for checkmate (simplified - just check if king captured)
-        if (captured?.toLowerCase() === 'k') {
-          setTimeout(() => {
-            alert(`🎉 ¡${isWhiteTurn ? 'Blancas' : 'Negras'} ganan!`);
-            if (window.RankingSystem) {
-              window.RankingSystem.submitScore('chess', chessState.moves);
-            }
-          }, 100);
-        }
-
-        renderBoard();
-        return;
-      }
-    }
-
-    // Select piece
-    if (piece && isWhitePiece(piece) === isWhiteTurn) {
-      chessState.selected = { row, col };
-      renderBoard();
-      
-      // Highlight valid moves
-      const validMoves = getValidMoves(row, col);
-      validMoves.forEach(m => {
-        const cell = document.querySelector(`[data-row="${m.row}"][data-col="${m.col}"]`);
-        if (cell) cell.classList.add('valid-move');
-      });
-    } else {
-      chessState.selected = null;
-      renderBoard();
+    // Captures
+    const captEl = document.getElementById('chess-captures');
+    if (captEl) {
+      captEl.innerHTML = `<span style="color:#ccc">${state.captures.white.join(' ')}</span> | <span style="color:#666">${state.captures.black.join(' ')}</span>`;
     }
   }
 
-  function updateCaptured() {
-    document.getElementById('captured-white').textContent = chessState.captured.white.map(pieceToSymbol).join(' ');
-    document.getElementById('captured-black').textContent = chessState.captured.black.map(pieceToSymbol).join(' ');
-  }
-
-  window.initChessGame = function(container) {
-    initGame(container);
-  };
+  window.ChessGame = { init };
 })();

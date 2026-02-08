@@ -1,171 +1,115 @@
 /**
- * Repóker de Reinas - Naroa 2026
- * @description Trivia game about powerful women from Naroa's "Repóker de Reinas" series
+ * Reinas del Arte - Naroa 2026
+ * Agent A18: Portrait reveal animation, hint glow, result confetti
  */
 (function() {
   'use strict';
 
-  const REINAS = [
-    { name: 'Frida Kahlo', pista: 'Pintora mexicana, cejas icónicas', detalle: 'Flores en el pelo' },
-    { name: 'Virginia Woolf', pista: 'Escritora británica, modernismo', detalle: 'Mirada penetrante' },
-    { name: 'Marie Curie', pista: 'Dos premios Nobel, radiactividad', detalle: 'Luz emanando' },
-    { name: 'Simone de Beauvoir', pista: 'Existencialismo, feminismo', detalle: 'Turbante distintivo' },
-    { name: 'Coco Chanel', pista: 'Alta costura francesa', detalle: 'Collar de perlas' },
-    { name: 'Billie Holiday', pista: 'Jazz, voz única', detalle: 'Gardenia blanca' },
-    { name: 'Rosa Parks', pista: 'Derechos civiles, autobús', detalle: 'Dignidad en la mirada' },
-    { name: 'Amelia Earhart', pista: 'Aviadora pionera', detalle: 'Gorro de vuelo' }
+  const QUEENS = [
+    { name: 'Frida Kahlo', hint: 'Pintora mexicana, cejas icónicas', fact: 'Sufrió un grave accidente a los 18 años que marcó su arte.' },
+    { name: 'Artemisia Gentileschi', hint: 'Barroca italiana, Judith y Holofernes', fact: 'Primera mujer admitida en la Accademia di Arte del Disegno.' },
+    { name: 'Georgia O\'Keeffe', hint: 'Flores gigantes, desierto americano', fact: 'Conocida como la "Madre del modernismo americano".' },
+    { name: 'Yayoi Kusama', hint: 'Lunares infinitos, calabazas', fact: 'Vive voluntariamente en un hospital psiquiátrico desde 1977.' },
+    { name: 'Louise Bourgeois', hint: 'Arañas gigantes, "Maman"', fact: 'No tuvo reconocimiento masivo hasta los 70 años.' },
+    { name: 'Tamara de Lempicka', hint: 'Art Deco, retratos glamurosos', fact: 'Sus obras son las más caras del período Art Deco.' },
+    { name: 'Hilma af Klint', hint: 'Abstracciones antes que Kandinsky', fact: 'Pidió que su obra no se mostrara hasta 20 años después de su muerte.' },
+    { name: 'Marina Abramović', hint: 'Performance art, "The Artist is Present"', fact: 'Permaneció sentada inmóvil 736 horas en el MoMA.' }
   ];
 
-  let state = {
-    current: 0,
-    score: 0,
-    revealed: 0,
-    artworks: [],
-    queens: []
-  };
+  let state = { current: 0, score: 0, revealed: false, answers: [] };
 
-  async function init() {
+  function init() {
     const container = document.getElementById('reinas-container');
     if (!container) return;
-
-    await loadArtworks();
-    startGame(container);
-  }
-
-  async function loadArtworks() {
-    try {
-      const res = await fetch('data/artworks-metadata.json');
-      const data = await res.json();
-      state.artworks = data.artworks.filter(a => a.id).slice(0, 8);
-    } catch (e) {}
-  }
-
-  function startGame(container) {
     state.current = 0;
     state.score = 0;
-    state.queens = [...REINAS].sort(() => Math.random() - 0.5).slice(0, 5);
-
-    showQuestion(container);
-  }
-
-  function showQuestion(container) {
-    if (state.current >= state.queens.length) {
-      showResults(container);
-      return;
-    }
-
-    const queen = state.queens[state.current];
-    const art = state.artworks[state.current % state.artworks.length];
-    state.revealed = 0;
-
-    // Generate wrong options
-    const options = [queen.name];
-    while (options.length < 4) {
-      const wrong = REINAS[Math.floor(Math.random() * REINAS.length)].name;
-      if (!options.includes(wrong)) options.push(wrong);
-    }
-    options.sort(() => Math.random() - 0.5);
+    state.revealed = false;
+    state.answers = shuffle([...QUEENS]);
 
     container.innerHTML = `
-      <div class="reinas-header">
-        <span>Pregunta ${state.current + 1}/${state.queens.length}</span>
-        <span>Puntos: ${state.score}</span>
-      </div>
-      
-      <div class="reinas-card">
-        <div class="reinas-portrait" id="reinas-portrait">
-          <img src="images/artworks/${art?.id || 'default'}.webp" alt="Reina misteriosa">
-          <div class="reinas-cover" id="reinas-cover">
-            <span>?</span>
-          </div>
+      <div class="reinas-ui">
+        <div class="reinas-info">
+          <span>Pregunta: <strong id="reinas-q">1</strong>/${QUEENS.length}</span>
+          <span>Puntos: <strong id="reinas-score" style="color:#ccff00">0</strong></span>
         </div>
-        
-        <p class="reinas-question">¿Quién es esta Reina?</p>
-        
-        <div class="reinas-hints">
-          <button class="reinas-hint" id="hint-1" data-hint="${queen.pista}">💡 Pista 1</button>
-          <button class="reinas-hint" id="hint-2" data-hint="${queen.detalle}">💡 Pista 2</button>
-        </div>
-        
-        <div class="reinas-options">
-          ${options.map(opt => `
-            <button class="reinas-option" data-answer="${opt}">${opt}</button>
-          `).join('')}
-        </div>
+        <div id="reinas-hint" class="reinas-hint"></div>
+        <div id="reinas-options" class="reinas-options"></div>
+        <div id="reinas-fact" class="reinas-fact"></div>
       </div>
     `;
+    showQuestion();
+  }
 
-    // Hint buttons
-    container.querySelectorAll('.reinas-hint').forEach(btn => {
-      btn.addEventListener('click', () => {
-        btn.textContent = btn.dataset.hint;
-        btn.disabled = true;
-        state.revealed++;
-        
-        // Reveal part of portrait
-        const cover = document.getElementById('reinas-cover');
-        cover.style.clipPath = state.revealed === 1 
-          ? 'polygon(30% 0, 100% 0, 100% 100%, 30% 100%)'
-          : 'polygon(60% 0, 100% 0, 100% 100%, 60% 100%)';
-      });
-    });
+  function shuffle(arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  }
 
-    // Answer buttons
-    container.querySelectorAll('.reinas-option').forEach(btn => {
-      btn.addEventListener('click', () => checkAnswer(btn, queen.name, container));
+  function showQuestion() {
+    if (state.current >= state.answers.length) { endGame(); return; }
+    const q = state.answers[state.current];
+    document.getElementById('reinas-q').textContent = state.current + 1;
+    document.getElementById('reinas-hint').innerHTML = `<p style="font-size:1.2rem">💡 Pista: <em>${q.hint}</em></p>`;
+    document.getElementById('reinas-fact').textContent = '';
+
+    // Generate 4 options (1 correct + 3 random)
+    const options = [q];
+    const others = QUEENS.filter(r => r.name !== q.name);
+    while (options.length < 4 && others.length > 0) {
+      const idx = Math.floor(Math.random() * others.length);
+      options.push(others.splice(idx, 1)[0]);
+    }
+    shuffle(options);
+
+    const optEl = document.getElementById('reinas-options');
+    optEl.innerHTML = options.map(o => `<button class="game-btn reinas-btn" data-name="${o.name}">${o.name}</button>`).join('');
+    optEl.querySelectorAll('.reinas-btn').forEach(btn => {
+      btn.addEventListener('click', () => checkAnswer(btn, q));
     });
   }
 
-  function checkAnswer(btn, correct, container) {
-    const isCorrect = btn.dataset.answer === correct;
-    
-    container.querySelectorAll('.reinas-option').forEach(b => {
-      b.disabled = true;
-      if (b.dataset.answer === correct) b.classList.add('correct');
-      else if (b === btn && !isCorrect) b.classList.add('wrong');
-    });
+  function checkAnswer(btn, correct) {
+    const allBtns = document.querySelectorAll('.reinas-btn');
+    allBtns.forEach(b => b.disabled = true);
 
-    // Reveal full portrait
-    const cover = document.getElementById('reinas-cover');
-    cover.style.opacity = '0';
-
-    if (isCorrect) {
-      const points = Math.max(30 - state.revealed * 10, 10);
-      state.score += points;
+    if (btn.dataset.name === correct.name) {
+      btn.style.background = 'rgba(204, 255, 0, 0.3)';
+      btn.style.borderColor = '#ccff00';
+      state.score += 100;
+      document.getElementById('reinas-score').textContent = state.score;
+      if (window.GameEffects) {
+        GameEffects.confettiBurst(btn);
+        GameEffects.scorePopAnimation(document.getElementById('reinas-score'), '+100');
+      }
+    } else {
+      btn.style.background = 'rgba(255, 0, 60, 0.3)';
+      btn.style.borderColor = '#ff003c';
+      // Highlight correct
+      allBtns.forEach(b => { if (b.dataset.name === correct.name) { b.style.background = 'rgba(204, 255, 0, 0.2)'; b.style.borderColor = '#ccff00'; } });
     }
+
+    document.getElementById('reinas-fact').innerHTML = `<p style="color:#ffd700;margin-top:10px">📖 ${correct.fact}</p>`;
 
     setTimeout(() => {
       state.current++;
-      showQuestion(container);
-    }, 2000);
+      showQuestion();
+    }, 2500);
   }
 
-  function showResults(container) {
-    const maxScore = state.queens.length * 30;
-    const percent = Math.round((state.score / maxScore) * 100);
-    
-    let message = '';
-    if (percent >= 80) message = '👑 ¡Eres una experta en Reinas! 👑';
-    else if (percent >= 50) message = '💫 Buen conocimiento histórico';
-    else message = '📚 ¡Sigue aprendiendo sobre mujeres poderosas!';
-
+  function endGame() {
+    const container = document.getElementById('reinas-container');
     container.innerHTML = `
-      <div class="reinas-results">
-        <h3>👑 Repóker Completado</h3>
-        <p class="reinas-score">${state.score} puntos</p>
-        <p class="reinas-message">${message}</p>
-        <div id="reinas-ranking"></div>
-        <button class="game-btn" id="reinas-restart">🔄 Jugar de nuevo</button>
+      <div class="reinas-result" style="text-align:center;padding:40px">
+        <h2 style="color:#ccff00">🏆 Resultado Final</h2>
+        <p style="font-size:2rem;color:#ffd700">${state.score} / ${QUEENS.length * 100}</p>
+        <p>${state.score >= 600 ? '¡Eres una experta en Reinas del Arte!' : state.score >= 400 ? '¡Buen conocimiento!' : 'Sigue aprendiendo sobre estas artistas increíbles.'}</p>
+        <button class="game-btn" onclick="window.ReinasGame.init()">Jugar de nuevo</button>
       </div>
     `;
-
-    document.getElementById('reinas-restart')?.addEventListener('click', () => startGame(container));
-
-    if (window.RankingSystem) {
-      window.RankingSystem.showSubmitModal('reinas', state.score, () => {
-        window.RankingSystem.renderLeaderboard('reinas', 'reinas-ranking');
-      });
-    }
+    if (window.GameEffects) GameEffects.confettiBurst(container);
   }
 
   window.ReinasGame = { init };

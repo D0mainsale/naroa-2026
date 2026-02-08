@@ -1,216 +1,237 @@
-/* ============================================
-   IMMERSIVE AUDIO UI STYLES
-   Floating audio controls
-   ============================================ */
+/* AUDIO DOCK — PREMIUM SOUND EXPERIENCE (VINYL EDITION) */
 
-.audio-controls {
+/* DOCK CONTAINER */
+.audio-dock {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 9000;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 1000;
   display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.audio-btn {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background: rgba(0, 0, 0, 0.8);
-  border: 2px solid rgba(220, 38, 38, 0.5);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
-}
-
-.audio-btn:hover {
-  background: rgba(220, 38, 38, 0.2);
-  border-color: #dc2626;
-  transform: scale(1.1);
-  box-shadow: 0 0 20px rgba(220, 38, 38, 0.4);
-}
-
-.audio-icon {
-  font-size: 1.3rem;
-}
-
-/* Audio visualizer indicator */
-.audio-indicator {
-  display: flex;
+  flex-direction: column;
   align-items: flex-end;
-  gap: 3px;
-  height: 20px;
-  opacity: 0.5;
+  gap: 1rem;
+  font-family: var(--font-family-mono, monospace);
+  pointer-events: none; /* Let clicks pass through when collapsed */
 }
 
-.audio-indicator--active {
-  opacity: 1;
+.audio-dock > * { pointer-events: auto; }
+
+/* TOGGLE BUTTON (COLLAPSED STATE) */
+.audio-dock__toggle {
+  background: rgba(0, 0, 0, 0.8);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 3rem;
+  padding: 0.5rem 0.75rem 0.5rem 0.5rem; /* Left padding specialized for vinyl */
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  color: #fff;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
 }
 
-.audio-indicator::before,
-.audio-indicator::after,
-.audio-indicator span {
+.audio-dock__toggle:hover {
+  background: rgba(0, 0, 0, 0.95);
+  border-color: var(--fluor, #ccff00);
+  transform: scale(1.02);
+  box-shadow: 0 4px 25px rgba(204, 255, 0, 0.15);
+}
+
+/* VINYL ANIMATION */
+.audio-dock__vinyl {
+  width: 40px;
+  height: 40px;
+  position: relative;
+}
+
+.vinyl-disc {
+  width: 100%;
+  height: 100%;
+  background: repeating-radial-gradient(
+    #111 0, 
+    #111 2px, 
+    #222 3px, 
+    #111 4px
+  );
+  border-radius: 50%;
+  position: relative;
+  animation: spinVinyl 4s linear infinite;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.vinyl-disc::before {
   content: '';
-  width: 4px;
-  background: linear-gradient(to top, #dc2626, #ffd700);
-  border-radius: 2px;
-  animation: audio-bar 0.5s ease-in-out infinite alternate;
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 12px;
+  height: 12px;
+  background: var(--red-pop, #ff003c);
+  border-radius: 50%;
+  border: 2px solid #000;
 }
 
-.audio-indicator--active::before,
-.audio-indicator--active::after {
+.active .vinyl-disc {
   animation-play-state: running;
 }
 
-.audio-indicator::before {
-  height: 8px;
-  animation-delay: 0s;
+/* Pause animation on hover if desired, or when closed */
+.audio-dock__toggle:not(.active) .vinyl-disc {
+  animation-play-state: paused;
 }
 
-.audio-indicator::after {
-  height: 16px;
-  animation-delay: 0.2s;
+@keyframes spinVinyl {
+  to { transform: rotate(360deg); }
 }
 
-/* Add dynamic bars via JS or keep simple */
-.audio-indicator--active::before {
-  animation: audio-bar 0.4s ease-in-out infinite alternate;
+/* INFO TEXT */
+.audio-dock__info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1.1;
 }
 
-.audio-indicator--active::after {
-  animation: audio-bar 0.6s ease-in-out infinite alternate;
-  animation-delay: 0.1s;
+.audio-dock__title {
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  color: var(--fluor, #ccff00);
+  font-weight: 700;
 }
 
-@keyframes audio-bar {
-  0% { height: 4px; }
-  100% { height: 20px; }
+.audio-dock__artist {
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  font-weight: 400;
+  text-transform: uppercase;
 }
 
-/* Volume slider (optional) */
-.audio-volume {
-  width: 80px;
-  height: 4px;
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 2px;
-  cursor: pointer;
-  position: relative;
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-
-.audio-controls:hover .audio-volume {
-  opacity: 1;
-}
-
-.audio-volume__fill {
-  height: 100%;
-  background: linear-gradient(90deg, #dc2626, #ffd700);
-  border-radius: 2px;
-  width: 70%;
-}
-
-.audio-volume__handle {
-  position: absolute;
-  top: 50%;
-  left: 70%;
-  width: 12px;
+/* EQUALIZER */
+.equalizer {
+  display: flex;
+  gap: 2px;
   height: 12px;
-  background: #fff;
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  align-items: flex-end;
+  margin-left: 0.5rem;
 }
 
-/* Spatial audio indicator */
-.spatial-audio-hint {
-  position: fixed;
-  bottom: 80px;
-  right: 20px;
-  background: rgba(0, 0, 0, 0.8);
-  border: 1px solid rgba(255, 215, 0, 0.3);
-  border-radius: 8px;
-  padding: 10px 15px;
-  font-size: 0.8rem;
-  color: #ffd700;
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
+.equalizer span {
+  width: 2px;
+  background-color: var(--red-pop, #ff003c);
+  animation: equalize 1s infinite alternate;
+}
+
+.equalizer span:nth-child(1) { height: 60%; animation-delay: -0.4s; }
+.equalizer span:nth-child(2) { height: 30%; animation-delay: -0.2s; }
+.equalizer span:nth-child(3) { height: 70%; animation-delay: -0.6s; }
+.equalizer span:nth-child(4) { height: 50%; animation-delay: -0.1s; }
+.equalizer span:nth-child(5) { height: 100%; animation-delay: -0.3s; }
+
+@keyframes equalize {
+  0% { height: 20%; opacity: 0.5; }
+  100% { height: 100%; opacity: 1; }
+}
+
+/* PANEL (EXPANDED STATE) */
+.audio-dock__panel {
+  width: 300px;
+  background: rgba(0, 0, 0, 0.95);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 1rem;
+  display: none; /* Hidden by default */
+  flex-direction: column;
+  gap: 1rem;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.6);
   opacity: 0;
-  transform: translateY(10px);
-  transition: all 0.3s ease;
-  pointer-events: none;
+  transform: translateY(20px);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.spatial-audio-hint--visible {
+.audio-dock__panel.open {
+  display: flex;
   opacity: 1;
   transform: translateY(0);
 }
 
-.spatial-audio-hint::before {
-  content: '🎧';
-  margin-right: 8px;
+/* PANEL HEADER */
+.audio-dock__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
-/* 3D audio position indicator */
-.audio-3d-map {
-  position: fixed;
-  bottom: 80px;
-  right: 80px;
-  width: 60px;
-  height: 60px;
-  background: rgba(0, 0, 0, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 50%;
-  opacity: 0;
-  transition: opacity 0.3s;
-  pointer-events: none;
+.audio-dock__now-playing {
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  color: var(--white-muted, #888);
 }
 
-.audio-controls:hover .audio-3d-map {
-  opacity: 0.7;
+.audio-dock__waveform {
+  display: flex;
+  gap: 2px;
+  height: 10px;
+  align-items: center;
+}
+.audio-dock__waveform span {
+  width: 2px;
+  height: 100%;
+  background: var(--fluor, #ccff00);
+  border-radius: 1px;
+  opacity: 0.5;
 }
 
-.audio-3d-map__dot {
-  position: absolute;
-  width: 6px;
-  height: 6px;
-  background: #dc2626;
-  border-radius: 50%;
-  box-shadow: 0 0 10px rgba(220, 38, 38, 0.8);
-  transform: translate(-50%, -50%);
+/* IFRAME */
+.audio-dock__iframe {
+  border-radius: 8px;
+  background: #000;
 }
 
-.audio-3d-map__listener {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 8px;
-  height: 8px;
-  background: #ffd700;
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
+/* LINKS ROW */
+.audio-dock__links {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
 }
 
-/* Mobile: simplified controls */
-@media (max-width: 768px) {
-  .audio-controls {
-    bottom: 10px;
-    right: 10px;
+.audio-dock__link {
+  font-size: 0.7rem;
+  color: var(--white-muted, #aaa);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: color 0.2s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.audio-dock__link:hover {
+  color: var(--white);
+}
+
+.audio-dock__link svg {
+  opacity: 0.8;
+}
+
+/* RESPONSIVE */
+@media (max-width: 480px) {
+  .audio-dock {
+    bottom: 1rem;
+    right: 1rem;
   }
-  
-  .audio-btn {
-    width: 44px;
-    height: 44px;
-  }
-  
-  .audio-indicator,
-  .audio-volume,
-  .audio-3d-map {
-    display: none;
+  .audio-dock__panel {
+    width: 280px;
   }
 }

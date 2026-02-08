@@ -1,190 +1,136 @@
 /**
- * TIRO AL BLANCO - Dispara a las obras que aparecen
- * Haz clic en los targets antes de que desaparezcan
+ * Target Practice - Naroa 2026
+ * Agent A22: Target pop with ring pulse, hit splatter, miss X-mark
  */
 (function() {
   'use strict';
 
-  const TARGET_CONFIG = {
-    spawnInterval: 1200,
-    targetLifetime: 2000,
-    artworks: []
-  };
+  let state = { targets: [], score: 0, misses: 0, combo: 0, timeLeft: 30, timer: null, running: false, spawnTimer: null };
 
-  let targetState = {
-    targets: [],
-    score: 0,
-    misses: 0,
-    maxMisses: 5,
-    timer: 60,
-    interval: null,
-    spawnInterval: null,
-    gameOver: false
-  };
-
-  async function loadArtworks() {
-    try {
-      const res = await fetch('data/artworks-metadata.json');
-      const data = await res.json();
-      TARGET_CONFIG.artworks = (data.artworks || data).map(a => a.image || a.src);
-    } catch(e) {
-      TARGET_CONFIG.artworks = [
-        'images/optimized/amy-rocks.webp',
-        'images/optimized/marilyn-rocks.webp'
-      ];
-    }
-  }
-
-  function initGame(container) {
-    targetState = {
-      targets: [],
-      score: 0,
-      misses: 0,
-      maxMisses: 5,
-      timer: 60,
-      interval: null,
-      spawnInterval: null,
-      gameOver: false
-    };
+  function init() {
+    const container = document.getElementById('target-container');
+    if (!container) return;
 
     container.innerHTML = `
-      <div class="target-game">
-        <div class="target-header">
-          <span>Puntos: <strong id="target-score">0</strong></span>
-          <span>❌ Fallos: <strong id="target-misses">0</strong>/${targetState.maxMisses}</span>
-          <span>⏱️ <strong id="target-time">60</strong>s</span>
+      <div class="target-ui">
+        <div class="target-stats">
+          <span>⏱️ <strong id="target-time">30</strong>s</span>
+          <span>🎯 <strong id="target-score" style="color:#ccff00">0</strong></span>
+          <span>🔥 <strong id="target-combo">x0</strong></span>
         </div>
-        <div class="target-arena" id="target-arena"></div>
-        <p class="target-hint">🎯 ¡Haz clic en las obras antes de que desaparezcan!</p>
+        <div id="target-field" style="position:relative;width:100%;height:400px;background:radial-gradient(circle,#0d0d1a,#050510);border-radius:12px;overflow:hidden;cursor:crosshair"></div>
+        <button class="game-btn" id="target-start">🎯 Empezar</button>
       </div>
-      <style>
-        .target-game { text-align: center; padding: 1rem; }
-        .target-header { display: flex; justify-content: space-around; margin-bottom: 1rem; font-size: 1.1rem; }
-        .target-arena {
-          position: relative;
-          width: 100%;
-          max-width: 600px;
-          height: 400px;
-          margin: 0 auto;
-          background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-          border-radius: 16px;
-          overflow: hidden;
-          cursor: crosshair;
-        }
-        .target-item {
-          position: absolute;
-          width: 80px;
-          height: 80px;
-          border-radius: 50%;
-          border: 3px solid #ffd700;
-          background-size: cover;
-          background-position: center;
-          cursor: pointer;
-          animation: targetPop 0.3s ease-out, targetPulse 0.5s ease-in-out infinite alternate;
-          transition: transform 0.1s;
-        }
-        .target-item:hover { transform: scale(1.1); }
-        .target-item.hit {
-          animation: targetHit 0.3s ease-out forwards;
-          pointer-events: none;
-        }
-        @keyframes targetPop {
-          from { transform: scale(0); }
-          to { transform: scale(1); }
-        }
-        @keyframes targetPulse {
-          from { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.4); }
-          to { box-shadow: 0 0 20px 10px rgba(255, 215, 0, 0); }
-        }
-        @keyframes targetHit {
-          to { transform: scale(1.5); opacity: 0; }
-        }
-        .target-hint { color: rgba(255,255,255,0.6); margin: 1rem 0; }
-      </style>
     `;
 
-    const arena = document.getElementById('target-arena');
-    
-    // Spawn targets
-    targetState.spawnInterval = setInterval(() => {
-      if (!targetState.gameOver) spawnTarget(arena);
-    }, TARGET_CONFIG.spawnInterval);
-
-    // Timer
-    targetState.interval = setInterval(() => {
-      targetState.timer--;
-      document.getElementById('target-time').textContent = targetState.timer;
-      
-      if (targetState.timer <= 0) {
-        endGame();
+    document.getElementById('target-start').addEventListener('click', startGame);
+    document.getElementById('target-field').addEventListener('click', e => {
+      if (!state.running) return;
+      // Check if clicked on empty space (miss)
+      if (e.target.id === 'target-field') {
+        state.misses++;
+        state.combo = 0;
+        document.getElementById('target-combo').textContent = 'x0';
+        // Show X mark
+        const x = document.createElement('div');
+        x.textContent = '✕';
+        x.style.cssText = `position:absolute;left:${e.offsetX-10}px;top:${e.offsetY-10}px;color:#ff003c;font-size:20px;pointer-events:none;animation:fadeOut 0.5s forwards`;
+        document.getElementById('target-field').appendChild(x);
+        setTimeout(() => x.remove(), 500);
       }
-    }, 1000);
-
-    // Initial spawn
-    spawnTarget(arena);
+    });
   }
 
-  function spawnTarget(arena) {
-    const art = TARGET_CONFIG.artworks[Math.floor(Math.random() * TARGET_CONFIG.artworks.length)];
-    
-    const target = document.createElement('div');
-    target.className = 'target-item';
-    target.style.backgroundImage = `url(${art})`;
-    target.style.left = (Math.random() * (arena.offsetWidth - 80)) + 'px';
-    target.style.top = (Math.random() * (arena.offsetHeight - 80)) + 'px';
+  function startGame() {
+    state.score = 0;
+    state.misses = 0;
+    state.combo = 0;
+    state.timeLeft = 30;
+    state.running = true;
+    state.targets = [];
+    document.getElementById('target-score').textContent = '0';
+    document.getElementById('target-combo').textContent = 'x0';
+    document.getElementById('target-start').style.display = 'none';
 
-    target.addEventListener('click', () => hitTarget(target));
-    
-    arena.appendChild(target);
-    targetState.targets.push(target);
+    // Clear field
+    const field = document.getElementById('target-field');
+    field.querySelectorAll('.target-dot').forEach(d => d.remove());
+
+    state.timer = setInterval(() => {
+      state.timeLeft--;
+      document.getElementById('target-time').textContent = state.timeLeft;
+      if (state.timeLeft <= 0) endGame();
+    }, 1000);
+
+    spawnTarget();
+  }
+
+  function spawnTarget() {
+    if (!state.running) return;
+    const field = document.getElementById('target-field');
+    const rect = field.getBoundingClientRect();
+    const size = 30 + Math.random() * 30;
+    const x = Math.random() * (rect.width - size);
+    const y = Math.random() * (rect.height - size);
+    const hue = Math.random() * 360;
+    const lifetime = 2000 + Math.random() * 1500; // 2-3.5s
+
+    const dot = document.createElement('div');
+    dot.className = 'target-dot';
+    dot.style.cssText = `position:absolute;left:${x}px;top:${y}px;width:${size}px;height:${size}px;border-radius:50%;background:radial-gradient(circle,hsl(${hue},80%,60%),hsl(${hue},80%,30%));box-shadow:0 0 15px hsla(${hue},80%,50%,0.6);cursor:pointer;transition:transform 0.1s;animation:targetPop 0.3s ease-out`;
+
+    // Ring
+    const ring = document.createElement('div');
+    ring.style.cssText = `position:absolute;inset:-5px;border-radius:50%;border:2px solid hsla(${hue},80%,60%,0.5);animation:ringPulse 1s infinite`;
+    dot.appendChild(ring);
+
+    dot.addEventListener('click', e => {
+      e.stopPropagation();
+      state.combo++;
+      const points = Math.round((60 - size) * (1 + state.combo * 0.2)); // Smaller = more points
+      state.score += points;
+      document.getElementById('target-score').textContent = state.score;
+      document.getElementById('target-combo').textContent = `x${state.combo}`;
+
+      // Hit splatter
+      dot.style.transform = 'scale(1.5)';
+      dot.style.opacity = '0';
+      setTimeout(() => dot.remove(), 200);
+
+      if (window.GameEffects) {
+        GameEffects.scorePopAnimation(document.getElementById('target-score'), `+${points}`);
+        GameEffects.hapticFeedback();
+      }
+    });
+
+    field.appendChild(dot);
 
     // Auto-remove after lifetime
     setTimeout(() => {
-      if (target.parentNode && !target.classList.contains('hit')) {
-        target.remove();
-        targetState.misses++;
-        document.getElementById('target-misses').textContent = targetState.misses;
-        
-        if (targetState.misses >= targetState.maxMisses) {
-          endGame();
+      if (dot.parentNode) {
+        dot.remove();
+        if (state.running) {
+          state.misses++;
+          state.combo = 0;
+          document.getElementById('target-combo').textContent = 'x0';
         }
       }
-    }, TARGET_CONFIG.targetLifetime);
-  }
+    }, lifetime);
 
-  function hitTarget(target) {
-    if (target.classList.contains('hit')) return;
-    
-    target.classList.add('hit');
-    targetState.score += 100;
-    document.getElementById('target-score').textContent = targetState.score;
-    
-    // Bonus for quick hits (under 1 second)
-    const bonusPoints = Math.floor(Math.random() * 50);
-    targetState.score += bonusPoints;
-    
-    setTimeout(() => target.remove(), 300);
+    // Schedule next target
+    const delay = Math.max(300, 800 - state.score * 2); // Gets faster
+    state.spawnTimer = setTimeout(spawnTarget, delay);
   }
 
   function endGame() {
-    targetState.gameOver = true;
-    clearInterval(targetState.interval);
-    clearInterval(targetState.spawnInterval);
-    
-    // Clear remaining targets
-    document.querySelectorAll('.target-item').forEach(t => t.remove());
-    
-    setTimeout(() => {
-      alert(`🎯 ¡Fin del juego!\nPuntuación: ${targetState.score}`);
-      
-      if (window.RankingSystem) {
-        window.RankingSystem.submitScore('target', targetState.score);
-      }
-    }, 100);
+    state.running = false;
+    clearInterval(state.timer);
+    clearTimeout(state.spawnTimer);
+    document.getElementById('target-start').style.display = 'inline-block';
+
+    if (window.GameEffects) GameEffects.confettiBurst(document.getElementById('target-field'));
+    alert(`🎯 Score: ${state.score} | Misses: ${state.misses}`);
   }
 
-  window.initTargetGame = async function(container) {
-    await loadArtworks();
-    initGame(container);
-  };
+  window.TargetGame = { init };
 })();

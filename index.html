@@ -56,6 +56,9 @@
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/effects/premium-hero.css">
+  <link rel="stylesheet" href="css/effects/scroll-360.css">
+  <link rel="stylesheet" href="css/effects/games-premium.css">
+  <link rel="stylesheet" href="css/effects/games-board.css">
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/gallery.css">
   <link rel="stylesheet" href="css/animations.css">
@@ -219,21 +222,23 @@
       </div>
   </div>
   
-  <!-- Spotify Audio Player -->
-  <div class="audio-dock glass-panel">
-    <div class="audio-dock__status">
-      <div class="equalizer">
-        <span></span><span></span><span></span>
+  <!-- Audio Player: Spotify + Bandcamp fallback -->
+  <!-- ═══ SOUND EXPERIENCE ═══ -->
+  <div class="audio-dock" id="audio-dock">
+    <button class="audio-dock__toggle" id="audio-toggle" aria-label="Toggle Sound Experience">
+      <div class="audio-dock__vinyl">
+        <div class="vinyl-disc"><div class="vinyl-label"></div></div>
       </div>
-      <span class="audio-dock__label">SOUND EXPERIENCE</span>
-    </div>
-    <div class="audio-dock__controls">
-      <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/6WHIabEaqEd6cFPad3gSrx?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-    </div>
-    <button class="audio-toggle" id="audio-toggle" aria-label="Toggle Audio">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18V5l12-2v13" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6" cy="18" r="3" stroke-width="2"/><circle cx="18" cy="16" r="3" stroke-width="2"/></svg>
+      <div class="audio-dock__info">
+        <span class="audio-dock__title">SOUND EXPERIENCE</span>
+        <span class="audio-dock__artist">BORJA MOSKV</span>
+      </div>
+      <div class="equalizer">
+        <span></span><span></span><span></span><span></span><span></span>
+      </div>
     </button>
   </div>
+
   <div class="noise-overlay"></div>
 
 
@@ -241,39 +246,45 @@
   <div class="aurora"></div>
   <main id="app">
     <section id="view-home" class="view view--home active">
-      <div class="hero hero--awwwards">
-        <div class="hero__video-bg-wrapper">
-          <video autoplay muted loop playsinline class="hero__video" poster="assets/video-poster-01.jpg">
-            <source src="/videos/flow/flow-video-01.mp4" type="video/mp4">
-          </video>
-          <div class="hero__grain"></div>
-          <div class="hero__gradient-overlay"></div>
+    <div class="hero hero--spectacular">
+      <div class="hero__slider" id="hero-slider">
+        <div class="hero__slide active" style="background-image: url('images/artworks/hq-amy.webp')"></div>
+        <div class="hero__slide" style="background-image: url('images/artworks/hq-james.webp')"></div>
+        <div class="hero__slide" style="background-image: url('images/artworks/hq-johnny.webp')"></div>
+        <div class="hero__slide" style="background-image: url('images/artworks/hq-marilyn.webp')"></div>
+        <div class="hero__slide" style="background-image: url('images/artworks/hq-portrait-1.webp')"></div>
+      </div>
+      
+      <div class="hero__overlay"></div> <!-- Gradient/Noise -->
+      
+      <div class="hero__content-layer">
+        <div class="hero__brand-header">
+          <span>NAROA GUTIÉRREZ GIL</span>
+          <span>EST. 1993</span>
+          <span>BILBAO / SOPELA</span>
         </div>
-        
-        <div class="hero__content-layer">
-          <div class="hero__brand-header">
-            <span class="hero__date">EST. 2026</span>
-            <span class="hero__location">BILBAO, ES</span>
+
+        <h1 class="hero__title-mega kinetic-text">
+          <span class="hero__line">Artivista</span>
+          <span class="hero__line indent">Del</span>
+          <span class="hero__line outline">Caos</span>
+        </h1>
+
+        <div class="hero__footer">
+          <div class="hero__role">
+            <span class="role-label">VISUAL ARTIST</span>
+            <span class="role-spec">MIXED MEDIA & TEXTURES</span>
           </div>
           
-          <h1 class="hero__title-mega" data-splitting>
-            <span class="hero__line">NAROA</span>
-            <span class="hero__line indent">GUTIÉRREZ</span>
-            <span class="hero__line outline">GIL</span>
-          </h1>
-          
-          <div class="hero__footer">
-            <div class="hero__role">
-              <span class="role-label">ARTISTA VISUAL</span>
-              <span class="role-spec">HIPERREALISMO POP</span>
-            </div>
-            <a href="#/galeria" class="hero__cta-circle magnetic-area">
-              <span class="cta-text">ENTRAR</span>
-              <svg viewBox="0 0 24 24" class="cta-arrow"><path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="2"/></svg>
-            </a>
-          </div>
+          <a href="#/galeria" class="hero__cta-circle">
+            <span class="cta-text">EXPLORE</span>
+            <svg class="cta-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+          </a>
         </div>
       </div>
+    </div>
+        
+
     </section>
 
 
@@ -474,21 +485,7 @@
       </div>
     </section>
 
-    <section id="view-juego" class="view view--juego">
-      <header class="view__header">
-        <h2>🎲 Juego de la Oca 🦆</h2>
-        <p class="view__subtitle">Descubre mi obra jugando</p>
-      </header>
-      <div id="oca-board"></div>
-    </section>
-
-    <section id="view-tetris" class="view view--tetris">
-      <header class="view__header">
-        <h2>🕹️ Tetris Artístico 🎨</h2>
-        <p class="view__subtitle">Juega Tetris con mis obras</p>
-      </header>
-      <div id="tetris-container"></div>
-    </section>
+    <!-- Duplicate view-juego and view-tetris removed (canonical versions at lines 742-750) -->
 
     <section id="view-juegos" class="view view--juegos games-hub">
       <header class="games-hub__header">
@@ -601,6 +598,26 @@
           <h3 class="game-card__title">Reversi</h3>
           <p class="game-card__desc">Voltea y conquista</p>
         </a>
+        <a href="#/runner" class="game-card game-card--new">
+          <div class="game-card__icon">🏃</div>
+          <h3 class="game-card__title">Art Runner</h3>
+          <p class="game-card__desc">Corre por el museo infinito</p>
+        </a>
+        <a href="#/rotate" class="game-card">
+          <div class="game-card__icon">🔄</div>
+          <h3 class="game-card__title">Rotate Puzzle</h3>
+          <p class="game-card__desc">Gira piezas hasta completar</p>
+        </a>
+        <a href="#/scratch" class="game-card game-card--new">
+          <div class="game-card__icon">🎰</div>
+          <h3 class="game-card__title">Scratch Art</h3>
+          <p class="game-card__desc">Rasca y descubre la obra</p>
+        </a>
+        <a href="#/target" class="game-card game-card--new">
+          <div class="game-card__icon">🎯</div>
+          <h3 class="game-card__title">Target Practice</h3>
+          <p class="game-card__desc">Dispara a dianas artísticas</p>
+        </a>
         <a href="#/restaurador" class="game-card game-card--spectacular game-card--web3">
           <div class="game-card__icon">🎨💀</div>
           <h3 class="game-card__title">El Restaurador Desastroso</h3>
@@ -709,6 +726,36 @@
       <div class="game-container" id="restaurador-container"></div>
     </section>
 
+    <section id="view-juego" class="view view--juego game-view">
+      <header class="view__header"><h2>🎲 Juego de la Oca</h2></header>
+      <div class="game-container" id="oca-container"></div>
+    </section>
+
+    <section id="view-tetris" class="view view--tetris game-view">
+      <header class="view__header"><h2>🕹️ Tetris Artístico</h2></header>
+      <div class="game-container" id="tetris-container"></div>
+    </section>
+
+    <section id="view-runner" class="view view--runner game-view">
+      <header class="view__header"><h2>🏃 Art Runner</h2></header>
+      <div class="game-container" id="runner-container"></div>
+    </section>
+
+    <section id="view-rotate" class="view view--rotate game-view">
+      <header class="view__header"><h2>🔄 Rotate Puzzle</h2></header>
+      <div class="game-container" id="rotate-container"></div>
+    </section>
+
+    <section id="view-scratch" class="view view--scratch game-view">
+      <header class="view__header"><h2>🎰 Scratch Art</h2></header>
+      <div class="game-container" id="scratch-container"></div>
+    </section>
+
+    <section id="view-target" class="view view--target game-view">
+      <header class="view__header"><h2>🎯 Target Practice</h2></header>
+      <div class="game-container" id="target-container"></div>
+    </section>
+
     <section id="view-exposiciones" class="view view--exposiciones">
       <div id="exposiciones-container"></div>
     </section>
@@ -787,6 +834,10 @@
   <script src="js/features/checkers-game.js" defer></script>
   <script src="js/features/connect4-game.js" defer></script>
   <script src="js/features/reversi-game.js" defer></script>
+  <script src="js/features/runner-game.js" defer></script>
+  <script src="js/features/rotate-game.js" defer></script>
+  <script src="js/features/scratch-game.js" defer></script>
+  <script src="js/features/target-game.js" defer></script>
   <script src="js/services/k25-vision-service.js" defer></script>
   <script src="js/features/restaurador-game.js" defer></script>
   <script src="js/features/restaurador-web3.js" defer></script>
@@ -804,11 +855,27 @@
   <script src="js/effects/eyes-follow.js" defer></script>
   <link rel="stylesheet" href="css/infinite-canvas-360.css">
   <script src="js/features/infinite-canvas-360.js" defer></script>
-  <script src="js/features/cantinflas-clones.js" type="module"></script>
+  <!-- cantinflas-clones.js removed -->
   <script src="js/effects/organic-particles.js" defer></script>
 
   <script src="js/effects/wow-effects.js" type="module" defer></script>
-  <script src="js/effects/kinetic-text.js" defer></script>
+  <!-- kinetic-text.js duplicate removed (already loaded at line 810) -->
+
+  <!-- Audio Dock Toggle -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggle = document.getElementById('audio-toggle');
+      const dock = document.getElementById('audio-dock');
+      if (toggle && dock) {
+        toggle.addEventListener('click', () => dock.classList.toggle('open'));
+      }
+    });
+  </script>
+  
+  <script src="js/effects/hero-slider.js" defer></script>
+  <script src="js/effects/scroll-360.js" defer></script>
+  <script src="js/effects/games-premium.js" defer></script>
+  <script src="js/features/game-gateway.js" defer></script>
   
 </body>
 </html>

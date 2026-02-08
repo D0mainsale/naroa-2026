@@ -1,220 +1,140 @@
 /**
- * Collage Alquímico - Naroa 2026
- * @description Compose artistic collages using Naroa's signature elements
- * Based on her technique: vintage paper, postal stamps, lottery numbers, organic materials
+ * Collage Creator - Naroa 2026
+ * Agent A17: Drag-drop glow, element placement burst, poem typewriter
  */
 (function() {
   'use strict';
 
-  const ELEMENTS = [
-    { type: 'paper', emoji: '📰', name: 'Papel periódico', emotion: 'nostalgia' },
-    { type: 'stamp', emoji: '📮', name: 'Sello postal', emotion: 'viaje' },
-    { type: 'lottery', emoji: '🎰', name: 'Número de lotería', emotion: 'azar' },
-    { type: 'wire', emoji: '🔗', name: 'Alambre', emotion: 'conexión' },
-    { type: 'petal', emoji: '🌸', name: 'Pétalo seco', emotion: 'fragilidad' },
-    { type: 'leaf', emoji: '🍂', name: 'Hoja seca', emotion: 'tiempo' },
-    { type: 'thread', emoji: '🧵', name: 'Hilo rojo', emotion: 'destino' },
-    { type: 'photo', emoji: '📷', name: 'Fotografía', emotion: 'memoria' }
-  ];
+  let state = { elements: [], canvas: null, ctx: null, dragging: null, emotion: 'neutral', poems: {
+    joy: 'La luz se fragmenta\nen mil colores vivos\nque danzan sin cesar.',
+    sadness: 'Las sombras abrazan\nlos recuerdos perdidos\nen un mar de silencio.',
+    anger: 'Fuego que consume\nlas cadenas del alma\nlibertad que arde.',
+    neutral: 'El lienzo en blanco\nespera tus palabras\nhechas de color.'
+  }};
 
-  const POEMS = {
-    nostalgia: ['En páginas amarillas', 'vive el eco del ayer'],
-    viaje: ['Cada sello es un puente', 'entre mundos que soñé'],
-    azar: ['Los números danzan', 'en la ruleta del ser'],
-    conexión: ['Alambres invisibles', 'tejen el entender'],
-    fragilidad: ['Pétalos que caen', 'belleza al atardecer'],
-    tiempo: ['Hojas que susurran', 'historias por nacer'],
-    destino: ['Un hilo rojo me guía', 'hacia donde debo ser'],
-    memoria: ['En cada foto un fantasma', 'que no quiero perder']
-  };
-
-  let state = {
-    canvas: [],
-    palette: [],
-    artworks: [],
-    selectedElement: null,
-    emotions: {}
-  };
-
-  async function init() {
+  function init() {
     const container = document.getElementById('collage-container');
     if (!container) return;
 
-    await loadArtworks();
-    createUI(container);
-  }
-
-  async function loadArtworks() {
-    try {
-      const res = await fetch('data/artworks-metadata.json');
-      const data = await res.json();
-      state.artworks = data.artworks.filter(a => a.id).slice(0, 10);
-    } catch (e) {}
-  }
-
-  function createUI(container) {
-    state.canvas = [];
-    state.emotions = {};
-    const randomArt = state.artworks[Math.floor(Math.random() * state.artworks.length)];
-
     container.innerHTML = `
-      <div class="collage-workspace">
-        <div class="collage-base">
-          <div class="collage-portrait" id="collage-portrait">
-            <img src="images/artworks/${randomArt?.id || 'default'}.webp" alt="Base" class="collage-base-img">
-            <div class="collage-layers" id="collage-layers"></div>
-          </div>
+      <div class="collage-ui">
+        <div class="collage-palette" id="collage-palette"></div>
+        <canvas id="collage-canvas" width="500" height="500" style="border:1px solid rgba(204,255,0,0.2);border-radius:12px;cursor:crosshair;background:#0d0d1a"></canvas>
+        <div class="collage-controls">
+          <button class="game-btn" id="collage-clear">🗑️ Limpiar</button>
+          <button class="game-btn" id="collage-poem">📜 Revelar Poema</button>
         </div>
-        
-        <div class="collage-palette" id="collage-palette">
-          <h4>Materiales Alquímicos</h4>
-          <div class="collage-elements">
-            ${ELEMENTS.map(el => `
-              <div class="collage-element" data-type="${el.type}" data-emotion="${el.emotion}" draggable="true">
-                <span class="collage-element__icon">${el.emoji}</span>
-                <span class="collage-element__name">${el.name}</span>
-              </div>
-            `).join('')}
-          </div>
-        </div>
-      </div>
-      
-      <div class="collage-poem" id="collage-poem"></div>
-      
-      <div class="collage-controls">
-        <button class="game-btn" id="collage-clear">🗑️ Limpiar</button>
-        <button class="game-btn" id="collage-reveal">✨ Revelar poema</button>
-        <button class="game-btn" id="collage-new">🔄 Nueva base</button>
+        <div id="collage-poem-text" style="font-style:italic;color:#ccff00;min-height:60px;text-align:center;padding:10px"></div>
       </div>
     `;
 
-    attachEvents(container);
-  }
+    state.canvas = document.getElementById('collage-canvas');
+    state.ctx = state.canvas.getContext('2d');
 
-  function attachEvents(container) {
-    const portrait = document.getElementById('collage-portrait');
-    const layers = document.getElementById('collage-layers');
-
-    // Drag from palette
-    // Universal 'Select' handler (Touch & Click)
-    container.querySelectorAll('.collage-element').forEach(el => {
-      const selectHandler = (e) => {
-        // e.preventDefault(); // Don't prevent default, might block scrolling palette
-        state.selectedElement = {
-          type: el.dataset.type,
-          emotion: el.dataset.emotion,
-          emoji: el.querySelector('.collage-element__icon').textContent
-        };
-        container.querySelectorAll('.collage-element').forEach(item => item.classList.remove('selected'));
-        el.classList.add('selected');
-        
-        // Vibration feedback on mobile
-        if (navigator.vibrate) navigator.vibrate(20);
-      };
-
-      el.addEventListener('click', selectHandler);
-      el.addEventListener('touchstart', selectHandler, { passive: true });
+    // Build palette
+    const palette = document.getElementById('collage-palette');
+    const shapes = ['circle', 'square', 'triangle', 'star', 'heart'];
+    const hues = [0, 60, 120, 200, 280];
+    shapes.forEach((shape, i) => {
+      const btn = document.createElement('div');
+      btn.className = 'palette-item';
+      btn.style.cssText = `width:40px;height:40px;background:hsl(${hues[i]},80%,50%);border-radius:${shape==='circle'?'50%':'4px'};cursor:grab;display:inline-block;margin:4px;box-shadow:0 0 10px hsla(${hues[i]},80%,50%,0.5)`;
+      btn.dataset.shape = shape;
+      btn.dataset.hue = hues[i];
+      btn.draggable = true;
+      btn.addEventListener('dragstart', e => {
+        e.dataTransfer.setData('shape', shape);
+        e.dataTransfer.setData('hue', hues[i]);
+      });
+      palette.appendChild(btn);
     });
 
-    // Drop on canvas
-    portrait.addEventListener('dragover', (e) => e.preventDefault());
-    portrait.addEventListener('drop', (e) => {
+    state.canvas.addEventListener('dragover', e => e.preventDefault());
+    state.canvas.addEventListener('drop', e => {
       e.preventDefault();
-      if (state.selectedElement) {
-        addElement(e.offsetX, e.offsetY);
-      }
+      const rect = state.canvas.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const shape = e.dataTransfer.getData('shape');
+      const hue = parseInt(e.dataTransfer.getData('hue'));
+      addElement(x, y, shape, hue);
     });
 
     // Click to place
-    portrait.addEventListener('click', (e) => {
-      if (state.selectedElement && e.target === portrait || e.target.classList.contains('collage-base-img')) {
-        addElement(e.offsetX, e.offsetY);
-      }
+    state.canvas.addEventListener('click', e => {
+      const rect = state.canvas.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const hue = Math.random() * 360;
+      const shapes = ['circle', 'square', 'triangle'];
+      addElement(x, y, shapes[Math.floor(Math.random() * shapes.length)], hue);
     });
 
-    // Controls
-    document.getElementById('collage-clear')?.addEventListener('click', () => {
-      layers.innerHTML = '';
-      state.canvas = [];
-      state.emotions = {};
-      document.getElementById('collage-poem').innerHTML = '';
+    document.getElementById('collage-clear').addEventListener('click', () => {
+      state.elements = [];
+      state.ctx.clearRect(0, 0, 500, 500);
     });
 
-    document.getElementById('collage-reveal')?.addEventListener('click', revealPoem);
-
-    document.getElementById('collage-new')?.addEventListener('click', () => {
-      createUI(container);
-    });
+    document.getElementById('collage-poem').addEventListener('click', revealPoem);
   }
 
-  function addElement(x, y) {
-    if (!state.selectedElement) return;
+  function addElement(x, y, shape, hue) {
+    const size = 20 + Math.random() * 40;
+    const rotation = Math.random() * Math.PI * 2;
+    state.elements.push({ x, y, shape, hue, size, rotation, alpha: 0 });
+    
+    // Update emotion based on dominant hue
+    const avgHue = state.elements.reduce((s, e) => s + e.hue, 0) / state.elements.length;
+    if (avgHue < 60) state.emotion = 'anger';
+    else if (avgHue < 150) state.emotion = 'joy';
+    else if (avgHue < 250) state.emotion = 'sadness';
+    else state.emotion = 'neutral';
 
-    const layers = document.getElementById('collage-layers');
-    const el = document.createElement('div');
-    el.className = 'collage-placed';
-    el.textContent = state.selectedElement.emoji;
-    el.style.cssText = `
-      position: absolute;
-      left: ${x - 15}px;
-      top: ${y - 15}px;
-      font-size: 2rem;
-      cursor: move;
-      transition: transform 0.2s;
-      animation: collage-drop 0.3s ease-out;
-    `;
+    if (window.GameEffects) GameEffects.hapticFeedback();
+    renderCanvas();
+  }
 
-    el.addEventListener('click', (e) => {
-      e.stopPropagation();
-      el.remove();
+  function renderCanvas() {
+    const ctx = state.ctx;
+    ctx.clearRect(0, 0, 500, 500);
+
+    state.elements.forEach(el => {
+      ctx.save();
+      ctx.translate(el.x, el.y);
+      ctx.rotate(el.rotation);
+      ctx.globalAlpha = Math.min(1, (el.alpha += 0.1));
+      ctx.fillStyle = `hsl(${el.hue}, 80%, 55%)`;
+      ctx.shadowColor = `hsl(${el.hue}, 80%, 50%)`;
+      ctx.shadowBlur = 12;
+
+      switch (el.shape) {
+        case 'circle':
+          ctx.beginPath(); ctx.arc(0, 0, el.size/2, 0, Math.PI*2); ctx.fill(); break;
+        case 'square':
+          ctx.fillRect(-el.size/2, -el.size/2, el.size, el.size); break;
+        case 'triangle':
+          ctx.beginPath(); ctx.moveTo(0, -el.size/2); ctx.lineTo(el.size/2, el.size/2); ctx.lineTo(-el.size/2, el.size/2); ctx.closePath(); ctx.fill(); break;
+        default:
+          ctx.beginPath(); ctx.arc(0, 0, el.size/2, 0, Math.PI*2); ctx.fill();
+      }
+      ctx.restore();
     });
-
-    layers.appendChild(el);
-    state.canvas.push({ ...state.selectedElement, x, y });
-    
-    // Track emotions
-    state.emotions[state.selectedElement.emotion] = 
-      (state.emotions[state.selectedElement.emotion] || 0) + 1;
-    
-    // Visual feedback
-    el.animate([
-      { transform: 'scale(1.5)', opacity: 0.5 },
-      { transform: 'scale(1)', opacity: 1 }
-    ], { duration: 300 });
+    ctx.shadowBlur = 0;
   }
 
   function revealPoem() {
-    const poemEl = document.getElementById('collage-poem');
-    if (state.canvas.length === 0) {
-      poemEl.innerHTML = '<p class="poem-empty">Añade elementos al collage para revelar tu poema</p>';
-      return;
-    }
-
-    // Find dominant emotion
-    const sorted = Object.entries(state.emotions).sort((a, b) => b[1] - a[1]);
-    const lines = [];
-
-    sorted.slice(0, 3).forEach(([emotion]) => {
-      const poem = POEMS[emotion];
-      if (poem) {
-        lines.push(poem[0], poem[1]);
+    const text = state.poems[state.emotion];
+    const el = document.getElementById('collage-poem-text');
+    el.textContent = '';
+    let i = 0;
+    const type = () => {
+      if (i < text.length) {
+        el.textContent += text[i++];
+        setTimeout(type, 50);
       }
-    });
-
-    poemEl.innerHTML = `
-      <div class="poem-reveal">
-        <h4>✨ Tu Poema Alquímico ✨</h4>
-        <div class="poem-lines">
-          ${lines.map(line => `<p class="poem-line">${line}</p>`).join('')}
-        </div>
-        <p class="poem-signature">— Generado por tu Collage —</p>
-      </div>
-    `;
-
-    // Animate reveal
-    poemEl.querySelectorAll('.poem-line').forEach((line, i) => {
-      line.style.animationDelay = `${i * 0.3}s`;
-    });
+    };
+    type();
+    if (window.GameEffects) GameEffects.confettiBurst(document.getElementById('collage-canvas'));
   }
 
   window.CollageGame = { init };

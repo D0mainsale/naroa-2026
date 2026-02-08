@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://naroa.online/sitemap.xml
+
+# Crawl-delay para ser amable con los crawlers
+Crawl-delay: 1
+
+# Bloquear assets internos que no aportan a SEO
+Disallow: /assets/
+Disallow: /js/
+Disallow: /css/

@@ -1,158 +1,104 @@
 /**
- * PUZZLE GIRATORIO - Gira las piezas para completar la imagen
- * Cada pieza puede girar 90° hasta coincidir
+ * Rotate Puzzle - Naroa 2026
+ * Agent A23: Rotation ring animation, completion burst, timer pulse
  */
 (function() {
   'use strict';
 
-  const ROTATE_CONFIG = {
-    gridSize: 3,
-    artworks: []
-  };
+  let state = { pieces: [], size: 3, moves: 0, timeStart: 0, timer: null, solved: false, artworkSrc: null };
 
-  let rotateState = {
-    pieces: [],
-    moves: 0,
-    solved: false,
-    startTime: null
-  };
+  async function init() {
+    const container = document.getElementById('rotate-container');
+    if (!container) return;
 
-  async function loadArtworks() {
     try {
       const res = await fetch('data/artworks-metadata.json');
       const data = await res.json();
-      ROTATE_CONFIG.artworks = data.artworks || data;
-    } catch(e) {
-      ROTATE_CONFIG.artworks = [
-        { image: 'images/optimized/johnny-rocks.webp', title: 'Johnny Rocks' }
-      ];
-    }
-  }
-
-  function getRandomArtwork() {
-    const arts = ROTATE_CONFIG.artworks;
-    return arts[Math.floor(Math.random() * arts.length)];
-  }
-
-  function initGame(container) {
-    const art = getRandomArtwork();
-    const { gridSize } = ROTATE_CONFIG;
-    
-    rotateState = { pieces: [], moves: 0, solved: false, startTime: Date.now() };
-    
-    // Create pieces with random rotations
-    for (let i = 0; i < gridSize * gridSize; i++) {
-      rotateState.pieces.push({
-        index: i,
-        rotation: [0, 90, 180, 270][Math.floor(Math.random() * 4)]
-      });
+      const art = data.artworks[Math.floor(Math.random() * data.artworks.length)];
+      state.artworkSrc = `images/gallery/${art.id}.webp`;
+    } catch (e) {
+      state.artworkSrc = null;
     }
 
     container.innerHTML = `
-      <div class="rotate-game">
-        <div class="rotate-header">
+      <div class="rotate-ui">
+        <div class="rotate-info">
           <span>Movimientos: <strong id="rotate-moves">0</strong></span>
-          <span>⏱️ <strong id="rotate-time">0</strong>s</span>
+          <span>⏱️ <strong id="rotate-time">0:00</strong></span>
         </div>
-        <div class="rotate-grid" id="rotate-grid" style="--grid-size: ${gridSize}"></div>
-        <p class="rotate-hint">👆 Haz clic en cada pieza para girarla 90°</p>
-        <button class="game-btn" id="rotate-new">Nueva Imagen</button>
+        <div id="rotate-board" class="rotate-board" style="display:grid;grid-template-columns:repeat(${state.size},1fr);gap:3px;max-width:360px;margin:0 auto"></div>
+        <button class="game-btn" id="rotate-new">🔄 Nuevo Puzzle</button>
       </div>
-      <style>
-        .rotate-game { text-align: center; padding: 1rem; }
-        .rotate-header { display: flex; justify-content: space-around; margin-bottom: 1rem; font-size: 1.1rem; }
-        .rotate-grid {
-          display: grid;
-          grid-template-columns: repeat(var(--grid-size), 1fr);
-          gap: 4px;
-          max-width: 400px;
-          margin: 0 auto;
-          background: #333;
-          padding: 4px;
-          border-radius: 12px;
-        }
-        .rotate-piece {
-          aspect-ratio: 1;
-          background-size: ${gridSize * 100}% ${gridSize * 100}%;
-          cursor: pointer;
-          transition: transform 0.3s ease;
-          border-radius: 4px;
-        }
-        .rotate-piece:hover { filter: brightness(1.1); }
-        .rotate-piece.correct { box-shadow: 0 0 10px #4ade80; }
-        .rotate-hint { color: rgba(255,255,255,0.6); margin: 1rem 0; }
-        .game-btn { background: var(--color-accent, #d4a574); border: none; padding: 0.75rem 2rem; border-radius: 8px; cursor: pointer; font-size: 1rem; margin-top: 1rem; }
-      </style>
     `;
 
-    const grid = document.getElementById('rotate-grid');
-    
-    rotateState.pieces.forEach((piece, i) => {
-      const row = Math.floor(i / gridSize);
-      const col = i % gridSize;
-      
-      const el = document.createElement('div');
-      el.className = 'rotate-piece';
-      el.dataset.index = i;
-      el.style.backgroundImage = `url(${art.image})`;
-      el.style.backgroundPosition = `${col * (100 / (gridSize - 1))}% ${row * (100 / (gridSize - 1))}%`;
-      el.style.transform = `rotate(${piece.rotation}deg)`;
-      
-      el.addEventListener('click', () => rotatePiece(i, el));
-      grid.appendChild(el);
-    });
+    document.getElementById('rotate-new').addEventListener('click', newPuzzle);
+    newPuzzle();
+  }
 
-    document.getElementById('rotate-new').addEventListener('click', () => initGame(container));
-    
-    // Timer
-    setInterval(() => {
-      if (!rotateState.solved) {
-        const elapsed = Math.floor((Date.now() - rotateState.startTime) / 1000);
-        document.getElementById('rotate-time').textContent = elapsed;
+  function newPuzzle() {
+    state.moves = 0;
+    state.solved = false;
+    state.pieces = [];
+
+    for (let r = 0; r < state.size; r++) {
+      for (let c = 0; c < state.size; c++) {
+        const rotation = [0, 90, 180, 270][Math.floor(Math.random() * 4)];
+        state.pieces.push({ r, c, rotation, correct: rotation === 0 });
       }
-    }, 1000);
-  }
-
-  function rotatePiece(index, el) {
-    if (rotateState.solved) return;
-    
-    const piece = rotateState.pieces[index];
-    piece.rotation = (piece.rotation + 90) % 360;
-    el.style.transform = `rotate(${piece.rotation}deg)`;
-    
-    rotateState.moves++;
-    document.getElementById('rotate-moves').textContent = rotateState.moves;
-    
-    // Check if correct (0 rotation)
-    if (piece.rotation === 0) {
-      el.classList.add('correct');
-    } else {
-      el.classList.remove('correct');
     }
-    
-    checkWin();
+
+    // Start timer
+    state.timeStart = Date.now();
+    if (state.timer) clearInterval(state.timer);
+    state.timer = setInterval(updateTimer, 1000);
+
+    render();
   }
 
-  function checkWin() {
-    const allCorrect = rotateState.pieces.every(p => p.rotation === 0);
-    
-    if (allCorrect) {
-      rotateState.solved = true;
-      const time = Math.floor((Date.now() - rotateState.startTime) / 1000);
-      const score = Math.max(1000 - rotateState.moves * 10 - time * 5, 100);
-      
-      setTimeout(() => {
-        alert(`🎉 ¡Completado!\nMovimientos: ${rotateState.moves}\nTiempo: ${time}s\nPuntuación: ${score}`);
-        
-        if (window.RankingSystem) {
-          window.RankingSystem.submitScore('rotate', score);
-        }
-      }, 300);
+  function updateTimer() {
+    const elapsed = Math.floor((Date.now() - state.timeStart) / 1000);
+    const m = Math.floor(elapsed / 60);
+    const s = elapsed % 60;
+    const el = document.getElementById('rotate-time');
+    if (el) el.textContent = `${m}:${s.toString().padStart(2, '0')}`;
+  }
+
+  function rotatePiece(idx) {
+    if (state.solved) return;
+    state.pieces[idx].rotation = (state.pieces[idx].rotation + 90) % 360;
+    state.pieces[idx].correct = state.pieces[idx].rotation === 0;
+    state.moves++;
+    document.getElementById('rotate-moves').textContent = state.moves;
+
+    if (window.GameEffects) GameEffects.hapticFeedback();
+
+    // Check win
+    if (state.pieces.every(p => p.correct)) {
+      state.solved = true;
+      clearInterval(state.timer);
+      if (window.GameEffects) GameEffects.confettiBurst(document.getElementById('rotate-board'));
     }
+
+    render();
   }
 
-  window.initRotateGame = async function(container) {
-    await loadArtworks();
-    initGame(container);
-  };
+  function render() {
+    const el = document.getElementById('rotate-board');
+    if (!el) return;
+
+    el.innerHTML = state.pieces.map((p, i) => {
+      const hue = (p.r * state.size + p.c) * 40;
+      const bg = state.artworkSrc
+        ? `background-image:url('${state.artworkSrc}');background-size:${state.size * 100}%;background-position:${p.c * (100/(state.size-1))}% ${p.r * (100/(state.size-1))}%`
+        : `background:linear-gradient(${p.r * 45}deg, hsl(${hue},70%,40%), hsl(${hue + 60},70%,50%))`;
+
+      return `<div class="rotate-piece${p.correct ? ' correct' : ''}" data-idx="${i}" style="width:120px;height:120px;${bg};border-radius:8px;cursor:pointer;transform:rotate(${p.rotation}deg);transition:transform 0.3s cubic-bezier(0.34,1.56,0.64,1);border:2px solid ${p.correct ? '#ccff00' : 'rgba(255,255,255,0.1)'};${p.correct ? 'box-shadow:0 0 15px rgba(204,255,0,0.4)' : ''}"></div>`;
+    }).join('');
+
+    el.querySelectorAll('.rotate-piece').forEach(piece => {
+      piece.addEventListener('click', () => rotatePiece(+piece.dataset.idx));
+    });
+  }
+
+  window.RotateGame = { init };
 })();
