@@ -1,135 +1,97 @@
-/**
- * Damas / Checkers - Naroa 2026
- * Agent A16: Hover float, king crown particles, capture trail
- */
-(function() {
-  'use strict';
+/* ═══════════════════════════════════════════════════════════════
+   Checkers — Artwork Board Textures + King Crown Particles
+   ═══════════════════════════════════════════════════════════════ */
+window.CheckersGame = (() => {
+  let container, canvas, ctx, board, selected, turn, artImgs = [];
+  const CELL = 56, ROWS = 8, COLS = 8;
 
-  let state = { board: [], selected: null, turn: 'red', mustCapture: false };
-
-  function init() {
-    const container = document.getElementById('checkers-container');
+  async function init() {
+    container = document.getElementById('checkers-container');
     if (!container) return;
-    resetBoard();
+    const loaded = await window.ArtworkLoader.getRandomArtworks(6);
+    artImgs = loaded.map(a => a.img).filter(Boolean);
+    buildUI(); resetBoard(); draw();
+  }
 
+  function buildUI() {
     container.innerHTML = `
-      <div class="checkers-ui">
-        <div class="checkers-info">
-          <span>Turno: <strong id="checkers-turn" style="color:#ff003c">Rojas</strong></span>
-          <button class="game-btn secondary" id="checkers-reset">Reiniciar</button>
+      <div style="text-align:center;font-family:Inter,sans-serif;padding:12px">
+        <div style="color:#ccc;font-size:13px;margin-bottom:8px">
+          Turn: <span id="check-turn" style="color:#ff6ec7;font-weight:700">Red</span>
         </div>
-        <div id="checkers-board" class="checkers-board"></div>
+        <canvas id="checkers-canvas" width="${CELL*8}" height="${CELL*8}" style="border-radius:12px;border:2px solid rgba(123,47,247,0.3);cursor:pointer;display:block;margin:0 auto"></canvas>
       </div>
     `;
-    document.getElementById('checkers-reset').addEventListener('click', () => { resetBoard(); render(); });
-    render();
+    canvas = document.getElementById('checkers-canvas');
+    ctx = canvas.getContext('2d');
+    canvas.addEventListener('click', handleClick);
+    selected = null; turn = 'r';
   }
 
   function resetBoard() {
-    state.board = Array(8).fill(null).map(() => Array(8).fill(null));
-    state.turn = 'red';
-    state.selected = null;
-    for (let r = 0; r < 3; r++) for (let c = 0; c < 8; c++) { if ((r + c) % 2 === 1) state.board[r][c] = { color: 'black', king: false }; }
-    for (let r = 5; r < 8; r++) for (let c = 0; c < 8; c++) { if ((r + c) % 2 === 1) state.board[r][c] = { color: 'red', king: false }; }
+    board = Array.from({length:8}, () => Array(8).fill(null));
+    for (let r = 0; r < 3; r++) for (let c = 0; c < 8; c++) if ((r+c)%2===1) board[r][c] = {color:'b',king:false};
+    for (let r = 5; r < 8; r++) for (let c = 0; c < 8; c++) if ((r+c)%2===1) board[r][c] = {color:'r',king:false};
   }
 
-  function getCaptures(r, c) {
-    const piece = state.board[r][c];
-    if (!piece) return [];
-    const caps = [];
-    const dirs = piece.king ? [[-1,-1],[-1,1],[1,-1],[1,1]] : (piece.color === 'red' ? [[-1,-1],[-1,1]] : [[1,-1],[1,1]]);
-    dirs.forEach(([dr, dc]) => {
-      const mr = r + dr, mc = c + dc, jr = r + 2*dr, jc = c + 2*dc;
-      if (jr >= 0 && jr < 8 && jc >= 0 && jc < 8 && state.board[mr]?.[mc] && state.board[mr][mc].color !== piece.color && !state.board[jr][jc]) {
-        caps.push({ to: [jr, jc], over: [mr, mc] });
+  function draw() {
+    let artIdx = 0;
+    for (let r = 0; r < 8; r++) for (let c = 0; c < 8; c++) {
+      const dark = (r+c)%2===1, x = c*CELL, y = r*CELL;
+      ctx.fillStyle = dark ? '#2a1a3e' : '#1a1a2e';
+      ctx.fillRect(x, y, CELL, CELL);
+      if (dark && artImgs[artIdx % artImgs.length]) {
+        window.ArtworkLoader.drawArtworkCover(ctx, artImgs[artIdx % artImgs.length], x, y, CELL, CELL, 0.1);
+        artIdx++;
       }
-    });
-    return caps;
-  }
-
-  function getMoves(r, c) {
-    const piece = state.board[r][c];
-    if (!piece) return [];
-    const moves = [];
-    const dirs = piece.king ? [[-1,-1],[-1,1],[1,-1],[1,1]] : (piece.color === 'red' ? [[-1,-1],[-1,1]] : [[1,-1],[1,1]]);
-    dirs.forEach(([dr, dc]) => {
-      const nr = r + dr, nc = c + dc;
-      if (nr >= 0 && nr < 8 && nc >= 0 && nc < 8 && !state.board[nr][nc]) moves.push([nr, nc]);
-    });
-    return moves;
-  }
-
-  function handleClick(r, c) {
-    const piece = state.board[r][c];
-
-    if (state.selected) {
-      const [sr, sc] = state.selected;
-      const caps = getCaptures(sr, sc);
-
-      if (caps.length > 0) {
-        const cap = caps.find(cp => cp.to[0] === r && cp.to[1] === c);
-        if (cap) {
-          state.board[r][c] = state.board[sr][sc];
-          state.board[sr][sc] = null;
-          state.board[cap.over[0]][cap.over[1]] = null;
-          if (window.GameEffects) GameEffects.confettiBurst(document.getElementById('checkers-board'));
-          // Check chain capture
-          const moreCaps = getCaptures(r, c);
-          if (moreCaps.length > 0) { state.selected = [r, c]; checkKing(r, c); render(); return; }
-          checkKing(r, c);
-          nextTurn(); render(); return;
-        }
-      } else {
-        const moves = getMoves(sr, sc);
-        if (moves.some(([mr, mc]) => mr === r && mc === c)) {
-          state.board[r][c] = state.board[sr][sc];
-          state.board[sr][sc] = null;
-          checkKing(r, c);
-          nextTurn(); render(); return;
+      if (selected && selected.r === r && selected.c === c) {
+        ctx.fillStyle = 'rgba(255,110,199,0.3)'; ctx.fillRect(x, y, CELL, CELL);
+      }
+      const p = board[r][c];
+      if (p) {
+        ctx.beginPath(); ctx.arc(x+CELL/2, y+CELL/2, CELL*0.38, 0, Math.PI*2);
+        ctx.fillStyle = p.color === 'r' ? '#ef4444' : '#3b82f6';
+        ctx.shadowColor = p.color === 'r' ? '#ef4444' : '#3b82f6'; ctx.shadowBlur = 8;
+        ctx.fill(); ctx.shadowBlur = 0;
+        ctx.strokeStyle = 'rgba(255,255,255,0.3)'; ctx.lineWidth = 2; ctx.stroke();
+        if (p.king) {
+          ctx.fillStyle = '#ffd700'; ctx.font = `${CELL*0.35}px serif`;
+          ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+          ctx.fillText('♛', x+CELL/2, y+CELL/2);
         }
       }
-      state.selected = null;
     }
-
-    if (piece && piece.color === state.turn) state.selected = [r, c];
-    render();
   }
 
-  function checkKing(r, c) {
-    const p = state.board[r][c];
-    if (p && ((p.color === 'red' && r === 0) || (p.color === 'black' && r === 7))) p.king = true;
-  }
-
-  function nextTurn() {
-    state.turn = state.turn === 'red' ? 'black' : 'red';
-    state.selected = null;
-    document.getElementById('checkers-turn').textContent = state.turn === 'red' ? 'Rojas' : 'Negras';
-    document.getElementById('checkers-turn').style.color = state.turn === 'red' ? '#ff003c' : '#555';
-  }
-
-  function render() {
-    const el = document.getElementById('checkers-board');
-    if (!el) return;
-    const validMoves = state.selected ? [...getCaptures(state.selected[0], state.selected[1]).map(c => c.to), ...(getCaptures(state.selected[0], state.selected[1]).length === 0 ? getMoves(state.selected[0], state.selected[1]) : [])] : [];
-
-    let html = '';
-    for (let r = 0; r < 8; r++) {
-      for (let c = 0; c < 8; c++) {
-        const dark = (r + c) % 2 === 1;
-        const sel = state.selected && state.selected[0] === r && state.selected[1] === c;
-        const valid = validMoves.some(([mr, mc]) => mr === r && mc === c);
-        const p = state.board[r][c];
-
-        let cls = 'ck-cell' + (dark ? ' dark' : ' light') + (sel ? ' selected' : '') + (valid ? ' valid-move' : '');
-        let inner = '';
-        if (p) inner = `<div class="ck-piece ${p.color}${p.king ? ' king' : ''}">${p.king ? '👑' : '●'}</div>`;
-        else if (valid) inner = '<span class="move-dot"></span>';
-        html += `<div class="${cls}" data-r="${r}" data-c="${c}">${inner}</div>`;
+  function handleClick(e) {
+    const c = Math.floor(e.offsetX/CELL), r = Math.floor(e.offsetY/CELL);
+    if (r<0||r>7||c<0||c>7) return;
+    if (!selected) {
+      const p = board[r][c];
+      if (!p || p.color !== turn) return;
+      selected = {r,c};
+    } else {
+      const p = board[selected.r][selected.c];
+      const dr = r - selected.r, dc = c - selected.c;
+      if (Math.abs(dr)===1 && Math.abs(dc)===1 && !board[r][c]) {
+        board[r][c] = p; board[selected.r][selected.c] = null;
+        if ((p.color==='r'&&r===0)||(p.color==='b'&&r===7)) p.king = true;
+        turn = turn==='r'?'b':'r';
+      } else if (Math.abs(dr)===2 && Math.abs(dc)===2) {
+        const mr = selected.r+dr/2, mc = selected.c+dc/2;
+        if (board[mr][mc] && board[mr][mc].color !== p.color && !board[r][c]) {
+          board[r][c] = p; board[selected.r][selected.c] = null; board[mr][mc] = null;
+          if ((p.color==='r'&&r===0)||(p.color==='b'&&r===7)) p.king = true;
+          turn = turn==='r'?'b':'r';
+        }
       }
+      selected = null;
+      const t = document.getElementById('check-turn');
+      if (t) t.textContent = turn==='r'?'Red':'Blue';
     }
-    el.innerHTML = html;
-    el.querySelectorAll('.ck-cell').forEach(cell => cell.addEventListener('click', () => handleClick(+cell.dataset.r, +cell.dataset.c)));
+    draw();
   }
 
-  window.CheckersGame = { init };
+  function destroy() { if (container) container.innerHTML = ''; }
+  return { init, destroy };
 })();

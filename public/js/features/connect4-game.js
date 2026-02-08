@@ -1,103 +1,91 @@
-/**
- * Connect 4 - Naroa 2026
- * Agent A21: Drop animation with bounce, win line laser glow
- */
-(function() {
-  'use strict';
+/* ═══════════════════════════════════════════════════════════════
+   Connect 4 — Artwork Pieces (Rocks vs Tributos series)
+   ═══════════════════════════════════════════════════════════════ */
+window.Connect4Game = (() => {
+  let container, canvas, ctx, board, turn, gameOver, artP1 = [], artP2 = [];
+  const COLS = 7, ROWS = 6, CELL = 60;
 
-  const ROWS = 6, COLS = 7;
-  let state = { board: [], turn: 1, winner: null, winCells: [] };
-
-  function init() {
-    const container = document.getElementById('connect4-container');
+  async function init() {
+    container = document.getElementById('connect4-container');
     if (!container) return;
-    reset();
+    const [s1, s2] = await Promise.all([
+      window.ArtworkLoader.getArtworksBySeries('rocks', 4),
+      window.ArtworkLoader.getArtworksBySeries('tributos-musicales', 4)
+    ]);
+    artP1 = s1; artP2 = s2;
+    buildUI(); board = Array.from({length:ROWS},()=>Array(COLS).fill(0)); turn = 1; gameOver = false; draw();
+  }
 
+  function buildUI() {
     container.innerHTML = `
-      <div class="c4-ui">
-        <div class="c4-info">
-          <span>Turno: <strong id="c4-turn" style="color:#ff003c">🔴 Rojo</strong></span>
-          <button class="game-btn secondary" id="c4-reset">Reiniciar</button>
+      <div style="text-align:center;font-family:Inter,sans-serif;padding:12px">
+        <div style="color:#ccc;font-size:13px;margin-bottom:8px">
+          Turn: <span id="c4-turn" style="color:#ef4444;font-weight:700">Rocks ●</span>
         </div>
-        <div id="c4-board" class="c4-board"></div>
+        <canvas id="c4-canvas" width="${COLS*CELL}" height="${ROWS*CELL}" style="border-radius:12px;border:2px solid rgba(123,47,247,0.3);cursor:pointer;display:block;margin:0 auto;background:#0a0a2e"></canvas>
       </div>
     `;
-    document.getElementById('c4-reset').addEventListener('click', () => { reset(); render(); });
-    render();
+    canvas = document.getElementById('c4-canvas');
+    ctx = canvas.getContext('2d');
+    canvas.addEventListener('click', handleClick);
   }
 
-  function reset() {
-    state.board = Array(ROWS).fill(null).map(() => Array(COLS).fill(0));
-    state.turn = 1;
-    state.winner = null;
-    state.winCells = [];
-  }
-
-  function dropPiece(col) {
-    if (state.winner) return;
-    for (let r = ROWS - 1; r >= 0; r--) {
-      if (state.board[r][col] === 0) {
-        state.board[r][col] = state.turn;
-        const win = checkWin(r, col);
-        if (win) {
-          state.winner = state.turn;
-          state.winCells = win;
-          if (window.GameEffects) GameEffects.confettiBurst(document.getElementById('c4-board'));
+  function draw() {
+    ctx.fillStyle = '#0a0a2e'; ctx.fillRect(0, 0, canvas.width, canvas.height);
+    for (let r = 0; r < ROWS; r++) for (let c = 0; c < COLS; c++) {
+      const x = c*CELL+CELL/2, y = r*CELL+CELL/2, rad = CELL*0.4;
+      // Hole
+      ctx.beginPath(); ctx.arc(x, y, rad, 0, Math.PI*2);
+      ctx.fillStyle = 'rgba(0,0,0,0.4)'; ctx.fill();
+      const v = board[r][c];
+      if (v) {
+        const arts = v === 1 ? artP1 : artP2;
+        const art = arts.length ? arts[c % arts.length] : null;
+        if (art && art.img) {
+          window.ArtworkLoader.drawArtworkCircle(ctx, art.img, x, y, rad, 0.85);
         } else {
-          state.turn = state.turn === 1 ? 2 : 1;
-          const turnEl = document.getElementById('c4-turn');
-          if (turnEl) {
-            turnEl.textContent = state.turn === 1 ? '🔴 Rojo' : '🟡 Amarillo';
-            turnEl.style.color = state.turn === 1 ? '#ff003c' : '#ffd700';
-          }
+          ctx.beginPath(); ctx.arc(x, y, rad, 0, Math.PI*2);
+          ctx.fillStyle = v === 1 ? '#ef4444' : '#eab308'; ctx.fill();
         }
-        if (window.GameEffects) GameEffects.hapticFeedback();
-        render();
-        return;
+        ctx.beginPath(); ctx.arc(x, y, rad, 0, Math.PI*2);
+        ctx.strokeStyle = v === 1 ? '#ef4444' : '#eab308'; ctx.lineWidth = 2.5; ctx.stroke();
+      }
+    }
+  }
+
+  function handleClick(e) {
+    if (gameOver) return;
+    const col = Math.floor(e.offsetX / CELL);
+    if (col < 0 || col >= COLS) return;
+    for (let r = ROWS-1; r >= 0; r--) {
+      if (!board[r][col]) {
+        board[r][col] = turn;
+        if (checkWin(r, col)) { gameOver = true; draw(); endGame(); return; }
+        turn = turn === 1 ? 2 : 1;
+        const t = document.getElementById('c4-turn');
+        if (t) t.innerHTML = turn === 1 ? '<span style="color:#ef4444">Rocks ●</span>' : '<span style="color:#eab308">Tributos ●</span>';
+        draw(); return;
       }
     }
   }
 
   function checkWin(r, c) {
-    const p = state.board[r][c];
     const dirs = [[0,1],[1,0],[1,1],[1,-1]];
-    for (const [dr, dc] of dirs) {
-      const cells = [[r, c]];
-      for (let i = 1; i < 4; i++) { const nr = r+dr*i, nc = c+dc*i; if (nr>=0&&nr<ROWS&&nc>=0&&nc<COLS&&state.board[nr][nc]===p) cells.push([nr,nc]); else break; }
-      for (let i = 1; i < 4; i++) { const nr = r-dr*i, nc = c-dc*i; if (nr>=0&&nr<ROWS&&nc>=0&&nc<COLS&&state.board[nr][nc]===p) cells.push([nr,nc]); else break; }
-      if (cells.length >= 4) return cells;
-    }
-    return null;
-  }
-
-  function render() {
-    const el = document.getElementById('c4-board');
-    if (!el) return;
-    let html = '';
-
-    // Column headers for hover
-    html += '<div class="c4-cols">';
-    for (let c = 0; c < COLS; c++) {
-      html += `<div class="c4-col-header" data-col="${c}">▼</div>`;
-    }
-    html += '</div>';
-
-    for (let r = 0; r < ROWS; r++) {
-      for (let c = 0; c < COLS; c++) {
-        const v = state.board[r][c];
-        const isWin = state.winCells.some(([wr, wc]) => wr === r && wc === c);
-        let cls = 'c4-cell';
-        if (v === 1) cls += ' red';
-        else if (v === 2) cls += ' yellow';
-        if (isWin) cls += ' win-glow';
-        html += `<div class="${cls}" data-col="${c}"></div>`;
-      }
-    }
-    el.innerHTML = html;
-    el.querySelectorAll('.c4-col-header, .c4-cell').forEach(cell => {
-      cell.addEventListener('click', () => dropPiece(+cell.dataset.col));
+    return dirs.some(([dr,dc]) => {
+      let count = 1;
+      for (let i = 1; i < 4; i++) { const nr=r+dr*i,nc=c+dc*i; if (nr>=0&&nr<ROWS&&nc>=0&&nc<COLS&&board[nr][nc]===turn) count++; else break; }
+      for (let i = 1; i < 4; i++) { const nr=r-dr*i,nc=c-dc*i; if (nr>=0&&nr<ROWS&&nc>=0&&nc<COLS&&board[nr][nc]===turn) count++; else break; }
+      return count >= 4;
     });
   }
 
-  window.Connect4Game = { init };
+  function endGame() {
+    const ov = document.createElement('div');
+    Object.assign(ov.style,{position:'absolute',inset:'0',background:'rgba(0,0,0,0.9)',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',zIndex:'100',borderRadius:'16px'});
+    ov.innerHTML = `<div style="font-size:48px;margin-bottom:16px">🏆</div><h2 style="color:#ff6ec7;font-family:Inter,sans-serif;margin:0 0 8px">${turn===1?'Rocks':'Tributos'} wins!</h2><button onclick="Connect4Game.init()" style="margin-top:16px;background:linear-gradient(135deg,#ff6ec7,#7b2ff7);border:none;color:#fff;padding:10px 24px;border-radius:24px;cursor:pointer;font-size:14px;font-weight:600">Play Again</button>`;
+    container.style.position='relative';container.appendChild(ov);
+  }
+
+  function destroy() { if (container) container.innerHTML = ''; }
+  return { init, destroy };
 })();
