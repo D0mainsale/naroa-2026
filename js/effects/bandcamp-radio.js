@@ -37,13 +37,14 @@ class BandcampRadio {
       right: 20px;
       width: 300px;
       height: 350px;
-      z-index: 999;
+      z-index: 1001; /* Fix z-index issue */
       transform: translateY(120%);
       transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
       box-shadow: 0 10px 40px rgba(0,0,0,0.5);
       border-radius: 12px;
       overflow: hidden;
       background: #000;
+      /* Mobile override handled in CSS */
     `;
     
     document.body.appendChild(this.container);
@@ -89,6 +90,18 @@ class BandcampRadio {
               seamless>
         <a href="https://borjamoskv.bandcamp.com/music">Borja Moskv Music</a>
       </iframe>
+      <button class="bandcamp-close-btn" style="
+        position: absolute; 
+        top: 10px; 
+        left: 10px; 
+        background: rgba(0,0,0,0.7); 
+        color: #fff; 
+        border: none; 
+        border-radius: 50%; 
+        width: 30px; 
+        height: 30px; 
+        cursor: pointer;
+        z-index: 1002;">✕</button>
       <button class="bandcamp-next-btn" style="
         position: absolute; 
         top: 10px; 
@@ -99,15 +112,20 @@ class BandcampRadio {
         border-radius: 50%; 
         width: 30px; 
         height: 30px; 
-        cursor: pointer;">↻</button>
+        cursor: pointer;
+        z-index: 1002;">↻</button>
     `;
     
     this.iframe = this.container.querySelector('iframe');
     
     this.container.querySelector('.bandcamp-next-btn').addEventListener('click', (e) => {
         e.stopPropagation();
-        // Logic to rotate ID here
-        console.log('Rotating album...');
+        this.loadRandomAlbum(true); // Force reload
+    });
+
+    this.container.querySelector('.bandcamp-close-btn').addEventListener('click', (e) => {
+        e.stopPropagation();
+        this.togglePlayer();
     });
   }
 }

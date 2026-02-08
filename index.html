@@ -87,6 +87,7 @@
   <link rel="stylesheet" href="css/about-contact.css">
   <link rel="stylesheet" href="css/nav.css">
   <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="css/mobile-fixes.css">
 
   <!-- Deferred non-critical CSS -->
   <link rel="stylesheet" href="css/audio-controls.css" media="print" onload="this.media='all'">
@@ -866,15 +867,7 @@
   <!-- kinetic-text.js duplicate removed (already loaded at line 810) -->
 
   <!-- Audio Dock Toggle -->
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const toggle = document.getElementById('audio-toggle');
-      const dock = document.getElementById('audio-dock');
-      if (toggle && dock) {
-        toggle.addEventListener('click', () => dock.classList.toggle('open'));
-      }
-    });
-  </script>
+  <script src="js/effects/cursor-sfx.js" defer></script>
   
   <script src="js/effects/hero-slider.js" defer></script>
   <script src="js/effects/scroll-360.js" defer></script>
