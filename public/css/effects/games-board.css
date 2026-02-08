@@ -1,0 +1,329 @@
+/* ============================================
+   Board Games Premium CSS — Chess, Checkers, Connect4, Reversi
+   ============================================ */
+
+/* Shared board grid */
+.chess-board, .checkers-board, .c4-board, .reversi-board, .rev-board {
+  display: grid;
+  gap: 0;
+  max-width: 400px;
+  margin: 0 auto;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 30px rgba(204, 255, 0, 0.1);
+}
+
+.chess-board { grid-template-columns: repeat(8, 1fr); }
+.checkers-board { grid-template-columns: repeat(8, 1fr); }
+.reversi-board { grid-template-columns: repeat(8, 1fr); }
+.c4-board { grid-template-columns: repeat(7, 1fr); }
+
+/* Chess cells */
+.chess-cell, .ck-cell, .rev-cell {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.chess-cell.light, .ck-cell.light, .rev-cell:nth-child(odd) {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.chess-cell.dark, .ck-cell.dark, .rev-cell:nth-child(even) {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.chess-cell.selected, .ck-cell.selected {
+  background: rgba(204, 255, 0, 0.25) !important;
+  box-shadow: inset 0 0 15px rgba(204, 255, 0, 0.3);
+}
+
+.chess-cell.valid-move, .ck-cell.valid-move, .rev-cell.valid-move {
+  background: rgba(204, 255, 0, 0.08) !important;
+}
+
+.chess-cell:hover, .ck-cell:hover, .rev-cell:hover {
+  background: rgba(255, 255, 255, 0.12) !important;
+}
+
+/* Move indicator dot */
+.move-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(204, 255, 0, 0.4);
+  display: block;
+  animation: pulseDot 1s infinite;
+}
+
+@keyframes pulseDot {
+  0%, 100% { transform: scale(1); opacity: 0.4; }
+  50% { transform: scale(1.3); opacity: 0.8; }
+}
+
+/* Checkers pieces */
+.ck-piece {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: grab;
+}
+
+.ck-piece.red {
+  background: radial-gradient(circle at 30% 30%, #ff6b6b, #c0392b);
+  box-shadow: 0 3px 10px rgba(255, 0, 60, 0.4);
+}
+
+.ck-piece.black {
+  background: radial-gradient(circle at 30% 30%, #555, #222);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+}
+
+.ck-piece.king {
+  border: 2px solid #ffd700;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+}
+
+.ck-piece:hover {
+  transform: translateY(-3px) scale(1.1);
+}
+
+/* Reversi pieces */
+.rev-cell {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  cursor: pointer;
+  background: rgba(0, 80, 0, 0.3);
+  border: 1px solid rgba(0, 100, 0, 0.2);
+  transition: background 0.2s;
+}
+
+.rev-piece {
+  transition: transform 0.4s ease;
+}
+
+.rev-piece.black { text-shadow: 0 0 10px rgba(100, 100, 100, 0.5); }
+.rev-piece.white { text-shadow: 0 0 10px rgba(255, 255, 255, 0.3); }
+
+/* Connect 4 */
+.c4-board {
+  background: rgba(0, 50, 200, 0.15);
+  border-radius: 12px;
+  padding: 8px;
+  max-width: 380px;
+  margin: 0 auto;
+}
+
+.c4-cols {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0;
+}
+
+.c4-col-header {
+  text-align: center;
+  color: rgba(204, 255, 0, 0.3);
+  cursor: pointer;
+  padding: 5px;
+  font-size: 0.8rem;
+  transition: color 0.2s;
+}
+
+.c4-col-header:hover { color: #ccff00; }
+
+.c4-cell {
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: rgba(0, 0, 20, 0.6);
+  margin: 3px;
+  transition: all 0.3s ease;
+  box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+}
+
+.c4-cell.red {
+  background: radial-gradient(circle at 35% 35%, #ff6b6b, #e74c3c);
+  box-shadow: 0 0 12px rgba(255, 0, 60, 0.4);
+}
+
+.c4-cell.yellow {
+  background: radial-gradient(circle at 35% 35%, #ffd700, #f39c12);
+  box-shadow: 0 0 12px rgba(255, 215, 0, 0.4);
+}
+
+.c4-cell.win-glow {
+  animation: winPulse 0.6s infinite alternate;
+}
+
+@keyframes winPulse {
+  from { box-shadow: 0 0 15px rgba(204, 255, 0, 0.5); }
+  to { box-shadow: 0 0 30px rgba(204, 255, 0, 0.9), 0 0 60px rgba(204, 255, 0, 0.3); }
+}
+
+/* Shared game UI */
+.chess-ui, .checkers-ui, .c4-ui, .reversi-ui,
+.reinas-ui, .typing-ui, .target-ui, .collage-ui,
+.rotate-ui, .puzzle-ui, .kintsugi-ui, .tetris-ui, .runner-ui {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.chess-info, .checkers-info, .c4-info, .reversi-info,
+.reinas-info, .typing-stats, .target-stats, .rotate-info, .puzzle-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  margin-bottom: 15px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+}
+
+.chess-captures {
+  text-align: center;
+  padding: 10px;
+  font-size: 1.2rem;
+  min-height: 30px;
+}
+
+/* Tetris UI */
+.tetris-ui {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.tetris-side {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 100px;
+}
+
+.tetris-box {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(204, 255, 0, 0.15);
+  border-radius: 8px;
+  padding: 8px;
+  text-align: center;
+}
+
+.tetris-box h3 {
+  font-size: 0.7rem;
+  color: rgba(204, 255, 0, 0.6);
+  margin: 0 0 5px;
+  letter-spacing: 2px;
+}
+
+.tetris-info p {
+  margin: 4px 0;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.tetris-info strong { color: #ccff00; }
+
+/* Game buttons */
+.game-btn {
+  background: linear-gradient(135deg, rgba(204, 255, 0, 0.15), rgba(204, 255, 0, 0.05));
+  border: 1px solid rgba(204, 255, 0, 0.3);
+  color: #ccff00;
+  padding: 10px 24px;
+  border-radius: 8px;
+  font-family: 'Satoshi', sans-serif;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.game-btn:hover {
+  background: linear-gradient(135deg, rgba(204, 255, 0, 0.25), rgba(204, 255, 0, 0.1));
+  box-shadow: 0 0 20px rgba(204, 255, 0, 0.2);
+  transform: translateY(-2px);
+}
+
+.game-btn.secondary {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* Reinas options */
+.reinas-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 400px;
+  margin: 15px auto;
+}
+
+.reinas-btn {
+  width: 100%;
+  text-align: left;
+  font-size: 1rem;
+}
+
+.reinas-hint {
+  text-align: center;
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  margin: 10px 0;
+}
+
+/* Target animations */
+@keyframes targetPop {
+  from { transform: scale(0); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes ringPulse {
+  0% { transform: scale(1); opacity: 0.6; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; transform: scale(1); }
+  to { opacity: 0; transform: scale(2); }
+}
+
+/* Collage palette */
+.collage-palette {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  margin: 10px 0;
+}
+
+.collage-controls {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin: 15px 0;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .chess-cell, .ck-cell, .rev-cell { font-size: 1.2rem; }
+  .tetris-ui { flex-direction: column; align-items: center; }
+  .tetris-side { flex-direction: row; }
+}
