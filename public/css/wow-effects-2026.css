@@ -1,0 +1,86 @@
+/* ═══════════════════════════════════════════════════════════════════════════════
+   WOW EFFECTS 2026 — MINIMAL EDITION
+   Only essentials: glass, subtle reveals
+   ═══════════════════════════════════════════════════════════════════════════════ */
+
+/* Liquid Glass — simplified */
+.liquid-glass {
+  position: relative;
+  overflow: hidden;
+}
+
+.liquid-glass::before { display: none; }
+
+/* Aurora — disabled */
+.aurora-bg { display: none !important; }
+
+/* Glitch Text — disabled */
+.glitch-text { position: relative; display: inline-block; }
+
+/* Morphing Cursor — removed */
+.morphing-cursor { display: none !important; }
+
+/* Stagger Reveal — subtle */
+.stagger-reveal > * {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.stagger-reveal > .reveal-active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Noise Overlay — removed */
+.noise-overlay { display: none !important; }
+
+/* Split Text — subtle */
+.split-reveal .split-char {
+  display: inline-block;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  transition-delay: calc(var(--char-index) * 0.02s);
+}
+
+.split-reveal.revealed .split-char { opacity: 1; transform: none; }
+
+/* Parallax — kept but simplified */
+.parallax-container { overflow: hidden; }
+
+/* Premium Card — minimal */
+.premium-card {
+  position: relative;
+  background: var(--black-card);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition: border-color 0.3s ease;
+}
+
+.premium-card::before { display: none; }
+.premium-card:hover {
+  transform: none;
+  box-shadow: none;
+  border-color: rgba(255,255,255,0.15);
+}
+
+/* Glow Text — disabled */
+.glow-text { text-shadow: none; animation: none; }
+
+/* Float Element — disabled */
+.float-element { animation: none; }
+
+/* Chromatic hover — disabled */
+.chromatic-hover { filter: none; }
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .stagger-reveal > *,
+  .split-reveal .split-char {
+    animation: none;
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
+}

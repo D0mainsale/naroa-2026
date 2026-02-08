@@ -11,44 +11,44 @@ const AudioSynth = {
     this.ctx = audioContext;
   },
 
-  // Generate UI hover sound - soft click
+  // Generate UI hover sound - soft warm bubble
   uiHover() {
     if (!this.ctx) return;
     const osc = this.ctx.createOscillator();
     const gain = this.ctx.createGain();
     
     osc.type = 'sine';
-    osc.frequency.setValueAtTime(800, this.ctx.currentTime);
-    osc.frequency.exponentialRampToValueAtTime(400, this.ctx.currentTime + 0.05);
+    osc.frequency.setValueAtTime(330, this.ctx.currentTime);
+    osc.frequency.linearRampToValueAtTime(400, this.ctx.currentTime + 0.12);
     
-    gain.gain.setValueAtTime(0.1, this.ctx.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.1);
+    gain.gain.setValueAtTime(0.03, this.ctx.currentTime);
+    gain.gain.linearRampToValueAtTime(0.001, this.ctx.currentTime + 0.2);
     
     osc.connect(gain);
     gain.connect(this.ctx.destination);
     
     osc.start();
-    osc.stop(this.ctx.currentTime + 0.1);
+    osc.stop(this.ctx.currentTime + 0.2);
   },
 
-  // Generate UI click sound
+  // Generate UI click sound - woodblock tap
   uiClick() {
     if (!this.ctx) return;
     const osc = this.ctx.createOscillator();
     const gain = this.ctx.createGain();
     
-    osc.type = 'square';
-    osc.frequency.setValueAtTime(600, this.ctx.currentTime);
-    osc.frequency.exponentialRampToValueAtTime(200, this.ctx.currentTime + 0.08);
+    osc.type = 'triangle';
+    osc.frequency.setValueAtTime(800, this.ctx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(100, this.ctx.currentTime + 0.05);
     
-    gain.gain.setValueAtTime(0.15, this.ctx.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.15);
+    gain.gain.setValueAtTime(0.1, this.ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.05);
     
     osc.connect(gain);
     gain.connect(this.ctx.destination);
     
     osc.start();
-    osc.stop(this.ctx.currentTime + 0.15);
+    osc.stop(this.ctx.currentTime + 0.05);
   },
 
   // Success sound - ascending arpeggio
@@ -201,42 +201,74 @@ const AudioSynth = {
     });
   },
 
-  // Ambient gallery drone (continuous)
+  // Ambient gallery drone (warm, soft, vibrating — alive)
   createAmbientDrone() {
     if (!this.ctx) return null;
     
     const masterGain = this.ctx.createGain();
-    masterGain.gain.value = 0.02;
+    masterGain.gain.value = 0.025;
     
-    // Create multiple drone oscillators
-    const drones = [55, 110, 165, 220].map(freq => {
+    // Master lowpass — everything warm and muffled
+    const masterFilter = this.ctx.createBiquadFilter();
+    masterFilter.type = 'lowpass';
+    masterFilter.frequency.value = 350;
+    masterFilter.Q.value = 0.7;
+    
+    // Warm chord: spread A Major voicing
+    const voices = [
+      { freq: 55.00,  type: 'sine',     vol: 0.30 },  // A1 sub-bass
+      { freq: 110.00, type: 'sine',     vol: 0.50 },  // A2 warm root
+      { freq: 164.81, type: 'triangle', vol: 0.25 },  // E3 soft fifth
+      { freq: 220.00, type: 'sine',     vol: 0.35 },  // A3 octave body
+      { freq: 277.18, type: 'triangle', vol: 0.15 },  // C#4 gentle third
+    ];
+    
+    const drones = voices.map(v => {
       const osc = this.ctx.createOscillator();
       const gain = this.ctx.createGain();
-      const filter = this.ctx.createBiquadFilter();
       
-      osc.type = 'sine';
-      osc.frequency.value = freq;
+      osc.type = v.type;
+      osc.frequency.value = v.freq;
+      gain.gain.value = v.vol;
       
-      // LFO for subtle movement
-      const lfo = this.ctx.createOscillator();
-      const lfoGain = this.ctx.createGain();
-      lfo.frequency.value = 0.1 + Math.random() * 0.1;
-      lfoGain.gain.value = freq * 0.01;
-      lfo.connect(lfoGain);
-      lfoGain.connect(osc.frequency);
-      lfo.start();
+      // Ultra-slow organic frequency drift
+      const lfoFreq = this.ctx.createOscillator();
+      const lfoFreqGain = this.ctx.createGain();
+      lfoFreq.frequency.value = 0.02 + Math.random() * 0.03;
+      lfoFreqGain.gain.value = 1.5;
+      lfoFreq.connect(lfoFreqGain);
+      lfoFreqGain.connect(osc.frequency);
+      lfoFreq.start();
       
-      filter.type = 'lowpass';
-      filter.frequency.value = 500;
+      // Breathing tremolo
+      const lfoAmp = this.ctx.createOscillator();
+      const lfoAmpGain = this.ctx.createGain();
+      lfoAmp.frequency.value = 0.08 + Math.random() * 0.06;
+      lfoAmpGain.gain.value = 0.15;
+      lfoAmp.connect(lfoAmpGain);
+      lfoAmpGain.connect(gain.gain);
+      lfoAmp.start();
       
-      gain.gain.value = 0.5;
+      osc.connect(gain);
+      gain.connect(masterFilter);
       
-      osc.connect(filter);
-      filter.connect(gain);
-      gain.connect(masterGain);
-      
-      return { osc, lfo, gain };
+      return { osc, lfoFreq, lfoAmp };
     });
+    
+    // Spatial delay for depth
+    const delay = this.ctx.createDelay(1.0);
+    const delayGain = this.ctx.createGain();
+    const feedback = this.ctx.createGain();
+    delay.delayTime.value = 0.4;
+    delayGain.gain.value = 0.12;
+    feedback.gain.value = 0.2;
+    
+    masterFilter.connect(masterGain);
+    masterFilter.connect(delay);
+    delay.connect(feedback);
+    feedback.connect(delay);
+    delay.connect(delayGain);
+    delayGain.connect(masterGain);
     
     masterGain.connect(this.ctx.destination);
     
@@ -247,11 +279,12 @@ const AudioSynth = {
       stop() {
         drones.forEach(d => {
           d.osc.stop();
-          d.lfo.stop();
+          d.lfoFreq.stop();
+          d.lfoAmp.stop();
         });
       },
       setVolume(v) {
-        masterGain.gain.value = v;
+        masterGain.gain.linearRampToValueAtTime(v, this.ctx.currentTime + 1);
       }
     };
   },

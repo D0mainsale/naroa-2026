@@ -9,7 +9,6 @@ class SwarmAgent {
     this.name = name;
     this.active = false;
   }
-  log(msg) { console.log(`[🐝 ${this.name}] ${msg}`); }
   activate() { this.active = true; this.log('Online ✅'); }
 }
 
@@ -275,7 +274,6 @@ class SwarmOrchestrator {
   init() {
     console.group('🐝 SWARM v2 — 10 Agents Initializing');
     this.agents.forEach(agent => agent.activate());
-    console.log(`✅ All ${this.agents.length} agents online`);
     console.groupEnd();
     window.Swarm = this;
   }

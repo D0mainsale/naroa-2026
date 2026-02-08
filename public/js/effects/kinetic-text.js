@@ -28,7 +28,6 @@ class KineticText {
 
   init(selector) {
     if (this.isReduced) {
-      console.log('[KineticText] Reduced motion detected, skipping init');
       return this;
     }
 

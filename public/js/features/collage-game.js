@@ -1,119 +1,141 @@
-/* ═══════════════════════════════════════════════════════════════
-   Collage Creator — Premium with Real Artwork Fragments
-   Users stamp artwork fragments onto a canvas
-   ═══════════════════════════════════════════════════════════════ */
-window.CollageGame = (() => {
-  let container, canvas, ctx, artworks = [], placed = [], currentArt = null;
-  let rotation = 0, scale = 1;
+/**
+ * Collage Creator - Naroa 2026
+ * Agent A17: Drag-drop glow, element placement burst, poem typewriter
+ */
+(function() {
+  'use strict';
 
-  async function init() {
-    container = document.getElementById('collage-container');
+  let state = { elements: [], canvas: null, ctx: null, dragging: null, emotion: 'neutral', poems: {
+    joy: 'La luz se fragmenta\nen mil colores vivos\nque danzan sin cesar.',
+    sadness: 'Las sombras abrazan\nlos recuerdos perdidos\nen un mar de silencio.',
+    anger: 'Fuego que consume\nlas cadenas del alma\nlibertad que arde.',
+    neutral: 'El lienzo en blanco\nespera tus palabras\nhechas de color.'
+  }};
+
+  function init() {
+    const container = document.getElementById('collage-container');
     if (!container) return;
-    artworks = await window.ArtworkLoader.getRandomArtworks(12);
-    buildUI();
-  }
 
-  function buildUI() {
     container.innerHTML = `
-      <div style="font-family:Inter,sans-serif;max-width:520px;margin:0 auto;padding:12px">
-        <div style="color:#ccc;font-size:13px;margin-bottom:8px;text-align:center">
-          Click a thumbnail below, then click the canvas to place it
+      <div class="collage-ui">
+        <div class="collage-palette" id="collage-palette"></div>
+        <canvas id="collage-canvas" width="500" height="500" style="border:1px solid rgba(204,255,0,0.2);border-radius:12px;cursor:crosshair;background:#0d0d1a"></canvas>
+        <div class="collage-controls">
+          <button class="game-btn" id="collage-clear">🗑️ Limpiar</button>
+          <button class="game-btn" id="collage-poem">📜 Revelar Poema</button>
         </div>
-        <canvas id="collage-canvas" style="width:100%;border-radius:12px;border:2px solid rgba(123,47,247,0.3);
-          background:#0a0a1a;cursor:crosshair;display:block"></canvas>
-        <div style="display:flex;gap:8px;margin-top:12px;overflow-x:auto;padding:8px 0" id="collage-palette"></div>
-        <div style="display:flex;gap:8px;margin-top:8px;justify-content:center">
-          <button onclick="CollageGame.rotate(-45)" style="background:rgba(123,47,247,0.3);border:1px solid #7b2ff7;color:#fff;padding:6px 14px;border-radius:8px;cursor:pointer;font-size:12px">↻ Rotate</button>
-          <button onclick="CollageGame.scaleUp()" style="background:rgba(123,47,247,0.3);border:1px solid #7b2ff7;color:#fff;padding:6px 14px;border-radius:8px;cursor:pointer;font-size:12px">+ Bigger</button>
-          <button onclick="CollageGame.scaleDown()" style="background:rgba(123,47,247,0.3);border:1px solid #7b2ff7;color:#fff;padding:6px 14px;border-radius:8px;cursor:pointer;font-size:12px">− Smaller</button>
-          <button onclick="CollageGame.clear()" style="background:rgba(239,68,68,0.3);border:1px solid #ef4444;color:#fff;padding:6px 14px;border-radius:8px;cursor:pointer;font-size:12px">🗑 Clear</button>
-        </div>
+        <div id="collage-poem-text" style="font-style:italic;color:#d4af37;min-height:60px;text-align:center;padding:10px"></div>
       </div>
     `;
-    canvas = document.getElementById('collage-canvas');
-    canvas.width = 500; canvas.height = 400;
-    ctx = canvas.getContext('2d');
-    placed = []; rotation = 0; scale = 1;
 
-    // Palette
+    state.canvas = document.getElementById('collage-canvas');
+    state.ctx = state.canvas.getContext('2d');
+
+    // Build palette
     const palette = document.getElementById('collage-palette');
-    artworks.forEach((art, i) => {
-      const thumb = document.createElement('div');
-      Object.assign(thumb.style, {
-        width: '50px', height: '50px', borderRadius: '8px', overflow: 'hidden',
-        border: '2px solid rgba(255,110,199,0.3)', cursor: 'pointer', flexShrink: '0',
-        transition: 'all 0.2s'
+    const shapes = ['circle', 'square', 'triangle', 'star', 'heart'];
+    const hues = [0, 60, 120, 200, 280];
+    shapes.forEach((shape, i) => {
+      const btn = document.createElement('div');
+      btn.className = 'palette-item';
+      btn.style.cssText = `width:40px;height:40px;background:hsl(${hues[i]},80%,50%);border-radius:${shape==='circle'?'50%':'4px'};cursor:grab;display:inline-block;margin:4px;box-shadow:0 0 10px hsla(${hues[i]},80%,50%,0.5)`;
+      btn.dataset.shape = shape;
+      btn.dataset.hue = hues[i];
+      btn.draggable = true;
+      btn.addEventListener('dragstart', e => {
+        e.dataTransfer.setData('shape', shape);
+        e.dataTransfer.setData('hue', hues[i]);
       });
-      if (art.img) {
-        const img = document.createElement('img');
-        img.src = art.img.src;
-        Object.assign(img.style, { width: '100%', height: '100%', objectFit: 'cover' });
-        thumb.appendChild(img);
+      palette.appendChild(btn);
+    });
+
+    state.canvas.addEventListener('dragover', e => e.preventDefault());
+    state.canvas.addEventListener('drop', e => {
+      e.preventDefault();
+      const rect = state.canvas.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const shape = e.dataTransfer.getData('shape');
+      const hue = parseInt(e.dataTransfer.getData('hue'));
+      addElement(x, y, shape, hue);
+    });
+
+    // Click to place
+    state.canvas.addEventListener('click', e => {
+      const rect = state.canvas.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const hue = Math.random() * 360;
+      const shapes = ['circle', 'square', 'triangle'];
+      addElement(x, y, shapes[Math.floor(Math.random() * shapes.length)], hue);
+    });
+
+    document.getElementById('collage-clear').addEventListener('click', () => {
+      state.elements = [];
+      state.ctx.clearRect(0, 0, 500, 500);
+    });
+
+    document.getElementById('collage-poem').addEventListener('click', revealPoem);
+  }
+
+  function addElement(x, y, shape, hue) {
+    const size = 20 + Math.random() * 40;
+    const rotation = Math.random() * Math.PI * 2;
+    state.elements.push({ x, y, shape, hue, size, rotation, alpha: 0 });
+    
+    // Update emotion based on dominant hue
+    const avgHue = state.elements.reduce((s, e) => s + e.hue, 0) / state.elements.length;
+    if (avgHue < 60) state.emotion = 'anger';
+    else if (avgHue < 150) state.emotion = 'joy';
+    else if (avgHue < 250) state.emotion = 'sadness';
+    else state.emotion = 'neutral';
+
+    if (window.GameEffects) GameEffects.hapticFeedback();
+    renderCanvas();
+  }
+
+  function renderCanvas() {
+    const ctx = state.ctx;
+    ctx.clearRect(0, 0, 500, 500);
+
+    state.elements.forEach(el => {
+      ctx.save();
+      ctx.translate(el.x, el.y);
+      ctx.rotate(el.rotation);
+      ctx.globalAlpha = Math.min(1, (el.alpha += 0.1));
+      ctx.fillStyle = `hsl(${el.hue}, 80%, 55%)`;
+      ctx.shadowColor = `hsl(${el.hue}, 80%, 50%)`;
+      ctx.shadowBlur = 12;
+
+      switch (el.shape) {
+        case 'circle':
+          ctx.beginPath(); ctx.arc(0, 0, el.size/2, 0, Math.PI*2); ctx.fill(); break;
+        case 'square':
+          ctx.fillRect(-el.size/2, -el.size/2, el.size, el.size); break;
+        case 'triangle':
+          ctx.beginPath(); ctx.moveTo(0, -el.size/2); ctx.lineTo(el.size/2, el.size/2); ctx.lineTo(-el.size/2, el.size/2); ctx.closePath(); ctx.fill(); break;
+        default:
+          ctx.beginPath(); ctx.arc(0, 0, el.size/2, 0, Math.PI*2); ctx.fill();
       }
-      thumb.addEventListener('click', () => {
-        currentArt = art;
-        palette.querySelectorAll('div').forEach(d => d.style.borderColor = 'rgba(255,110,199,0.3)');
-        thumb.style.borderColor = '#ff6ec7';
-        thumb.style.boxShadow = '0 0 12px rgba(255,110,199,0.5)';
-      });
-      palette.appendChild(thumb);
-    });
-
-    canvas.addEventListener('click', placeArtwork);
-    drawCanvas();
-  }
-
-  function placeArtwork(e) {
-    if (!currentArt) return;
-    const rect = canvas.getBoundingClientRect();
-    const scaleX = canvas.width / rect.width;
-    const x = (e.clientX - rect.left) * scaleX;
-    const y = (e.clientY - rect.top) * scaleX;
-    placed.push({ art: currentArt, x, y, rotation, scale, opacity: 0.9 });
-    drawCanvas();
-  }
-
-  function drawCanvas() {
-    ctx.fillStyle = '#0a0a1a'; ctx.fillRect(0, 0, canvas.width, canvas.height);
-    // Light grid
-    ctx.strokeStyle = 'rgba(123,47,247,0.05)';
-    for (let x = 0; x < canvas.width; x += 20) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, canvas.height); ctx.stroke(); }
-    for (let y = 0; y < canvas.height; y += 20) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(canvas.width, y); ctx.stroke(); }
-
-    placed.forEach(p => {
-      if (!p.art.img) return;
-      const sz = 80 * p.scale;
-      ctx.save();
-      ctx.translate(p.x, p.y);
-      ctx.rotate(p.rotation * Math.PI / 180);
-      ctx.globalAlpha = p.opacity;
-      // Shadow
-      ctx.shadowColor = '#ff6ec7'; ctx.shadowBlur = 12;
-      window.ArtworkLoader.drawArtworkCover(ctx, p.art.img, -sz/2, -sz/2, sz, sz);
-      ctx.shadowBlur = 0;
-      // Border
-      ctx.strokeStyle = 'rgba(255,110,199,0.4)'; ctx.lineWidth = 1.5;
-      ctx.strokeRect(-sz/2, -sz/2, sz, sz);
       ctx.restore();
     });
-
-    // Watermark
-    if (placed.length > 0) {
-      ctx.save();
-      ctx.globalAlpha = 0.3;
-      ctx.fillStyle = '#fff'; ctx.font = '10px Inter';
-      ctx.fillText('Collage by Naroa', 10, canvas.height - 10);
-      ctx.restore();
-    }
+    ctx.shadowBlur = 0;
   }
 
-  function destroy() { if (container) container.innerHTML = ''; }
+  function revealPoem() {
+    const text = state.poems[state.emotion];
+    const el = document.getElementById('collage-poem-text');
+    el.textContent = '';
+    let i = 0;
+    const type = () => {
+      if (i < text.length) {
+        el.textContent += text[i++];
+        setTimeout(type, 50);
+      }
+    };
+    type();
+    if (window.GameEffects) GameEffects.confettiBurst(document.getElementById('collage-canvas'));
+  }
 
-  return {
-    init, destroy,
-    rotate: (deg) => { rotation += deg; },
-    scaleUp: () => { scale = Math.min(3, scale + 0.2); },
-    scaleDown: () => { scale = Math.max(0.3, scale - 0.2); },
-    clear: () => { placed = []; drawCanvas(); }
-  };
+  window.CollageGame = { init };
 })();

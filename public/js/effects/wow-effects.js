@@ -117,4 +117,3 @@ if (document.readyState === 'loading') {
   initWowEffects();
 }
 
-console.log('✨ WOW Effects initialized');

@@ -80,10 +80,9 @@ const ImmersiveAudio = {
       // Create UI controls
       this.createUI();
 
-      // Start ambient drone
-      this.startAmbient();
+      // Ambient drone disabled per user request
+      // this.startAmbient();
 
-      console.log('🎧 Immersive Audio Engine initialized (HiFi 48kHz)');
       return true;
     } catch (err) {
       console.warn('Audio not available:', err);

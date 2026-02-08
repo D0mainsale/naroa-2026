@@ -1,0 +1,309 @@
+/* ═══════════════════════════════════════════════════════════
+   STITCH PREMIUM CARDS v2.0 — Naroa 2026
+   Glassmorphism cards with shimmer, series color, featured badge
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── BASE CARD ── */
+
+.stitch-card {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              box-shadow 0.4s ease,
+              border-color 0.4s ease;
+  cursor: pointer;
+  will-change: transform;
+}
+
+.stitch-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.1),
+    0 0 30px -5px color-mix(in srgb, var(--series-color, var(--fluor, #39ff14)) 25%, transparent);
+  border-color: color-mix(in srgb, var(--series-color, var(--fluor, #39ff14)) 40%, transparent);
+}
+
+/* ── MEDIA WRAPPER + SHIMMER ── */
+
+.stitch-media-wrapper {
+  position: relative;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.02);
+  min-height: 180px;
+}
+
+.stitch-media-wrapper.shimmer {
+  background: linear-gradient(
+    110deg,
+    rgba(255, 255, 255, 0.02) 0%,
+    rgba(255, 255, 255, 0.02) 30%,
+    rgba(255, 255, 255, 0.08) 50%,
+    rgba(255, 255, 255, 0.02) 70%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer-sweep 1.8s ease-in-out infinite;
+}
+
+@keyframes shimmer-sweep {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.stitch-media-content {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              opacity 0.5s ease;
+  opacity: 0;
+}
+
+.stitch-media-content.loaded {
+  opacity: 1;
+}
+
+.stitch-card:hover .stitch-media-content {
+  transform: scale(1.06);
+}
+
+/* ── CONTENT OVERLAY ── */
+
+.stitch-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1.5rem;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.6) 100%
+  );
+  transform: translateY(8px);
+  opacity: 0;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+.stitch-card:hover .stitch-content {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.stitch-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  margin: 0 0 4px;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+}
+
+.stitch-subtitle {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.6);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* ── BADGES ── */
+
+.stitch-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.stitch-badge--featured {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 3;
+  background: linear-gradient(135deg, #FFD700, #FFA500);
+  color: #1a1a1a;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
+  animation: badge-glow 3s ease-in-out infinite;
+}
+
+@keyframes badge-glow {
+  0%, 100% { box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3); }
+  50% { box-shadow: 0 4px 20px rgba(255, 215, 0, 0.6); }
+}
+
+/* ── GALLERY ITEM: SCROLL REVEAL ── */
+/* Items visible by default — fade-up animation handled by gallery.css */
+
+.gallery__item--exit {
+  opacity: 0;
+  transform: scale(0.95);
+  transition: all 0.2s ease;
+}
+
+/* ── EMPTY STATE ── */
+
+.gallery__empty {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.gallery__empty-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  opacity: 0.5;
+  animation: empty-float 3s ease-in-out infinite;
+}
+
+@keyframes empty-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* ── FILTER BUTTONS ── */
+
+.gallery-filters--scrollable {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding: 8px 0;
+  mask-image: linear-gradient(to right, transparent, black 16px, black calc(100% - 16px), transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 16px, black calc(100% - 16px), transparent);
+}
+
+.gallery-filters--scrollable::-webkit-scrollbar {
+  display: none;
+}
+
+.gallery-filter {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.gallery-filter:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: white;
+  border-color: color-mix(in srgb, var(--filter-color, var(--gold-metallic, #d4af37)) 40%, transparent);
+}
+
+.gallery-filter--active {
+  background: color-mix(in srgb, var(--filter-color, var(--gold-metallic, #d4af37)) 20%, transparent);
+  color: var(--filter-color, var(--fluor, #39ff14));
+  border-color: color-mix(in srgb, var(--filter-color, var(--gold-metallic, #d4af37)) 50%, transparent);
+  font-weight: 600;
+}
+
+.gallery-filter__emoji {
+  font-size: 1rem;
+}
+
+.gallery-filter__count {
+  font-size: 0.7rem;
+  font-family: 'JetBrains Mono', monospace;
+  opacity: 0.5;
+  padding: 1px 6px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+}
+
+.gallery-filter--active .gallery-filter__count {
+  opacity: 0.8;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* ── 360 TOGGLE ── */
+
+.btn-360 {
+  padding: 8px 16px;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.85rem;
+}
+
+.btn-360:hover {
+  background: rgba(57, 255, 20, 0.1);
+  border-color: rgba(57, 255, 20, 0.3);
+  color: var(--fluor, #39ff14);
+}
+
+.btn-360--active {
+  background: rgba(57, 255, 20, 0.15);
+  color: var(--fluor, #39ff14);
+  border-color: var(--fluor, #39ff14);
+  box-shadow: 0 0 16px rgba(57, 255, 20, 0.2);
+}
+
+/* ── RESPONSIVE ── */
+
+@media (max-width: 768px) {
+  .stitch-card:hover {
+    transform: translateY(-4px) scale(1.01);
+  }
+
+  .stitch-content {
+    opacity: 1;
+    transform: translateY(0);
+    padding: 1rem;
+  }
+
+  .stitch-title {
+    font-size: 0.9rem;
+  }
+
+  .gallery-filter {
+    padding: 6px 12px;
+    font-size: 0.75rem;
+  }
+}
+
+/* ── VIDEO GRID (legacy support) ── */
+
+.stitch-grid--video {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}

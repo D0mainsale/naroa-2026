@@ -4,6 +4,9 @@
    ========================================================================== */
 
 /* Override layout.css: Make ALL views visible for 360° scroll */
+/* Override layout.css: Make ALL views visible for 360° scroll */
+/* DISABLED FOR STABILITY - REVERTING TO SPA MODE */
+/*
 .view {
   display: block !important;
   opacity: 1 !important;
@@ -11,6 +14,7 @@
   position: relative !important;
   z-index: 1 !important;
 }
+*/
 
 /* Scroll-snap container on html */
 html {
@@ -25,12 +29,14 @@ html {
 }
 
 /* Ensure Home view has flex layout in scroll mode too */
+/*
 .view--home,
 .view--about,
 .view--manifesto,
 .view--contact {
   display: flex !important;
 }
+*/
 
 /* ===== Section Dividers (subtle) ===== */
 .view + .view::before {

@@ -1,0 +1,346 @@
+/* ==========================================================================
+   ABOUT & CONTACT — EDITORIAL GOLD / ORGANIC EDITION
+   Premium Gold, Deep Black, Sophisticated
+   ========================================================================== */
+
+/* ═══════════════════════════════════════════
+   SHARED LAYOUT
+   ═══════════════════════════════════════════ */
+
+.view--premium-dark {
+  background-color: var(--black);
+  background-image: 
+    radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.03) 0%, transparent 50%);
+  background-size: 100% 100%;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Organic Grain Overlay */
+.view--premium-dark::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 999;
+  opacity: 0.4;
+}
+
+/* ═══════════════════════════════════════════
+   ABOUT SECTION
+   ═══════════════════════════════════════════ */
+
+.about__hero {
+  padding: 8rem 0 4rem;
+  text-align: center;
+}
+
+.about__hero h2 {
+  font-family: var(--font-family-display);
+  font-size: clamp(3rem, 7vw, 6rem);
+  text-transform: uppercase;
+  color: var(--white);
+  letter-spacing: -0.02em;
+  position: relative;
+  display: inline-block;
+  background: linear-gradient(135deg, #fff 0%, #d4af37 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.about__hero h2::after {
+  content: none;
+}
+
+.about__container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2rem 8rem;
+}
+
+.about__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4rem;
+}
+
+@media (min-width: 900px) {
+  .about__grid {
+    grid-template-columns: 400px 1fr;
+    grid-template-areas: 
+      "avatar bio"
+      "stats skills"
+      "stats themes";
+    gap: 5rem;
+  }
+}
+
+/* Avatar Card */
+.about__avatar-container {
+  grid-area: avatar;
+  position: relative;
+}
+
+.about__avatar {
+  width: 100%;
+  aspect-ratio: 1/1.2;
+  overflow: hidden;
+  border-radius: 200px 200px 20px 20px; /* Arch shape */
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  position: relative;
+}
+
+.about__avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(20%) sepia(10%);
+  transition: all 0.6s ease;
+}
+
+.about__avatar:hover img {
+  filter: grayscale(0%) sepia(0%);
+  transform: scale(1.05);
+}
+
+.about__bio {
+  grid-area: bio;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.about__bio h3 {
+  font-family: var(--font-family-display);
+  font-size: 2.5rem;
+  line-height: 1.1;
+  margin-bottom: 1rem;
+  color: var(--white);
+  font-weight: 300;
+}
+
+.about__tagline {
+  color: var(--gold-metallic, #d4af37);
+  font-family: var(--font-family-mono);
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+  display: inline-block;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+  padding-bottom: 5px;
+  background: none;
+}
+
+.about__description {
+  font-size: 1.15rem;
+  line-height: 1.8;
+  color: var(--white-muted);
+  font-weight: 300;
+}
+
+.about__description strong {
+  color: var(--white);
+  font-weight: 500;
+}
+
+/* Stats */
+.about__stats {
+  grid-area: stats;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+@media (max-width: 900px) {
+  .about__stats {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+}
+
+.about__stat {
+  padding: 1rem 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: left;
+  background: none;
+  border-bottom: none;
+  border-left: none;
+  border-right: none;
+}
+
+.about__stat::before { display: none; }
+
+.about__stat-number {
+  font-family: var(--font-family-display);
+  font-size: 3.5rem;
+  font-weight: 300;
+  color: var(--gold-metallic, #d4af37);
+  display: block;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.about__stat-label {
+  font-family: var(--font-family-mono);
+  font-size: 0.8rem;
+  color: var(--white-subtle);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Skills & Themes */
+.about__card h4 {
+  font-family: var(--font-family-mono);
+  color: var(--gold-metallic, #d4af37);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 1.5rem;
+  border: none;
+}
+
+.about__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  list-style: none;
+}
+
+.about__tags li {
+  font-family: var(--font-family-sans);
+  font-size: 0.95rem;
+  color: var(--white-muted);
+  padding: 0.6rem 1.2rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 50px;
+  transition: all 0.3s ease;
+}
+
+.about__tags li:hover {
+  background: rgba(212, 175, 55, 0.1);
+  color: var(--gold-metallic, #d4af37);
+  border-color: rgba(212, 175, 55, 0.3);
+  transform: translateY(-2px);
+}
+
+/* ═══════════════════════════════════════════
+   CONTACT SECTION
+   ═══════════════════════════════════════════ */
+
+.contact__container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 6rem 2rem;
+  text-align: center;
+}
+
+.contact__intro {
+  font-family: var(--font-family-sans);
+  font-size: 1.2rem;
+  color: var(--white-muted);
+  margin-top: 1rem;
+  font-weight: 300;
+}
+
+.contact__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin: 5rem 0;
+}
+
+.contact__card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  padding: 2rem;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.contact__card::after { display: none; }
+
+.contact__card:hover {
+  background: rgba(255, 255, 255, 0.04);
+  transform: translateY(-8px);
+  border-color: rgba(212, 175, 55, 0.3);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.contact__icon {
+  font-size: 2.5rem;
+  color: var(--white-subtle);
+  transition: all 0.4s ease;
+}
+
+.contact__card:hover .contact__icon {
+  color: var(--gold-metallic, #d4af37);
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.3));
+}
+
+.contact__label {
+  font-family: var(--font-family-mono);
+  font-size: 0.75rem;
+  color: var(--white-subtle);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.contact__value {
+  font-family: var(--font-family-display);
+  font-size: 1.1rem;
+  color: var(--white);
+  font-weight: 500;
+}
+
+.contact__cta {
+  margin-top: 4rem;
+  padding: 4rem 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  background: radial-gradient(circle at center, rgba(212, 175, 55, 0.05) 0%, transparent 70%);
+}
+
+.contact__cta p {
+  color: var(--white);
+  font-family: var(--font-family-display);
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.btn-premium {
+  background: var(--gold-metallic, #d4af37);
+  color: #111;
+  font-family: var(--font-family-mono);
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 1rem 2.5rem;
+  border: none;
+  border-radius: 50px;
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  transition: all 0.3s;
+  letter-spacing: 0.05em;
+}
+
+.btn-premium:hover {
+  background: #f0c040;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+}
+
+@media (max-width: 640px) {
+  .about__hero h2 { font-size: 3.5rem; }
+  .about__avatar { border-radius: 20px; }
+}

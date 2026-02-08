@@ -19,7 +19,6 @@ class ExposicionesDataService {
     async getExposiciones() {
         // Check cache first
         if (this.cache && Date.now() < this.cacheExpiry) {
-            console.log('[ExposicionesData] Serving from cache');
             return this.cache;
         }
 
@@ -29,7 +28,6 @@ class ExposicionesDataService {
         try {
             data = await this.fetchFromNotebookLM();
             if (data && data.length > 0) {
-                console.log('[ExposicionesData] Data from NotebookLM:', data.length, 'items');
                 this.setCache(data);
                 return data;
             }
@@ -40,7 +38,6 @@ class ExposicionesDataService {
         // 2. Fallback: JSON local
         try {
             data = await this.fetchFromLocalJSON();
-            console.log('[ExposicionesData] Data from local JSON:', data.length, 'items');
             this.setCache(data);
             return data;
         } catch (e) {

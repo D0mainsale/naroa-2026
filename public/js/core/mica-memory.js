@@ -33,7 +33,6 @@ class MICAMemory {
     try {
       this.db = await this.openDatabase();
       this.isReady = true;
-      console.log('🧠 MICA Memory: IndexedDB ready');
       
       // Run aging on startup
       await this.runAgingProtocol();
@@ -120,7 +119,6 @@ class MICAMemory {
             const tx = this.db.transaction('facts', 'readwrite');
             const store = tx.objectStore('facts');
             await store.add(fact);
-            console.log(`🧠 Remembered Fact: "${content.substring(0, 30)}..."`);
         } catch (e) {
             console.warn('🧠 Fact remember failed:', e);
         }
@@ -290,7 +288,6 @@ class MICAMemory {
         if (age > WEEK) {
           // Archive: Delete or move to cold storage
           await store.delete(fact.id);
-          console.log(`🧠 Archived old fact: "${fact.content.substring(0, 20)}..."`);
         } else if (age > DAY) {
           // Decay: Reduce importance
           fact.decayWeight = Math.max(0.1, fact.decayWeight - 0.2);
@@ -359,7 +356,6 @@ class MICAMemory {
 // Singleton global
 if (typeof window !== 'undefined') {
   window.MICAMemory = new MICAMemory();
-  console.log('🧠 MICA Semantic Memory Engine loaded');
 }
 
 // Export for modules

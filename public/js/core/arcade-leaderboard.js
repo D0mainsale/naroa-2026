@@ -165,7 +165,6 @@ const ArcadeLeaderboard = {
   playSound(type) {
     // Could be expanded with actual audio
     if (type === 'highscore') {
-      console.log('🎵 HIGH SCORE SOUND!');
     }
   },
 

@@ -1,0 +1,186 @@
+/**
+ * SOTY Effects — PREMIUM EDITION (2026)
+ * "Site of the Year" caliber interactions and micro-animations.
+ * Authorized for Naroa.online
+ */
+
+:root {
+  /* Timing */
+  --soty-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --soty-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --soty-ease-sculpt: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  
+  --soty-duration-fast: 300ms;
+  --soty-duration-normal: 600ms;
+  --soty-duration-slow: 1200ms;
+  
+  /* Depth */
+  --soty-depth-static: 0px 4px 12px rgba(0,0,0,0.1);
+  --soty-depth-hover: 0px 20px 40px rgba(0,0,0,0.4);
+  --soty-depth-float: 0px 10px 30px rgba(0,0,0,0.2);
+}
+
+/* =========================================
+   1. MAGNETIC BUTTONS (Liquid Feel)
+   ========================================= */
+.magnetic-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5em 3em;
+  border-radius: 100px;
+  background: var(--color-text);
+  color: var(--color-bg);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: transform var(--soty-duration-fast) var(--soty-ease-out),
+              box-shadow var(--soty-duration-fast) var(--soty-ease-out);
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.magnetic-btn:hover {
+  transform: scale(1.05) translateY(-2px);
+  box-shadow: 0 10px 30px rgba(255,255,255,0.15);
+}
+
+.magnetic-btn::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  border-radius: inherit;
+  box-shadow: 0 0 0 2px var(--color-text);
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all var(--soty-duration-normal) var(--soty-ease-sculpt);
+}
+
+.magnetic-btn:hover::after {
+  opacity: 0.3;
+  transform: scale(1.4);
+}
+
+/* =========================================
+   2. KINETIC TEXT (Typography that breathes)
+   ========================================= */
+.kinetic-text {
+  display: inline-block;
+  transition: all var(--soty-duration-normal) var(--soty-ease-out);
+  cursor: default;
+}
+
+.kinetic-text:hover {
+  letter-spacing: 0.1em;
+  font-weight: 200;
+  color: var(--color-accent);
+  text-shadow: 0 0 20px rgba(255,255,255,0.5);
+  transform: skewX(-5deg);
+}
+
+/* =========================================
+   3. SCROLL REVEAL (Cinema)
+   ========================================= */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(40px) scale(0.95);
+  filter: blur(10px);
+  transition: 
+    opacity 0.8s var(--soty-ease-out),
+    transform 0.8s var(--soty-ease-out),
+    filter 0.8s var(--soty-ease-out);
+  will-change: transform, opacity, filter;
+}
+
+.reveal-on-scroll.revealed {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+}
+
+/* Stagger delays manually or via JS */
+.reveal-delay-1 { transition-delay: 100ms; }
+.reveal-delay-2 { transition-delay: 200ms; }
+.reveal-delay-3 { transition-delay: 300ms; }
+
+/* =========================================
+   4. GALLERY DEPTH (Museum Feel)
+   ========================================= */
+.gallery__item {
+  transition: transform var(--soty-duration-normal) var(--soty-ease-out),
+              filter var(--soty-duration-normal) var(--soty-ease-out),
+              opacity var(--soty-duration-normal) var(--soty-ease-out);
+}
+
+.gallery__item:hover {
+  z-index: 10;
+  transform: scale(1.03) translateY(-10px) rotateX(2deg);
+  box-shadow: var(--soty-depth-hover);
+  filter: brightness(1.1) contrast(1.05);
+}
+
+.gallery__item--floating {
+  animation: float-y 6s ease-in-out infinite;
+}
+
+@keyframes float-y {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+/* =========================================
+   5. CURSOR TRAIL (Corrected)
+   ========================================= */
+.cursor-trail-particle {
+  position: fixed;
+  pointer-events: none;
+  background: white;
+  border-radius: 50%;
+  mix-blend-mode: difference;
+  z-index: 9999;
+  width: 8px;
+  height: 8px;
+  animation: fadeOut 0.8s forwards;
+}
+
+@keyframes fadeOut {
+  0% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(3); }
+}
+
+/* =========================================
+   6. TEXT SHIMMER (Gold/Premium)
+   ========================================= */
+.text-shimmer {
+  background: linear-gradient(
+    110deg, 
+    #7a7a7a 30%, 
+    #ffffff 45%, 
+    #7a7a7a 65%
+  );
+  background-size: 200% auto;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: shimmer 5s infinite;
+}
+
+@keyframes shimmer {
+  to { background-position: 200% center; }
+}
+
+/* =========================================
+   REDUCED MOTION
+   ========================================= */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal-on-scroll { opacity: 1; transform: none; filter: none; }
+  .gallery__item:hover { transform: none; }
+  .cursor-trail-particle { display: none; }
+}

@@ -23,7 +23,6 @@ class StitchService {
             this.initialized = !!this.apiKey;
             
             if (this.initialized) {
-                console.log('🎨 Stitch Service initialized');
             } else {
                 console.warn('⚠️ Stitch API key not found. UI generation disabled.');
             }

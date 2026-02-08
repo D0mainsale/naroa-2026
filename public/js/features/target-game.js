@@ -1,125 +1,136 @@
-/* ═══════════════════════════════════════════════════════════════
-   Target Practice — Artwork Circular Targets
-   Targets show artwork images; hit shatters them
-   ═══════════════════════════════════════════════════════════════ */
-window.TargetGame = (() => {
-  let container, canvas, ctx, targets = [], score = 0, combo = 0, timeLeft = 30, timer, artworks = [];
+/**
+ * Target Practice - Naroa 2026
+ * Agent A22: Target pop with ring pulse, hit splatter, miss X-mark
+ */
+(function() {
+  'use strict';
 
-  async function init() {
-    container = document.getElementById('target-container');
+  let state = { targets: [], score: 0, misses: 0, combo: 0, timeLeft: 30, timer: null, running: false, spawnTimer: null };
+
+  function init() {
+    const container = document.getElementById('target-container');
     if (!container) return;
-    artworks = await window.ArtworkLoader.getRandomArtworks(12);
-    buildUI(); startGame();
-  }
 
-  function buildUI() {
     container.innerHTML = `
-      <div style="text-align:center;font-family:Inter,sans-serif;padding:8px">
-        <div style="display:flex;justify-content:space-between;max-width:440px;margin:0 auto;color:#ccc;font-size:13px;margin-bottom:8px">
-          <span>Score: <b id="tgt-score" style="color:#ff6ec7">0</b></span>
-          <span>Combo: <b id="tgt-combo" style="color:#7b2ff7">x0</b></span>
-          <span>⏱ <b id="tgt-timer">30s</b></span>
+      <div class="target-ui">
+        <div class="target-stats">
+          <span>⏱️ <strong id="target-time">30</strong>s</span>
+          <span>🎯 <strong id="target-score" style="color:#d4af37">0</strong></span>
+          <span>🔥 <strong id="target-combo">x0</strong></span>
         </div>
-        <canvas id="target-canvas" style="border-radius:12px;border:1px solid rgba(123,47,247,0.3);display:block;margin:0 auto;background:#0a0a1a;cursor:crosshair"></canvas>
+        <div id="target-field" style="position:relative;width:100%;height:400px;background:radial-gradient(circle,#0d0d1a,#050510);border-radius:12px;overflow:hidden;cursor:crosshair"></div>
+        <button class="game-btn" id="target-start">🎯 Empezar</button>
       </div>
     `;
-    canvas = document.getElementById('target-canvas');
-    const maxW = Math.min(container.clientWidth - 20, 440);
-    canvas.width = maxW; canvas.height = maxW * 0.85;
-    ctx = canvas.getContext('2d');
-    canvas.addEventListener('click', handleClick);
+
+    document.getElementById('target-start').addEventListener('click', startGame);
+    document.getElementById('target-field').addEventListener('click', e => {
+      if (!state.running) return;
+      // Check if clicked on empty space (miss)
+      if (e.target.id === 'target-field') {
+        state.misses++;
+        state.combo = 0;
+        document.getElementById('target-combo').textContent = 'x0';
+        // Show X mark
+        const x = document.createElement('div');
+        x.textContent = '✕';
+        x.style.cssText = `position:absolute;left:${e.offsetX-10}px;top:${e.offsetY-10}px;color:#ff003c;font-size:20px;pointer-events:none;animation:fadeOut 0.5s forwards`;
+        document.getElementById('target-field').appendChild(x);
+        setTimeout(() => x.remove(), 500);
+      }
+    });
   }
 
   function startGame() {
-    score = 0; combo = 0; timeLeft = 30; targets = [];
-    clearInterval(timer);
-    timer = setInterval(() => {
-      timeLeft--;
-      const t = document.getElementById('tgt-timer');
-      if (t) { t.textContent = timeLeft + 's'; if (timeLeft <= 5) t.style.color = '#ef4444'; }
-      if (timeLeft <= 0) endGame();
+    state.score = 0;
+    state.misses = 0;
+    state.combo = 0;
+    state.timeLeft = 30;
+    state.running = true;
+    state.targets = [];
+    document.getElementById('target-score').textContent = '0';
+    document.getElementById('target-combo').textContent = 'x0';
+    document.getElementById('target-start').style.display = 'none';
+
+    // Clear field
+    const field = document.getElementById('target-field');
+    field.querySelectorAll('.target-dot').forEach(d => d.remove());
+
+    state.timer = setInterval(() => {
+      state.timeLeft--;
+      document.getElementById('target-time').textContent = state.timeLeft;
+      if (state.timeLeft <= 0) endGame();
     }, 1000);
-    setInterval(spawnTarget, 700);
-    animate();
+
+    spawnTarget();
   }
 
   function spawnTarget() {
-    if (targets.length >= 5 || timeLeft <= 0) return;
-    const r = 20 + Math.random() * 25;
-    const art = artworks.length ? artworks[Math.floor(Math.random() * artworks.length)] : null;
-    targets.push({
-      x: r + Math.random() * (canvas.width - r * 2),
-      y: r + Math.random() * (canvas.height - r * 2),
-      r, lifetime: 2000 + Math.random() * 1500, spawn: Date.now(),
-      artwork: art, hit: false, hitTime: 0
-    });
-  }
+    if (!state.running) return;
+    const field = document.getElementById('target-field');
+    const rect = field.getBoundingClientRect();
+    const size = 30 + Math.random() * 30;
+    const x = Math.random() * (rect.width - size);
+    const y = Math.random() * (rect.height - size);
+    const hue = Math.random() * 360;
+    const lifetime = 2000 + Math.random() * 1500; // 2-3.5s
 
-  function handleClick(e) {
-    const mx = e.offsetX, my = e.offsetY;
-    let hitAny = false;
-    targets.forEach(t => {
-      if (t.hit) return;
-      const d = Math.sqrt((mx-t.x)**2 + (my-t.y)**2);
-      if (d < t.r) {
-        t.hit = true; t.hitTime = Date.now();
-        hitAny = true; combo++; score += 10 * combo;
-        if (typeof GameEffects !== 'undefined') GameEffects.scorePopup(container, `+${10*combo}`, mx, my);
+    const dot = document.createElement('div');
+    dot.className = 'target-dot';
+    dot.style.cssText = `position:absolute;left:${x}px;top:${y}px;width:${size}px;height:${size}px;border-radius:50%;background:radial-gradient(circle,hsl(${hue},80%,60%),hsl(${hue},80%,30%));box-shadow:0 0 15px hsla(${hue},80%,50%,0.6);cursor:pointer;transition:transform 0.1s;animation:targetPop 0.3s ease-out`;
+
+    // Ring
+    const ring = document.createElement('div');
+    ring.style.cssText = `position:absolute;inset:-5px;border-radius:50%;border:2px solid hsla(${hue},80%,60%,0.5);animation:ringPulse 1s infinite`;
+    dot.appendChild(ring);
+
+    dot.addEventListener('click', e => {
+      e.stopPropagation();
+      state.combo++;
+      const points = Math.round((60 - size) * (1 + state.combo * 0.2)); // Smaller = more points
+      state.score += points;
+      document.getElementById('target-score').textContent = state.score;
+      document.getElementById('target-combo').textContent = `x${state.combo}`;
+
+      // Hit splatter
+      dot.style.transform = 'scale(1.5)';
+      dot.style.opacity = '0';
+      setTimeout(() => dot.remove(), 200);
+
+      if (window.GameEffects) {
+        GameEffects.scorePopAnimation(document.getElementById('target-score'), `+${points}`);
+        GameEffects.hapticFeedback();
       }
     });
-    if (!hitAny) combo = 0;
-    updateHUD();
-  }
 
-  function updateHUD() {
-    const s = document.getElementById('tgt-score'), c = document.getElementById('tgt-combo');
-    if (s) s.textContent = score; if (c) c.textContent = `x${combo}`;
-  }
+    field.appendChild(dot);
 
-  function animate() {
-    if (timeLeft <= 0) return;
-    ctx.fillStyle = '#0a0a1a'; ctx.fillRect(0, 0, canvas.width, canvas.height);
-    const now = Date.now();
-    targets = targets.filter(t => {
-      const elapsed = now - t.spawn;
-      if (t.hit && now - t.hitTime > 300) return false;
-      if (!t.hit && elapsed > t.lifetime) { combo = 0; updateHUD(); return false; }
-
-      const progress = t.hit ? 0.3 : Math.min(1, elapsed / 200);
-      const scale = t.hit ? 1.3 : progress;
-      const r = t.r * scale;
-
-      // Draw artwork circle
-      if (t.artwork && t.artwork.img) {
-        window.ArtworkLoader.drawArtworkCircle(ctx, t.artwork.img, t.x, t.y, r, t.hit ? 0.3 : 0.9);
+    // Auto-remove after lifetime
+    setTimeout(() => {
+      if (dot.parentNode) {
+        dot.remove();
+        if (state.running) {
+          state.misses++;
+          state.combo = 0;
+          document.getElementById('target-combo').textContent = 'x0';
+        }
       }
-      // Ring
-      ctx.beginPath(); ctx.arc(t.x, t.y, r, 0, Math.PI * 2);
-      ctx.strokeStyle = t.hit ? '#22c55e' : `rgba(255,110,199,${1 - elapsed/t.lifetime})`;
-      ctx.lineWidth = t.hit ? 3 : 2;
-      ctx.shadowColor = t.hit ? '#22c55e' : '#ff6ec7'; ctx.shadowBlur = 10;
-      ctx.stroke(); ctx.shadowBlur = 0;
+    }, lifetime);
 
-      // Shrink ring (remaining time)
-      if (!t.hit) {
-        const remain = 1 - elapsed / t.lifetime;
-        ctx.beginPath(); ctx.arc(t.x, t.y, r + 4, -Math.PI/2, -Math.PI/2 + Math.PI*2*remain);
-        ctx.strokeStyle = 'rgba(123,47,247,0.5)'; ctx.lineWidth = 2; ctx.stroke();
-      }
-      return true;
-    });
-    requestAnimationFrame(animate);
+    // Schedule next target
+    const delay = Math.max(300, 800 - state.score * 2); // Gets faster
+    state.spawnTimer = setTimeout(spawnTarget, delay);
   }
 
   function endGame() {
-    clearInterval(timer);
-    const ov = document.createElement('div');
-    Object.assign(ov.style,{position:'absolute',inset:'0',background:'rgba(0,0,0,0.9)',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',zIndex:'100',borderRadius:'16px'});
-    ov.innerHTML = `<div style="font-size:48px;margin-bottom:16px">🎯</div><h2 style="color:#ff6ec7;font-family:Inter,sans-serif;margin:0 0 8px">Time's Up!</h2><p style="color:#ccc;font-family:Inter,sans-serif;font-size:14px">Score: ${score}</p><button onclick="TargetGame.init()" style="margin-top:16px;background:linear-gradient(135deg,#ff6ec7,#7b2ff7);border:none;color:#fff;padding:10px 24px;border-radius:24px;cursor:pointer;font-size:14px;font-weight:600">Play Again</button>`;
-    container.style.position='relative';container.appendChild(ov);
-    if (typeof RankingSystem !== 'undefined') RankingSystem.submit('target', score);
+    state.running = false;
+    clearInterval(state.timer);
+    clearTimeout(state.spawnTimer);
+    document.getElementById('target-start').style.display = 'inline-block';
+
+    if (window.GameEffects) GameEffects.confettiBurst(document.getElementById('target-field'));
+    alert(`🎯 Score: ${state.score} | Misses: ${state.misses}`);
   }
 
-  function destroy() { clearInterval(timer); if (container) container.innerHTML = ''; }
-  return { init, destroy };
+  window.TargetGame = { init };
 })();

@@ -1,0 +1,66 @@
+/* ==========================================================================
+   NAROA PALETTE — CYBER-POP EDITION
+   Legacy compat with dark+red+fluor palette
+   ========================================================================== */
+
+/* Disable the global border-radius madness */
+/* All organic geometry rules removed for minimalism */
+
+/* Legacy variable compat — map to variables.css tokens */
+:root {
+  --naroa-cream: var(--white);
+  --naroa-black: var(--black);
+  --naroa-orange: var(--red-pop);
+  --bg-primary: var(--black);
+  --bg-secondary: var(--black-soft);
+  --bg-elevated: var(--black-card);
+  --text-primary: var(--white);
+  --text-secondary: var(--white-muted);
+  --highlight: var(--gold-metallic, #d4af37);
+  --gradient-subtle: none;
+  --gradient-dark: none;
+  --gradient-warm: none;
+  --shadow-soft: var(--shadow-subtle);
+  --shadow-medium: var(--shadow-card);
+  --shadow-strong: var(--shadow-elevated);
+  --shadow-orange: 0 0 20px var(--red-glow);
+}
+
+/* Pigment effects — disabled */
+.pigment-canvas, .pigment-stain::before, .pigment-orange::after,
+.watercolor::before, .brushstroke-border, .pigment-shadow { display: none; }
+
+/* MICA filter effects — disabled */
+.mica-filter::before { display: none !important; }
+.mica-shimmer::after { display: none !important; }
+.mica-glow { box-shadow: none; animation: none; }
+.mica-mood-indicator { display: none; }
+
+/* MICA glass — simplified */
+.mica-glass {
+  background: rgba(255,255,255,0.03);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 0, 60, 0.1);
+  box-shadow: none;
+}
+
+/* MICA frosted — simplified */
+.mica-frosted {
+  background: rgba(0,0,0,0.5);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.06);
+  box-shadow: none;
+}
+
+/* MICA interactive */
+.mica-interactive:hover {
+  background: rgba(212, 175, 55, 0.04);
+  box-shadow: none;
+  transform: none;
+}
+
+/* Mood states — disabled for minimal */
+[data-mica-mood] { filter: none; }
+[data-mica-mood] .mica-filter::before { display: none; }

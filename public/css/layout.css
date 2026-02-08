@@ -1,0 +1,394 @@
+/* ==========================================================================
+   LAYOUT — 360° SCROLL EDITION
+   All sections visible, smooth scroll navigation
+   ========================================================================== */
+
+:root {
+  --font-family-display: 'Outfit', 'Switzer', 'Inter', -apple-system, sans-serif;
+  --font-family-mono: 'JetBrains Mono', monospace;
+  --font-family-sans: 'Switzer', 'Inter', -apple-system, sans-serif;
+  --font-display-size: clamp(3rem, 10vw, 7rem);
+  --gold-metallic: #d4af37;
+  --black: #0a0a0a;
+  --white: #ffffff;
+}
+
+html {
+  scroll-behavior: smooth;
+  height: auto;
+  overflow-y: scroll;
+}
+
+body {
+  background-color: var(--black) !important;
+  color: var(--white);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Custom Scrollbar - Organic Gold */
+::-webkit-scrollbar {
+  width: 8px;
+  background: var(--black);
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(212, 175, 55, 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gold-metallic, #d4af37);
+}
+
+/* Container */
+.container {
+  width: 100%;
+  max-width: var(--container-max, 1400px);
+  margin-inline: auto;
+  padding-inline: var(--container-padding, 2rem);
+}
+
+/* ═══════════════════════════════════════════
+   VIEWS — 360° SCROLL MODE
+   All main sections visible + stacked vertically
+   Game views still use show/hide
+   ═══════════════════════════════════════════ */
+
+/* Main content sections — always visible in scroll */
+.view {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  background: var(--black);
+}
+
+/* MAIN SECTIONS — always visible, part of scroll flow */
+.view--home,
+.view--rocks,
+.view--archivo,
+.view--about,
+.view--contacto,
+.view--manifesto {
+  display: block !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  min-height: 100vh;
+}
+
+/* GAME VIEWS — hidden by default, shown on demand */
+.view.game-view,
+.view--juegos,
+.view--games,
+.view--exposiciones,
+.view--obra,
+.view--mica-dashboard {
+  display: none;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+
+/* When a game/secondary view is active, overlay it */
+.view.game-view.active,
+.view--juegos.active,
+.view--games.active,
+.view--exposiciones.active,
+.view--obra.active,
+.view--mica-dashboard.active {
+  display: block;
+  opacity: 1;
+  pointer-events: auto;
+  position: fixed;
+  inset: 0;
+  z-index: 5000;
+  overflow-y: auto;
+  padding-top: 80px;
+}
+
+/* Section dividers — subtle gold line between sections */
+.view--home,
+.view--rocks,
+.view--archivo,
+.view--about {
+  border-bottom: 1px solid rgba(212, 175, 55, 0.08);
+}
+
+/* Scroll-reveal animations for sections */
+.view[data-scroll-reveal] {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.view[data-scroll-reveal].revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ═══════════════════════════════════════════
+   HERO — Full viewport opening
+   ═══════════════════════════════════════════ */
+
+.hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  text-align: center;
+  padding: var(--space-3xl, 3rem);
+  overflow: hidden;
+  background-color: var(--black) !important;
+}
+
+/* Hero background artwork */
+.hero--premium::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('/images/artworks/espejos-del-alma.webp') center/cover no-repeat;
+  opacity: 0.15;
+  filter: blur(2px) saturate(0.7);
+  transform: scale(1.1);
+  transition: opacity 1.5s ease, transform 8s ease;
+  animation: heroZoom 20s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes heroZoom {
+  0% { transform: scale(1.1) translate(0, 0); }
+  50% { transform: scale(1.15) translate(-1%, 1%); }
+  100% { transform: scale(1.1) translate(1%, -1%); }
+}
+
+.hero--premium::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(ellipse at center, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.85) 70%),
+    linear-gradient(180deg, rgba(255,0,60,0.05) 0%, transparent 30%, transparent 70%, rgba(0,0,0,0.7) 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Kill non-essential decorative elements */
+.hero__palindrome,
+.aurora-bg { display: none !important; }
+
+.hero__title {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+  gap: 0.25rem;
+}
+
+.hero__line {
+  display: block;
+  font-size: var(--font-display-size);
+  font-weight: var(--font-weight-bold, 700);
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: transparent;
+  -webkit-text-stroke: 2px var(--white);
+  opacity: 0;
+  transform: translateY(30px);
+  animation: heroLineReveal 1s ease forwards;
+  position: relative;
+}
+
+.hero__line:last-child {
+  -webkit-text-stroke-color: var(--red-pop, #ff003c);
+  text-shadow: 4px 4px 0 rgba(255, 0, 60, 0.3);
+}
+
+.hero__line:nth-child(1) { animation-delay: 0.2s; }
+.hero__line:nth-child(2) { animation-delay: 0.45s; }
+.hero__line:nth-child(3) { animation-delay: 0.7s; }
+
+@keyframes heroLineReveal {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero__subtitle {
+  position: relative;
+  z-index: 2;
+  margin-top: var(--space-xl, 2rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md, 1rem);
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-sm, 0.875rem);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--fluor, #d4af37);
+  background: rgba(212, 175, 55, 0.05);
+  padding: 0.4rem 1.2rem;
+  border: 1px solid rgba(212, 175, 55, 0.15);
+}
+
+.hero__cta-group {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  gap: var(--space-xl, 2rem);
+  margin-top: var(--space-3xl, 3rem);
+}
+
+.hero__cta {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-xs, 0.75rem);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--white);
+  text-decoration: none;
+  position: relative;
+  padding: 0.6rem 1.5rem;
+  border: 2px solid rgba(255,255,255,0.2);
+  transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.hero__cta::after { display: none; }
+.hero__cta:hover {
+  color: var(--black);
+  background: var(--fluor, #d4af37);
+  border-color: var(--fluor, #d4af37);
+  box-shadow: 4px 4px 0 var(--red-pop, #ff003c);
+  transform: translate(-2px, -2px);
+}
+
+/* Scroll indicator */
+.hero__scroll-indicator {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0.3;
+  z-index: 2;
+}
+
+.hero__scroll-line {
+  width: 1px;
+  height: 50px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.5) 0%, transparent 100%);
+  animation: scroll-grow 2.5s ease-in-out infinite;
+}
+
+@keyframes scroll-grow {
+  0% { transform: scaleY(0); transform-origin: top; }
+  50% { transform: scaleY(1); transform-origin: top; }
+  51% { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+
+.hero__spotify { display: none !important; }
+.hero__counter { display: none; }
+
+/* Mobile */
+@media (max-width: 768px) {
+  .hero__line { font-size: 14vw; }
+  .hero__cta-group { flex-direction: column; gap: 1rem; }
+}
+
+/* ═══════════════════════════════════════════
+   SECTIONS
+   ═══════════════════════════════════════════ */
+
+/* Manifesto */
+.view--manifesto {
+  background: rgba(15, 15, 15, 0.8);
+  color: var(--white);
+  text-align: center;
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+  padding: 6rem 2rem;
+}
+
+.chiquito-quote {
+  font-family: var(--font-family-display);
+  font-size: clamp(1.5rem, 4vw, 3rem);
+  line-height: 1.2;
+  max-width: 800px;
+  margin: 0 auto 2rem;
+  color: var(--white);
+}
+
+.view--manifesto cite {
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.4);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+}
+
+/* Section titles */
+.section-title {
+  font-family: var(--font-family-display);
+  font-weight: var(--font-weight-light, 300);
+  letter-spacing: 0.2em;
+}
+
+.section-subtitle {
+  color: rgba(255,255,255,0.4);
+  font-size: var(--font-size-sm, 0.875rem);
+  letter-spacing: var(--letter-spacing-wide, 0.05em);
+}
+
+/* Archive/Gallery section padding */
+.view--archivo {
+  padding-top: 2rem;
+  padding-bottom: 4rem;
+}
+
+/* About & Contact section */
+.view--about,
+.view--contacto {
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 6rem 2rem;
+}
+
+/* Close button for game overlays */
+.game-view-close {
+  position: fixed;
+  top: 1.5rem;
+  right: 1.5rem;
+  z-index: 5001;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.8);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.game-view-close:hover {
+  background: var(--red-pop, #ff003c);
+  border-color: var(--red-pop, #ff003c);
+  transform: scale(1.1);
+}
