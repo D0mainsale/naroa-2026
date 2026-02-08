@@ -27,17 +27,7 @@ body {
   min-height: 100vh;
 }
 
-/* Nuclear anti-glow — kill any stray shadows/borders */
-html, body, main, section,
-html::before, html::after,
-body::before, body::after,
-main::before, main::after,
-.view, .view::before, .view::after,
-.hero, .hero::before, .hero::after {
-  box-shadow: none !important;
-  outline: none !important;
-  border-image: none !important;
-}
+/* Subtle container styling */
 
 /* Typography */
 h1, h2, h3, h4, h5, h6 {
@@ -114,9 +104,11 @@ img {
   color: var(--white, #fff);
 }
 
-/* Scrollbar — invisible */
-::-webkit-scrollbar { width: 0; height: 0; }
-* { scrollbar-width: none; }
+/* Scrollbar — elegant gold (360° scroll) */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: rgba(255,255,255,0.02); }
+::-webkit-scrollbar-thumb { background: rgba(212,175,55,0.25); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(212,175,55,0.5); }
 
 /* Focus */
 :focus { outline: none; }

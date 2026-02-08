@@ -184,9 +184,6 @@
   .nav__toggle { display: flex; }
 }
 
-/* Body offset */
-body { padding-top: 56px; }
+/* Body offset for fixed nav */
+body { padding-top: 0; }
 
-@media (max-width: 768px) {
-  body { padding-top: 48px; }
-}

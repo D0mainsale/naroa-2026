@@ -1,5 +1,7 @@
 /**
- * Router - Hash-based SPA routing for Naroa 2026
+ * Router - 360° Scroll Navigation for Naroa 2026
+ * Main sections are all visible (scroll-based), 
+ * game/secondary views are overlay-based
  * @module core/router
  */
 
@@ -9,86 +11,146 @@ class Router {
     this.currentRoute = null;
     this.beforeEach = null;
     this.afterEach = null;
+    
+    // Main sections that are always visible in scroll
+    this.scrollSections = new Map([
+      ['#/', 'view-home'],
+      ['#/rocks', 'view-rocks'],
+      ['#/galeria', 'view-archivo'],
+      ['#/archivo', 'view-archivo'],
+      ['#/about', 'view-about'],
+      ['#/contacto', 'view-contacto'],
+    ]);
+    
+    // Overlay sections (games, etc.)
+    this.overlaySections = new Set();
   }
 
-  /**
-   * Register a route handler
-   * @param {string} path - Route path (e.g., '/#/portfolio')
-   * @param {Function} handler - Handler function
-   */
   register(path, handler) {
     this.routes.set(path, handler);
     return this;
   }
 
-  /**
-   * Navigate to a route programmatically
-   * @param {string} path - Route to navigate to
-   */
   navigate(path) {
     window.location.hash = path.replace('#', '');
   }
 
-  /**
-   * Get current route from hash
-   * @returns {string}
-   */
   getCurrentRoute() {
     const hash = window.location.hash;
     return hash || '#/';
   }
 
   /**
-   * Handle route change
+   * Handle route change — 360° scroll edition
+   * Main sections: smooth scroll to target
+   * Game sections: show as overlay
    */
   handleRoute() {
     const path = this.getCurrentRoute();
     const previousRoute = this.currentRoute;
     this.currentRoute = path;
 
-    // Before hook
     if (this.beforeEach) {
       this.beforeEach(path, previousRoute);
     }
 
-    // Find matching route
-    const handler = this.routes.get(path);
-    
-    if (handler) {
-      handler(path);
+    // Check if this is a scroll section (main content)
+    if (this.scrollSections.has(path)) {
+      // Close any open game overlay first
+      this.closeAllOverlays();
+      
+      const viewId = this.scrollSections.get(path);
+      this.scrollToView(viewId);
+      
+      // Execute any registered handler (e.g., loadArchive for gallery)
+      const handler = this.routes.get(path);
+      if (handler) handler(path);
+      
+      // Update nav active state
+      this.updateNavActive(path);
     } else {
-      // Fallback to home
-      const homeHandler = this.routes.get('#/');
-      if (homeHandler) homeHandler('#/');
+      // It's a game/overlay route
+      const handler = this.routes.get(path);
+      if (handler) {
+        handler(path);
+      } else {
+        // Unknown route, scroll to top
+        this.scrollToView('view-home');
+      }
     }
 
-    // After hook
     if (this.afterEach) {
       this.afterEach(path, previousRoute);
     }
   }
 
   /**
-   * Smooth scroll to specific view
-   * @param {string} viewId 
+   * Smooth scroll to a section
    */
   scrollToView(viewId) {
     const view = document.getElementById(viewId);
     if (!view) return;
 
-    // Use robust scrollIntoView
-    view.scrollIntoView({
-      behavior: 'smooth',
-      block: 'start'
+    // Offset for fixed nav
+    const navHeight = document.querySelector('.nav')?.offsetHeight || 60;
+    const elementPosition = view.getBoundingClientRect().top + window.scrollY;
+    const offsetPosition = elementPosition - navHeight - 10;
+
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: 'smooth'
     });
   }
 
   /**
-   * Hide all view sections
+   * Show a game/overlay view
    */
-  hideAllViews() {
-    const views = document.querySelectorAll('.view');
-    views.forEach(view => {
+  showView(viewId) {
+    const view = document.getElementById(viewId);
+    if (!view) return;
+
+    // Check if it's a main scroll section — just scroll to it
+    for (const [, id] of this.scrollSections) {
+      if (id === viewId) {
+        this.scrollToView(viewId);
+        return;
+      }
+    }
+
+    // It's a game/overlay — show it as overlay
+    this.closeAllOverlays();
+    
+    view.classList.add('active');
+    view.style.display = 'block';
+    void view.offsetWidth; // Force reflow
+    view.style.opacity = '1';
+    view.style.pointerEvents = 'auto';
+    
+    // Add close button if not present
+    if (!view.querySelector('.game-view-close')) {
+      const closeBtn = document.createElement('button');
+      closeBtn.className = 'game-view-close';
+      closeBtn.innerHTML = '✕';
+      closeBtn.setAttribute('aria-label', 'Cerrar');
+      closeBtn.addEventListener('click', () => {
+        this.closeAllOverlays();
+        window.location.hash = '#/';
+      });
+      view.prepend(closeBtn);
+    }
+
+    // Track it
+    this.overlaySections.add(viewId);
+    
+    // Prevent body scroll while overlay is open
+    document.body.style.overflow = 'hidden';
+  }
+
+  /**
+   * Close all overlay views (games, etc.)
+   */
+  closeAllOverlays() {
+    document.querySelectorAll('.view.game-view.active, .view--juegos.active, .view--games.active, .view--exposiciones.active, .view--obra.active, .view--mica-dashboard.active').forEach(view => {
       view.classList.remove('active');
       view.style.opacity = '0';
       view.style.pointerEvents = 'none';
@@ -96,46 +158,90 @@ class Router {
         if (!view.classList.contains('active')) {
           view.style.display = 'none';
         }
-      }, 500); // Wait for fade out
+      }, 500);
+    });
+    
+    this.overlaySections.clear();
+    document.body.style.overflow = '';
+  }
+
+  /**
+   * DEPRECATED — kept for compatibility but routes to new methods
+   */
+  hideAllViews() {
+    // In 360° mode, we don't hide main views
+    // Only close overlays
+    this.closeAllOverlays();
+  }
+
+  /**
+   * Update navigation active state based on scroll position
+   */
+  updateNavActive(currentPath) {
+    document.querySelectorAll('.nav__link').forEach(link => {
+      const href = link.getAttribute('href');
+      link.classList.toggle('nav__link--active', href === currentPath);
     });
   }
 
   /**
-   * Show a specific view by ID with transition
-   * @param {string} viewId - Element ID of the view
+   * Setup scroll-based navigation highlighting
    */
-  showView(viewId) {
-    // 1. Hide others
-    this.hideAllViews();
+  initScrollSpy() {
+    const sections = [];
+    this.scrollSections.forEach((viewId, path) => {
+      const el = document.getElementById(viewId);
+      if (el) sections.push({ el, path });
+    });
 
-    // 2. Show target
-    const view = document.getElementById(viewId);
-    if (!view) return;
-
-    view.style.display = 'block';
-    // Force reflow
-    void view.offsetWidth;
-    
-    view.classList.add('active');
-    view.style.opacity = '1';
-    view.style.pointerEvents = 'auto';
-
-    // 3. Scroll to top
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (ticking) return;
+      ticking = true;
+      
+      requestAnimationFrame(() => {
+        const scrollPos = window.scrollY + window.innerHeight / 3;
+        
+        let activeSection = sections[0];
+        for (const section of sections) {
+          if (section.el.offsetTop <= scrollPos) {
+            activeSection = section;
+          }
+        }
+        
+        if (activeSection) {
+          this.updateNavActive(activeSection.path);
+        }
+        
+        ticking = false;
+      });
+    }, { passive: true });
   }
 
   /**
-   * Initialize router and listen for hash changes
+   * Initialize router
    */
   init() {
     window.addEventListener('hashchange', () => this.handleRoute());
-    window.addEventListener('DOMContentLoaded', () => this.handleRoute());
     
-    // If no hash, set to home
-    if (!window.location.hash) {
-      window.location.hash = '#/';
+    // On DOM ready
+    const initRouting = () => {
+      // Initialize scroll spy for nav highlights
+      this.initScrollSpy();
+      
+      // Handle initial route
+      if (!window.location.hash || window.location.hash === '#/') {
+        // Home — just make sure we're at top
+        window.scrollTo({ top: 0 });
+      } else {
+        this.handleRoute();
+      }
+    };
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initRouting);
     } else {
-      this.handleRoute();
+      initRouting();
     }
 
     return this;

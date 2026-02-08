@@ -1,5 +1,6 @@
 /**
  * App - Main application bootstrap for Naroa 2026
+ * 360° Scroll Edition — all main sections visible
  * @module core/app
  */
 
@@ -18,41 +19,32 @@
   };
 
   // ===========================================
-  // ROUTE REGISTRATION
+  // ROUTE REGISTRATION (360° MODE)
   // ===========================================
 
   function registerRoutes() {
     const router = window.Router;
 
+    // Main scroll sections — these just scroll, no hide/show
     router
       .register('#/', () => {
-        router.showView('view-home');
-        // if (window.Swarm) window.Swarm.navigator.flyTo('view-home');
+        // Home — already visible, just scroll
       })
       .register('#/galeria', () => {
         loadArchive();
-        if (window.Swarm) {
-          window.Swarm.curator.forceLoadGallery();
-          // window.Swarm.navigator.flyTo('view-archivo');
-        }
-        router.showView('view-archivo');
       })
       .register('#/archivo', () => {
         loadArchive();
-        if (window.Swarm) {
-          window.Swarm.curator.forceLoadGallery();
-          // window.Swarm.navigator.flyTo('view-archivo');
-        }
-        router.showView('view-archivo');
       })
       .register('#/about', () => {
-        router.showView('view-about');
-        // if (window.Swarm) window.Swarm.navigator.flyTo('view-about');
+        // Already visible in scroll
       })
       .register('#/contacto', () => {
         loadContactoPanel();
-        router.showView('view-contacto');
-        // if (window.Swarm) window.Swarm.navigator.flyTo('view-contacto');
+      })
+      // Game overlay routes
+      .register('#/juegos', () => {
+        router.showView('view-juegos');
       })
       .register('#/juego', () => {
         router.showView('view-juego');
@@ -61,9 +53,6 @@
       .register('#/tetris', () => {
         router.showView('view-tetris');
         loadTetris();
-      })
-      .register('#/juegos', () => {
-        router.showView('view-juegos');
       })
       .register('#/memory', () => {
         router.showView('view-memory');
@@ -163,57 +152,40 @@
     router.handleRoute = function() {
       const path = this.getCurrentRoute();
       
-      // Check for dynamic artwork route
       if (path.startsWith('#/obra/')) {
         const artworkId = path.replace('#/obra/', '');
         if (artworkId) {
-          this.hideAllViews();
           this.showView('view-obra');
           loadArtworkDetail(artworkId);
           return;
         }
       }
       
-      // Fall back to original handler
       originalHandleRoute();
     };
 
-    // Lifecycle hooks
-    // Lifecycle hooks — "Golden Curtain" (compatible with 360)
+    // Lifecycle hooks — minimal in 360° mode
     router.beforeEach = (to, from) => {
       document.body.classList.add('navigating');
-      const curtain = document.getElementById('page-curtain');
-      if (curtain) curtain.classList.add('active');
     };
 
     router.afterEach = (to, from) => {
-      const curtain = document.getElementById('page-curtain');
-      
       setTimeout(() => {
-        // 360 Mode: Do NOT reset scroll to top. Let Swarm Navigator handle position.
-        if (curtain) curtain.classList.remove('active');
-        
-        setTimeout(() => {
-          document.body.classList.remove('navigating');
-        }, 600);
-      }, 400);
+        document.body.classList.remove('navigating');
+      }, 800);
     };
 
     router.init();
   }
 
   // ===========================================
-  // MOBILE NAVIGATION
+  // SCROLL SYSTEMS
   // ===========================================
 
-  // ===========================================
-  // FLUID SYSTEMS: RED THREAD & MICA
-  // ===========================================
-
-  function initFluidSystems() {
+  function initScrollSystems() {
     const scrollThread = document.getElementById('scroll-thread');
     
-    // Smooth Scroll Progress (Hilo Rojo)
+    // Scroll Progress Bar (Gold Thread)
     window.addEventListener('scroll', () => {
       if (!scrollThread) return;
       const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
@@ -222,41 +194,102 @@
       scrollThread.style.width = scrolled + "%";
     }, { passive: true });
 
-    // Force MICA presence
-    if (window.micaInstance) {
-      setTimeout(() => {
-        if (!window.micaInstance.isOpen) {
+    // Scroll reveal for sections
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
         }
-      }, 2000);
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -80px 0px' });
+
+    document.querySelectorAll('.view[data-scroll-reveal]').forEach(section => {
+      revealObserver.observe(section);
+    });
+
+    // Nav scroll effect (compact on scroll)
+    const nav = document.getElementById('main-nav');
+    let lastScroll = 0;
+    
+    window.addEventListener('scroll', () => {
+      const currentScroll = window.scrollY;
+      if (nav) {
+        nav.classList.toggle('nav--scrolled', currentScroll > 100);
+      }
+      lastScroll = currentScroll;
+    }, { passive: true });
+  }
+
+  // ===========================================
+  // NAV — smooth scroll links
+  // ===========================================
+
+  function initNavigation() {
+    // Make nav links use smooth scroll instead of route changes
+    document.querySelectorAll('.nav__link').forEach(link => {
+      link.addEventListener('click', (e) => {
+        const href = link.getAttribute('href');
+        
+        // Check if it's a main section
+        const sectionMap = {
+          '#/': 'view-home',
+          '#/galeria': 'view-archivo',
+          '#/about': 'view-about',
+          '#/contacto': 'view-contacto',
+        };
+        
+        if (sectionMap[href]) {
+          e.preventDefault();
+          
+          // Close mobile menu if open
+          const navLinks = document.querySelector('.nav__links');
+          const navToggle = document.getElementById('nav-toggle');
+          if (navLinks) navLinks.classList.remove('nav__links--open');
+          if (navToggle) navToggle.classList.remove('nav__toggle--active');
+          
+          // Update hash without triggering route change
+          history.pushState(null, null, href);
+          
+          // Smooth scroll to section
+          const targetId = sectionMap[href];
+          const target = document.getElementById(targetId);
+          if (target) {
+            const navHeight = document.querySelector('.nav')?.offsetHeight || 60;
+            const elementPosition = target.getBoundingClientRect().top + window.scrollY;
+            const offsetPosition = elementPosition - navHeight - 10;
+            
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: 'smooth'
+            });
+          }
+          
+          // Trigger any needed loading (e.g., gallery)
+          if (href === '#/galeria') loadArchive();
+          if (href === '#/contacto') loadContactoPanel();
+        }
+      });
+    });
+
+    // Mobile hamburger toggle
+    const navToggle = document.getElementById('nav-toggle');
+    const navLinks = document.querySelector('.nav__links');
+    
+    if (navToggle && navLinks) {
+      navToggle.addEventListener('click', () => {
+        navToggle.classList.toggle('nav__toggle--active');
+        navLinks.classList.toggle('nav__links--open');
+      });
     }
   }
 
   // ===========================================
-  // PLACEHOLDER LOADERS (to be expanded)
+  // LOADERS
   // ===========================================
-
-  function loadFeatured() {
-    if (window.Gallery) {
-      window.Gallery.loadFeatured();
-    }
-  }
 
   function loadArchive() {
     if (window.Gallery) {
       window.Gallery.loadArchive();
-    }
-  }
-
-  function loadGalleryDisruptive() {
-    // First load featured content
-    if (window.Gallery) {
-      window.Gallery.loadFeatured();
-    }
-    // Then initialize the disruptive engine for effects
-    if (window.GalleryDisruptive) {
-      // Reset and reinitialize to ensure lazy loading works
-      window.GalleryDisruptive.initialized = false;
-      window.GalleryDisruptive.init();
     }
   }
 
@@ -273,7 +306,6 @@
   }
 
   async function loadExposiciones() {
-    // Dynamic import for module
     try {
       const module = await import('../features/exposiciones-timeline.js');
       if (module.exposicionesTimeline) {
@@ -300,7 +332,6 @@
       const module = await import('../features/videocall-panel.js');
       if (module.videoCallPanel) {
         module.videoCallPanel.init('contacto-container');
-        // Hide fallback content
         const fallback = document.getElementById('contact-fallback');
         if (fallback) fallback.style.display = 'none';
       }
@@ -325,35 +356,32 @@
   // ===========================================
 
   async function init() {
+    console.log('[Naroa 360°] Initializing...');
     
-    // CRITICAL: Initialize Gallery BEFORE routes so data is ready
+    // Load Gallery data
     if (window.Gallery) {
       await window.Gallery.init();
+      // Pre-load gallery since it's always visible in scroll
+      window.Gallery.loadArchive();
     }
     
-    // Initialize Swarm Architecture
-    // ----------------------------------------
-    
-    // Dynamic import to break dependency cycle if needed
-    try {
-      const { Swarm } = await import('./swarm-orchestrator.js');
-      Swarm.init();
-    } catch (e) {
-      console.warn('Swarm initialization failed:', e);
-    }
-
+    // Register routes (for game overlays + hash handling)
     registerRoutes();
-    initFluidSystems();
+    
+    // Setup scroll-based systems
+    initScrollSystems();
+    
+    // Setup smooth scroll navigation
+    initNavigation();
+    
+    // Initialize UI controls
     initUIControls();
 
     // Initialize premium effects
     if (window.initMagnet) window.initMagnet();
+    if (window.Lightbox) window.Lightbox.init();
 
-    // Initialize other modules when ready
-    if (window.Lightbox) {
-      window.Lightbox.init();
-    }
-
+    console.log('[Naroa 360°] Ready — scroll to explore ✨');
   }
 
   function initUIControls() {
