@@ -22,8 +22,8 @@
           width: 4px;
           height: 4px;
           border-radius: 50%;
-          background: rgba(204, 255, 0, 0.6);
-          box-shadow: 0 0 8px rgba(204, 255, 0, 0.4);
+          background: rgba(212, 175, 55, 0.6);
+          box-shadow: 0 0 8px rgba(212, 175, 55, 0.4);
           left: ${x}px;
           top: ${y}px;
           pointer-events: none;
@@ -47,7 +47,7 @@
   // ==========================================
   window.GameEffects = window.GameEffects || {};
   
-  window.GameEffects.scorePopUp = function(element, value, color = '#ccff00') {
+  window.GameEffects.scorePopUp = function(element, value, color = '#d4af37') {
     if (!element) return;
     
     const pop = document.createElement('span');
@@ -103,7 +103,7 @@
   window.GameEffects.confettiBurst = function(container, count = 30) {
     if (!container) return;
     
-    const colors = ['#ccff00', '#ff003c', '#a855f7', '#ffd700', '#3b82f6', '#fff'];
+    const colors = ['#d4af37', '#ff003c', '#a855f7', '#ffd700', '#3b82f6', '#fff'];
     const shapes = ['circle', 'square', 'triangle'];
     
     for (let i = 0; i < count; i++) {
@@ -184,7 +184,7 @@
     flash.style.cssText = `
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle, rgba(204, 255, 0, 0.3), transparent);
+      background: radial-gradient(circle, rgba(212, 175, 55, 0.3), transparent);
       pointer-events: none;
       z-index: 50;
       animation: flashPulse 0.5s ease-out forwards;
@@ -200,7 +200,7 @@
     if (!container || combo < 2) return;
     
     const el = document.createElement('div');
-    const colors = ['', '', '#ccff00', '#ffd700', '#ff003c', '#a855f7'];
+    const colors = ['', '', '#d4af37', '#ffd700', '#ff003c', '#a855f7'];
     const color = colors[Math.min(combo, 5)];
     
     el.textContent = `${combo}x COMBO!`;

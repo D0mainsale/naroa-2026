@@ -13,7 +13,7 @@
     gravity: 0.15,
     spawnRate: 60,
     colors: {
-      primary: '#ccff00',
+      primary: '#d4af37',
       danger: '#ff003c',
       info: '#3b82f6',
       gold: '#ffd700',
@@ -73,7 +73,7 @@
       // Draw trail
       this.trail.forEach((pos, i) => {
         const alpha = (i / this.trail.length) * 0.4;
-        ctx.fillStyle = `rgba(204, 255, 0, ${alpha})`;
+        ctx.fillStyle = `rgba(212, 175, 55, ${alpha})`;
         ctx.beginPath();
         ctx.arc(pos.x, pos.y, 3 + i * 0.5, 0, Math.PI * 2);
         ctx.fill();
@@ -231,9 +231,9 @@
     container.innerHTML = `
       <div class="catch-game-wrapper" style="font-family: Satoshi, sans-serif; text-align: center;">
         <div class="game-ui" style="display: flex; justify-content: center; gap: 30px; margin-bottom: 15px; flex-wrap: wrap;">
-          <div class="score-display" style="background: linear-gradient(135deg, #1a1a2e, #0f0f1a); padding: 12px 25px; border-radius: 12px; border: 1px solid #ccff00; box-shadow: 0 0 15px rgba(204, 255, 0, 0.3);">
+          <div class="score-display" style="background: linear-gradient(135deg, #1a1a2e, #0f0f1a); padding: 12px 25px; border-radius: 12px; border: 1px solid #d4af37; box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);">
             <span style="color: #888; font-size: 12px; text-transform: uppercase; letter-spacing: 1px;">Score</span>
-            <div id="catch-score" style="color: #ccff00; font-size: 28px; font-weight: 700; text-shadow: 0 0 10px rgba(204, 255, 0, 0.5);">0</div>
+            <div id="catch-score" style="color: #d4af37; font-size: 28px; font-weight: 700; text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);">0</div>
           </div>
           <div class="lives-display" style="background: linear-gradient(135deg, #1a1a2e, #0f0f1a); padding: 12px 25px; border-radius: 12px; border: 1px solid #ff003c; box-shadow: 0 0 15px rgba(255, 0, 60, 0.3);">
             <span style="color: #888; font-size: 12px; text-transform: uppercase; letter-spacing: 1px;">Lives</span>
@@ -244,7 +244,7 @@
             <div id="catch-combo" style="color: #ffd700; font-size: 28px; font-weight: 700; text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);">x1</div>
           </div>
         </div>
-        <canvas id="catch-canvas" style="border-radius: 16px; box-shadow: 0 0 40px rgba(204, 255, 0, 0.15); max-width: 100%; cursor: none;"></canvas>
+        <canvas id="catch-canvas" style="border-radius: 16px; box-shadow: 0 0 40px rgba(212, 175, 55, 0.15); max-width: 100%; cursor: none;"></canvas>
         <div class="game-controls" style="margin-top: 15px; color: #666; font-size: 14px;">
           Use ← → arrows or touch/drag to move • Catch diamonds • Avoid bombs!
         </div>

@@ -181,7 +181,7 @@
 
     // Series color from taxonomy
     const seriesInfo = TAXONOMY?.series?.[artwork.category];
-    const seriesColor = seriesInfo?.color || 'var(--fluor)';
+    const seriesColor = seriesInfo?.color || 'var(--gold-metallic, #d4af37)';
     item.style.setProperty('--series-color', seriesColor);
 
     if (animate) {
@@ -251,7 +251,7 @@
 
       // Get series color from taxonomy
       const seriesInfo = TAXONOMY?.series?.[filter.id];
-      const seriesColor = seriesInfo?.color || 'var(--fluor)';
+      const seriesColor = seriesInfo?.color || 'var(--gold-metallic, #d4af37)';
       
       const btn = document.createElement('button');
       btn.className = 'gallery-filter';

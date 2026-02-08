@@ -44,7 +44,7 @@ html {
     90deg,
     transparent,
     rgba(255, 0, 60, 0.3) 20%,
-    rgba(204, 255, 0, 0.2) 50%,
+    rgba(212, 175, 55, 0.2) 50%,
     rgba(255, 0, 60, 0.3) 80%,
     transparent
   );
@@ -102,10 +102,10 @@ html {
 }
 
 .scroll-indicator__dot--active {
-  background: var(--fluor, #ccff00);
-  border-color: var(--fluor, #ccff00);
+  background: var(--fluor, #d4af37);
+  border-color: var(--fluor, #d4af37);
   transform: scale(1.4);
-  box-shadow: 0 0 8px rgba(204, 255, 0, 0.4);
+  box-shadow: 0 0 8px rgba(212, 175, 55, 0.4);
 }
 
 /* ===== Scroll-driven Reveal Animations ===== */

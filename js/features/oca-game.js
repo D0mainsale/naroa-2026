@@ -87,7 +87,7 @@
 
   function resetGame() {
     state.players = [
-      { id: 0, name: 'Jugador', color: '#ccff00', pos: 0, skipTurns: 0 },
+      { id: 0, name: 'Jugador', color: '#d4af37', pos: 0, skipTurns: 0 },
       { id: 1, name: 'MICA', color: '#ff003c', pos: 0, skipTurns: 0 } // AI opponent
     ];
     state.currentPlayer = 0;
@@ -196,7 +196,7 @@
     ctx.fillRect(0, 0, W, H);
 
     // Draw path connecting tiles
-    ctx.strokeStyle = 'rgba(204, 255, 0, 0.2)';
+    ctx.strokeStyle = 'rgba(212, 175, 55, 0.2)';
     ctx.lineWidth = 3;
     ctx.beginPath();
     state.board.forEach((t, i) => {
@@ -212,7 +212,7 @@
       
       // Tile glow
       if (t.type !== 'normal') {
-        ctx.shadowColor = t.type === 'death' ? '#ff003c' : '#ccff00';
+        ctx.shadowColor = t.type === 'death' ? '#ff003c' : '#d4af37';
         ctx.shadowBlur = 10;
       }
 

@@ -12,7 +12,7 @@
     minSpawnInterval: 400,
     moleDuration: 1500,
     colors: {
-      primary: '#ccff00',
+      primary: '#d4af37',
       danger: '#ff003c',
       info: '#3b82f6',
       gold: '#ffd700',
@@ -465,9 +465,9 @@
     container.innerHTML = `
       <div class="whack-game-wrapper" style="font-family: Satoshi, sans-serif; text-align: center; position: relative;">
         <div class="game-ui" style="display: flex; justify-content: center; gap: 20px; margin-bottom: 20px; flex-wrap: wrap;">
-          <div class="score-display" style="background: linear-gradient(135deg, #1a1a2e, #0f0f1a); padding: 12px 25px; border-radius: 12px; border: 1px solid ${CONFIG.colors.primary}; box-shadow: 0 0 15px rgba(204, 255, 0, 0.3);">
+          <div class="score-display" style="background: linear-gradient(135deg, #1a1a2e, #0f0f1a); padding: 12px 25px; border-radius: 12px; border: 1px solid ${CONFIG.colors.primary}; box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);">
             <span style="color: #888; font-size: 12px; text-transform: uppercase; letter-spacing: 1px;">Score</span>
-            <div id="whack-score" style="color: ${CONFIG.colors.primary}; font-size: 28px; font-weight: 700; text-shadow: 0 0 10px rgba(204, 255, 0, 0.5);">0</div>
+            <div id="whack-score" style="color: ${CONFIG.colors.primary}; font-size: 28px; font-weight: 700; text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);">0</div>
           </div>
           <div class="timer-display" style="background: linear-gradient(135deg, #1a1a2e, #0f0f1a); padding: 12px 25px; border-radius: 12px; border: 1px solid ${CONFIG.colors.info}; box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);">
             <span style="color: #888; font-size: 12px; text-transform: uppercase; letter-spacing: 1px;">Time</span>

@@ -168,7 +168,7 @@ window.WhackGame = (() => {
       // Neon ring
       ctx.beginPath();
       ctx.arc(hole.x, hole.y, r, 0, Math.PI * 2);
-      ctx.strokeStyle = mole.hit ? '#00ff88' : 'rgba(123,47,247,0.7)';
+      ctx.strokeStyle = mole.hit ? '#d4af37' : 'rgba(123,47,247,0.7)';
       ctx.lineWidth = mole.hit ? 4 : 2;
       ctx.stroke();
 

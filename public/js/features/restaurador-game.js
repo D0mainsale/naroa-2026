@@ -35,7 +35,7 @@
         
         <div style="display:flex; justify-content:space-between; align-items:center;">
           <h2 style="font-family:'Space Grotesk'; margin:0;">Restaurador</h2>
-          <div style="font-family:'Courier New'; color:#ccff00;">NIVEL <span id="rest-level">1</span></div>
+          <div style="font-family:'Courier New'; color:#d4af37;">NIVEL <span id="rest-level">1</span></div>
         </div>
 
         <div style="position:relative; border-radius:12px; overflow:hidden; border:2px solid #333; cursor:crosshair;">
@@ -54,7 +54,7 @@
         </div>
 
         <div style="width:100%; background:#222; height:6px; border-radius:3px;">
-          <div id="rest-progress" style="width:0%; height:100%; background:#00ff88; transition:width 0.2s;"></div>
+          <div id="rest-progress" style="width:0%; height:100%; background:#d4af37; transition:width 0.2s;"></div>
         </div>
       </div>
     `;

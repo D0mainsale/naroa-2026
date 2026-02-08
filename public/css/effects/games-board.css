@@ -10,7 +10,7 @@
   margin: 0 auto;
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 0 30px rgba(204, 255, 0, 0.1);
+  box-shadow: 0 0 30px rgba(212, 175, 55, 0.1);
 }
 
 .chess-board { grid-template-columns: repeat(8, 1fr); }
@@ -39,12 +39,12 @@
 }
 
 .chess-cell.selected, .ck-cell.selected {
-  background: rgba(204, 255, 0, 0.25) !important;
-  box-shadow: inset 0 0 15px rgba(204, 255, 0, 0.3);
+  background: rgba(212, 175, 55, 0.25) !important;
+  box-shadow: inset 0 0 15px rgba(212, 175, 55, 0.3);
 }
 
 .chess-cell.valid-move, .ck-cell.valid-move, .rev-cell.valid-move {
-  background: rgba(204, 255, 0, 0.08) !important;
+  background: rgba(212, 175, 55, 0.08) !important;
 }
 
 .chess-cell:hover, .ck-cell:hover, .rev-cell:hover {
@@ -56,7 +56,7 @@
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background: rgba(204, 255, 0, 0.4);
+  background: rgba(212, 175, 55, 0.4);
   display: block;
   animation: pulseDot 1s infinite;
 }
@@ -136,14 +136,14 @@
 
 .c4-col-header {
   text-align: center;
-  color: rgba(204, 255, 0, 0.3);
+  color: rgba(212, 175, 55, 0.3);
   cursor: pointer;
   padding: 5px;
   font-size: 0.8rem;
   transition: color 0.2s;
 }
 
-.c4-col-header:hover { color: #ccff00; }
+.c4-col-header:hover { color: #d4af37; }
 
 .c4-cell {
   aspect-ratio: 1;
@@ -170,8 +170,8 @@
 }
 
 @keyframes winPulse {
-  from { box-shadow: 0 0 15px rgba(204, 255, 0, 0.5); }
-  to { box-shadow: 0 0 30px rgba(204, 255, 0, 0.9), 0 0 60px rgba(204, 255, 0, 0.3); }
+  from { box-shadow: 0 0 15px rgba(212, 175, 55, 0.5); }
+  to { box-shadow: 0 0 30px rgba(212, 175, 55, 0.9), 0 0 60px rgba(212, 175, 55, 0.3); }
 }
 
 /* Shared game UI */
@@ -219,7 +219,7 @@
 
 .tetris-box {
   background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(204, 255, 0, 0.15);
+  border: 1px solid rgba(212, 175, 55, 0.15);
   border-radius: 8px;
   padding: 8px;
   text-align: center;
@@ -227,7 +227,7 @@
 
 .tetris-box h3 {
   font-size: 0.7rem;
-  color: rgba(204, 255, 0, 0.6);
+  color: rgba(212, 175, 55, 0.6);
   margin: 0 0 5px;
   letter-spacing: 2px;
 }
@@ -238,13 +238,13 @@
   color: rgba(255, 255, 255, 0.6);
 }
 
-.tetris-info strong { color: #ccff00; }
+.tetris-info strong { color: #d4af37; }
 
 /* Game buttons */
 .game-btn {
-  background: linear-gradient(135deg, rgba(204, 255, 0, 0.15), rgba(204, 255, 0, 0.05));
-  border: 1px solid rgba(204, 255, 0, 0.3);
-  color: #ccff00;
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(212, 175, 55, 0.05));
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  color: #d4af37;
   padding: 10px 24px;
   border-radius: 8px;
   font-family: 'Satoshi', sans-serif;
@@ -256,8 +256,8 @@
 }
 
 .game-btn:hover {
-  background: linear-gradient(135deg, rgba(204, 255, 0, 0.25), rgba(204, 255, 0, 0.1));
-  box-shadow: 0 0 20px rgba(204, 255, 0, 0.2);
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.25), rgba(212, 175, 55, 0.1));
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
   transform: translateY(-2px);
 }
 

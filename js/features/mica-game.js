@@ -19,7 +19,7 @@
 
     container.innerHTML = `
       <div class="mica-viva-ui">
-        <h2>MICA STATE: <span style="color:#ccff00">ACTIVE</span></h2>
+        <h2>MICA STATE: <span style="color:#d4af37">ACTIVE</span></h2>
         <canvas id="mica-canvas" width="${W}" height="${H}"></canvas>
       </div>
     `;
@@ -49,7 +49,7 @@
 
     // Outer Aura
     const grad = ctx.createRadialGradient(cx, cy, radius * 0.8, cx, cy, radius * 3);
-    grad.addColorStop(0, 'rgba(204, 255, 0, 0.6)');
+    grad.addColorStop(0, 'rgba(212, 175, 55, 0.6)');
     grad.addColorStop(0.5, 'rgba(0, 255, 204, 0.2)');
     grad.addColorStop(1, 'rgba(0, 0, 0, 0)');
     ctx.fillStyle = grad;
@@ -59,7 +59,7 @@
 
     // Core
     ctx.fillStyle = '#fff';
-    ctx.shadowColor = '#ccff00';
+    ctx.shadowColor = '#d4af37';
     ctx.shadowBlur = 40 + state.breathing * 20;
     ctx.beginPath();
     ctx.arc(cx, cy, radius, 0, Math.PI * 2);

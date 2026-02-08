@@ -10,7 +10,7 @@
     maxDelay: 4000,
     timeout: 3000,
     colors: {
-      primary: '#ccff00',
+      primary: '#d4af37',
       danger: '#ff003c',
       info: '#3b82f6',
       gold: '#ffd700',
@@ -370,7 +370,7 @@
             <span style="color: #888; font-size: 11px; text-transform: uppercase; letter-spacing: 1px;">Average</span>
             <div id="avg-time" style="color: ${CONFIG.colors.info}; font-size: 22px; font-weight: 700;">--</div>
           </div>
-          <div class="stat-display" style="background: linear-gradient(135deg, #1a1a2e, #0f0f1a); padding: 12px 20px; border-radius: 12px; border: 1px solid ${CONFIG.colors.primary}; box-shadow: 0 0 15px rgba(204, 255, 0, 0.2);">
+          <div class="stat-display" style="background: linear-gradient(135deg, #1a1a2e, #0f0f1a); padding: 12px 20px; border-radius: 12px; border: 1px solid ${CONFIG.colors.primary}; box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);">
             <span style="color: #888; font-size: 11px; text-transform: uppercase; letter-spacing: 1px;">Attempts</span>
             <div id="attempts-count" style="color: ${CONFIG.colors.primary}; font-size: 22px; font-weight: 700;">0</div>
           </div>

@@ -135,13 +135,13 @@
       .gg-dialog {
         position: relative; z-index: 1;
         background: rgba(20, 20, 40, 0.9);
-        border: 1px solid rgba(204, 255, 0, 0.2);
+        border: 1px solid rgba(212, 175, 55, 0.2);
         border-radius: 20px;
         padding: 40px;
         max-width: 480px;
         width: 90%;
         text-align: center;
-        box-shadow: 0 0 60px rgba(204, 255, 0, 0.08), 0 25px 50px rgba(0,0,0,0.5);
+        box-shadow: 0 0 60px rgba(212, 175, 55, 0.08), 0 25px 50px rgba(0,0,0,0.5);
         animation: ggSlideIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
       }
 
@@ -153,22 +153,22 @@
       .gg-avatar {
         width: 60px; height: 60px;
         border-radius: 50%;
-        background: linear-gradient(135deg, #ccff00, #00ff88);
+        background: linear-gradient(135deg, #d4af37, #d4af37);
         display: flex; align-items: center; justify-content: center;
         font-size: 1.8rem;
         margin: 0 auto 15px;
-        box-shadow: 0 0 25px rgba(204, 255, 0, 0.3);
+        box-shadow: 0 0 25px rgba(212, 175, 55, 0.3);
         animation: ggBreathe 3s ease-in-out infinite;
       }
 
       @keyframes ggBreathe {
-        0%, 100% { box-shadow: 0 0 25px rgba(204, 255, 0, 0.3); }
-        50% { box-shadow: 0 0 40px rgba(204, 255, 0, 0.5); }
+        0%, 100% { box-shadow: 0 0 25px rgba(212, 175, 55, 0.3); }
+        50% { box-shadow: 0 0 40px rgba(212, 175, 55, 0.5); }
       }
 
       .gg-label {
         font-size: 0.75rem;
-        color: rgba(204, 255, 0, 0.5);
+        color: rgba(212, 175, 55, 0.5);
         text-transform: uppercase;
         letter-spacing: 3px;
         margin-bottom: 10px;
@@ -212,13 +212,13 @@
       .gg-btn:hover::before { opacity: 1; }
 
       .gg-btn--yes {
-        background: linear-gradient(135deg, #ccff00, #88dd00);
+        background: linear-gradient(135deg, #d4af37, #88dd00);
         color: #0a0a0a;
-        box-shadow: 0 0 20px rgba(204, 255, 0, 0.3);
+        box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
       }
       .gg-btn--yes:hover {
         transform: translateY(-3px) scale(1.05);
-        box-shadow: 0 0 35px rgba(204, 255, 0, 0.5);
+        box-shadow: 0 0 35px rgba(212, 175, 55, 0.5);
       }
 
       .gg-btn--depends {
@@ -271,7 +271,7 @@
 
       .gg-game-card {
         background: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(204, 255, 0, 0.15);
+        border: 1px solid rgba(212, 175, 55, 0.15);
         border-radius: 12px;
         padding: 15px;
         cursor: pointer;
@@ -280,16 +280,16 @@
         text-align: center;
       }
       .gg-game-card:hover {
-        background: rgba(204, 255, 0, 0.1);
-        border-color: rgba(204, 255, 0, 0.4);
+        background: rgba(212, 175, 55, 0.1);
+        border-color: rgba(212, 175, 55, 0.4);
         transform: translateY(-5px);
-        box-shadow: 0 10px 25px rgba(204, 255, 0, 0.15);
+        box-shadow: 0 10px 25px rgba(212, 175, 55, 0.15);
       }
       .gg-game-card__icon { font-size: 2rem; margin-bottom: 5px; }
       .gg-game-card__name { font-size: 0.85rem; color: #fff; }
 
       .gg-response {
-        color: #ccff00;
+        color: #d4af37;
         font-style: italic;
         min-height: 24px;
         margin-top: 10px;

@@ -187,8 +187,8 @@
     ctx.fillRect(0, H-20, W, 20); // Floor
 
     // Player
-    ctx.fillStyle = '#ccff00';
-    ctx.shadowColor = '#ccff00';
+    ctx.fillStyle = '#d4af37';
+    ctx.shadowColor = '#d4af37';
     ctx.shadowBlur = 10;
     ctx.fillRect(state.player.x, state.player.y, state.player.w, state.player.h);
     ctx.shadowBlur = 0;

@@ -24,7 +24,7 @@
           <button class="game-btn" id="collage-clear">🗑️ Limpiar</button>
           <button class="game-btn" id="collage-poem">📜 Revelar Poema</button>
         </div>
-        <div id="collage-poem-text" style="font-style:italic;color:#ccff00;min-height:60px;text-align:center;padding:10px"></div>
+        <div id="collage-poem-text" style="font-style:italic;color:#d4af37;min-height:60px;text-align:center;padding:10px"></div>
       </div>
     `;
 

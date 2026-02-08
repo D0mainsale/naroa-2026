@@ -36,7 +36,7 @@
     container.innerHTML = `
       <div class="chess-ui">
         <div class="chess-info">
-          <span>Turno: <strong id="chess-turn" style="color:#ccff00">Blancas</strong></span>
+          <span>Turno: <strong id="chess-turn" style="color:#d4af37">Blancas</strong></span>
           <span>Movimientos: <strong id="chess-moves">0</strong></span>
         </div>
         <div id="chess-board" class="chess-board"></div>

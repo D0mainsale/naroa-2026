@@ -158,7 +158,7 @@
     if (!elements.infoPanel) return;
 
     const seriesInfo = getSeriesInfo(artwork.series);
-    const seriesColor = seriesInfo ? seriesInfo.color : 'var(--fluor)';
+    const seriesColor = seriesInfo ? seriesInfo.color : 'var(--gold-metallic, #d4af37)';
     const seriesName = seriesInfo ? seriesInfo.displayNameEs : artwork.series || '';
     const technique = artwork.technique || (seriesInfo ? seriesInfo.technique : '');
 

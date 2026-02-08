@@ -28,7 +28,7 @@
   background: linear-gradient(
     105deg,
     transparent 40%,
-    rgba(204, 255, 0, 0.03) 45%,
+    rgba(212, 175, 55, 0.03) 45%,
     rgba(255, 0, 60, 0.03) 50%,
     transparent 55%
   );
@@ -44,10 +44,10 @@
 
 .game-card:hover {
   transform: translateY(-12px) scale(1.02);
-  border-color: rgba(204, 255, 0, 0.3);
+  border-color: rgba(212, 175, 55, 0.3);
   box-shadow: 
     0 20px 60px rgba(0, 0, 0, 0.5),
-    0 0 30px rgba(204, 255, 0, 0.08),
+    0 0 30px rgba(212, 175, 55, 0.08),
     inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
@@ -59,7 +59,7 @@
   left: 0;
   right: 0;
   height: 3px;
-  background: linear-gradient(90deg, var(--fluor, #ccff00), transparent);
+  background: linear-gradient(90deg, var(--fluor, #d4af37), transparent);
   opacity: 0;
   transition: opacity 0.4s ease;
 }
@@ -81,7 +81,7 @@
 
 .game-card:hover .game-card__icon {
   transform: scale(1.2) rotate(-5deg);
-  filter: drop-shadow(0 0 16px rgba(204, 255, 0, 0.6));
+  filter: drop-shadow(0 0 16px rgba(212, 175, 55, 0.6));
   animation: iconBounce 0.6s ease;
 }
 
@@ -104,8 +104,8 @@
 }
 
 .game-card:hover .game-card__title {
-  color: var(--fluor, #ccff00);
-  text-shadow: 0 0 20px rgba(204, 255, 0, 0.3);
+  color: var(--fluor, #d4af37);
+  text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
 }
 
 /* ===== DESCRIPTION ===== */
@@ -188,7 +188,7 @@
   font-family: var(--font-family-mono, monospace);
   font-size: 0.6rem;
   font-weight: 800;
-  background: var(--fluor, #ccff00);
+  background: var(--fluor, #d4af37);
   color: #000;
   padding: 3px 8px;
   border-radius: 4px;
@@ -198,8 +198,8 @@
 }
 
 @keyframes newPulse {
-  0%, 100% { opacity: 1; box-shadow: 0 0 0 rgba(204, 255, 0, 0); }
-  50% { opacity: 0.8; box-shadow: 0 0 12px rgba(204, 255, 0, 0.4); }
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 rgba(212, 175, 55, 0); }
+  50% { opacity: 0.8; box-shadow: 0 0 12px rgba(212, 175, 55, 0.4); }
 }
 
 /* ===== VARIANT: STRATEGY ===== */
@@ -228,7 +228,7 @@
   font-family: var(--font-family-display, 'Space Grotesk', sans-serif);
   font-size: clamp(2.5rem, 6vw, 5rem);
   text-transform: uppercase;
-  background: linear-gradient(135deg, #fff 0%, #ccff00 50%, #ff003c 100%);
+  background: linear-gradient(135deg, #fff 0%, #d4af37 50%, #ff003c 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -239,14 +239,14 @@
 
 .games-hub__subtitle {
   font-family: var(--font-family-mono, monospace);
-  color: rgba(204, 255, 0, 0.8);
+  color: rgba(212, 175, 55, 0.8);
   font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 0.2em;
-  background: rgba(204, 255, 0, 0.06);
+  background: rgba(212, 175, 55, 0.06);
   display: inline-block;
   padding: 0.6rem 1.5rem;
-  border: 1px solid rgba(204, 255, 0, 0.15);
+  border: 1px solid rgba(212, 175, 55, 0.15);
   border-radius: 100px;
 }
 
@@ -270,7 +270,7 @@
 
 /* ===== GAME BUTTON UPGRADE ===== */
 .game-btn {
-  background: linear-gradient(135deg, var(--fluor, #ccff00), #b3e600);
+  background: linear-gradient(135deg, var(--fluor, #d4af37), #c49b30);
   color: #000;
   font-family: var(--font-family-mono, monospace);
   font-weight: 800;
@@ -298,7 +298,7 @@
 
 .game-btn:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 30px rgba(204, 255, 0, 0.3);
+  box-shadow: 0 8px 30px rgba(212, 175, 55, 0.3);
 }
 
 .game-btn:hover::before {
@@ -318,7 +318,7 @@
 }
 
 #snake-canvas {
-  border: 2px solid rgba(204, 255, 0, 0.3);
+  border: 2px solid rgba(212, 175, 55, 0.3);
 }
 
 #breakout-canvas {
@@ -331,7 +331,7 @@
 
 /* ===== MEMORY CARD UPGRADE ===== */
 .memory-card__front {
-  background: linear-gradient(135deg, rgba(204, 255, 0, 0.1), rgba(255, 0, 60, 0.1));
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(255, 0, 60, 0.1));
   border: 2px solid rgba(255, 255, 255, 0.1);
   border-radius: 12px;
   font-size: 2.5rem;
@@ -339,7 +339,7 @@
 
 .memory-card__back {
   border-radius: 12px;
-  border: 2px solid rgba(204, 255, 0, 0.3);
+  border: 2px solid rgba(212, 175, 55, 0.3);
 }
 
 .memory-card.matched {
@@ -362,7 +362,7 @@
 
 .puzzle-tile:hover:not(.puzzle-tile--empty) {
   transform: scale(0.92);
-  box-shadow: 0 0 15px rgba(204, 255, 0, 0.2);
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
 }
 
 /* ===== SIMON UPGRADE ===== */
@@ -407,7 +407,7 @@
 
 @keyframes scoreFlash {
   0%, 100% { color: #fff; }
-  50% { color: var(--fluor, #ccff00); text-shadow: 0 0 20px rgba(204, 255, 0, 0.5); }
+  50% { color: var(--fluor, #d4af37); text-shadow: 0 0 20px rgba(212, 175, 55, 0.5); }
 }
 
 /* ===== GRID RESPONSIVENESS ===== */

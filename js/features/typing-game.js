@@ -23,7 +23,7 @@
       <div class="typing-ui">
         <div class="typing-stats">
           <span>⏱️ <strong id="typing-time">60</strong>s</span>
-          <span>Puntos: <strong id="typing-score" style="color:#ccff00">0</strong></span>
+          <span>Puntos: <strong id="typing-score" style="color:#d4af37">0</strong></span>
           <span>🔥 <strong id="typing-combo">x0</strong></span>
         </div>
         <div id="typing-word" style="font-size:2.5rem;text-align:center;font-family:monospace;letter-spacing:4px;min-height:60px;color:#fff;padding:20px"></div>
@@ -102,7 +102,7 @@
       const ch = state.currentWord[i];
       if (i < state.typed.length) {
         if (state.typed[i] === ch) {
-          html += `<span style="color:#ccff00">${ch}</span>`;
+          html += `<span style="color:#d4af37">${ch}</span>`;
         } else {
           html += `<span style="color:#ff003c;text-decoration:underline">${ch}</span>`;
         }

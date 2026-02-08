@@ -7,7 +7,7 @@
 
   const CONFIG = {
     colors: {
-      primary: '#ccff00',
+      primary: '#d4af37',
       danger: '#ff003c',
       info: '#3b82f6',
       gold: '#ffd700',
@@ -112,7 +112,7 @@
               font-size: 24px;
               font-weight: 700;
               color: #000;
-              box-shadow: 0 0 20px rgba(204, 255, 0, 0.4);
+              box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
             ">${artwork.title.charAt(0)}</div>
           </div>
           <div class="artwork-info" style="text-align: center; margin-top: 10px;">
@@ -176,7 +176,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 0 20px rgba(204, 255, 0, 0.1);
+      box-shadow: 0 0 20px rgba(212, 175, 55, 0.1);
       transition: box-shadow 0.3s ease, border-color 0.3s ease;
     `;
 
@@ -188,7 +188,7 @@
     });
 
     card.addEventListener('mouseleave', () => {
-      cardBack.style.boxShadow = '0 0 20px rgba(204, 255, 0, 0.1)';
+      cardBack.style.boxShadow = '0 0 20px rgba(212, 175, 55, 0.1)';
       cardBack.style.borderColor = CONFIG.colors.primary;
     });
 
@@ -362,7 +362,7 @@
             <span style="color: #888; font-size: 12px; text-transform: uppercase; letter-spacing: 1px;">Time</span>
             <div id="memory-timer" style="color: ${CONFIG.colors.info}; font-size: 28px; font-weight: 700; font-family: monospace;">00:00</div>
           </div>
-          <div class="moves-display" style="background: linear-gradient(135deg, #1a1a2e, #0f0f1a); padding: 12px 25px; border-radius: 12px; border: 1px solid ${CONFIG.colors.primary}; box-shadow: 0 0 15px rgba(204, 255, 0, 0.3);">
+          <div class="moves-display" style="background: linear-gradient(135deg, #1a1a2e, #0f0f1a); padding: 12px 25px; border-radius: 12px; border: 1px solid ${CONFIG.colors.primary}; box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);">
             <span style="color: #888; font-size: 12px; text-transform: uppercase; letter-spacing: 1px;">Moves</span>
             <div id="memory-moves" style="color: ${CONFIG.colors.primary}; font-size: 28px; font-weight: 700;">0</div>
           </div>

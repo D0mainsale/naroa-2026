@@ -7,7 +7,7 @@
 
   const CONFIG = {
     colors: {
-      primary: '#ccff00',
+      primary: '#d4af37',
       danger: '#ff003c',
       info: '#3b82f6',
       gold: '#ffd700',

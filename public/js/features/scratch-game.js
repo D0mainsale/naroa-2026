@@ -27,7 +27,7 @@
 
     container.innerHTML = `
       <div class="scratch-game">
-        <div class="scratch-stats">Descubierto: <strong id="scratch-percent" style="color:#ccff00">0%</strong></div>
+        <div class="scratch-stats">Descubierto: <strong id="scratch-percent" style="color:#d4af37">0%</strong></div>
         <div style="position:relative; width:${W}px; height:${H}px; margin:20px auto; border-radius:12px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.5)">
             <canvas id="scratch-bg" width="${W}" height="${H}" style="position:absolute; top:0; left:0; z-index:1"></canvas>
             <canvas id="scratch-cover" width="${W}" height="${H}" style="position:absolute; top:0; left:0; z-index:2; cursor:crosshair"></canvas>

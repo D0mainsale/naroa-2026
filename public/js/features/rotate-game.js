@@ -92,7 +92,7 @@
         ? `background-image:url('${state.artworkSrc}');background-size:${state.size * 100}%;background-position:${p.c * (100/(state.size-1))}% ${p.r * (100/(state.size-1))}%`
         : `background:linear-gradient(${p.r * 45}deg, hsl(${hue},70%,40%), hsl(${hue + 60},70%,50%))`;
 
-      return `<div class="rotate-piece${p.correct ? ' correct' : ''}" data-idx="${i}" style="width:120px;height:120px;${bg};border-radius:8px;cursor:pointer;transform:rotate(${p.rotation}deg);transition:transform 0.3s cubic-bezier(0.34,1.56,0.64,1);border:2px solid ${p.correct ? '#ccff00' : 'rgba(255,255,255,0.1)'};${p.correct ? 'box-shadow:0 0 15px rgba(204,255,0,0.4)' : ''}"></div>`;
+      return `<div class="rotate-piece${p.correct ? ' correct' : ''}" data-idx="${i}" style="width:120px;height:120px;${bg};border-radius:8px;cursor:pointer;transform:rotate(${p.rotation}deg);transition:transform 0.3s cubic-bezier(0.34,1.56,0.64,1);border:2px solid ${p.correct ? '#d4af37' : 'rgba(255,255,255,0.1)'};${p.correct ? 'box-shadow:0 0 15px rgba(204,255,0,0.4)' : ''}"></div>`;
     }).join('');
 
     el.querySelectorAll('.rotate-piece').forEach(piece => {

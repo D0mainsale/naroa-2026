@@ -21,7 +21,7 @@
     container.innerHTML = `
       <div class="puzzle-ui">
         <div class="puzzle-info">
-          <span>Movimientos: <strong id="puzzle-moves" style="color:#ccff00">0</strong></span>
+          <span>Movimientos: <strong id="puzzle-moves" style="color:#d4af37">0</strong></span>
           <button class="game-btn secondary" id="puzzle-new">🔀 Mezclar</button>
         </div>
         <div id="puzzle-board" class="puzzle-board" style="display:grid;grid-template-columns:repeat(${state.size},1fr);gap:3px;max-width:360px;margin:0 auto"></div>
@@ -108,7 +108,7 @@
 
       const isCorrect = (idx === tile - 1);
 
-      return `<div class="puzzle-tile" data-idx="${idx}" style="width:85px;height:85px;${bg};border-radius:6px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.2rem;font-weight:bold;color:rgba(255,255,255,0.8);text-shadow:0 1px 3px rgba(0,0,0,0.5);border:2px solid ${isCorrect ? '#ccff00' : 'rgba(255,255,255,0.1)'};transition:transform 0.15s ease;${isCorrect ? 'box-shadow:0 0 10px rgba(204,255,0,0.3)' : ''}">${state.artworkSrc ? '' : tile}</div>`;
+      return `<div class="puzzle-tile" data-idx="${idx}" style="width:85px;height:85px;${bg};border-radius:6px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.2rem;font-weight:bold;color:rgba(255,255,255,0.8);text-shadow:0 1px 3px rgba(0,0,0,0.5);border:2px solid ${isCorrect ? '#d4af37' : 'rgba(255,255,255,0.1)'};transition:transform 0.15s ease;${isCorrect ? 'box-shadow:0 0 10px rgba(204,255,0,0.3)' : ''}">${state.artworkSrc ? '' : tile}</div>`;
     }).join('');
 
     el.querySelectorAll('.puzzle-tile:not(.empty)').forEach(tile => {
