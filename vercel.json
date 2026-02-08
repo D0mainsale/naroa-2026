@@ -6,7 +6,7 @@
   
   "rewrites": [
     { "source": "/galeria", "destination": "/galeria.html" },
-    { "source": "/:path*", "destination": "/index.html" }
+    { "source": "/((?!assets/|images/|css/|js/|.*\\..*).*)", "destination": "/index.html" }
   ],
   
   "headers": [

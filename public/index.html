@@ -28,7 +28,8 @@
   <link rel="preload" href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700&f[]=switzer@300,400,500,600,700&display=swap" as="style">
   <link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700&f[]=switzer@300,400,500,600,700&display=swap" rel="stylesheet">
   
-  <link rel="preload" as="image" href="images/artworks/espejos-del-alma.webp" fetchpriority="high">
+  <link rel="preload" as="image" href="images/artworks/blur-amy.webp" fetchpriority="high">
+  <link rel="preload" as="image" href="images/artworks/web-amy.webp">
   
   <style>
     /* Reset */
@@ -280,11 +281,12 @@
     <section id="view-home" class="view view--home active">
     <div class="hero hero--spectacular">
       <div class="hero__slider" id="hero-slider">
-        <div class="hero__slide active" style="background-image: url('images/artworks/hq-amy.webp')"></div>
-        <div class="hero__slide" style="background-image: url('images/artworks/hq-james.webp')"></div>
-        <div class="hero__slide" style="background-image: url('images/artworks/hq-johnny.webp')"></div>
-        <div class="hero__slide" style="background-image: url('images/artworks/hq-marilyn.webp')"></div>
-        <div class="hero__slide" style="background-image: url('images/artworks/hq-portrait-1.webp')"></div>
+        <div class="hero__slide active" style="background-image: url('images/artworks/blur-amy.webp')"></div>
+        <div class="hero__slide" style="background-image: url('images/artworks/blur-james.webp')"></div>
+        <div class="hero__slide" style="background-image: url('images/artworks/blur-johnny.webp')"></div>
+        <div class="hero__slide" style="background-image: url('images/artworks/blur-marilyn.webp')"></div>
+        <div class="hero__slide" style="background-image: url('images/artworks/blur-portrait-1.webp')"></div>
+        <div class="hero__slide" style="background-image: url('images/artworks/blur-portrait-2.webp')"></div>
       </div>
       
       <div class="hero__overlay"></div> <!-- Gradient/Noise -->
@@ -848,7 +850,9 @@
 
   <!-- WebGL Scroll Shader — aurora background (Kimi K2.5) -->
   <script src="js/webgl/scroll-shader.js" defer></script>
-  
+  <script src="js/features/progressive-hero.js"></script>
+  <script src="js/features/seo-manager.js" defer></script>
+
   <script src="js/core/router.js"></script>
   <script src="js/core/ranking-system.js" defer></script>
   <script src="js/features/gallery.js"></script>

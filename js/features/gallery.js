@@ -23,8 +23,8 @@
   async function loadArtworkData() {
     try {
       const [metadataRes, taxonomyRes] = await Promise.all([
-        fetch('/data/artworks-metadata.json')
-          .catch(() => fetch('data/artworks-metadata.json')), // Fallback for local
+        fetch('/data/database.json')
+          .catch(() => fetch('data/database.json')), // Fallback for local
         fetch('/data/artworks-taxonomy.json')
           .catch(() => fetch('data/artworks-taxonomy.json'))  // Fallback for local
       ]);
@@ -40,8 +40,8 @@
           .map((art, index) => ({
             id: index + 1,
             title: art.title,
-            file: `${art.id}.webp`, // Trust the ID structure
-            category: art.series,
+            file: art.file, // Trust the filename from database.json
+            category: art.series.toLowerCase().replace(/\s+/g, '-'), // Normalize series to category ID (e.g. "Rocks" -> "rocks")
             technique: art.technique,
             year: art.year,
             originalId: art.id
@@ -195,7 +195,7 @@
     item.innerHTML = `
       <div class="stitch-media-wrapper shimmer">
         <img 
-          data-src="images/artworks/${artwork.originalId}.webp" 
+          data-src="/images/artworks/${artwork.originalId}.webp" 
           alt="${artwork.title}"
           loading="lazy"
           class="stitch-media-content gallery__img--hq"

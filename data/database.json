@@ -1,0 +1,171 @@
+{
+  "metadata": {
+    "version": "1.0",
+    "generated": "2026-02-08",
+    "source": "FileSystem Scan + Manual Metadata"
+  },
+  "artworks": [
+    {
+      "id": "amy-rocks",
+      "title": "Amy Rocks",
+      "series": "Rocks",
+      "year": 2023,
+      "technique": "Mixed Media",
+      "file": "amy-rocks.webp",
+      "tags": ["music", "icon", "pop"]
+    },
+    {
+      "id": "james-rocks",
+      "title": "James Rocks",
+      "series": "Rocks",
+      "year": 2023,
+      "technique": "Mixed Media",
+      "file": "james-rocks.webp",
+      "tags": ["film", "icon", "rebel"]
+    },
+    {
+      "id": "johnny-rocks",
+      "title": "Johnny Rocks",
+      "series": "Rocks",
+      "year": 2023,
+      "technique": "Mixed Media",
+      "file": "johnny-rocks.webp",
+      "tags": ["music", "icon", "country"]
+    },
+    {
+      "id": "marilyn-rocks",
+      "title": "Marilyn Rocks",
+      "series": "Rocks",
+      "year": 2023,
+      "technique": "Mixed Media",
+      "file": "marilyn-rocks.webp",
+      "tags": ["film", "icon", "glamour"]
+    },
+    {
+      "id": "divinos-amy",
+      "title": "Saint Amy",
+      "series": "DiviNos",
+      "year": 2022,
+      "technique": "Digital Collage",
+      "file": "divinos-amy.webp",
+      "tags": ["spiritual", "icon"]
+    },
+    {
+      "id": "divinos-james",
+      "title": "Saint James",
+      "series": "DiviNos",
+      "year": 2022,
+      "technique": "Digital Collage",
+      "file": "divinos-james.webp",
+      "tags": ["spiritual", "icon"]
+    },
+    {
+      "id": "divinos-johnny",
+      "title": "Saint Johnny",
+      "series": "DiviNos",
+      "year": 2022,
+      "technique": "Digital Collage",
+      "file": "divinos-johnny.webp",
+      "tags": ["spiritual", "icon"]
+    },
+    {
+      "id": "divinos-marilyn",
+      "title": "Saint Marilyn",
+      "series": "DiviNos",
+      "year": 2022,
+      "technique": "Digital Collage",
+      "file": "divinos-marilyn.webp",
+      "tags": ["spiritual", "icon"]
+    },
+    {
+      "id": "espejos-del-alma",
+      "title": "Espejos del Alma",
+      "series": "Espejos del Alma",
+      "year": 2021,
+      "technique": "Photography",
+      "file": "espejos-del-alma.webp",
+      "tags": ["reflection", "soul"]
+    },
+    {
+      "id": "cantinflas-0",
+      "title": "Cantinflas Origin",
+      "series": "CantinFlowers",
+      "year": 2024,
+      "technique": "AI & Mixed Media",
+      "file": "cantinflas-0.webp",
+      "tags": ["flowers", "humor"]
+    },
+    {
+      "id": "cantinflas-1",
+      "title": "Cantinflas Bloom",
+      "series": "CantinFlowers",
+      "year": 2024,
+      "technique": "AI & Mixed Media",
+      "file": "cantinflas-1.webp",
+      "tags": ["flowers", "humor"]
+    },
+    {
+      "id": "cantinflas-2",
+      "title": "Cantinflas Pop",
+      "series": "CantinFlowers",
+      "year": 2024,
+      "technique": "AI & Mixed Media",
+      "file": "cantinflas-2.webp",
+      "tags": ["flowers", "humor"]
+    },
+    {
+      "id": "walking-gallery-plumas",
+      "title": "Walking Gallery",
+      "series": "Performance",
+      "year": 2015,
+      "technique": "Urban Intervention",
+      "file": "walking-gallery-plumas.webp",
+      "tags": ["performance", "street"]
+    },
+    {
+      "id": "amor-en-conserva",
+      "title": "Amor en Conserva",
+      "series": "En.lata.das",
+      "year": 2020,
+      "technique": "Sculpture",
+      "file": "amor-en-conserva.webp",
+      "tags": ["tin", "love"]
+    },
+    {
+      "id": "dar-la-lata",
+      "title": "Dar la Lata",
+      "series": "En.lata.das",
+      "year": 2020,
+      "technique": "Sculpture",
+      "file": "dar-la-lata.webp",
+      "tags": ["tin", "pun"]
+    },
+    {
+      "id": "hammock-in-tin",
+      "title": "Hammock in Tin",
+      "series": "En.lata.das",
+      "year": 2020,
+      "technique": "Sculpture",
+      "file": "hammock-in-tin.webp",
+      "tags": ["tin", "relax"]
+    },
+    {
+      "id": "audit-icon",
+      "title": "Audrey Hepburn",
+      "series": "Icons",
+      "year": 2021,
+      "technique": "Digital Art",
+      "file": "audrey-hepburn.webp",
+      "tags": ["film", "icon", "classic"]
+    },
+    {
+      "id": "hq-amy",
+      "title": "Amy HQ",
+      "series": "Rocks",
+      "year": 2023,
+      "technique": "Mixed Media",
+      "file": "hq-amy.webp",
+      "tags": ["music", "high-res"]
+    }
+  ]
+}

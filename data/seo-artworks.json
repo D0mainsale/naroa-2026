@@ -1,0 +1,893 @@
+{
+  "meta": {
+    "version": "7.1.0",
+    "source": "Confluencia: naroa-2026 + assets-master + NotebookLM",
+    "totalArtworks": 82,
+    "series": ["tributos-musicales","rocks","enlatas","walking-gallery","golden","amor","retratos","naturaleza","espejos-del-alma","cantinflas","bodas","divinos"]
+  },
+  "albums": [
+    {"title":"Buena Fuente","images":17,"url":"https://www.facebook.com/media/set/?set=a.111105260704082&type=3"},
+    {"title":"Marian de Miranda","images":15,"url":"https://www.facebook.com/media/set/?set=a.108770445270897&type=3"},
+    {"title":"Red Red Wine","images":4,"url":"https://www.facebook.com/media/set/?set=a.106904296457512&type=3"},
+    {"title":"Pajarraca Azul","images":20,"url":"https://www.facebook.com/media/set/?set=a.106629713131637&type=3"}
+  ],
+  "artworks": [
+    {
+      "id": "cantinflas-0",
+      "title": "Cantinflas I",
+      "series": "cantinflas",
+      "technique": "mixed-media",
+      "year": 2024,
+      "featured": true,
+      "creativeDisplay": "spotlight",
+      "altText": "Retrato de Cantinflas en técnica mixta sobre lienzo, destacando su expresión cómica icónica con colores vibrantes y texturas que evocan el cine mexicano de oro.",
+      "metaDescription": "Cantinflas I - Arte pop y técnica mixta de Naroa Gutiérrez Gil. Homenaje al cine clásico mexicano en formato contemporáneo. Arte contemporáneo Bilbao.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"Cantinflas I\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Técnica mixta\",\"dateCreated\":\"2024\",\"artform\":\"Pintura\",\"artworkSurface\":\"Lienzo\"}"
+    },
+    {
+      "id": "cantinflas-1",
+      "title": "Cantinflas II",
+      "series": "cantinflas",
+      "technique": "mixed-media",
+      "year": 2024,
+      "creativeDisplay": "spotlight",
+      "altText": "Segunda pieza de la serie Cantinflas, retrato en técnica mixta que captura la genialidad cómica del actor mexicano con elementos collage y texturas expresivas.",
+      "metaDescription": "Cantinflas II - Serie exclusiva de arte pop de Naroa Gutiérrez Gil. Técnica mixta sobre lienzo inspirada en el humor mexicano. Arte contemporáneo Bilbao.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"Cantinflas II\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Técnica mixta\",\"dateCreated\":\"2024\",\"artform\":\"Pintura\",\"artworkSurface\":\"Lienzo\"}"
+    },
+    {
+      "id": "cantinflas-2",
+      "title": "Cantinflas III",
+      "series": "cantinflas",
+      "technique": "mixed-media",
+      "year": 2024,
+      "creativeDisplay": "spotlight",
+      "altText": "Tercera obra de la serie Cantinflas, retrato en técnica mixta que fusiona el pop art con elementos del cine clásico latinoamericano en colores vibrantes.",
+      "metaDescription": "Cantinflas III - Homenaje pop art de Naroa Gutiérrez Gil. Técnica mixta contemporánea que celebra la cultura cinematográfica. Arte contemporáneo Bilbao.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"Cantinflas III\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Técnica mixta\",\"dateCreated\":\"2024\",\"artform\":\"Pintura\",\"artworkSurface\":\"Lienzo\"}"
+    },
+    {
+      "id": "cantinflas-3",
+      "title": "Cantinflas IV",
+      "series": "cantinflas",
+      "technique": "mixed-media",
+      "year": 2024,
+      "creativeDisplay": "spotlight",
+      "altText": "Cuarta pieza de Cantinflas, retrato en técnica mixta que resalta la expresividad facial del actor con capas de pintura y collage de elementos cinematográficos.",
+      "metaDescription": "Cantinflas IV - Obra de arte pop de Naroa Gutiérrez Gil. Técnica mixta sobre lienzo inspirada en iconos del humor latinoamericano. Arte contemporáneo Bilbao.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"Cantinflas IV\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Técnica mixta\",\"dateCreated\":\"2024\",\"artform\":\"Pintura\",\"artworkSurface\":\"Lienzo\"}"
+    },
+    {
+      "id": "cantinflas-4",
+      "title": "Cantinflas V",
+      "series": "cantinflas",
+      "technique": "mixed-media",
+      "year": 2024,
+      "creativeDisplay": "spotlight",
+      "altText": "Quinta y última pieza de la serie Cantinflas, retrato en técnica mixta que cierra el homenaje con una composición vibrante y elementos pop art distintivos.",
+      "metaDescription": "Cantinflas V - Colección completa de arte pop de Naroa Gutiérrez Gil. Técnica mixta final de la serie. Arte contemporáneo Bilbao, hiperrealismo pop.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"Cantinflas V\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Técnica mixta\",\"dateCreated\":\"2024\",\"artform\":\"Pintura\",\"artworkSurface\":\"Lienzo\"}"
+    },
+    {
+      "id": "the-world-is-yours",
+      "title": "The World is Yours",
+      "series": "retratos",
+      "technique": "mixed-media",
+      "year": 2026,
+      "featured": true,
+      "altText": "Retrato en técnica mixta con elementos de Scarface, composición cinematográfica en tonos dorados y negros que evocan poder y ambición urbana contemporánea.",
+      "metaDescription": "The World is Yours - Arte contemporáneo de Naroa Gutiérrez Gil. Técnica mixta inspirada en iconos cinematográficos. Arte pop Bilbao, retratos personalizados.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"The World is Yours\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Técnica mixta\",\"dateCreated\":\"2026\",\"artform\":\"Pintura\",\"artworkSurface\":\"Lienzo\"}"
+    },
+    {
+      "id": "amy-rocks",
+      "title": "Amy Rocks (HQ)",
+      "series": "rocks",
+      "technique": "acrilico-pizarra",
+      "year": 2023,
+      "featured": true,
+      "description": "Retrato hiperrealista de Amy Winehouse. Acrílico y papel de seda sobre pizarra natural. (Versión Alta Calidad)",
+      "image": "images/artworks/hq-amy.webp",
+      "altText": "Retrato hiperrealista de Amy Winehouse en acrílico sobre pizarra negra natural, con texturas de piedra visibles. Su mirada melancólica contrasta con el eyeliner marcado y labios rojos vibrantes.",
+      "metaDescription": "Amy Rocks - Retrato hiperrealista de Amy Winehouse por Naroa Gutiérrez Gil. Acrílico y papel de seda sobre pizarra natural. Arte contemporáneo Bilbao, técnica mixta.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"Amy Rocks\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Acrílico y papel de seda sobre pizarra\",\"dateCreated\":\"2023\",\"artform\":\"Pintura\",\"artworkSurface\":\"Pizarra natural\",\"about\":\"Amy Winehouse\"}"
+    },
+    {
+      "id": "james-rocks",
+      "title": "James Rocks (HQ)",
+      "series": "rocks",
+      "technique": "acrilico-pizarra",
+      "year": 2023,
+      "featured": true,
+      "description": "Retrato de James Dean. Acrílico sobre pizarra.",
+      "image": "images/artworks/hq-james.webp",
+      "altText": "Retrato hiperrealista de James Dean en acrílico sobre pizarra negra natural. Su icónica pose rebelde emerge de la textura rugosa de la piedra en contraste dramático.",
+      "metaDescription": "James Rocks - Homenaje a James Dean por Naroa Gutiérrez Gil. Retrato hiperrealista en acrílico sobre pizarra natural. Arte contemporáneo Bilbao, técnica mixta única.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"James Rocks\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Acrílico sobre pizarra\",\"dateCreated\":\"2023\",\"artform\":\"Pintura\",\"artworkSurface\":\"Pizarra natural\",\"about\":\"James Dean\"}"
+    },
+    {
+      "id": "johnny-rocks",
+      "title": "Johnny Rocks (HQ)",
+      "series": "rocks",
+      "technique": "acrilico-pizarra",
+      "year": 2023,
+      "featured": true,
+      "description": "Retrato de Johnny Depp. Acrílico sobre pizarra.",
+      "image": "images/artworks/hq-johnny.webp",
+      "altText": "Retrato hiperrealista de Johnny Depp en acrílico sobre pizarra negra. Los detalles de su rostro contrastan con la superficie texturizada de piedra natural oscura.",
+      "metaDescription": "Johnny Rocks - Retrato de Johnny Depp por Naroa Gutiérrez Gil. Hiperrealismo sobre pizarra natural. Arte contemporáneo Bilbao, retratos pop art originales.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"Johnny Rocks\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Acrílico sobre pizarra\",\"dateCreated\":\"2023\",\"artform\":\"Pintura\",\"artworkSurface\":\"Pizarra natural\",\"about\":\"Johnny Depp\"}"
+    },
+    {
+      "id": "marilyn-rocks",
+      "title": "Marilyn Rocks (HQ)",
+      "series": "rocks",
+      "technique": "acrilico-pizarra",
+      "year": 2023,
+      "featured": true,
+      "description": "Retrato de Marilyn Monroe. Acrílico sobre pizarra.",
+      "image": "images/artworks/hq-marilyn.webp",
+      "altText": "Retrato hiperrealista de Marilyn Monroe en acrílico sobre pizarra negra natural. La belleza icónica de Hollywood contrasta con la rugosidad orgánica de la piedra.",
+      "metaDescription": "Marilyn Rocks - Retrato de Marilyn Monroe por Naroa Gutiérrez Gil. Hiperrealismo pop sobre pizarra natural. Arte contemporáneo Bilbao, técnica mixta especializada.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"Marilyn Rocks\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Acrílico sobre pizarra\",\"dateCreated\":\"2023\",\"artform\":\"Pintura\",\"artworkSurface\":\"Pizarra natural\",\"about\":\"Marilyn Monroe\"}"
+    },
+    {
+      "id": "retrato-estudio-1",
+      "title": "Retrato Estudio I",
+      "series": "retratos",
+      "technique": "oleo-lienzo",
+      "year": 2024,
+      "featured": false,
+      "description": "Retrato de estudio en alta resolución.",
+      "image": "images/artworks/hq-portrait-1.webp",
+      "altText": "Retrato de estudio realizado al óleo sobre lienzo en alta resolución. Técnica clásica con pinceladas visibles que capturan la profundidad y carácter del sujeto.",
+      "metaDescription": "Retrato Estudio I - Óleo sobre lienzo de Naroa Gutiérrez Gil. Retratos personalizados de alta calidad. Arte contemporáneo Bilbao, retratos hiperrealistas.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"Retrato Estudio I\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Óleo sobre lienzo\",\"dateCreated\":\"2024\",\"artform\":\"Pintura\",\"artworkSurface\":\"Lienzo\"}"
+    },
+    {
+      "id": "retrato-estudio-2",
+      "title": "Retrato Estudio II",
+      "series": "retratos",
+      "technique": "oleo-lienzo",
+      "year": 2024,
+      "featured": false,
+      "description": "Retrato de estudio en alta resolución.",
+      "image": "images/artworks/hq-portrait-2.webp",
+      "altText": "Segundo retrato de estudio al óleo sobre lienzo en alta resolución. Dominio de la técnica clásica con expresión contemporánea y detalles meticulosos.",
+      "metaDescription": "Retrato Estudio II - Óleo sobre lienzo de Naroa Gutiérrez Gil. Retratos personalizados profesionales. Arte contemporáneo Bilbao, retratos de alta calidad.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"Retrato Estudio II\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Óleo sobre lienzo\",\"dateCreated\":\"2024\",\"artform\":\"Pintura\",\"artworkSurface\":\"Lienzo\"}"
+    },
+    {
+      "id": "james-rocks-hq-3",
+      "title": "James Rocks",
+      "series": "rocks",
+      "technique": "acrilico-pizarra",
+      "year": 2023,
+      "featured": true,
+      "altText": "Retrato hiperrealista de James Dean en acrílico sobre pizarra natural. El rebelde sin causa emerge de la textura mineral con fuerza expresiva y atmósfera cinematográfica.",
+      "metaDescription": "James Rocks - Retrato hiperrealista de James Dean por Naroa Gutiérrez Gil. Acrílico sobre pizarra natural. Arte contemporáneo Bilbao, técnica mixta especializada.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"James Rocks\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Acrílico sobre pizarra\",\"dateCreated\":\"2023\",\"artform\":\"Pintura\",\"artworkSurface\":\"Pizarra natural\",\"about\":\"James Dean\"}"
+    },
+    {
+      "id": "baroque-farrokh",
+      "title": "Baroque Farrokh",
+      "series": "tributos-musicales",
+      "technique": "mixed-media",
+      "year": 2021,
+      "description": "Retrato hiperrealista de Freddie Mercury con estetica barroca.",
+      "altText": "Retrato hiperrealista de Freddie Mercury con estética barroca en técnica mixta. Fusiona la majestuosidad del cantante con elementos ornamentales del arte clásico europeo.",
+      "metaDescription": "Baroque Farrokh - Tributo a Freddie Mercury por Naroa Gutiérrez Gil. Hiperrealismo barroco en técnica mixta. Arte contemporáneo Bilbao, retratos musicales.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"Baroque Farrokh\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Técnica mixta\",\"dateCreated\":\"2021\",\"artform\":\"Pintura\",\"artworkSurface\":\"Lienzo\",\"about\":\"Freddie Mercury\"}"
+    },
+    {
+      "id": "starchild",
+      "title": "Starchild / The Starchild",
+      "series": "tributos-musicales",
+      "technique": "mixed-media",
+      "year": 2022,
+      "description": "David Bowie como Ziggy Stardust.",
+      "altText": "Retrato de David Bowie como Ziggy Stardust en técnica mixta. Explosión de color cósmico que captura el alter ego espacial del artista con elementos pop art vibrantes.",
+      "metaDescription": "Starchild - Tributo a David Bowie/Ziggy Stardust por Naroa Gutiérrez Gil. Arte pop cósmico en técnica mixta. Arte contemporáneo Bilbao, retratos musicales únicos.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"Starchild\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Técnica mixta\",\"dateCreated\":\"2022\",\"artform\":\"Pintura\",\"artworkSurface\":\"Lienzo\",\"about\":\"David Bowie\"}"
+    },
+    {
+      "id": "los-clarinetes-de-bowie",
+      "title": "Los Clarinetes de Bowie",
+      "series": "tributos-musicales",
+      "technique": "mixed-media",
+      "year": 2022,
+      "altText": "Composición en técnica mixta dedicada a David Bowie con elementos musicales. Clarinetes estilizados en colores vibrantes que evocan la constante transformación del artista.",
+      "metaDescription": "Los Clarinetes de Bowie - Homenaje musical de Naroa Gutiérrez Gil. Técnica mixta con elementos pop art. Arte contemporáneo Bilbao, arte inspirado en música.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"Los Clarinetes de Bowie\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Técnica mixta\",\"dateCreated\":\"2022\",\"artform\":\"Pintura\",\"artworkSurface\":\"Lienzo\",\"about\":\"David Bowie\"}"
+    },
+    {
+      "id": "bowie-shhh-till-alive",
+      "title": "Bowie Shhh..till Alive",
+      "series": "tributos-musicales",
+      "technique": "mixed-media",
+      "year": 2022,
+      "altText": "Retrato conceptual de David Bowie en técnica mixta. Composición que celebra su legado eterno con gesto íntimo y paleta de colores que evocan su estética cambiante.",
+      "metaDescription": "Bowie Shhh..till Alive - Tributo a David Bowie por Naroa Gutiérrez Gil. Arte conceptual en técnica mixta. Arte contemporáneo Bilbao, retratos de iconos musicales.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"Bowie Shhh..till Alive\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Técnica mixta\",\"dateCreated\":\"2022\",\"artform\":\"Pintura\",\"artworkSurface\":\"Lienzo\",\"about\":\"David Bowie\"}"
+    },
+    {
+      "id": "tedas-queen",
+      "title": "Tedas Queen",
+      "series": "tributos-musicales",
+      "technique": "mixed-media",
+      "year": 2023,
+      "altText": "Composición en técnica mixta inspirada en ABBA y Dancing Queen. Juego fonético visual con elementos pop que celebran la música disco y la alegría de bailar.",
+      "metaDescription": "Tedas Queen - Homenaje a ABBA por Naroa Gutiérrez Gil. Arte pop inspirado en Dancing Queen. Arte contemporáneo Bilbao, técnica mixta musical.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"Tedas Queen\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Técnica mixta\",\"dateCreated\":\"2023\",\"artform\":\"Pintura\",\"artworkSurface\":\"Lienzo\",\"about\":\"ABBA\"}"
+    },
+    {
+      "id": "can-dy-queen",
+      "title": "Can-dy Queen",
+      "series": "tributos-musicales",
+      "technique": "mixed-media",
+      "year": 2023,
+      "altText": "Composición en técnica mixta inspirada en Iggy Pop y el concepto de Candy. Juego visual entre dulzura y rebeldía rock con colores vibrantes y texturas expresivas.",
+      "metaDescription": "Can-dy Queen - Tributo a Iggy Pop por Naroa Gutiérrez Gil. Arte rock en técnica mixta. Arte contemporáneo Bilbao, retratos musicales originales.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"Can-dy Queen\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Técnica mixta\",\"dateCreated\":\"2023\",\"artform\":\"Pintura\",\"artworkSurface\":\"Lienzo\",\"about\":\"Iggy Pop\"}"
+    },
+    {
+      "id": "camaron-de-la-isla",
+      "title": "Camaron de la Isla",
+      "series": "tributos-musicales",
+      "technique": "acrilico-seda-lienzo",
+      "year": 2021,
+      "description": "Acrilico y papel de seda con lunares sobre lienzo crudo (sin imprimacion).",
+      "altText": "Retrato de Camarón de la Isla en acrílico y papel de seda con lunares sobre lienzo crudo. La textura del flamenco se fusiona con materiales delicados en homenaje vibrante.",
+      "metaDescription": "Camarón de la Isla - Tributo flamenco de Naroa Gutiérrez Gil. Acrílico y seda sobre lienzo crudo. Arte contemporáneo Bilbao, retratos musicales españoles.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"Camarón de la Isla\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Acrílico y papel de seda sobre lienzo\",\"dateCreated\":\"2021\",\"artform\":\"Pintura\",\"artworkSurface\":\"Lienzo crudo\",\"about\":\"Camarón de la Isla\"}"
+    },
+    {
+      "id": "audrey-hepburn",
+      "title": "Audrey's Lightning",
+      "series": "tributos-musicales",
+      "technique": "mixed-media",
+      "year": 2022,
+      "featured": true,
+      "altText": "Retrato de Audrey Hepburn en técnica mixta con elementos de rayo/energía. La elegancia clásica de Hollywood se electriza con toques contemporáneos pop art vibrantes.",
+      "metaDescription": "Audrey's Lightning - Tributo a Audrey Hepburn por Naroa Gutiérrez Gil. Arte pop elegante en técnica mixta. Arte contemporáneo Bilbao, retratos de cine clásico.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"Audrey's Lightning\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Técnica mixta\",\"dateCreated\":\"2022\",\"artform\":\"Pintura\",\"artworkSurface\":\"Lienzo\",\"about\":\"Audrey Hepburn\"}"
+    },
+    {
+      "id": "celia-cruz-asucar",
+      "title": "Celia Cruz Azucar",
+      "series": "tributos-musicales",
+      "technique": "mixed-media",
+      "year": 2020,
+      "description": "Tributo a Celia Cruz. Paquetes de azucar intervenidos.",
+      "altText": "Tributo a Celia Cruz con paquetes de azúcar intervenidos en técnica mixta. La azúcar de la salsa hecha arte con objetos cotidianos transformados en iconos culturales.",
+      "metaDescription": "Celia Cruz Azúcar - Homenaje a la Reina de la Salsa por Naroa Gutiérrez Gil. Arte con objetos intervenidos. Arte contemporáneo Bilbao, arte cubano latinoamericano.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"Celia Cruz Azucar\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Técnica mixta con objetos\",\"dateCreated\":\"2020\",\"artform\":\"Arte de objetos\",\"artworkSurface\":\"Paquetes de azúcar\",\"about\":\"Celia Cruz\"}"
+    },
+    {
+      "id": "james-dean",
+      "title": "James Dean",
+      "series": "tributos-musicales",
+      "technique": "mixed-media",
+      "year": 2019,
+      "altText": "Retrato de James Dean en técnica mixta. El rebelde eterno del cine capturado con capas de pintura y collage que evocan su mito atemporal y estética cinematográfica.",
+      "metaDescription": "James Dean - Retrato hiperrealista de Naroa Gutiérrez Gil. Técnica mixta sobre icono cinematográfico. Arte contemporáneo Bilbao, retratos clásicos Hollywood.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"James Dean\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Técnica mixta\",\"dateCreated\":\"2019\",\"artform\":\"Pintura\",\"artworkSurface\":\"Lienzo\",\"about\":\"James Dean\"}"
+    },
+    {
+      "id": "mr-fahrenheit",
+      "title": "Mr. Fahrenheit",
+      "series": "tributos-musicales",
+      "technique": "mixed-media",
+      "year": 2019,
+      "description": "Freddie Mercury. Don't Stop Me Now.",
+      "altText": "Retrato de Freddie Mercury como Mr. Fahrenheit en técnica mixta. Referencia directa a Don't Stop Me Now con energía explosiva y colores que celebran el legado de Queen.",
+      "metaDescription": "Mr. Fahrenheit - Tributo a Freddie Mercury por Naroa Gutiérrez Gil. Arte pop inspirado en Queen. Arte contemporáneo Bilbao, retratos musicales vibrantes.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"Mr. Fahrenheit\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Técnica mixta\",\"dateCreated\":\"2019\",\"artform\":\"Pintura\",\"artworkSurface\":\"Lienzo\",\"about\":\"Freddie Mercury\"}"
+    },
+    {
+      "id": "celia-cruz-cantinflowers",
+      "title": "Celia Cruz Cantinflowers",
+      "series": "tributos-musicales",
+      "technique": "collage-textil",
+      "year": 2020,
+      "description": "Tributo a Celia Cruz con motivos florales.",
+      "altText": "Tributo a Celia Cruz en collage textil con motivos florales vibrantes. La alegría de la salsa se transforma en jardín textil con tejidos y elementos naturales.",
+      "metaDescription": "Celia Cruz Cantinflowers - Homenaje textil de Naroa Gutiérrez Gil. Collage con motivos florales. Arte contemporáneo Bilbao, arte textil latinoamericano.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"Celia Cruz Cantinflowers\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Collage textil\",\"dateCreated\":\"2020\",\"artform\":\"Textil\",\"artworkSurface\":\"Tela\",\"about\":\"Celia Cruz\"}"
+    },
+    {
+      "id": "rocka-gipsy",
+      "title": "RockaGipsy",
+      "series": "tributos-musicales",
+      "technique": "acrilico-seda-lienzo",
+      "year": 2022,
+      "altText": "Composición en acrílico y papel de seda sobre lienzo que fusiona rock y cultura gitana. Texturas vibrantes que celebran la mezcla cultural y la libertad musical.",
+      "metaDescription": "RockaGipsy - Fusión rock-gitana de Naroa Gutiérrez Gil. Acrílico y seda sobre lienzo. Arte contemporáneo Bilbao, arte multicultural, técnica mixta original.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"RockaGipsy\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Acrílico y papel de seda sobre lienzo\",\"dateCreated\":\"2022\",\"artform\":\"Pintura\",\"artworkSurface\":\"Lienzo\"}"
+    },
+    {
+      "id": "espejos-del-alma",
+      "title": "Espejos del Alma",
+      "series": "espejos-del-alma",
+      "technique": "mixed-media",
+      "year": 2023,
+      "featured": true,
+      "description": "Proyecto introspectivo: identidad y reflexion.",
+      "altText": "Obra introspectiva en técnica mixta sobre identidad y reflexión. Espejos fragmentados que exploran el alma humana con profundidad emocional y simbolismo poético.",
+      "metaDescription": "Espejos del Alma - Proyecto introspectivo de Naroa Gutiérrez Gil. Técnica mixta sobre identidad y reflexión. Arte contemporáneo Bilbao, arte conceptual personal.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"Espejos del Alma\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Técnica mixta\",\"dateCreated\":\"2023\",\"artform\":\"Pintura\",\"artworkSurface\":\"Lienzo\"}"
+    },
+    {
+      "id": "espejos-del-alma-var3",
+      "title": "Espejos del Alma III",
+      "series": "espejos-del-alma",
+      "technique": "mixed-media",
+      "year": 2023,
+      "altText": "Tercera variación del proyecto Espejos del Alma en técnica mixta. Exploración más profunda de la identidad con capas simbólicas y reflexiones visuales fragmentadas.",
+      "metaDescription": "Espejos del Alma III - Serie conceptual de Naroa Gutiérrez Gil. Técnica mixta introspectiva. Arte contemporáneo Bilbao, arte sobre identidad y autoconocimiento.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"Espejos del Alma III\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Técnica mixta\",\"dateCreated\":\"2023\",\"artform\":\"Pintura\",\"artworkSurface\":\"Lienzo\"}"
+    },
+    {
+      "id": "dar-la-lata",
+      "title": "Dar la Lata",
+      "series": "enlatas",
+      "technique": "collage",
+      "year": 2022,
+      "altText": "Collage sobre lata de conserva con elementos pop art. La expresión española transformada en arte reciclado con humor y crítica social contemporánea.",
+      "metaDescription": "Dar la Lata - Collage reciclado de Naroa Gutiérrez Gil. Arte sobre latas de conserva. Arte contemporáneo Bilbao, arte reciclado pop, sostenibilidad creativa.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"Dar la Lata\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Collage\",\"dateCreated\":\"2022\",\"artform\":\"Collage\",\"artworkSurface\":\"Lata de conserva\"}"
+    },
+    {
+      "id": "hammock-in-tin",
+      "title": "Hammock in Tin",
+      "series": "enlatas",
+      "technique": "collage",
+      "year": 2022,
+      "altText": "Collage sobre lata metálica con escena de hamaca. Relajación tropical convertida en arte reciclado con elementos surrealistas y paleta de colores cálidos.",
+      "metaDescription": "Hammock in Tin - Collage sobre lata de Naroa Gutiérrez Gil. Arte reciclado con escenas veraniegas. Arte contemporáneo Bilbao, upcycling art, collage original.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"Hammock in Tin\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Collage\",\"dateCreated\":\"2022\",\"artform\":\"Collage\",\"artworkSurface\":\"Lata de conserva\"}"
+    },
+    {
+      "id": "sardine-tin-collage",
+      "title": "En.lata.das Sardine",
+      "series": "enlatas",
+      "technique": "collage",
+      "year": 2021,
+      "altText": "Collage sobre lata de sardinas con elementos marinos y culturales. Tradición pesquera transformada en arte contemporáneo con humor y texturas metálicas.",
+      "metaDescription": "En.lata.das Sardine - Collage sobre lata de sardinas de Naroa Gutiérrez Gil. Arte reciclado marítimo. Arte contemporáneo Bilbao, upcycling, arte vasco original.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"En.lata.das Sardine\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Collage\",\"dateCreated\":\"2021\",\"artform\":\"Collage\",\"artworkSurface\":\"Lata de sardinas\"}"
+    },
+    {
+      "id": "en-caja",
+      "title": "En-Caja Temuri",
+      "series": "enlatas",
+      "technique": "collage",
+      "year": 2020,
+      "altText": "Collaje sobre caja de metal intervenida con elementos personales y culturales. Arquitectura emocional contenida en formato íntimo de reciclaje creativo.",
+      "metaDescription": "En-Caja Temuri - Collage sobre caja de Naroa Gutiérrez Gil. Arte reciclado personal. Arte contemporáneo Bilbao, assemblage, técnica mixta original.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"En-Caja Temuri\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Collage\",\"dateCreated\":\"2020\",\"artform\":\"Collage\",\"artworkSurface\":\"Caja metálica\"}"
+    },
+    {
+      "id": "hugo-box",
+      "title": "Hugo Box",
+      "series": "enlatas",
+      "technique": "collage",
+      "year": 2024,
+      "featured": true,
+      "altText": "Collage contemporáneo sobre caja de metal con elementos personales y simbólicos. Obra destacada de la serie EnLatas con narrativa visual rica y texturas diversas.",
+      "metaDescription": "Hugo Box - Obra destacada de Naroa Gutiérrez Gil. Collage sobre caja metálica 2024. Arte contemporáneo Bilbao, upcycling art, serie EnLatas exclusiva.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"Hugo Box\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Collage\",\"dateCreated\":\"2024\",\"artform\":\"Collage\",\"artworkSurface\":\"Caja metálica\"}"
+    },
+    {
+      "id": "amor-en-conserva",
+      "title": "Amor en Conserva",
+      "series": "enlatas",
+      "technique": "collage-reciclaje",
+      "year": 2022,
+      "description": "Latas de conserva intervenidas. Metafora de lo eterno.",
+      "altText": "Latas de conserva intervenidas con collage que simbolizan el amor eterno. Objetos cotidianos transformados en metáforas del tiempo y los sentimientos duraderos.",
+      "metaDescription": "Amor en Conserva - Metáfora visual de Naroa Gutiérrez Gil. Collage sobre latas, arte reciclado emocional. Arte contemporáneo Bilbao, upcycling con mensaje.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"Amor en Conserva\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Collage y reciclaje\",\"dateCreated\":\"2022\",\"artform\":\"Arte de objetos\",\"artworkSurface\":\"Latas de conserva\"}"
+    },
+    {
+      "id": "walking-gallery-plumas",
+      "title": "Walking Gallery Plumas",
+      "series": "walking-gallery",
+      "technique": "mixed-media",
+      "year": 2022,
+      "altText": "Pieza de la serie Walking Gallery en técnica mixta con elementos de plumas. Arte urbano efímero que celebra la transformación y la libertad en el espacio público.",
+      "metaDescription": "Walking Gallery Plumas - Arte urbano de Naroa Gutiérrez Gil. Técnica mixta callejera. Arte contemporáneo Bilbao, street art efímero, intervención urbana.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"Walking Gallery Plumas\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Técnica mixta\",\"dateCreated\":\"2022\",\"artform\":\"Arte urbano\",\"artworkSurface\":\"Espacio público\"}"
+    },
+    {
+      "id": "candy-wedding",
+      "title": "Candy Wedding",
+      "series": "bodas",
+      "technique": "mixed-media",
+      "year": 2019,
+      "altText": "Obra de la serie Bodas en técnica mixta con temática dulce y nupcial. Composición romántica que celebra el amor con colores pastel y elementos decorativos festivos.",
+      "metaDescription": "Candy Wedding - Arte nupcial de Naroa Gutiérrez Gil. Técnica mixta para celebraciones de amor. Arte contemporáneo Bilbao, regalos de boda originales, arte personalizado.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"Candy Wedding\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Técnica mixta\",\"dateCreated\":\"2019\",\"artform\":\"Pintura\",\"artworkSurface\":\"Lienzo\"}"
+    },
+    {
+      "id": "the-golden-couple",
+      "title": "The Golden Couple",
+      "series": "golden",
+      "technique": "mixed-media",
+      "year": 2020,
+      "altText": "Retrato de pareja en técnica mixta con predominio dorado. Serie Golden que celebra el amor con elegancia y brillo metálico en composición clásica contemporánea.",
+      "metaDescription": "The Golden Couple - Serie Golden de Naroa Gutiérrez Gil. Técnica mixta con elementos dorados. Arte contemporáneo Bilbao, retratos de pareja, regalos aniversario.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"The Golden Couple\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Técnica mixta\",\"dateCreated\":\"2020\",\"artform\":\"Pintura\",\"artworkSurface\":\"Lienzo\"}"
+    },
+    {
+      "id": "the-golden-couple-and-balloons",
+      "title": "The Golden Couple & Balloons",
+      "series": "golden",
+      "technique": "mixed-media",
+      "year": 2020,
+      "featured": true,
+      "altText": "Obra destacada de la serie Golden con pareja y globos en técnica mixta. Celebración dorada del amor con elementos festivos y alegría contenida en brillo metálico.",
+      "metaDescription": "The Golden Couple & Balloons - Obra destacada de Naroa Gutiérrez Gil. Serie Golden con elementos festivos. Arte contemporáneo Bilbao, arte celebración, técnica mixta dorada.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"The Golden Couple & Balloons\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Técnica mixta\",\"dateCreated\":\"2020\",\"artform\":\"Pintura\",\"artworkSurface\":\"Lienzo\"}"
+    },
+    {
+      "id": "lagrimas-de-oro",
+      "title": "Lagrimas de Oro",
+      "series": "golden",
+      "technique": "mixed-media",
+      "year": 2021,
+      "featured": true,
+      "altText": "Obra destacada de la serie Golden con lágrimas doradas en técnica mixta. Belleza melancólica transformada en oro, donde la tristeza se vuelve preciosa y eterna.",
+      "metaDescription": "Lágrimas de Oro - Obra destacada de Naroa Gutiérrez Gil. Serie Golden sobre emociones doradas. Arte contemporáneo Bilbao, arte emotivo, técnica mixta metálica.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"Lágrimas de Oro\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Técnica mixta\",\"dateCreated\":\"2021\",\"artform\":\"Pintura\",\"artworkSurface\":\"Lienzo\"}"
+    },
+    {
+      "id": "pink-and-sparkles",
+      "title": "Pink & Sparkles",
+      "series": "golden",
+      "technique": "mixed-media",
+      "year": 2022,
+      "altText": "Obra de la serie Golden en tonos rosa con destellos brillantes. Feminidad y glamour fusionados en técnica mixta con purpurina y elementos decorativos festivos.",
+      "metaDescription": "Pink & Sparkles - Serie Golden de Naroa Gutiérrez Gil. Técnica mixta rosa con brillos. Arte contemporáneo Bilbao, arte femenino, decoración original dorada.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"Pink & Sparkles\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Técnica mixta\",\"dateCreated\":\"2022\",\"artform\":\"Pintura\",\"artworkSurface\":\"Lienzo\"}"
+    },
+    {
+      "id": "love",
+      "title": "LoVe",
+      "series": "amor",
+      "technique": "mixed-media",
+      "year": 2020,
+      "featured": true,
+      "altText": "Obra destacada de la serie Amor con la palabra LOVE en técnica mixta. Tipografía expresiva que celebra el amor universal con colores vibrantes y texturas emotivas.",
+      "metaDescription": "LoVe - Obra destacada de Naroa Gutiérrez Gil. Serie Amor en técnica mixta expresiva. Arte contemporáneo Bilbao, arte amor, regalos originales San Valentín.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"LoVe\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Técnica mixta\",\"dateCreated\":\"2020\",\"artform\":\"Pintura\",\"artworkSurface\":\"Lienzo\"}"
+    },
+    {
+      "id": "multidimensional-love",
+      "title": "Multidimensional Love",
+      "series": "amor",
+      "technique": "mixed-media",
+      "year": 2023,
+      "altText": "Obra de la serie Amor que explora el amor en múltiples dimensiones. Técnica mixta con capas que representan las distintas formas y profundidades del sentimiento amoroso.",
+      "metaDescription": "Multidimensional Love - Serie Amor de Naroa Gutiérrez Gil. Técnica mixta sobre amor complejo. Arte contemporáneo Bilbao, arte conceptual amor, obra original 2023.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"Multidimensional Love\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Técnica mixta\",\"dateCreated\":\"2023\",\"artform\":\"Pintura\",\"artworkSurface\":\"Lienzo\"}"
+    },
+    {
+      "id": "smile-world-smiles-back",
+      "title": "Smile & the World Smiles Back",
+      "series": "amor",
+      "technique": "mixed-media",
+      "year": 2022,
+      "featured": true,
+      "altText": "Obra destacada de la serie Amor con mensaje positivo en técnica mixta. Sonrisa contagiosa que invita a la alegría con colores cálidos y composición optimista.",
+      "metaDescription": "Smile & the World Smiles Back - Obra destacada de Naroa Gutiérrez Gil. Serie Amor mensaje positivo. Arte contemporáneo Bilbao, arte optimista, técnica mixta alegre.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"Smile & the World Smiles Back\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Técnica mixta\",\"dateCreated\":\"2022\",\"artform\":\"Pintura\",\"artworkSurface\":\"Lienzo\"}"
+    },
+    {
+      "id": "me-parto-de-risa",
+      "title": "Me Parto de Risa",
+      "series": "amor",
+      "technique": "mixed-media",
+      "year": 2021,
+      "altText": "Obra de la serie Amor con humor español en técnica mixta. Expresión de alegría desbordante con elementos cómicos y colores que celebran la risa y el buen humor.",
+      "metaDescription": "Me Parto de Risa - Serie Amor de Naroa Gutiérrez Gil. Técnica mixta con humor español. Arte contemporáneo Bilbao, arte divertido, obra original alegre 2021.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"Me Parto de Risa\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Técnica mixta\",\"dateCreated\":\"2021\",\"artform\":\"Pintura\",\"artworkSurface\":\"Lienzo\"}"
+    },
+    {
+      "id": "soy-un-amor-y-tengo-alas",
+      "title": "Soy un Amor y tengo Alas",
+      "series": "amor",
+      "technique": "mixed-media",
+      "year": 2021,
+      "altText": "Obra de la serie Amor con figura alada en técnica mixta. Amor personificado con libertad y ligereza, combinando elementos figurativos con simbolismo poético elevado.",
+      "metaDescription": "Soy un Amor y tengo Alas - Serie Amor de Naroa Gutiérrez Gil. Técnica mixta con simbolismo alado. Arte contemporáneo Bilbao, arte poético, obra original con alas.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"Soy un Amor y tengo Alas\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Técnica mixta\",\"dateCreated\":\"2021\",\"artform\":\"Pintura\",\"artworkSurface\":\"Lienzo\"}"
+    },
+    {
+      "id": "i-know-love-stripes",
+      "title": "I Know Love Stripes",
+      "series": "amor",
+      "technique": "mixed-media",
+      "year": 2022,
+      "altText": "Obra de la serie Amor con rayas en técnica mixta. Patrón gráfico que juega con el conocimiento del amor y la estética pop de líneas limpias y colores contrastantes.",
+      "metaDescription": "I Know Love Stripes - Serie Amor de Naroa Gutiérrez Gil. Técnica mixta con rayas pop art. Arte contemporáneo Bilbao, arte gráfico amor, obra original rayas 2022.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"I Know Love Stripes\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Técnica mixta\",\"dateCreated\":\"2022\",\"artform\":\"Pintura\",\"artworkSurface\":\"Lienzo\"}"
+    },
+    {
+      "id": "concurso-con-mi-torso-al-dorso",
+      "title": "Concurso con Mi Torso al Dorso",
+      "series": "amor",
+      "technique": "mixed-media",
+      "year": 2020,
+      "altText": "Obra de la serie Amor con juego de palabras visual en técnica mixta. Retrato íntimo con humor lingüístico que juega con la posesión y la presencia corporal.",
+      "metaDescription": "Concurso con Mi Torso al Dorso - Serie Amor de Naroa Gutiérrez Gil. Técnica mixta con juego lingüístico. Arte contemporáneo Bilbao, arte humorístico, obra original 2020.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"Concurso con Mi Torso al Dorso\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Técnica mixta\",\"dateCreated\":\"2020\",\"artform\":\"Pintura\",\"artworkSurface\":\"Lienzo\"}"
+    },
+    {
+      "id": "denbora-nora-zoaz",
+      "title": "Denbora Nora Zoaz",
+      "series": "amor",
+      "technique": "mixed-media",
+      "year": 2021,
+      "altText": "Obra de la serie Amor con título en euskera en técnica mixta. '¿A dónde vas, tiempo?' pregunta existencial sobre el amor y el paso del tiempo en composición emotiva.",
+      "metaDescription": "Denbora Nora Zoaz - Serie Amor de Naroa Gutiérrez Gil. Técnica mixta con título en euskera. Arte contemporáneo Bilbao, arte vasco, obra sobre tiempo y amor.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"Denbora Nora Zoaz\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Técnica mixta\",\"dateCreated\":\"2021\",\"artform\":\"Pintura\",\"artworkSurface\":\"Lienzo\"}"
+    },
+    {
+      "id": "buena-fuente",
+      "title": "Buena Fuente",
+      "series": "retratos",
+      "technique": "mixed-media",
+      "year": 2021,
+      "altText": "Retrato personalizado en técnica mixta de la serie Buena Fuente. Captura la esencia del sujeto con estilo contemporáneo y elementos que revelan su personalidad única.",
+      "metaDescription": "Buena Fuente - Retratos personalizados de Naroa Gutiérrez Gil. Técnica mixta contemporánea. Arte contemporáneo Bilbao, retratos por encargo, obra original 2021.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"Buena Fuente\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Técnica mixta\",\"dateCreated\":\"2021\",\"artform\":\"Pintura\",\"artworkSurface\":\"Lienzo\"}"
+    },
+    {
+      "id": "infusion-de-berto",
+      "title": "Infusion de Berto",
+      "series": "retratos",
+      "technique": "mixed-media",
+      "year": 2022,
+      "altText": "Retrato personalizado en técnica mixta con temática de infusión. Carácter cálido y acogedor del sujeto representado metafóricamente a través de elementos de té y calidez.",
+      "metaDescription": "Infusión de Berto - Retrato personalizado de Naroa Gutiérrez Gil. Técnica mixta conceptual. Arte contemporáneo Bilbao, retratos originales, obra personalizada 2022.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"Infusión de Berto\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Técnica mixta\",\"dateCreated\":\"2022\",\"artform\":\"Pintura\",\"artworkSurface\":\"Lienzo\"}"
+    },
+    {
+      "id": "el-gran-dakari",
+      "title": "El Gran Dakari",
+      "series": "retratos",
+      "technique": "grafito",
+      "year": 2021,
+      "featured": true,
+      "altText": "Retrato destacado realizado al grafito con gran detalle y precisión. Obra maestra del dibujo que captura la esencia del sujeto con técnica impecable y profundidad expresiva.",
+      "metaDescription": "El Gran Dakari - Obra destacada de Naroa Gutiérrez Gil. Retrato hiperrealista en grafito. Arte contemporáneo Bilbao, dibujo a lápiz, retratos de alta calidad.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"El Gran Dakari\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Grafito\",\"dateCreated\":\"2021\",\"artform\":\"Dibujo\",\"artworkSurface\":\"Papel\"}"
+    },
+    {
+      "id": "cincuenta-conmigo",
+      "title": "Cincuenta Conmigo",
+      "series": "retratos",
+      "technique": "mixed-media",
+      "year": 2022,
+      "altText": "Retrato conmemorativo en técnica mixta celebrando cincuenta años. Obra personalizada que marca una fecha especial con elementos simbólicos y celebración visual.",
+      "metaDescription": "Cincuenta Conmigo - Retrato conmemorativo de Naroa Gutiérrez Gil. Técnica mixta aniversario 50. Arte contemporáneo Bilbao, regalos especiales, obra personalizada 2022.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"Cincuenta Conmigo\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Técnica mixta\",\"dateCreated\":\"2022\",\"artform\":\"Pintura\",\"artworkSurface\":\"Lienzo\"}"
+    },
+    {
+      "id": "blonde-embroidery",
+      "title": "Blonde Embroidery",
+      "series": "retratos",
+      "technique": "mixed-media",
+      "year": 2021,
+      "altText": "Retrato de rubia en técnica mixta con elementos de bordado. Fusiona pintura con textil creando texturas únicas que enmarcan la belleza clásica con innovación artesanal.",
+      "metaDescription": "Blonde Embroidery - Retrato textil de Naroa Gutiérrez Gil. Técnica mixta con bordado. Arte contemporáneo Bilbao, arte textil, retratos innovadores 2021.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"Blonde Embroidery\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Técnica mixta con bordado\",\"dateCreated\":\"2021\",\"artform\":\"Pintura\",\"artworkSurface\":\"Lienzo y textil\"}"
+    },
+    {
+      "id": "peter-rowan",
+      "title": "Peter Rowan",
+      "series": "retratos",
+      "technique": "pencil",
+      "year": 2023,
+      "featured": true,
+      "altText": "Retrato destacado realizado a lápiz con sombreado magistral. Captura la personalidad del sujeto con precisión fotográfica y sensibilidad artística en blanco y negro.",
+      "metaDescription": "Peter Rowan - Obra destacada de Naroa Gutiérrez Gil. Retrato hiperrealista a lápiz. Arte contemporáneo Bilbao, dibujo profesional, retratos de alta calidad 2023.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"Peter Rowan\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Lápiz\",\"dateCreated\":\"2023\",\"artform\":\"Dibujo\",\"artworkSurface\":\"Papel\"}"
+    },
+    {
+      "id": "Laura",
+      "title": "Laura",
+      "series": "retratos",
+      "technique": "mixed-media",
+      "year": 2022,
+      "altText": "Retrato personalizado de Laura en técnica mixta. Captura la esencia femenina con delicadeza y fuerza, combinando elementos clásicos con toques contemporáneos vibrantes.",
+      "metaDescription": "Laura - Retrato personalizado de Naroa Gutiérrez Gil. Técnica mixta femenina. Arte contemporáneo Bilbao, retratos por encargo, obra personalizada original 2022.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"Laura\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Técnica mixta\",\"dateCreated\":\"2022\",\"artform\":\"Pintura\",\"artworkSurface\":\"Lienzo\"}"
+    },
+    {
+      "id": "denis",
+      "title": "Denis",
+      "series": "retratos",
+      "technique": "pencil",
+      "year": 2020,
+      "altText": "Retrato masculino realizado a lápiz con detalle meticuloso. Expresión serena capturada con dominio del claroscuro y textura del grafito sobre papel de alta calidad.",
+      "metaDescription": "Denis - Retrato a lápiz de Naroa Gutiérrez Gil. Dibujo hiperrealista masculino. Arte contemporáneo Bilbao, retratos a lápiz, obra original en grafito 2020.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"Denis\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Lápiz\",\"dateCreated\":\"2020\",\"artform\":\"Dibujo\",\"artworkSurface\":\"Papel\"}"
+    },
+    {
+      "id": "el-gordo",
+      "title": "El Gordo",
+      "series": "retratos",
+      "technique": "pencil",
+      "year": 2019,
+      "altText": "Retrato a lápiz con carácter expresivo y personalidad marcada. Dibujo que celebra la diversidad corporal con ternura y realismo, capturando la esencia del sujeto.",
+      "metaDescription": "El Gordo - Retrato a lápiz de Naroa Gutiérrez Gil. Dibujo expresivo con carácter. Arte contemporáneo Bilbao, retratos realistas, obra original en grafito 2019.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"El Gordo\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Lápiz\",\"dateCreated\":\"2019\",\"artform\":\"Dibujo\",\"artworkSurface\":\"Papel\"}"
+    },
+    {
+      "id": "es-la-hora",
+      "title": "Es la Hora",
+      "series": "retratos",
+      "technique": "mixed-media",
+      "year": 2021,
+      "altText": "Retrato conceptual en técnica mixta sobre el paso del tiempo. Figura con elementos de relojes o temporalidad que invitan a la reflexión sobre momentos decisivos.",
+      "metaDescription": "Es la Hora - Retrato conceptual de Naroa Gutiérrez Gil. Técnica mixta sobre tiempo. Arte contemporáneo Bilbao, arte filosófico, obra original sobre el momento 2021.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"Es la Hora\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Técnica mixta\",\"dateCreated\":\"2021\",\"artform\":\"Pintura\",\"artworkSurface\":\"Lienzo\"}"
+    },
+    {
+      "id": "geisha",
+      "title": "Geisha",
+      "series": "retratos",
+      "technique": "pencil",
+      "year": 2019,
+      "altText": "Retrato a lápiz de geisha con delicadeza oriental. Precisión en los detalles del maquillaje tradicional y expresión serena capturada con maestría del dibujo hiperrealista.",
+      "metaDescription": "Geisha - Retrato a lápiz de Naroa Gutiérrez Gil. Dibujo hiperrealista japonés. Arte contemporáneo Bilbao, retratos orientales, obra original en grafito 2019.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"Geisha\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Lápiz\",\"dateCreated\":\"2019\",\"artform\":\"Dibujo\",\"artworkSurface\":\"Papel\"}"
+    },
+    {
+      "id": "la-pensadora",
+      "title": "La Pensadora",
+      "series": "retratos",
+      "technique": "pencil",
+      "year": 2020,
+      "altText": "Retrato a lápiz femenino en pose contemplativa. Expresión introspectiva capturada con sutileza, evocando la clásica postura filosófica con mirada contemporánea femenina.",
+      "metaDescription": "La Pensadora - Retrato a lápiz de Naroa Gutiérrez Gil. Dibujo introspectivo femenino. Arte contemporáneo Bilbao, retratos filosóficos, obra original en grafito 2020.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"La Pensadora\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Lápiz\",\"dateCreated\":\"2020\",\"artform\":\"Dibujo\",\"artworkSurface\":\"Papel\"}"
+    },
+    {
+      "id": "maxim",
+      "title": "Maxim",
+      "series": "retratos",
+      "technique": "mixed-media",
+      "year": 2021,
+      "altText": "Retrato personalizado en técnica mixta con carácter distintivo. Composición que revela la personalidad única del sujeto con elementos simbólicos y paleta de colores personal.",
+      "metaDescription": "Maxim - Retrato personalizado de Naroa Gutiérrez Gil. Técnica mixta contemporánea. Arte contemporáneo Bilbao, retratos por encargo, obra personalizada original 2021.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"Maxim\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Técnica mixta\",\"dateCreated\":\"2021\",\"artform\":\"Pintura\",\"artworkSurface\":\"Lienzo\"}"
+    },
+    {
+      "id": "marian-de-miranda",
+      "title": "Marian de Miranda",
+      "series": "retratos",
+      "technique": "mixed-media",
+      "year": 2020,
+      "altText": "Retrato personalizado en técnica mixta de la serie dedicada. Captura la esencia del sujeto con estilo único que combina realismo con elementos expresivos contemporáneos.",
+      "metaDescription": "Marian de Miranda - Retrato personalizado de Naroa Gutiérrez Gil. Serie dedicada en técnica mixta. Arte contemporáneo Bilbao, retratos especiales, obra 2020.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"Marian de Miranda\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Técnica mixta\",\"dateCreated\":\"2020\",\"artform\":\"Pintura\",\"artworkSurface\":\"Lienzo\"}"
+    },
+    {
+      "id": "papitxulo",
+      "title": "Papitxulo",
+      "series": "retratos",
+      "technique": "pencil",
+      "year": 2020,
+      "altText": "Retrato a lápiz con término cariñoso vasco en el título. Dibujo tierno que captura la esencia familiar con calidez y precisión en el detalle expresivo del rostro.",
+      "metaDescription": "Papitxulo - Retrato a lápiz de Naroa Gutiérrez Gil. Dibujo familiar con cariño vasco. Arte contemporáneo Bilbao, retratos familiares, obra original en grafito 2020.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"Papitxulo\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Lápiz\",\"dateCreated\":\"2020\",\"artform\":\"Dibujo\",\"artworkSurface\":\"Papel\"}"
+    },
+    {
+      "id": "patxiko-listo",
+      "title": "Patxiko Listo",
+      "series": "retratos",
+      "technique": "mixed-media",
+      "year": 2022,
+      "altText": "Retrato personalizado en técnica mixta con nombre vasco. Composición que celebra la identidad vasca con elementos culturales y expresión de astucia y carácter personal.",
+      "metaDescription": "Patxiko Listo - Retrato personalizado de Naroa Gutiérrez Gil. Técnica mixta con identidad vasca. Arte contemporáneo Bilbao, retratos vascos, obra personalizada 2022.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"Patxiko Listo\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Técnica mixta\",\"dateCreated\":\"2022\",\"artform\":\"Pintura\",\"artworkSurface\":\"Lienzo\"}"
+    },
+    {
+      "id": "rattler",
+      "title": "Rattler",
+      "series": "retratos",
+      "technique": "pencil",
+      "year": 2020,
+      "altText": "Retrato a lápiz con carácter rústico y fuerza. Dibujo que captura la esencia de resistencia y determinación con trazos firmes y sombreado dramático en blanco y negro.",
+      "metaDescription": "Rattler - Retrato a lápiz de Naroa Gutiérrez Gil. Dibujo con carácter rústico y fuerza. Arte contemporáneo Bilbao, retratos intensos, obra original en grafito 2020.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"Rattler\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Lápiz\",\"dateCreated\":\"2020\",\"artform\":\"Dibujo\",\"artworkSurface\":\"Papel\"}"
+    },
+    {
+      "id": "red-red-wine",
+      "title": "Red Red Wine",
+      "series": "retratos",
+      "technique": "mixed-media",
+      "year": 2021,
+      "altText": "Retrato en técnica mixta inspirado en la canción de UB40. Paleta de colores vino tinto y elementos que evocan relajación, celebración y momentos de disfrute vital.",
+      "metaDescription": "Red Red Wine - Retrato musical de Naroa Gutiérrez Gil. Técnica mixta inspirada en UB40. Arte contemporáneo Bilbao, arte musical, retratos con temática vino 2021.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"Red Red Wine\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Técnica mixta\",\"dateCreated\":\"2021\",\"artform\":\"Pintura\",\"artworkSurface\":\"Lienzo\"}"
+    },
+    {
+      "id": "viejuno",
+      "title": "Viejuno",
+      "series": "retratos",
+      "technique": "mixed-media",
+      "year": 2021,
+      "altText": "Retrato en técnica mixta con carácter vintage y nostalgia. Figura que evoca épocas pasadas con encanto clásico y elementos que celebran la elegancia atemporal de lo antiguo.",
+      "metaDescription": "Viejuno - Retrato vintage de Naroa Gutiérrez Gil. Técnica mixta con nostalgia. Arte contemporáneo Bilbao, retratos clásicos, obra original con encanto retro 2021.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"Viejuno\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Técnica mixta\",\"dateCreated\":\"2021\",\"artform\":\"Pintura\",\"artworkSurface\":\"Lienzo\"}"
+    },
+    {
+      "id": "beatriz-de-pandora",
+      "title": "Beatriz de Pandora",
+      "series": "retratos",
+      "technique": "mixed-media",
+      "year": 2020,
+      "altText": "Retrato personalizado en técnica mixta con referencia mitológica. Composición que sugiere misterio y descubrimiento, fusionando lo personal con elementos de la caja de Pandora.",
+      "metaDescription": "Beatriz de Pandora - Retrato mitológico de Naroa Gutiérrez Gil. Técnica mixta con referencias. Arte contemporáneo Bilbao, retratos simbólicos, obra personalizada 2020.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"Beatriz de Pandora\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Técnica mixta\",\"dateCreated\":\"2020\",\"artform\":\"Pintura\",\"artworkSurface\":\"Lienzo\"}"
+    },
+    {
+      "id": "my-tiny-face",
+      "title": "My Tiny Face",
+      "series": "retratos",
+      "technique": "mixed-media",
+      "year": 2020,
+      "altText": "Autorretrato íntimo en formato pequeño en técnica mixta. Mirada cercana y personal que revela vulnerabilidad y autoconocimiento en formato íntimo y delicado.",
+      "metaDescription": "My Tiny Face - Autorretrato de Naroa Gutiérrez Gil. Técnica mixta íntima personal. Arte contemporáneo Bilbao, autorretratos, obra original introspectiva 2020.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"My Tiny Face\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Técnica mixta\",\"dateCreated\":\"2020\",\"artform\":\"Pintura\",\"artworkSurface\":\"Lienzo\"}"
+    },
+    {
+      "id": "a-lapiz-y-un-algo",
+      "title": "A Lapiz y un Algo",
+      "series": "retratos",
+      "technique": "pencil",
+      "year": 2020,
+      "altText": "Retrato a lápiz con elementos adicionales mixtos. Dibujo base clásico enriquecido con toques contemporáneos que añaden profundidad y contexto a la obra.",
+      "metaDescription": "A Lápiz y un Algo - Retrato mixto de Naroa Gutiérrez Gil. Dibujo con elementos adicionales. Arte contemporáneo Bilbao, retratos innovadores, obra original 2020.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"A Lápiz y un Algo\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Lápiz y técnica mixta\",\"dateCreated\":\"2020\",\"artform\":\"Dibujo\",\"artworkSurface\":\"Papel\"}"
+    },
+    {
+      "id": "pajarraca-azul",
+      "title": "Pajarraca Azul",
+      "series": "naturaleza",
+      "technique": "mixed-media",
+      "year": 2022,
+      "featured": true,
+      "altText": "Obra destacada de ave azul en técnica mixta de la serie naturaleza. Plumaje vibrante capturado con detalle y expresividad que celebra la belleza de las aves silvestres.",
+      "metaDescription": "Pajarraca Azul - Obra destacada de Naroa Gutiérrez Gil. Serie naturaleza en técnica mixta. Arte contemporáneo Bilbao, arte de aves, obra naturalista original 2022.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"Pajarraca Azul\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Técnica mixta\",\"dateCreated\":\"2022\",\"artform\":\"Pintura\",\"artworkSurface\":\"Lienzo\"}"
+    },
+    {
+      "id": "monster-dragon",
+      "title": "Monster Dragon",
+      "series": "naturaleza",
+      "technique": "mixed-media",
+      "year": 2020,
+      "altText": "Obra de dragón o monstruo natural en técnica mixta. Criatura fantástica con elementos orgánicos que fusionan lo real y lo imaginario en composición de fuerza salvaje.",
+      "metaDescription": "Monster Dragon - Serie naturaleza de Naroa Gutiérrez Gil. Técnica mixta fantástica. Arte contemporáneo Bilbao, arte de criaturas, obra original imaginativa 2020.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"Monster Dragon\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Técnica mixta\",\"dateCreated\":\"2020\",\"artform\":\"Pintura\",\"artworkSurface\":\"Lienzo\"}"
+    },
+    {
+      "id": "into-the-wild",
+      "title": "Into the Wild",
+      "series": "naturaleza",
+      "technique": "mixed-media",
+      "year": 2021,
+      "altText": "Obra de naturaleza salvaje en técnica mixta. Paisaje o criatura que invita a la aventura con elementos que evocan libertad, exploración y conexión con lo salvaje natural.",
+      "metaDescription": "Into the Wild - Serie naturaleza de Naroa Gutiérrez Gil. Técnica mixta sobre lo salvaje. Arte contemporáneo Bilbao, arte naturalista, obra original aventura 2021.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"Into the Wild\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Técnica mixta\",\"dateCreated\":\"2021\",\"artform\":\"Pintura\",\"artworkSurface\":\"Lienzo\"}"
+    },
+    {
+      "id": "wild-not",
+      "title": "Wild Not",
+      "series": "naturaleza",
+      "technique": "mixed-media",
+      "year": 2021,
+      "altText": "Obra de naturaleza en técnica mixta con concepto contrario. Contraste entre lo salvaje y lo domesticado explorado con ironía visual y elementos simbólicos de naturaleza.",
+      "metaDescription": "Wild Not - Serie naturaleza de Naroa Gutiérrez Gil. Técnica mixta conceptual. Arte contemporáneo Bilbao, arte reflexivo, obra original sobre domesticación 2021.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"Wild Not\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Técnica mixta\",\"dateCreated\":\"2021\",\"artform\":\"Pintura\",\"artworkSurface\":\"Lienzo\"}"
+    },
+    {
+      "id": "divinos-amy",
+      "title": "DiviNos Amy",
+      "series": "divinos",
+      "technique": "acrilico-pizarra",
+      "year": 2023,
+      "description": "Amy Winehouse sobre pizarra.",
+      "altText": "Retrato de Amy Winehouse en acrílico sobre pizarra natural. Serie DiviNos que presenta a iconos musicales con tratamiento casi religioso sobre piedra oscura texturizada.",
+      "metaDescription": "DiviNos Amy - Serie DiviNos de Naroa Gutiérrez Gil. Amy Winehouse sobre pizarra natural. Arte contemporáneo Bilbao, retratos divinos, técnica mixta original 2023.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"DiviNos Amy\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Acrílico sobre pizarra\",\"dateCreated\":\"2023\",\"artform\":\"Pintura\",\"artworkSurface\":\"Pizarra natural\",\"about\":\"Amy Winehouse\"}"
+    },
+    {
+      "id": "divinos-james",
+      "title": "DiviNos James",
+      "series": "divinos",
+      "technique": "acrilico-pizarra",
+      "year": 2023,
+      "altText": "Retrato de James Dean en acrílico sobre pizarra natural. Serie DiviNos con tratamiento reverente del icono cinematográfico sobre piedra negra de textura ancestral.",
+      "metaDescription": "DiviNos James - Serie DiviNos de Naroa Gutiérrez Gil. James Dean sobre pizarra natural. Arte contemporáneo Bilbao, retratos divinos, técnica mixta única 2023.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"DiviNos James\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Acrílico sobre pizarra\",\"dateCreated\":\"2023\",\"artform\":\"Pintura\",\"artworkSurface\":\"Pizarra natural\",\"about\":\"James Dean\"}"
+    },
+    {
+      "id": "divinos-johnny",
+      "title": "DiviNos Johnny",
+      "series": "divinos",
+      "technique": "acrilico-pizarra",
+      "year": 2023,
+      "altText": "Retrato de Johnny Depp en acrílico sobre pizarra natural. Serie DiviNos que eleva al actor a categoría casi religiosa sobre piedra oscura con tratamiento hiperrealista.",
+      "metaDescription": "DiviNos Johnny - Serie DiviNos de Naroa Gutiérrez Gil. Johnny Depp sobre pizarra natural. Arte contemporáneo Bilbao, retratos divinos, técnica especializada 2023.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"DiviNos Johnny\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Acrílico sobre pizarra\",\"dateCreated\":\"2023\",\"artform\":\"Pintura\",\"artworkSurface\":\"Pizarra natural\",\"about\":\"Johnny Depp\"}"
+    },
+    {
+      "id": "divinos-marilyn",
+      "title": "DiviNos Marilyn",
+      "series": "divinos",
+      "technique": "acrilico-pizarra",
+      "year": 2023,
+      "altText": "Retrato de Marilyn Monroe en acrílico sobre pizarra natural. Serie DiviNos que presenta a la diva de Hollywood con reverencia sobre piedra negra de textura milenaria.",
+      "metaDescription": "DiviNos Marilyn - Serie DiviNos de Naroa Gutiérrez Gil. Marilyn Monroe sobre pizarra natural. Arte contemporáneo Bilbao, retratos divinos, obra icónica 2023.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"DiviNos Marilyn\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Acrílico sobre pizarra\",\"dateCreated\":\"2023\",\"artform\":\"Pintura\",\"artworkSurface\":\"Pizarra natural\",\"about\":\"Marilyn Monroe\"}"
+    },
+    {
+      "id": "verhoeven-x12",
+      "title": "Verhoeven x12",
+      "series": "tributos-musicales",
+      "technique": "mixed-media",
+      "year": 2025,
+      "description": "Serie de 12 piezas. Expo Sept 2025 Siarte.",
+      "altText": "Serie de 12 piezas en técnica mixta dedicada a Verhoeven. Colección completa para exposición en Siarte que explora múltiples facetas del tema con variedad compositiva.",
+      "metaDescription": "Verhoeven x12 - Serie completa de Naroa Gutiérrez Gil. 12 obras en técnica mixta. Expo Siarte 2025. Arte contemporáneo Bilbao, exposiciones arte, serie exclusiva.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"Verhoeven x12\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Técnica mixta\",\"dateCreated\":\"2025\",\"artform\":\"Pintura\",\"artworkSurface\":\"Lienzo\"}"
+    },
+    {
+      "id": "el-abrazo-del-cielo",
+      "title": "El Abrazo del Cielo en la Tierra",
+      "series": "espejos-del-alma",
+      "technique": "mixed-media-ia",
+      "year": 2025,
+      "description": "Obra animada con IA. NetArt.",
+      "altText": "Obra animada con inteligencia artificial en formato NetArt. Serie Espejos del Alma que explora la fusión entre tecnología y emoción con movimiento poético digital.",
+      "metaDescription": "El Abrazo del Cielo en la Tierra - NetArt de Naroa Gutiérrez Gil. Obra animada con IA. Arte contemporáneo Bilbao, arte digital, inteligencia artificial creativa 2025.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"El Abrazo del Cielo en la Tierra\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Arte digital con IA\",\"dateCreated\":\"2025\",\"artform\":\"Arte digital\",\"artworkSurface\":\"Digital\"}"
+    },
+    {
+      "id": "la-llorona",
+      "title": "La Llorona",
+      "series": "retratos",
+      "technique": "mixed-media",
+      "year": 2023,
+      "featured": true,
+      "description": "Obra recuperada del archivo digital.",
+      "altText": "Obra destacada recuperada del archivo digital en técnica mixta. Retrato evocador que recrea el mito folclórico con expresividad emocional y atmósfera misteriosa cautivadora.",
+      "metaDescription": "La Llorona - Obra destacada recuperada de Naroa Gutiérrez Gil. Técnica mixta sobre mito folclórico. Arte contemporáneo Bilbao, arte mexicano, obra original 2023.",
+      "schemaLD": "{\"@context\":\"https://schema.org\",\"@type\":\"VisualArtwork\",\"name\":\"La Llorona\",\"artist\":{\"@type\":\"Person\",\"name\":\"Naroa Gutiérrez Gil\"},\"artMedium\":\"Técnica mixta\",\"dateCreated\":\"2023\",\"artform\":\"Pintura\",\"artworkSurface\":\"Lienzo\"}"
+    }
+  ],
+  "exhibitions": {
+    "past": [
+      {"title":"Repoker de Reinas","venue":"Siarte Leku","date":"Abril 2022","type":"Individual"},
+      {"title":"Rincones de Bilbao","venue":"Siarte","date":"2022","type":"Colectiva"},
+      {"title":"Recicl-ARTE","venue":"Siarte","date":"2022","type":"Colectiva"},
+      {"title":"Emakumeen arteaN","venue":"Bilbao La Vieja","date":"2021","type":"Colectiva"},
+      {"title":"Walking Gallery Bilbao","venue":"Calles de Bilbao","date":"2013-2022","type":"Serie"}
+    ],
+    "upcoming": [
+      {"title":"Verhoeven x12","venue":"Siarte","date":"Septiembre 2025","type":"Individual"},
+      {"title":"DiviNos VaiVenes","venue":"Politena Espacio de Arte","date":"Enero 2026","type":"Individual"}
+    ]
+  },
+  "spaces": {
+    "politena": {"name":"Politena Espacio de Arte","location":"Bilbao"},
+    "siarte": {"name":"Siarte Leku","location":"Bilbao"},
+    "elRecreo": {"name":"El ReCreo","location":"Uribarri, Chasse Danza"}
+  }
+}

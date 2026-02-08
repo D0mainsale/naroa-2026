@@ -147,20 +147,21 @@ class Router {
   }
 
   /**
-   * Close all overlay views (games, etc.)
+   * NEW: Close overlays but KEEP main scroll position
    */
   closeAllOverlays() {
-    document.querySelectorAll('.view.game-view.active, .view--juegos.active, .view--games.active, .view--exposiciones.active, .view--obra.active, .view--mica-dashboard.active').forEach(view => {
-      view.classList.remove('active');
-      view.style.opacity = '0';
-      view.style.pointerEvents = 'none';
-      setTimeout(() => {
-        if (!view.classList.contains('active')) {
-          view.style.display = 'none';
-        }
-      }, 500);
+    document.querySelectorAll('.view').forEach(view => {
+      // Only close OVERLAYS (games, details), not scroll sections
+      if (this.overlaySections.has(view.id) || view.classList.contains('game-view')) {
+        view.classList.remove('active');
+        view.style.opacity = '0';
+        view.style.pointerEvents = 'none';
+        setTimeout(() => {
+           // Double check before hiding
+           if (!view.classList.contains('active')) view.style.display = 'none';
+        }, 500);
+      }
     });
-    
     this.overlaySections.clear();
     document.body.style.overflow = '';
   }

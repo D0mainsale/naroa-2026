@@ -7,14 +7,14 @@
 (function() {
   'use strict';
 
-  const ARTWORKS_PATH = 'images/artworks/';
+  const ARTWORKS_PATH = '/images/artworks/';
   const CACHE = new Map();
   let artworksData = null;
 
   async function loadMetadata() {
     if (artworksData) return artworksData;
     try {
-      const res = await fetch('data/artworks-metadata.json');
+      const res = await fetch('/data/database.json');
       artworksData = await res.json();
       return artworksData;
     } catch (e) {
