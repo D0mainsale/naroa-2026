@@ -45,13 +45,11 @@ class MicaCursor {
     document.addEventListener('mousemove', (e) => this.onMouseMove(e));
     document.addEventListener('click', (e) => this.onMouseClick(e));
     
-    console.log('✨ Cursor rotativo activado:', this.cursors[this.currentCursorIndex].name);
   }
   
   rotateCursor() {
     this.currentCursorIndex = (this.currentCursorIndex + 1) % this.cursors.length;
     this.applyCursor();
-    console.log('🔄 Cursor cambiado a:', this.cursors[this.currentCursorIndex].name);
   }
   
   applyCursor() {

@@ -189,5 +189,4 @@ Elige una obra que te **emocione**, no solo que "parezca buena inversión". El a
   // Export global
   window.BlogEngine = BlogEngine;
   
-  console.log('[BlogEngine] Inicializado con', BlogEngine.posts.length, 'posts');
 })();

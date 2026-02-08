@@ -32,7 +32,6 @@ class MICAOrchestrator {
       const EmotionEngine = await import('./mica-emotion-engine.js');
       this.modules.emotion = window.MICA || new EmotionEngine.default();
       this.loaded.add('emotion');
-      console.log('✨ MICA Emotion Engine ready');
     } catch (e) {
       console.warn('[MICA] Emotion engine not available:', e);
     }
@@ -69,7 +68,6 @@ class MICAOrchestrator {
       try {
         this.modules[moduleName] = await loaders[moduleName]();
         this.loaded.add(moduleName);
-        console.log(`✨ MICA ${moduleName} loaded`);
         return this.modules[moduleName];
       } catch (e) {
         console.warn(`[MICA] Failed to load ${moduleName}:`, e);
@@ -163,4 +161,3 @@ window.MICAOrchestrator = micaOrchestrator;
 export default MICAOrchestrator;
 export { micaOrchestrator };
 
-console.log('🎭 MICA v5.0 Orchestrator initialized');

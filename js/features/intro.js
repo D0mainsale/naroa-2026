@@ -19,7 +19,6 @@
       const response = await fetch('data/intro-artworks.json');
       const data = await response.json();
       introState.artworks = data.artworks;
-      console.log(`✨ Intro: ${introState.artworks.length} artworks cargados`);
     } catch (e) {
       console.warn('Intro artworks not found, using fallback');
       introState.artworks = [
@@ -233,14 +232,12 @@
   async function initIntro() {
     // Skip if already seen this session
     if (sessionStorage.getItem('naroa-intro-seen')) {
-      console.log('Intro: skipped (already seen)');
       return;
     }
     
     // Skip if navigating directly to a specific route (not home)
     const hash = window.location.hash;
     if (hash && hash !== '#/' && hash !== '#') {
-      console.log('Intro: skipped (deep link to ' + hash + ')');
       sessionStorage.setItem('naroa-intro-seen', 'true');
       return;
     }
@@ -248,7 +245,6 @@
     await loadIntroArtworks();
     
     if (introState.artworks.length === 0) {
-      console.log('Intro: no artworks, skipping');
       return;
     }
 

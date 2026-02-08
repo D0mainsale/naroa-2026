@@ -83,7 +83,6 @@ const ImmersiveAudio = {
       // Start ambient drone
       this.startAmbient();
 
-      console.log('🎧 Immersive Audio Engine initialized (HiFi 48kHz)');
       return true;
     } catch (err) {
       console.warn('Audio not available:', err);

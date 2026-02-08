@@ -28,7 +28,6 @@ export function initMagnet() {
     });
   });
 
-  console.log('🧲 Magnet effect initialized');
 }
 
 // Auto-init

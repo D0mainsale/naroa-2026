@@ -98,7 +98,6 @@ class MICAEmotionEngine {
       
       return this.getWeatherValue(condition);
     } catch (error) {
-      console.log('Weather API timeout, using fallback');
       return this.getWeatherFallback();
     }
   }
@@ -282,7 +281,6 @@ class MICAEmotionEngine {
     // Setup midnight reset
     this.scheduleMidnightReset();
     
-    console.log('🌟 MICA Emotion Engine initialized', this.state);
   }
 
   /**

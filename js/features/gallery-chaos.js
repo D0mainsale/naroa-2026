@@ -74,7 +74,6 @@ const ChaosEngine = {
   isActive: false,
 
   init() {
-    console.log('🌪️ initializing Ephemeral Chaos Engine (Vibe Aware)...');
     // Don't auto-start, wait for user interaction or check localStorage if persistence desired
     // But we need to listen to keys globally
     
@@ -94,7 +93,6 @@ const ChaosEngine = {
     container.classList.add('gallery-mode-chaos');
     this.applyChaos();
     this.startLoop();
-    console.log('🌪️ Chaos Mode ENABLED');
   },
 
   disable() {
@@ -128,7 +126,6 @@ const ChaosEngine = {
       item.style.removeProperty('--chaos-delay');
     });
 
-    console.log('🌪️ Chaos Mode DISABLED');
   },
 
   toggle() {
@@ -254,11 +251,9 @@ const ChaosEngine = {
       }
     });
 
-    console.log(`🌪️ Chaos Applied. Layout regenerated with Vibe Engine.`);
   },
 
   regenerate() {
-    console.log('🌪️ Regenerating Chaos...');
     const items = document.querySelectorAll(this.config.itemSelector);
     items.forEach(item => {
         item.style.animation = 'none';

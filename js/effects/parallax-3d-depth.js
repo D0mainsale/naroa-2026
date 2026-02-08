@@ -42,7 +42,6 @@ class Parallax3DDepth {
     this.bindEvents();
     this.animate();
     
-    console.log('🌌 Parallax 3D Depth Engine initialized');
   }
 
   setupContainer(container) {

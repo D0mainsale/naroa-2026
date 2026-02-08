@@ -47,7 +47,6 @@
             originalId: art.id
           }));
         
-        console.log(`[Gallery] Loaded ${ARTWORKS.length} artworks from metadata (${data.artworks.length} total in JSON)`);
       }
       
       if (taxonomyRes.ok) {
@@ -56,7 +55,6 @@
         if (TAXONOMY.filters && Array.isArray(TAXONOMY.filters)) {
           FILTERS = TAXONOMY.filters;
         }
-        console.log(`[Gallery] Loaded taxonomy with ${Object.keys(TAXONOMY.series).length} series`);
       }
       
       return true;
@@ -93,7 +91,7 @@
   ];
 
   // ===========================================
-  // LAZY LOADING
+  // LAZY LOADING + SHIMMER → REVEAL
   // ===========================================
 
   const lazyObserver = new IntersectionObserver((entries) => {
@@ -117,11 +115,30 @@
         
         img.classList.add('loaded');
         lazyObserver.unobserve(img);
+
+        // Remove shimmer when loaded
+        img.addEventListener('load', () => {
+          const wrapper = img.closest('.stitch-media-wrapper');
+          if (wrapper) wrapper.classList.remove('shimmer');
+        }, { once: true });
       }
     });
   }, {
     rootMargin: '300% 300%',
     threshold: 0.01
+  });
+
+  // Scroll reveal observer — staggers cards into view
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('gallery__item--visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, {
+    rootMargin: '0px 0px -60px 0px',
+    threshold: 0.05
   });
 
   // ===========================================
@@ -162,13 +179,21 @@
     item.dataset.category = artwork.category;
     item.dataset.id = artwork.id;
 
+    // Series color from taxonomy
+    const seriesInfo = TAXONOMY?.series?.[artwork.category];
+    const seriesColor = seriesInfo?.color || 'var(--fluor)';
+    item.style.setProperty('--series-color', seriesColor);
+
     if (animate) {
       item.classList.add('gallery__item--enter');
     }
 
+    // Check if featured
+    const isFeatured = artwork.featured || FEATURED_ARTWORK_IDS.includes(artwork.originalId);
+
     const baseName = artwork.file.replace('.webp', '');
     item.innerHTML = `
-      <div class="stitch-media-wrapper">
+      <div class="stitch-media-wrapper shimmer">
         <img 
           data-src="images/artworks/${artwork.originalId}.webp" 
           alt="${artwork.title}"
@@ -177,6 +202,7 @@
           onerror="this.style.display='none'; console.warn('Missing image:', this.dataset.src || this.src);"
         >
       </div>
+      ${isFeatured ? '<span class="stitch-badge stitch-badge--featured">★ Destacada</span>' : ''}
       <div class="stitch-content">
         <h3 class="stitch-title">${artwork.title}</h3>
         <div class="stitch-subtitle">
@@ -189,6 +215,9 @@
     // Setup lazy loading
     const img = item.querySelector('img');
     lazyObserver.observe(img);
+
+    // Scroll reveal
+    revealObserver.observe(item);
 
     // Click handler for lightbox
     item.addEventListener('click', () => {
@@ -206,6 +235,8 @@
    */
   function renderFilters(container) {
     container.innerHTML = '';
+    // Enable horizontal scroll for mobile
+    container.classList.add('gallery-filters--scrollable');
     
     const counts = getArtworkCounts();
     const filtersToUse = FILTERS.length > 0 ? FILTERS : FALLBACK_FILTERS;
@@ -217,10 +248,15 @@
       if (filter.id !== 'todos' && count === 0) {
         return;
       }
+
+      // Get series color from taxonomy
+      const seriesInfo = TAXONOMY?.series?.[filter.id];
+      const seriesColor = seriesInfo?.color || 'var(--fluor)';
       
       const btn = document.createElement('button');
       btn.className = 'gallery-filter';
       btn.dataset.category = filter.id;
+      btn.style.setProperty('--filter-color', seriesColor);
       
       // Use emoji from filter, with fallback
       const emoji = filter.emoji || '🎨';
@@ -262,21 +298,20 @@
       ? ARTWORKS 
       : ARTWORKS.filter(artwork => artwork.category === category);
 
+    // Update gallery title
+    updateGalleryTitle(category, filteredArtworks.length);
+
     // Animate out current items
     const currentItems = container.querySelectorAll('.gallery__item');
     
     if (currentItems.length > 0 && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      // Add exit animation
       currentItems.forEach(item => {
         item.classList.add('gallery__item--exit');
       });
-
-      // Wait for exit animation then render new items
       setTimeout(() => {
         renderGalleryGrid(container, filteredArtworks);
       }, 250);
     } else {
-      // No animation for reduced motion or empty gallery
       renderGalleryGrid(container, filteredArtworks);
     }
 
@@ -289,20 +324,46 @@
   }
 
   /**
+   * Update gallery section title to reflect current filter
+   */
+  function updateGalleryTitle(category, count) {
+    const titleEl = document.querySelector('#view-archivo .section-title, #view-archivo h2');
+    if (!titleEl) return;
+
+    if (category === 'todos') {
+      titleEl.textContent = 'Archivo Completo';
+    } else {
+      const filterInfo = FILTERS.find(f => f.id === category);
+      const seriesInfo = TAXONOMY?.series?.[category];
+      const name = seriesInfo?.displayNameEs || filterInfo?.label || category;
+      const emoji = filterInfo?.emoji || '';
+      titleEl.textContent = `${emoji} ${name} — ${count} obra${count !== 1 ? 's' : ''}`;
+    }
+  }
+
+  /**
    * Render the gallery grid with entrance animation
    * @param {HTMLElement} container - Gallery container
    * @param {Array} artworks - Array of artworks to render
    */
   function renderGalleryGrid(container, artworks) {
     container.innerHTML = '';
+
+    if (artworks.length === 0) {
+      container.innerHTML = `
+        <div class="gallery__empty">
+          <span class="gallery__empty-icon">🎨</span>
+          <p>No hay obras en esta categoría</p>
+        </div>
+      `;
+      return;
+    }
     
     artworks.forEach((artwork, index) => {
       const item = renderGalleryItem(artwork, true);
       
-      // Staggered entrance animation
-      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        item.style.animationDelay = `${Math.min(index * 50, 500)}ms`;
-      }
+      // Stagger index for reveal observer
+      item.style.setProperty('--reveal-index', index);
       
       container.appendChild(item);
     });
@@ -359,7 +420,6 @@
                                   container.querySelectorAll('.gallery-massive__item').length > 0;
       
       if (hasDisruptiveLayout) {
-        console.log('[Gallery] Disruptive layout detected - preserving static content');
         // Initialize the disruptive gallery engine instead
         if (window.GalleryDisruptive) {
           window.GalleryDisruptive.init();
@@ -383,7 +443,6 @@
         return aIndex - bIndex;
       });
       
-      console.log(`[Gallery] Showing ${featured.length} featured artworks`);
       
       featured.forEach(artwork => {
         container.appendChild(renderGalleryItem(artwork));
@@ -425,11 +484,9 @@
     async init() {
       const loaded = await loadArtworkData();
       if (!loaded || ARTWORKS.length === 0) {
-        console.log('[Gallery] Using fallback artworks');
         ARTWORKS = FALLBACK_ARTWORKS.slice();
         FILTERS = FALLBACK_FILTERS;
       }
-      console.log(`[Gallery] Initialized with ${ARTWORKS.length} artworks`);
     },
 
     // Get series labels for UI
@@ -447,7 +504,44 @@
       if (FILTERS.some(f => f.id === category) || category === 'todos') {
         filterGallery(category);
       }
-    }
+    },
+
+    // 360° Canvas toggle
+    is360Active: false,
+    toggle360() {
+      this.is360Active = !this.is360Active;
+      const gridContainer = document.getElementById('archivo-grid');
+      const filtersContainer = document.getElementById('gallery-filters');
+      const canvasContainer = document.getElementById('infinite-canvas-container');
+      const toggleBtn = document.getElementById('view-toggle-360');
+
+      if (this.is360Active) {
+        if (gridContainer) gridContainer.hidden = true;
+        if (filtersContainer) filtersContainer.hidden = true;
+        if (canvasContainer) {
+          canvasContainer.hidden = false;
+          if (window.InfiniteCanvas360) window.InfiniteCanvas360.init?.();
+        }
+        if (toggleBtn) toggleBtn.classList.add('btn-360--active');
+        localStorage.setItem('naroa-gallery-view', '360');
+      } else {
+        if (gridContainer) gridContainer.hidden = false;
+        if (filtersContainer) filtersContainer.hidden = false;
+        if (canvasContainer) canvasContainer.hidden = true;
+        if (toggleBtn) toggleBtn.classList.remove('btn-360--active');
+        localStorage.setItem('naroa-gallery-view', 'grid');
+      }
+    },
+
+    // Restore view preference
+    restoreViewPreference() {
+      const pref = localStorage.getItem('naroa-gallery-view');
+      if (pref === '360') this.toggle360();
+    },
+
+    // Get all artworks (for external use like 360 canvas)
+    getArtworks() { return ARTWORKS; },
+    getTaxonomy() { return TAXONOMY; }
   };
 
 })();

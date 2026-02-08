@@ -52,7 +52,6 @@ class ExposicionesTimeline {
         this.initWowEffects();
         
         const stats = this.dataService.getStats(this.data);
-        console.log('[ExposicionesTimeline] WOW Edition loaded:', stats);
     }
 
     /**

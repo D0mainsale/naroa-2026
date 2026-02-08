@@ -28,7 +28,6 @@ class RevealObserver {
       document.querySelectorAll(selector).forEach(el => {
         el.classList.add('revealed');
       });
-      console.log('[RevealObserver] Reduced motion detected, all elements revealed');
       return this;
     }
 

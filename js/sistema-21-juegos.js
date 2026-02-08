@@ -152,7 +152,6 @@ class MICA21Juegos extends Sistema21Juegos {
 if (typeof window !== 'undefined') {
     window.Sistema21Juegos = Sistema21Juegos;
     window.MICA21Juegos = MICA21Juegos;
-    console.log('✨ Sistema 21 Juegos loaded');
 }
 
 export { Sistema21Juegos, MICA21Juegos };

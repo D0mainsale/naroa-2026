@@ -62,11 +62,9 @@ const MICA = {
   // INITIALIZATION
   // ════════════════════════════════════════════
   init() {
-    console.log('🪨 MICA v5.0 Orchestrator initializing...');
     
     const input = document.querySelector(this.config.inputSelector);
     if (!input) {
-      console.log('🪨 MICA input not found, creating floating UI...');
       this.createFloatingUI();
       return;
     }
@@ -115,7 +113,6 @@ const MICA = {
 
     // Voice input (Web Speech API)
     if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
-      console.log('🪨 MICA: Voice input available');
     }
   },
 

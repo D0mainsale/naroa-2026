@@ -61,6 +61,7 @@
   <link rel="stylesheet" href="css/effects/games-board.css">
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/gallery.css">
+  <link rel="stylesheet" href="css/infinite-canvas-360.css">
   <link rel="stylesheet" href="css/animations.css">
   <link rel="stylesheet" href="css/soty-effects.css">
   <link rel="stylesheet" href="css/mica.css">
@@ -376,8 +377,14 @@
           <button id="chaos-toggle" class="btn-chaos" aria-label="Activar modo caos">
              <span>⚡</span> MODO CAOS
           </button>
+          <button id="view-toggle-360" class="btn-chaos btn-360" aria-label="Vista 360">
+             <span>🌐</span> 360°
+          </button>
         </div>
       </header>
+      <!-- 360 Canvas Container (Hidden by default) -->
+      <div id="infinite-canvas-container" class="infinite-canvas-container" hidden></div>
+
       <div class="gallery gallery--masonry" id="archivo-grid">
       </div>
     </section>
@@ -798,6 +805,7 @@
   <script src="js/core/router.js"></script>
   <script src="js/core/ranking-system.js" defer></script>
   <script src="js/features/gallery.js"></script>
+  <script src="js/features/infinite-canvas-360.js"></script>
   <script src="js/features/lightbox.js" defer></script>
   <script src="js/core/app.js"></script>
   <script src="js/features/navigation.js"></script>

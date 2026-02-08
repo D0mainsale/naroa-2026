@@ -15,7 +15,6 @@ class MICAParticleSystem {
     this.gl = this.canvas.getContext('webgl2', { alpha: true, antialias: false, premultipliedAlpha: false });
     
     if (!this.gl) {
-      console.log('WebGL2 not available, using Canvas 2D fallback');
       this.fallbackMode = true;
       this.initFallback();
       return;
@@ -52,7 +51,6 @@ class MICAParticleSystem {
     // Resize handler
     window.addEventListener('resize', () => this.resize());
     
-    console.log('✨ MICA Particle System (WebGL2) initialized');
   }
 
   initShaders() {

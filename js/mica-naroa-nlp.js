@@ -226,7 +226,6 @@ Reglas: Frases cortas (máx 10 palabras). Sin emojis. Usa "..." para pausas.`;
 // Singleton global
 if (typeof window !== 'undefined') {
   window.MicaNLP = new MicaNaroaPersonality();
-  console.log('🧠 MICA NLP Personality Engine loaded');
 }
 
 export default MicaNaroaPersonality;

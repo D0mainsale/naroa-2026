@@ -59,7 +59,6 @@ class DisplacementDepthParallax {
     this.bindEvents();
     this.startLoop();
 
-    console.log('🌊 Displacement Depth Parallax initialized');
   }
 
   async setupShaders() {
@@ -322,7 +321,6 @@ class DisplacementDepthParallax {
 
   useCSSFallback() {
     // Fallback to CSS-only parallax
-    console.log('Using CSS fallback for parallax');
   }
 
   destroy() {

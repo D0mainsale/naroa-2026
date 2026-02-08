@@ -23,7 +23,6 @@ class BandcampRadio {
   init() {
     this.createDOM();
     this.bindEvents();
-    console.log('📻 Bandcamp Radio initialized');
   }
 
   createDOM() {

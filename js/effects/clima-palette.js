@@ -86,7 +86,6 @@ class ClimaPalette {
     // DISABLED: User prefers fixed dark theme
     // The Clima Palette was changing colors to light beige based on weather
     // Keeping dark aesthetic as intended
-    console.log('🌙 Clima Palette: Disabled - Dark theme locked');
     return;
     
     /* Original code - re-enable if user wants dynamic colors:
@@ -181,7 +180,6 @@ class ClimaPalette {
     window.climaMood = palette.mood;
     
     // Log for debugging
-    console.log(`🌤️ Clima Palette: ${weather} - "${palette.mood}"`);
     
     // Emit event
     document.dispatchEvent(new CustomEvent('climatePaletteChanged', {

@@ -23,7 +23,6 @@ export class CantinflasSpotlight {
   init() {
     this.createDOM();
     this.attachEvents();
-    console.log('🎭 Cantinflas Spotlight initialized');
   }
 
   createDOM() {

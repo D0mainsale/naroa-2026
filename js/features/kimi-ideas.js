@@ -15,7 +15,6 @@ const KimiIdeas = {
   // INIT ALL
   // ════════════════════════════════════════════
   init() {
-    console.log('🎨 Kimi Ideas initializing...');
     // this.initCollectorMode();      // #10 REMOVED
     this.initCursorLens();         // #2
     this.initParallaxScroll();     // #1
@@ -23,7 +22,6 @@ const KimiIdeas = {
     this.initMicaContextual();     // #6
     this.initSwipeGallery();       // #8 + #3 (pinch)
     this.createFavoritesBar();     // #8 UI
-    console.log('🎨 Kimi Ideas ready — 9 features loaded');
   },
 
   // ════════════════════════════════════════════

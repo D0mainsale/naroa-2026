@@ -108,7 +108,6 @@ class MICASwarmOrchestrator {
       if (response.ok) {
         const data = await response.json();
         this.artworkIndex = data.artworks || data;
-        console.log(`🐝 Swarm: Loaded ${this.artworkIndex.length} artworks`);
       }
     } catch (e) {
       console.warn('🐝 Swarm: Could not load artwork index');
@@ -210,7 +209,6 @@ class MICASwarmOrchestrator {
     
     // 1. Clasificar intención
     const classification = this.classify(query);
-    console.log(`🐝 Swarm: Routed to ${classification.agent.emoji} ${classification.agent.name}`);
     
     // 2. Buscar obra específica (siempre)
     const artworkMatch = this.searchArtwork(query);

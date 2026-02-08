@@ -23,7 +23,6 @@ class MagneticButton {
 
   init(selector = '.magnetic-btn') {
     if (this.isReduced) {
-      console.log('[MagneticButton] Reduced motion detected, skipping init');
       return this;
     }
 

@@ -226,7 +226,6 @@
     if (window.micaInstance) {
       setTimeout(() => {
         if (!window.micaInstance.isOpen) {
-          console.log('[App] MICA invited to lead the conversation');
         }
       }, 2000);
     }
@@ -237,21 +236,18 @@
   // ===========================================
 
   function loadFeatured() {
-    console.log('[App] Loading Obra Destacada...');
     if (window.Gallery) {
       window.Gallery.loadFeatured();
     }
   }
 
   function loadArchive() {
-    console.log('[App] Loading Archivo...');
     if (window.Gallery) {
       window.Gallery.loadArchive();
     }
   }
 
   function loadGalleryDisruptive() {
-    console.log('[App] Loading Galería Disruptiva...');
     // First load featured content
     if (window.Gallery) {
       window.Gallery.loadFeatured();
@@ -265,21 +261,18 @@
   }
 
   function loadGame() {
-    console.log('[App] Loading Juego de la Oca...');
     if (window.OcaGame) {
       window.OcaGame.init();
     }
   }
 
   function loadTetris() {
-    console.log('[App] Loading Tetris Artístico...');
     if (window.TetrisGame) {
       window.TetrisGame.init();
     }
   }
 
   async function loadExposiciones() {
-    console.log('[App] Loading Exposiciones Timeline...');
     // Dynamic import for module
     try {
       const module = await import('../features/exposiciones-timeline.js');
@@ -292,7 +285,6 @@
   }
 
   async function loadArtworkDetail(artworkId) {
-    console.log('[App] Loading Artwork Detail:', artworkId);
     try {
       const module = await import('../features/artwork-detail.js');
       if (module.artworkDetail) {
@@ -304,7 +296,6 @@
   }
 
   async function loadContactoPanel() {
-    console.log('[App] Loading Contacto Panel...');
     try {
       const module = await import('../features/videocall-panel.js');
       if (module.videoCallPanel) {
@@ -319,7 +310,6 @@
   }
 
   async function loadMicaDashboard() {
-    console.log('[App] Loading MICA Dashboard...');
     try {
       const module = await import('../features/mica-dashboard.js');
       if (module.micaDashboard) {
@@ -335,17 +325,14 @@
   // ===========================================
 
   async function init() {
-    console.log('[Naroa 2026] Initializing...');
     
     // CRITICAL: Initialize Gallery BEFORE routes so data is ready
     if (window.Gallery) {
       await window.Gallery.init();
-      console.log('[Naroa 2026] Gallery initialized with artwork data');
     }
     
     // Initialize Swarm Architecture
     // ----------------------------------------
-    console.log('[Naroa 2026] Awakening Swarm... 🦞');
     
     // Dynamic import to break dependency cycle if needed
     try {
@@ -367,7 +354,6 @@
       window.Lightbox.init();
     }
 
-    console.log('[Naroa 2026] Ready ✨ (High Quality Mode)');
   }
 
   function initUIControls() {

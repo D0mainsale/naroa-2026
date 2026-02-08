@@ -252,7 +252,6 @@
   // ==========================================
   function init() {
     initCardParticles();
-    console.log('🎮 Games Premium Effects loaded');
   }
 
   if (document.readyState === 'loading') {

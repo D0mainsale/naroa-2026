@@ -286,7 +286,6 @@ const WOWEffects2026 = {
   // INIT ALL
   // ════════════════════════════════════════════
   initAll() {
-    console.log('✨ WOW Effects 2026 initializing... MODO A POR TODO');
 
     // Core effects (always on)
     this.initLiquidGlass();
@@ -302,7 +301,6 @@ const WOWEffects2026 = {
     this.initAuroraGradient();
     // this.initSmoothMomentum(); // Disabled - conflicts with MICA scroll
 
-    console.log('✨ WOW Effects 2026 ready! Premium mode activated 🚀');
   },
 };
 

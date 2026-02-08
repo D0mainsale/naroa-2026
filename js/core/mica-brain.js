@@ -33,7 +33,6 @@ export class MicaBrain {
      * Inicializa el cerebro
      */
     async init() {
-        console.log('[MicaBrain] Initializing Neural Core...');
         // Cargar estado previo si existe
         if (this.memory) {
             const lastState = await this.memory.recall('mica_state_snapshot', 1);

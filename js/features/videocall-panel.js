@@ -376,7 +376,6 @@ export class VideoCallPanel {
         this.showSuccess();
 
         // Log for demo (in production, send to backend)
-        console.log('[VideoCallPanel] Booking:', this.formData);
     }
 
     /**

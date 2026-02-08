@@ -12,7 +12,6 @@ class MicaInteractions {
         this.setupMagneticButtons();
         this.setupCustomCursor();
         this.setupEasterEggs();
-        console.log('🎨 MICA Interactions initialized');
     }
     
     /* ==========================================

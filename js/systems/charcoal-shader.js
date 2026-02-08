@@ -163,7 +163,6 @@ const CharcoalShader = (() => {
     }
 
     // TODO: Implementar renderizado WebGL completo
-    console.log('CharcoalShader: Aplicando efecto WebGL');
   }
 
   /**

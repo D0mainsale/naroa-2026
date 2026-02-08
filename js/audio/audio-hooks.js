@@ -15,7 +15,6 @@ const AudioHooks = {
       if (window.ImmersiveAudio?.ctx && window.AudioSynth) {
         clearInterval(waitForAudio);
         this.setupHooks();
-        console.log('🎵 Audio hooks active');
       }
     }, 100);
   },

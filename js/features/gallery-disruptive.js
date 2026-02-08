@@ -80,7 +80,6 @@ const GalleryDisruptive = {
     this.setupMouseTracking();
     this.setupAdjacentPreload();
 
-    console.log('🖼️ Gallery Disruptive 2.0 Engine initialized');
   },
 
   // ═════════════════════════════════════════════════════════════════════════════

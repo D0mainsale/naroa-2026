@@ -28,7 +28,6 @@ class EyesFollow {
 
   init() {
     if (this.isReduced) {
-      console.log('[EyesFollow] Disabled: prefers-reduced-motion');
       return this;
     }
     
@@ -36,7 +35,6 @@ class EyesFollow {
     this.bindEvents();
     this.startLoop();
     
-    console.log(`👁️ EyesFollow: ${this.targets.length} elementos rastreando tu mirada`);
     return this;
   }
 

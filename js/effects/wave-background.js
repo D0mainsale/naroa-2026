@@ -16,7 +16,6 @@
     init() {
       this.createWaveContainer();
       this.bindScrollThrottle();
-      console.log('[WaveBackground] 🌊 Oleaje zen activado');
     }
 
     createWaveContainer() {

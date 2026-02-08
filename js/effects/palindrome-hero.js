@@ -107,8 +107,6 @@ const PalindromeGenerator = (() => {
     applyMicaTexture(palindromeEl);
     
     // Log para debugging
-    console.log(`🔮 Palíndromo único: ${palindrome}`);
-    console.log(`📐 Proporción Áurea aplicada: φ = ${PHI.toFixed(6)}`);
     
     // Modo loop: cambiar cada 30 segundos (opcional, para exposiciones)
     if (window.PALINDROME_LOOP_MODE) {

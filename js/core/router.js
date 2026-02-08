@@ -84,18 +84,44 @@ class Router {
   }
 
   /**
-   * Hide all view sections - DEPRECATED for Scroll Mode
+   * Hide all view sections
    */
   hideAllViews() {
-    // No-op: We want all views visible for scrolling
+    const views = document.querySelectorAll('.view');
+    views.forEach(view => {
+      view.classList.remove('active');
+      view.style.opacity = '0';
+      view.style.pointerEvents = 'none';
+      setTimeout(() => {
+        if (!view.classList.contains('active')) {
+          view.style.display = 'none';
+        }
+      }, 500); // Wait for fade out
+    });
   }
 
   /**
-   * Show a specific view by ID - UPDATED to Scroll
+   * Show a specific view by ID with transition
    * @param {string} viewId - Element ID of the view
    */
   showView(viewId) {
-    this.scrollToView(viewId);
+    // 1. Hide others
+    this.hideAllViews();
+
+    // 2. Show target
+    const view = document.getElementById(viewId);
+    if (!view) return;
+
+    view.style.display = 'block';
+    // Force reflow
+    void view.offsetWidth;
+    
+    view.classList.add('active');
+    view.style.opacity = '1';
+    view.style.pointerEvents = 'auto';
+
+    // 3. Scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   /**

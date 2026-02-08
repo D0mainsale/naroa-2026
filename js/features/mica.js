@@ -239,7 +239,6 @@ Responde en español. Sé cálida y vendedora natural.`
       const resp = await fetch('data/mica-brain.json');
       if (resp.ok) {
         this.brain = await resp.json();
-        console.log('🧠 MICA Brain loaded from NotebookLM');
       }
     } catch (e) {
       console.warn('[MICA] Brain load failed:', e);
@@ -252,7 +251,6 @@ Responde en español. Sé cálida y vendedora natural.`
       if (resp.ok) {
         const data = await resp.json();
         this.catalog = data.artworks || [];
-        console.log(`🧠 MICA Catalog loaded: ${this.catalog.length} artworks`);
       }
     } catch (e) {
       console.warn('[MICA] Catalog load failed:', e);
@@ -493,7 +491,6 @@ Responde en español. Sé cálida y vendedora natural.`
       try {
         swarmContext = await this.swarm.route(text);
         enrichedPrompt = this.swarm.enrichPrompt(text, swarmContext);
-        console.log(`🐝 Swarm routed to: ${swarmContext.classification.agent.name}`);
       } catch (e) {
         console.warn('🐝 Swarm routing failed, using direct:', e);
       }

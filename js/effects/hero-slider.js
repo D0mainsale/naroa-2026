@@ -39,5 +39,4 @@ document.addEventListener('DOMContentLoaded', () => {
     // Start loop
     setInterval(nextSlide, intervalTime);
     
-    console.log('Hero Slider initialized with ' + slides.length + ' slides.');
 });

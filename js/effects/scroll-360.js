@@ -217,7 +217,6 @@
     interceptNavClicks();
     scrollToInitialHash();
 
-    console.log('🎡 360° Scroll Navigation initialized');
   }
 
   // Wait for DOM

@@ -148,7 +148,6 @@
     async _callGeminiVision(imageBase64, mode) {
       // Gemini cannot generate images, only analyze
       // For disaster mode, we use procedural generation
-      console.log('Gemini Vision: Image generation not supported, using procedural');
       return this._generateProceduralDisaster(imageBase64);
     },
 

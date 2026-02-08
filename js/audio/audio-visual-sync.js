@@ -23,7 +23,6 @@ const AudioVisualSync = {
     ImmersiveAudio.masterGain.connect(this.analyser);
 
     this.isActive = true;
-    console.log('🎨 Visual-Audio Sync active');
   },
 
   // Get current audio level (0-1)

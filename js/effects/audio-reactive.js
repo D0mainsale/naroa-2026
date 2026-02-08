@@ -46,7 +46,6 @@ class AudioReactiveSystem {
     // Setup CSS custom properties for reactive styling
     this.setupCSSProperties();
 
-    console.log('🎵 Audio Reactive System ready - Click to enable');
   }
 
   createEnableButton() {
@@ -201,7 +200,6 @@ class AudioReactiveSystem {
       this.enableButton.querySelector('span').textContent = 'Escuchando';
       document.body.classList.add('audio-reactive');
 
-      console.log('🎤 Microphone enabled - Listening to audio');
 
     } catch (err) {
       console.error('Mic access denied:', err);
@@ -323,7 +321,6 @@ class AudioReactiveSystem {
     // Reset CSS properties
     this.setupCSSProperties();
 
-    console.log('🔇 Audio reactive disabled');
   }
 
   // Get current energy levels (for external use)

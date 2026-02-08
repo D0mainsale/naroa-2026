@@ -267,7 +267,6 @@ class NaroaCursorSystem {
     if (this.variants[variantName]) {
       this.activeVariant = variantName;
       this.trailParticles = [];
-      console.log(`🎨 Cursor variant changed to: ${variantName}`);
     }
   }
 
@@ -280,7 +279,6 @@ class NaroaCursorSystem {
 if (typeof window !== 'undefined') {
   window.addEventListener('DOMContentLoaded', () => {
     window.NaroaCursors = new NaroaCursorSystem();
-    console.log('✨ Naroa Cursor System initialized');
     
     // Ejemplo de uso: cambiar variante
     // window.NaroaCursors.setVariant('mica_dust');

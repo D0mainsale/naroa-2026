@@ -23,13 +23,11 @@ class SpotifyRotator {
     this.currentIndex = 0;
     this.applyEmbed();
     
-    console.log('🎵', this.embeds[0].name);
   }
   
   rotate() {
     this.currentIndex = (this.currentIndex + 1) % this.embeds.length;
     this.applyEmbed();
-    console.log('🔄 Spotify cambiado a:', this.embeds[this.currentIndex].name);
   }
   
   applyEmbed() {

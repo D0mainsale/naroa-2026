@@ -45,7 +45,6 @@ class InfiniteCanvas360 {
     this.loadArtworks();
     this.setupEventListeners();
     this.startRenderLoop();
-    console.log('🌐 Infinite Canvas 360° initialized');
   }
 
   createDOM() {
