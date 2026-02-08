@@ -23,8 +23,10 @@
   async function loadArtworkData() {
     try {
       const [metadataRes, taxonomyRes] = await Promise.all([
-        fetch('./data/artworks-metadata.json'),
-        fetch('./data/artworks-taxonomy.json')
+        fetch('/data/artworks-metadata.json')
+          .catch(() => fetch('data/artworks-metadata.json')), // Fallback for local
+        fetch('/data/artworks-taxonomy.json')
+          .catch(() => fetch('data/artworks-taxonomy.json'))  // Fallback for local
       ]);
       
       if (metadataRes.ok) {

@@ -16,7 +16,7 @@ const KimiIdeas = {
   // ════════════════════════════════════════════
   init() {
     console.log('🎨 Kimi Ideas initializing...');
-    this.initCollectorMode();      // #10
+    // this.initCollectorMode();      // #10 REMOVED
     this.initCursorLens();         // #2
     this.initParallaxScroll();     // #1
     this.initBurnTransition();     // #5
@@ -27,24 +27,10 @@ const KimiIdeas = {
   },
 
   // ════════════════════════════════════════════
-  // #10 COLLECTOR MODE — Toggle tech specs
+  // #10 COLLECTOR MODE — REMOVED
   // ════════════════════════════════════════════
   initCollectorMode() {
-    // Create toggle button
-    const toggle = document.createElement('button');
-    toggle.className = 'collector-toggle';
-    toggle.setAttribute('aria-label', 'Modo Coleccionista');
-    toggle.innerHTML = `
-      <span class="collector-toggle__icon">🔍</span>
-      <span>Coleccionista</span>
-    `;
-    document.body.appendChild(toggle);
-
-    toggle.addEventListener('click', () => {
-      document.body.classList.toggle('collector');
-      const isActive = document.body.classList.contains('collector');
-      toggle.setAttribute('aria-pressed', isActive);
-    });
+    // Feature disabled by user request
   },
 
   // ════════════════════════════════════════════

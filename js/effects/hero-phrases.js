@@ -6,26 +6,27 @@
   'use strict';
 
   // Frases de Naroa (filosofía, obras, palíndromos)
+  // Frases de Naroa (filosofía, obras, palíndromos)
   const PHRASES = [
-    // === Frases propias de Naroa ===
-    { line1: 'Artivista',   line2: 'Del',  line3: 'Caos' },
-    { line1: 'El Problema', line2: 'Es',   line3: 'Trampolín' },
-    { line1: 'Las Grietas', line2: 'Se',   line3: 'Doran' },
-    { line1: 'El Error',    line2: 'Crea', line3: 'Belleza' },
-    { line1: 'Vuelve A',    line2: 'Elegirte', line3: 'ReCreo' },
-    { line1: 'Resignificar', line2: 'El Bien', line3: 'Mirar' },
-
-    // === Palíndromos artísticos ===
-    { line1: 'Ama',     line2: 'La',    line3: 'Trama' },
-    { line1: 'Arte',    line2: 'Cada',  line3: 'Letra' },
-    { line1: 'Oro',     line2: 'No',    line3: 'Lloro' },
-    { line1: 'Yo Dono', line2: 'Color', line3: 'A Naroa' },
-
-    // === Nombres de series/obras ===
-    { line1: 'Espejos',  line2: 'Del',  line3: 'Alma' },
-    { line1: 'Amor',     line2: 'En',   line3: 'Conserva' },
-    { line1: 'Kintsugi', line2: 'Del',  line3: 'Color' },
-    { line1: 'Salvaje',  line2: 'Y',    line3: 'Libre' },
+    // === Manifestos ===
+    { line1: 'Artivista',    line2: 'Del',     line3: 'Caos' },
+    { line1: 'El Problema',  line2: 'Es',      line3: 'Trampolín' },
+    { line1: 'Kintsugi',     line2: 'Del',     line3: 'Alma' },
+    { line1: 'Cicatrices',   line2: 'De',      line3: 'Oro' },
+    
+    // === Palíndromos & Juegos de Palabras ===
+    { line1: 'Amor',         line2: 'A',       line3: 'Roma' },
+    { line1: 'Yo Hago',      line2: 'Yoga',    line3: 'Hoy' },
+    { line1: 'Atar',         line2: 'A La',    line3: 'Rata' }, // Clásico palíndromo
+    { line1: 'Luz',          line2: 'Azul',    line3: 'Luz' },
+    { line1: 'Somos',        line2: 'O',       line3: 'No Somos' },
+    
+    // === Poética Naroa ===
+    { line1: 'Mica',         line2: 'En La',   line3: 'Mirada' },
+    { line1: 'Pintar',       line2: 'Para',    line3: 'Salar' },
+    { line1: 'Ojos',         line2: 'Que',     line3: 'Hablan' },
+    { line1: 'Pizarra',      line2: 'Viva',    line3: 'Eterna' },
+    { line1: 'Arte',         line2: 'Sin',     line3: 'Miedo' }
   ];
 
   const CYCLE_MS = 8000;
