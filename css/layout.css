@@ -4,7 +4,13 @@
    ========================================================================== */
 
 :root {
+  --font-family-display: 'Outfit', 'Switzer', 'Inter', -apple-system, sans-serif;
+  --font-family-mono: 'JetBrains Mono', monospace;
+  --font-family-sans: 'Switzer', 'Inter', -apple-system, sans-serif;
   --font-display-size: clamp(3rem, 10vw, 7rem);
+  --gold-metallic: #d4af37;
+  --black: #0a0a0a;
+  --white: #ffffff;
 }
 
 html {
