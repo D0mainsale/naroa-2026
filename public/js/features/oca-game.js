@@ -1,267 +1,135 @@
-/**
- * El Juego de la Oca - Naroa 2026 Edition
- * @description Classic Oca board game with premium neon aesthetics & animations
- * Agent A08: Enhanced tile animations, dice roll 3D effect, path glow
- */
-(function() {
-  'use strict';
-
-  const W = 800, H = 600;
-  let state = {
-    board: [], players: [], currentPlayer: 0, dice: 1, rolling: false,
-    message: 'Tira el dado para empezar', gameOver: false,
-    artworks: [], particles: [], turn: 0, camera: { x: 0, y: 0, targetX: 0, targetY: 0 }
-  };
+/* ═══════════════════════════════════════════════════════════════
+   Oca — Classic with Artwork Tiles
+   Special Oca tiles show real artwork thumbnails
+   ═══════════════════════════════════════════════════════════════ */
+window.OcaGame = (() => {
+  let container, canvas, ctx, players, currentPlayer, tiles, diceValue, rolling, artworks = [];
+  const TOTAL_TILES = 63;
 
   async function init() {
-    const container = document.getElementById('oca-container');
+    container = document.getElementById('oca-container');
     if (!container) return;
+    artworks = await window.ArtworkLoader.getRandomArtworks(10);
+    buildUI();
+    players = [{ pos: 0, color: '#ff6ec7' }, { pos: 0, color: '#7b2ff7' }];
+    currentPlayer = 0; diceValue = 0; rolling = false;
+    generateTiles(); draw();
+  }
 
-    try {
-      const res = await fetch('data/artworks-metadata.json');
-      const data = await res.json();
-      state.artworks = data.artworks;
-    } catch (e) {}
-
+  function buildUI() {
     container.innerHTML = `
-      <div class="oca-ui">
-        <div class="oca-header">
-          <span id="oca-message">${state.message}</span>
+      <div style="text-align:center;font-family:Inter,sans-serif;padding:12px">
+        <div style="color:#ccc;font-size:13px;margin-bottom:8px">
+          <span id="oca-turn" style="color:#ff6ec7;font-weight:700">Player 1</span> &nbsp;·&nbsp;
+          Dice: <span id="oca-dice" style="color:#eab308;font-weight:700">—</span>
         </div>
-        <div class="oca-controls">
-          <button class="game-btn" id="oca-roll">🎲 Tirar Dado</button>
-          <button class="game-btn secondary" id="oca-reset">Reiniciar</button>
-        </div>
-        <canvas id="oca-canvas" width="${W}" height="${H}"></canvas>
+        <canvas id="oca-canvas" style="border-radius:12px;border:2px solid rgba(123,47,247,0.3);cursor:pointer;display:block;margin:0 auto;background:#0a0a1a"></canvas>
+        <button id="oca-roll" onclick="OcaGame.roll()" style="margin-top:12px;background:linear-gradient(135deg,#ff6ec7,#7b2ff7);border:none;color:#fff;padding:10px 28px;border-radius:24px;cursor:pointer;font-size:15px;font-weight:600">🎲 Roll</button>
       </div>
     `;
-
-    document.getElementById('oca-roll').addEventListener('click', rollDice);
-    document.getElementById('oca-reset').addEventListener('click', resetGame);
-    
-    // Canvas interaction
-    const canvas = document.getElementById('oca-canvas');
-    canvas.addEventListener('mousemove', e => {
-      const rect = canvas.getBoundingClientRect();
-      const x = (e.clientX - rect.left) * (W / rect.width);
-      const y = (e.clientY - rect.top) * (H / rect.height);
-      // Hover effects logic could go here
-    });
-
-    createBoard();
-    resetGame();
-    gameLoop();
+    canvas = document.getElementById('oca-canvas');
+    const maxW = Math.min(container.clientWidth - 20, 500);
+    canvas.width = maxW; canvas.height = maxW;
+    ctx = canvas.getContext('2d');
   }
 
-  function createBoard() {
-    // Spiral path generation
-    state.board = [];
-    const SPIRAL_LEN = 63;
-    const centerX = W/2, centerY = H/2;
-    let angle = 0, radius = 40;
-    
-    for (let i = 0; i < SPIRAL_LEN; i++) {
-      const x = centerX + Math.cos(angle) * radius;
-      const y = centerY + Math.sin(angle) * radius;
-      let type = 'normal';
-      let effect = null;
-
-      // Special tiles
-      if (i % 9 === 0 && i > 0) { type = 'oca'; effect = 'De Oca a Oca...'; }
-      if (i === 19) { type = 'inn'; effect = 'Posada (Pierdes 1 turno)'; }
-      if (i === 31) { type = 'well'; effect = 'Pozo (Espera rescate)'; }
-      if (i === 42) { type = 'maze'; effect = 'Laberinto (Retrocede 12)'; }
-      if (i === 52) { type = 'prison'; effect = 'Cárcel (Pierdes 2 turnos)'; }
-      if (i === 58) { type = 'death'; effect = 'Muerte (Vuelve a 1)'; }
-      if (i === 62) { type = 'garden'; effect = 'Jardín de Naroa (FIN)'; }
-
-      state.board.push({
-        index: i + 1, x, y, type, effect,
-        art: state.artworks[i % state.artworks.length] || null
-      });
-
-      angle += 0.5;
-      radius += (i < 30 ? 4 : 2.5);
-    }
-  }
-
-  function resetGame() {
-    state.players = [
-      { id: 0, name: 'Jugador', color: '#ccff00', pos: 0, skipTurns: 0 },
-      { id: 1, name: 'MICA', color: '#ff003c', pos: 0, skipTurns: 0 } // AI opponent
-    ];
-    state.currentPlayer = 0;
-    state.gameOver = false;
-    state.dice = 1;
-    state.rolling = false;
-    state.message = 'Tu turno';
-    state.particles = [];
-  }
-
-  function rollDice() {
-    if (state.rolling || state.gameOver) return;
-    
-    // Check skip turns
-    if (state.players[state.currentPlayer].skipTurns > 0) {
-      state.players[state.currentPlayer].skipTurns--;
-      state.message = `${state.players[state.currentPlayer].name} pierde turno.`;
-      nextTurn();
-      return;
-    }
-
-    state.rolling = true;
-    let rolls = 0;
-    const rollInterval = setInterval(() => {
-      state.dice = Math.floor(Math.random() * 6) + 1;
-      rolls++;
-      if (rolls > 10) {
-        clearInterval(rollInterval);
-        state.rolling = false;
-        movePlayer(state.dice);
+  function generateTiles() {
+    tiles = [];
+    const cols = 8, rows = 8;
+    let index = 0;
+    for (let r = 0; r < rows; r++) {
+      for (let c = 0; c < cols; c++) {
+        if (index >= TOTAL_TILES) break;
+        const x = (r % 2 === 0) ? c : (cols - 1 - c);
+        tiles.push({
+          index, x: x * (canvas.width / cols) + (canvas.width / cols) / 2,
+          y: (rows - 1 - r) * (canvas.height / rows) + (canvas.height / rows) / 2,
+          special: index % 9 === 0 && index > 0 ? 'oca' : (index % 14 === 0 ? 'bridge' : null)
+        });
+        index++;
       }
-    }, 50);
-  }
-
-  function movePlayer(steps) {
-    const p = state.players[state.currentPlayer];
-    let target = p.pos + steps;
-
-    // Bounce back if over 63
-    if (target >= 63) {
-      const excess = target - 62;
-      target = 62 - excess;
     }
-
-    // Animation could be step-by-step, for now instant with visual slide
-    const interval = setInterval(() => {
-      if (p.pos < target) p.pos++;
-      else if (p.pos > target) p.pos--;
-      else {
-        clearInterval(interval);
-        handleTileEffect(p);
-      }
-    }, 200);
-  }
-
-  function handleTileEffect(p) {
-    if (p.pos >= 62) { // Win (Index 63 is pos 62)
-      state.message = `¡${p.name} GANA! 🎉`;
-      state.gameOver = true;
-      if (window.GameEffects) GameEffects.confettiBurst(document.getElementById('oca-canvas'));
-      return;
-    }
-
-    const tile = state.board[p.pos];
-    state.message = `${p.name} cae en ${tile.index}: ${tile.effect || '...'}`;
-
-    if (tile.type === 'oca') {
-      state.message += ' ¡Tira otra vez!';
-      // Jump to next Oca? Classic rules vary. Let's just grant extra roll.
-      if (p.id === 1) setTimeout(rollDice, 1000); // AI rolls again
-      return; // Don't nextTurn
-    } 
-    else if (tile.type === 'death') { p.pos = 0; state.message = '¡A la casilla 1!'; }
-    else if (tile.type === 'maze') p.pos = Math.max(0, p.pos - 12);
-    else if (tile.type === 'inn') p.skipTurns = 1;
-    else if (tile.type === 'prison') p.skipTurns = 2;
-    else if (tile.type === 'well') p.skipTurns = 3; // Or until rescued
-
-    nextTurn();
-  }
-
-  function nextTurn() {
-    state.currentPlayer = (state.currentPlayer + 1) % 2;
-    // Update message
-    if (state.players[state.currentPlayer].name === 'MICA') {
-      state.message = 'Turno de MICA...';
-      document.getElementById('oca-roll').disabled = true;
-      setTimeout(rollDice, 1500);
-    } else {
-      state.message = 'Tu turno';
-      document.getElementById('oca-roll').disabled = false;
-    }
-    document.getElementById('oca-message').textContent = state.message;
   }
 
   function draw() {
-    const canvas = document.getElementById('oca-canvas');
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = '#0a0a1a'; ctx.fillRect(0, 0, canvas.width, canvas.height);
+    const tileR = Math.min(canvas.width, canvas.height) / 20;
 
-    // Background
-    const grad = ctx.createRadialGradient(W/2, H/2, 0, W/2, H/2, W);
-    grad.addColorStop(0, '#101020');
-    grad.addColorStop(1, '#050510');
-    ctx.fillStyle = grad;
-    ctx.fillRect(0, 0, W, H);
-
-    // Draw path connecting tiles
-    ctx.strokeStyle = 'rgba(204, 255, 0, 0.2)';
-    ctx.lineWidth = 3;
-    ctx.beginPath();
-    state.board.forEach((t, i) => {
-      if (i === 0) ctx.moveTo(t.x, t.y);
-      else ctx.lineTo(t.x, t.y);
+    tiles.forEach((t, i) => {
+      // Tile circle
+      ctx.beginPath(); ctx.arc(t.x, t.y, tileR, 0, Math.PI * 2);
+      if (t.special === 'oca') {
+        // Artwork tile
+        const art = artworks[Math.floor(i / 9) % artworks.length];
+        if (art && art.img) {
+          window.ArtworkLoader.drawArtworkCircle(ctx, art.img, t.x, t.y, tileR, 0.7);
+        } else {
+          ctx.fillStyle = '#22c55e'; ctx.fill();
+        }
+        ctx.strokeStyle = '#22c55e'; ctx.lineWidth = 2; ctx.stroke();
+      } else if (t.special === 'bridge') {
+        ctx.fillStyle = '#eab308'; ctx.fill();
+        ctx.strokeStyle = '#eab308'; ctx.lineWidth = 2; ctx.stroke();
+      } else {
+        ctx.fillStyle = 'rgba(26,26,46,0.8)'; ctx.fill();
+        ctx.strokeStyle = 'rgba(123,47,247,0.2)'; ctx.lineWidth = 1; ctx.stroke();
+      }
+      // Number
+      ctx.fillStyle = '#aaa'; ctx.font = '9px Inter'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.fillText(i, t.x, t.y);
     });
+
+    // Path lines
+    ctx.strokeStyle = 'rgba(123,47,247,0.1)'; ctx.lineWidth = 1; ctx.beginPath();
+    tiles.forEach((t, i) => { if (i === 0) ctx.moveTo(t.x, t.y); else ctx.lineTo(t.x, t.y); });
     ctx.stroke();
 
-    // Draw tiles
-    state.board.forEach(t => {
-      ctx.save();
-      ctx.translate(t.x, t.y);
-      
-      // Tile glow
-      if (t.type !== 'normal') {
-        ctx.shadowColor = t.type === 'death' ? '#ff003c' : '#ccff00';
-        ctx.shadowBlur = 10;
+    // Players
+    players.forEach((p, pi) => {
+      if (p.pos < tiles.length) {
+        const t = tiles[p.pos];
+        const offset = pi === 0 ? -6 : 6;
+        ctx.beginPath(); ctx.arc(t.x + offset, t.y, 8, 0, Math.PI * 2);
+        ctx.fillStyle = p.color;
+        ctx.shadowColor = p.color; ctx.shadowBlur = 10;
+        ctx.fill(); ctx.shadowBlur = 0;
+        ctx.strokeStyle = '#fff'; ctx.lineWidth = 1.5; ctx.stroke();
       }
-
-      ctx.fillStyle = t.type === 'normal' ? 'rgba(255,255,255,0.1)' : 
-                      t.type === 'death' ? 'rgba(255,0,60,0.3)' : 'rgba(204,255,0,0.3)';
-      ctx.beginPath();
-      ctx.arc(0, 0, 15, 0, Math.PI * 2);
-      ctx.fill();
-      
-      // Index text
-      ctx.fillStyle = '#fff';
-      ctx.font = '10px Satoshi';
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-      ctx.fillText(t.index, 0, 0);
-
-      ctx.restore();
     });
+  }
 
-    // Draw Players
-    state.players.forEach((p, i) => {
-      const t = state.board[p.pos];
-      if (!t) return;
-      
-      const offset = i * 10 - 5; // Separate overlapping players
-      
-      ctx.shadowColor = p.color;
-      ctx.shadowBlur = 15;
-      ctx.fillStyle = p.color;
-      ctx.beginPath();
-      ctx.arc(t.x + offset, t.y - 10, 8, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.shadowBlur = 0;
-    });
+  function roll() {
+    if (rolling) return;
+    rolling = true;
+    diceValue = Math.floor(Math.random() * 6) + 1;
+    const dEl = document.getElementById('oca-dice');
+    if (dEl) dEl.textContent = diceValue;
 
-    // Dice display
-    if (state.rolling || state.dice) {
-      ctx.fillStyle = '#fff';
-      ctx.font = '40px Satoshi';
-      ctx.textAlign = 'right';
-      ctx.fillText(`🎲 ${state.dice}`, W - 30, 50);
+    const p = players[currentPlayer];
+    p.pos = Math.min(TOTAL_TILES - 1, p.pos + diceValue);
+
+    // Check special
+    if (p.pos < tiles.length && tiles[p.pos].special === 'oca') {
+      p.pos = Math.min(TOTAL_TILES - 1, p.pos + diceValue); // Double advance
     }
 
-    requestAnimationFrame(draw);
-  }
-
-  function gameLoop() {
     draw();
+    if (p.pos >= TOTAL_TILES - 1) { endGame(); return; }
+
+    currentPlayer = (currentPlayer + 1) % players.length;
+    const tEl = document.getElementById('oca-turn');
+    if (tEl) { tEl.textContent = `Player ${currentPlayer + 1}`; tEl.style.color = players[currentPlayer].color; }
+    rolling = false;
   }
 
-  window.OcaGame = { init };
+  function endGame() {
+    rolling = true;
+    const ov = document.createElement('div');
+    Object.assign(ov.style,{position:'absolute',inset:'0',background:'rgba(0,0,0,0.9)',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',zIndex:'100',borderRadius:'16px'});
+    ov.innerHTML = `<div style="font-size:48px;margin-bottom:16px">🦆</div><h2 style="color:${players[currentPlayer].color};font-family:Inter,sans-serif;margin:0 0 8px">Player ${currentPlayer+1} wins!</h2><button onclick="OcaGame.init()" style="margin-top:16px;background:linear-gradient(135deg,#ff6ec7,#7b2ff7);border:none;color:#fff;padding:10px 24px;border-radius:24px;cursor:pointer;font-size:14px;font-weight:600">Play Again</button>`;
+    container.style.position='relative';container.appendChild(ov);
+  }
+
+  function destroy() { if (container) container.innerHTML = ''; }
+  return { init, destroy, roll };
 })();

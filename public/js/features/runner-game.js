@@ -1,225 +1,145 @@
-/**
- * Art Runner - Naroa 2026
- * @description Parallax infinite runner avoiding crowds in a museum
- * Agent A05: Parallax scrolling layers, dust particles, art collectible glow
- */
-(function() {
-  'use strict';
-
-  const W = 600, H = 300;
-  let state = {
-    canvas: null, ctx: null,
-    player: { x: 50, y: 0, w: 30, h: 50, vy: 0, grounded: false },
-    obstacles: [], collectibles: [],
-    score: 0, speed: 4, gravity: 0.6,
-    bgLayer1: 0, bgLayer2: 0,
-    artworks: [], particles: [], running: false
-  };
+/* ═══════════════════════════════════════════════════════════════
+   Runner — Art Runner with Real Artwork Collectibles
+   Collectibles show actual artwork thumbnails; museum walls
+   ═══════════════════════════════════════════════════════════════ */
+window.RunnerGame = (() => {
+  let container, canvas, ctx, player, obstacles, collectibles, score, gameOver, speed, animFrame;
+  let artworks = [], bgImg = null;
+  const GROUND = 0.8; // ground at 80% height
 
   async function init() {
-    const container = document.getElementById('runner-container');
+    container = document.getElementById('runner-container');
     if (!container) return;
+    artworks = await window.ArtworkLoader.getRandomArtworks(8);
+    if (artworks.length) bgImg = artworks[0].img;
+    buildUI(); startGame();
+  }
 
-    try {
-      const res = await fetch('data/artworks-metadata.json');
-      const data = await res.json();
-      state.artworks = data.artworks;
-    } catch (e) {}
-
+  function buildUI() {
     container.innerHTML = `
-      <div class="runner-ui">
-        <div class="runner-score">SCORE: <span id="runner-score">0</span></div>
-        <canvas id="runner-canvas" width="${W}" height="${H}"></canvas>
-        <button class="game-btn" id="runner-start">RUN!</button>
+      <div style="text-align:center;font-family:Inter,sans-serif;padding:8px">
+        <div style="color:#ccc;font-size:13px;margin-bottom:8px">
+          Score: <b id="run-score" style="color:#ff6ec7">0</b> &nbsp;·&nbsp; 
+          <span style="color:#aaa;font-size:11px">Space/Tap to jump</span>
+        </div>
+        <canvas id="runner-canvas" style="border-radius:12px;border:1px solid rgba(123,47,247,0.3);display:block;margin:0 auto;background:#0a0a1a"></canvas>
       </div>
     `;
-
-    state.canvas = document.getElementById('runner-canvas');
-    state.ctx = state.canvas.getContext('2d');
-
-    document.getElementById('runner-start').addEventListener('click', startGame);
-    
-    // Controls: Jump (Space / Click)
-    const jump = () => {
-        if (!state.running) return;
-        if (state.player.grounded) {
-            state.player.vy = -12;
-            state.player.grounded = false;
-            spawnParticles(state.player.x + 15, H-20, 5, '#fff'); // Dust
-        }
-    };
-    document.addEventListener('keydown', e => { if(e.code === 'Space') jump(); });
-    state.canvas.addEventListener('touchstart', jump, {passive:true});
-    state.canvas.addEventListener('mousedown', jump);
+    canvas = document.getElementById('runner-canvas');
+    const maxW = Math.min(container.clientWidth - 20, 500);
+    canvas.width = maxW; canvas.height = maxW * 0.45;
+    ctx = canvas.getContext('2d');
+    document.addEventListener('keydown', e => { if (e.code === 'Space') jump(); });
+    canvas.addEventListener('touchstart', e => { e.preventDefault(); jump(); });
   }
 
   function startGame() {
-    state.running = true;
-    state.score = 0;
-    state.obstacles = [];
-    state.collectibles = [];
-    state.particles = [];
-    state.player.y = H - 50;
-    state.player.vy = 0;
-    document.getElementById('runner-start').style.display = 'none';
+    const gh = canvas.height * GROUND;
+    player = { x: 60, y: gh, w: 28, h: 36, vy: 0, grounded: true };
+    obstacles = []; collectibles = []; score = 0; gameOver = false; speed = 3;
+    cancelAnimationFrame(animFrame);
     loop();
   }
 
-  function spawnObstacle() {
-    if (Math.random() < 0.02) {
-        state.obstacles.push({
-            x: W, y: H - 40, w: 30, h: 40,
-            color: '#ff003c' // Security guard or rope
-        });
-    }
-  }
-
-  function spawnCollectible() {
-    if (Math.random() < 0.01) {
-        const art = state.artworks[Math.floor(Math.random()*state.artworks.length)];
-        state.collectibles.push({
-            x: W, y: H - 100 - Math.random()*50, w: 25, h: 25,
-            hue: Math.random()*360
-        });
-    }
-  }
-
-  function spawnParticles(x, y, count, color) {
-    for(let i=0; i<count; i++) {
-        state.particles.push({
-            x, y, vx: (Math.random()-0.5)*4, vy: (Math.random()-1)*4,
-            life: 1.0, color: color || '#fff', size: Math.random()*3
-        });
-    }
+  function jump() {
+    if (gameOver) { startGame(); return; }
+    if (player.grounded) { player.vy = -10; player.grounded = false; }
   }
 
   function loop() {
-    if (!state.running) return;
+    if (gameOver) return;
+    const gh = canvas.height * GROUND;
+    // Physics
+    player.vy += 0.5;
+    player.y += player.vy;
+    if (player.y >= gh) { player.y = gh; player.vy = 0; player.grounded = true; }
 
-    // Logic
-    state.speed += 0.001; // Accel
-    state.player.vy += state.gravity;
-    state.player.y += state.player.vy;
-
-    // Ground collision
-    if (state.player.y >= H - 50) {
-        state.player.y = H - 50;
-        state.player.vy = 0;
-        state.player.grounded = true;
+    // Spawn
+    if (Math.random() < 0.02) obstacles.push({ x: canvas.width, y: gh, w: 20, h: 30 + Math.random() * 20 });
+    if (Math.random() < 0.015) {
+      const art = artworks.length ? artworks[Math.floor(Math.random() * artworks.length)] : null;
+      collectibles.push({ x: canvas.width, y: gh - 50 - Math.random() * 40, size: 24, artwork: art });
     }
 
-    // Parallax
-    state.bgLayer1 -= state.speed * 0.5;
-    state.bgLayer2 -= state.speed * 0.2;
-    if (state.bgLayer1 < -W) state.bgLayer1 = 0;
-    if (state.bgLayer2 < -W) state.bgLayer2 = 0;
+    // Move
+    obstacles.forEach(o => o.x -= speed);
+    collectibles.forEach(c => c.x -= speed);
+    obstacles = obstacles.filter(o => o.x > -50);
+    collectibles = collectibles.filter(c => c.x > -50);
 
-    spawnObstacle();
-    spawnCollectible();
+    // Collision
+    obstacles.forEach(o => {
+      if (player.x + player.w > o.x && player.x < o.x + o.w && player.y > o.y - o.h) {
+        gameOver = true;
+      }
+    });
+    collectibles = collectibles.filter(c => {
+      if (player.x + player.w > c.x && player.x < c.x + c.size && player.y > c.y - c.size && player.y - player.h < c.y) {
+        score += 10; speed = Math.min(8, speed + 0.1);
+        const s = document.getElementById('run-score'); if (s) s.textContent = score;
+        return false;
+      }
+      return true;
+    });
 
-    // Move & Collide Obstacles
-    state.obstacles.forEach(o => o.x -= state.speed);
-    state.obstacles = state.obstacles.filter(o => o.x > -50);
-    state.obstacles.forEach(o => {
-        if (rectIntersect(state.player, o)) {
-            gameOver();
+    // Draw
+    ctx.fillStyle = '#0a0a1a'; ctx.fillRect(0, 0, canvas.width, canvas.height);
+    // Museum wall artwork
+    if (artworks.length > 1) {
+      for (let i = 1; i < Math.min(4, artworks.length); i++) {
+        const wx = (i * canvas.width / 4) - 30 + (Date.now() * 0.01 * speed) % canvas.width;
+        const finalX = ((wx % canvas.width) + canvas.width) % canvas.width - canvas.width / 4;
+        if (artworks[i].img) {
+          window.ArtworkLoader.drawArtworkCover(ctx, artworks[i].img, finalX, 20, 50, 40, 0.08);
+          ctx.strokeStyle = 'rgba(123,47,247,0.15)'; ctx.strokeRect(finalX, 20, 50, 40);
         }
-    });
-
-    // Move & Collide Collectibles
-    state.collectibles.forEach(c => c.x -= state.speed);
-    state.collectibles = state.collectibles.filter(c => !c.collected && c.x > -50);
-    state.collectibles.forEach(c => {
-        if (rectIntersect(state.player, c)) {
-            c.collected = true;
-            state.score += 100;
-            spawnParticles(c.x, c.y, 10, `hsl(${c.hue}, 100%, 50%)`);
-            if (window.GameEffects) GameEffects.scorePopAnimation(document.getElementById('runner-score'), '+100');
-        }
-    });
-
-    state.score++;
-    document.getElementById('runner-score').textContent = Math.floor(state.score);
-
-    // Particles
-    state.particles = state.particles.filter(p => {
-        p.x += p.vx; p.y += p.vy; p.life -= 0.05;
-        return p.life > 0;
-    });
-
-    draw();
-    requestAnimationFrame(loop);
-  }
-
-  function rectIntersect(r1, r2) {
-      return !(r2.x > r1.x + r1.w || 
-               r2.x + r2.w < r1.x || 
-               r2.y > r1.y + r1.h || 
-               r2.y + r2.h < r1.y);
-  }
-
-  function gameOver() {
-    state.running = false;
-    if (window.GameEffects) GameEffects.cameraShake(state.canvas, 10);
-    alert(`Game Over! Score: ${Math.floor(state.score)}`);
-    document.getElementById('runner-start').style.display = 'inline-block';
-  }
-
-  function draw() {
-    const ctx = state.ctx;
-    const bg1 = state.bgLayer1;
-    const bg2 = state.bgLayer2;
-
-    // Clear
-    ctx.clearRect(0,0,W,H);
-
-    // BG Layer 2 (Far) - Dark museum
-    ctx.fillStyle = '#100a1a';
-    ctx.fillRect(0,0,W,H);
-    ctx.fillStyle = '#1a102a';
-    // Draw repeating pillars or arches
-    for(let i=0; i<W*2; i+=200) {
-        ctx.fillRect(bg2 + i, 50, 40, H-50);
+      }
     }
-
-    // BG Layer 1 (Mid) - Paintings
-    ctx.fillStyle = '#222';
-    ctx.fillRect(0, H-20, W, 20); // Floor
+    // Ground
+    ctx.fillStyle = '#1a1a3e'; ctx.fillRect(0, gh, canvas.width, canvas.height - gh);
+    ctx.strokeStyle = 'rgba(123,47,247,0.3)'; ctx.beginPath(); ctx.moveTo(0, gh); ctx.lineTo(canvas.width, gh); ctx.stroke();
 
     // Player
-    ctx.fillStyle = '#ccff00';
-    ctx.shadowColor = '#ccff00';
-    ctx.shadowBlur = 10;
-    ctx.fillRect(state.player.x, state.player.y, state.player.w, state.player.h);
+    ctx.fillStyle = '#ff6ec7'; ctx.fillRect(player.x, player.y - player.h, player.w, player.h);
+    ctx.shadowColor = '#ff6ec7'; ctx.shadowBlur = 8;
+    ctx.fillRect(player.x, player.y - player.h, player.w, player.h);
     ctx.shadowBlur = 0;
 
     // Obstacles
-    state.obstacles.forEach(o => {
-        ctx.fillStyle = o.color;
-        ctx.fillRect(o.x, o.y, o.w, o.h);
+    obstacles.forEach(o => {
+      ctx.fillStyle = '#ef4444';
+      ctx.fillRect(o.x, o.y - o.h, o.w, o.h);
     });
 
-    // Collectibles
-    state.collectibles.forEach(c => {
-        ctx.fillStyle = `hsl(${c.hue}, 100%, 60%)`;
-        ctx.shadowColor = `hsl(${c.hue}, 100%, 50%)`;
-        ctx.shadowBlur = 10;
-        ctx.beginPath();
-        ctx.arc(c.x + c.w/2, c.y + c.h/2, c.w/2, 0, Math.PI*2);
-        ctx.fill();
+    // Collectibles — artwork thumbnails
+    collectibles.forEach(c => {
+      if (c.artwork && c.artwork.img) {
+        window.ArtworkLoader.drawArtworkCover(ctx, c.artwork.img, c.x, c.y - c.size, c.size, c.size, 0.9);
+        ctx.strokeStyle = '#22c55e'; ctx.lineWidth = 1.5;
+        ctx.strokeRect(c.x, c.y - c.size, c.size, c.size);
+        // Glow
+        ctx.shadowColor = '#22c55e'; ctx.shadowBlur = 8;
+        ctx.strokeRect(c.x, c.y - c.size, c.size, c.size);
         ctx.shadowBlur = 0;
+      } else {
+        ctx.fillStyle = '#22c55e'; ctx.beginPath();
+        ctx.arc(c.x + c.size/2, c.y - c.size/2, c.size/2, 0, Math.PI*2); ctx.fill();
+      }
     });
 
-    // Particles
-    state.particles.forEach(p => {
-        ctx.globalAlpha = p.life;
-        ctx.fillStyle = p.color;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI*2);
-        ctx.fill();
-    });
-    ctx.globalAlpha = 1.0;
+    score++; speed += 0.001;
+    if (!gameOver) animFrame = requestAnimationFrame(loop);
+    else {
+      // Game over overlay
+      ctx.fillStyle = 'rgba(0,0,0,0.7)'; ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#ff6ec7'; ctx.font = 'bold 24px Inter'; ctx.textAlign = 'center';
+      ctx.fillText('Game Over', canvas.width/2, canvas.height/2 - 10);
+      ctx.fillStyle = '#ccc'; ctx.font = '14px Inter';
+      ctx.fillText(`Score: ${score} · Tap to retry`, canvas.width/2, canvas.height/2 + 20);
+      if (typeof RankingSystem !== 'undefined') RankingSystem.submit('runner', score);
+    }
   }
 
-  window.RunnerGame = { init };
+  function destroy() { gameOver = true; cancelAnimationFrame(animFrame); if (container) container.innerHTML = ''; }
+  return { init, destroy };
 })();

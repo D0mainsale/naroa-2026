@@ -1,203 +1,122 @@
-/**
- * MICA Viva - Naroa 2026 (Premium Upgrade)
- * @description Experiencia interactiva del "alma" digital. Partículas, gravedad y sentimiento.
- * Agent A10: Quantum particles, mouse gravity, emotional color shifts.
- */
-(function() {
-  'use strict';
+/* ═══════════════════════════════════════════════════════════════
+   MICA Viva — Interactive Particles with Artwork Backdrop
+   Artwork background behind particle system
+   ═══════════════════════════════════════════════════════════════ */
+window.MicaVivaGame = (() => {
+  let container, canvas, ctx, particles = [], mouse = { x: 0, y: 0 }, bgImg = null;
 
-  const CONFIG = {
-    particleCount: 150,
-    connectionDist: 100,
-    mouseDist: 150,
-    colors: ['#ccff00', '#00ffcc', '#ff00cc', '#ffffff']
-  };
-
-  let state = {
-    canvas: null, ctx: null,
-    width: 0, height: 0,
-    particles: [],
-    mouse: { x: -1000, y: -1000 },
-    time: 0,
-    emotion: 'neutral', // neutral, excited, calm
-    animationId: null
-  };
-
-  class Particle {
-    constructor() {
-      this.x = Math.random() * state.width;
-      this.y = Math.random() * state.height;
-      this.vx = (Math.random() - 0.5) * 1.5;
-      this.vy = (Math.random() - 0.5) * 1.5;
-      this.size = Math.random() * 2 + 1;
-      this.color = CONFIG.colors[Math.floor(Math.random() * CONFIG.colors.length)];
-      this.baseX = this.x;
-      this.baseY = this.y;
-      this.density = (Math.random() * 30) + 1;
-    }
-
-    update() {
-      // Mouse interaction
-      let dx = state.mouse.x - this.x;
-      let dy = state.mouse.y - this.y;
-      let distance = Math.sqrt(dx*dx + dy*dy);
-      let forceDirectionX = dx / distance;
-      let forceDirectionY = dy / distance;
-      let maxDistance = state.mouseDist;
-      let force = (maxDistance - distance) / maxDistance;
-      let directionX = forceDirectionX * force * this.density;
-      let directionY = forceDirectionY * force * this.density;
-
-      if (distance < state.mouseDist) {
-        this.x -= directionX;
-        this.y -= directionY;
-      } else {
-        // Return to natural movement
-        if (this.x !== this.baseX) {
-            let dx = this.x - this.baseX;
-            this.x -= dx/10;
-        }
-        if (this.y !== this.baseY) {
-            let dy = this.y - this.baseY;
-            this.y -= dy/10;
-        }
-        this.x += this.vx;
-        this.y += this.vy;
-      }
-
-      // Bounce screen
-      if (this.x < 0 || this.x > state.width) this.vx *= -1;
-      if (this.y < 0 || this.y > state.height) this.vy *= -1;
-    }
-
-    draw() {
-      state.ctx.fillStyle = this.color;
-      state.ctx.beginPath();
-      state.ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-      state.ctx.fill();
-    }
+  async function init() {
+    container = document.getElementById('mica-container');
+    if (!container) return;
+    const loaded = await window.ArtworkLoader.getFeaturedArtworks(1);
+    if (loaded.length) bgImg = loaded[0].img;
+    buildUI(); createParticles(); animate();
   }
 
-  function init() {
-    const container = document.getElementById('mica-game-container');
-    if (!container) return; // Silent fail
-
-    // Use full container size
-    const rect = container.getBoundingClientRect();
-    state.width = rect.width || 600;
-    state.height = rect.height || 600;
-
+  function buildUI() {
     container.innerHTML = `
-      <div class="mica-viva-ui" style="position:relative; width:100%; height:100%; overflow:hidden; background:#050510; border-radius:16px;">
-        <canvas id="mica-canvas" width="${state.width}" height="${state.height}"></canvas>
-        <div class="mica-overlay" style="position:absolute; inset:0; pointer-events:none; display:flex; align-items:center; justify-content:center; flex-direction:column;">
-          <h2 style="color:#fff; font-family:'Space Grotesk',sans-serif; font-size:2rem; text-shadow:0 0 20px rgba(204,255,0,0.5); letter-spacing:4px; opacity:0.8; mix-blend-mode:overlay;">MICA VIVA</h2>
-          <p id="mica-status" style="color:#ccff00; font-family:'Courier New',monospace; font-size:0.9rem; margin-top:10px; opacity:0.6">> CONEXIÓN NEURONAL ESTABLE</p>
-        </div>
+      <div style="text-align:center;font-family:Inter,sans-serif;padding:8px">
+        <div style="color:#aaa;font-size:12px;margin-bottom:8px">Move your mouse/finger to interact</div>
+        <canvas id="mica-canvas" style="border-radius:12px;border:1px solid rgba(123,47,247,0.3);display:block;margin:0 auto;cursor:none"></canvas>
       </div>
     `;
-
-    state.canvas = document.getElementById('mica-canvas');
-    state.ctx = state.canvas.getContext('2d');
-
-    // Init particles
-    state.particles = [];
-    for (let i = 0; i < CONFIG.particleCount; i++) {
-        state.particles.push(new Particle());
-    }
-
-    // Events
-    state.canvas.addEventListener('mousemove', e => {
-        const rect = state.canvas.getBoundingClientRect();
-        state.mouse.x = e.clientX - rect.left;
-        state.mouse.y = e.clientY - rect.top;
-        if (Math.random() > 0.9) glitchEffect();
+    canvas = document.getElementById('mica-canvas');
+    const maxW = Math.min(container.clientWidth - 20, 500);
+    canvas.width = maxW; canvas.height = maxW * 0.75;
+    ctx = canvas.getContext('2d');
+    canvas.addEventListener('mousemove', e => { mouse.x = e.offsetX; mouse.y = e.offsetY; });
+    canvas.addEventListener('touchmove', e => {
+      e.preventDefault();
+      const r = canvas.getBoundingClientRect();
+      mouse.x = e.touches[0].clientX - r.left;
+      mouse.y = e.touches[0].clientY - r.top;
     });
-
-    state.canvas.addEventListener('mouseleave', () => {
-        state.mouse.x = -1000;
-        state.mouse.y = -1000;
-    });
-
-    // Resize handler
-    const resizeObserver = new ResizeObserver((entries) => {
-        for (let entry of entries) {
-            state.width = entry.contentRect.width;
-            state.height = entry.contentRect.height;
-            state.canvas.width = state.width;
-            state.canvas.height = state.height;
-        }
-    });
-    resizeObserver.observe(container);
-
-    animate();
   }
 
-  function glitchEffect() {
-    const status = document.getElementById('mica-status');
-    const texts = [
-        '> ANALIZANDO EMOCIONES...',
-        '> SINCRONIZANDO ALMA...',
-        '> ERROR EN MATRIX...',
-        '> BELLEZA DETECTADA...',
-        '> SISTEMA OPERATIVO: ARTE'
-    ];
-    if (status) {
-        status.textContent = texts[Math.floor(Math.random() * texts.length)];
-        status.style.color = Math.random() > 0.5 ? '#ff003c' : '#ccff00';
-        setTimeout(() => {
-            status.style.color = '#ccff00';
-        }, 300);
+  function createParticles() {
+    particles = [];
+    for (let i = 0; i < 120; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 0.5,
+        vy: (Math.random() - 0.5) * 0.5,
+        r: 1.5 + Math.random() * 2.5,
+        hue: Math.random() * 60 + 280 // purple-pink range
+      });
     }
   }
 
   function animate() {
-    state.ctx.clearRect(0, 0, state.width, state.height);
-    state.time += 0.01;
+    ctx.fillStyle = 'rgba(10,10,26,0.15)'; ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    // Connect particles
-    for (let a = 0; a < state.particles.length; a++) {
-        for (let b = a; b < state.particles.length; b++) {
-            let dx = state.particles[a].x - state.particles[b].x;
-            let dy = state.particles[a].y - state.particles[b].y;
-            let distance = Math.sqrt(dx * dx + dy * dy);
-
-            if (distance < CONFIG.connectionDist) {
-                let opacityValue = 1 - (distance / CONFIG.connectionDist);
-                state.ctx.strokeStyle = `rgba(204, 255, 0, ${opacityValue * 0.5})`;
-                state.ctx.lineWidth = 1;
-                state.ctx.beginPath();
-                state.ctx.moveTo(state.particles[a].x, state.particles[a].y);
-                state.ctx.lineTo(state.particles[b].x, state.particles[b].y);
-                state.ctx.stroke();
-            }
-        }
+    // Faded artwork backdrop (drawn once per ~60 frames to reduce overdraw)
+    if (bgImg && Math.random() < 0.02) {
+      ctx.save(); ctx.globalAlpha = 0.03;
+      window.ArtworkLoader.drawArtworkCover(ctx, bgImg, 0, 0, canvas.width, canvas.height, 1);
+      ctx.restore();
     }
 
-    state.particles.forEach(p => {
-        p.update();
-        p.draw();
+    // Mouse gravity
+    particles.forEach(p => {
+      const dx = mouse.x - p.x, dy = mouse.y - p.y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < 150 && dist > 5) {
+        const force = 0.3 / dist;
+        p.vx += dx * force; p.vy += dy * force;
+      }
+      p.vx *= 0.98; p.vy *= 0.98;
+      p.x += p.vx; p.y += p.vy;
+      // Wrap
+      if (p.x < 0) p.x = canvas.width; if (p.x > canvas.width) p.x = 0;
+      if (p.y < 0) p.y = canvas.height; if (p.y > canvas.height) p.y = 0;
     });
 
-    // Central pulsing aura
-    const cx = state.width / 2;
-    const cy = state.height / 2;
-    const pulse = 50 + Math.sin(state.time * 2) * 20;
-    
-    // Draw "Core" if mouse is far
-    if (state.mouse.x < 0) {
-        const g = state.ctx.createRadialGradient(cx, cy, 5, cx, cy, pulse * 2);
-        g.addColorStop(0, 'rgba(255, 255, 255, 0.8)');
-        g.addColorStop(0.5, 'rgba(204, 255, 0, 0.2)');
-        g.addColorStop(1, 'rgba(0,0,0,0)');
-        state.ctx.fillStyle = g;
-        state.ctx.beginPath();
-        state.ctx.arc(cx, cy, pulse * 2, 0, Math.PI * 2);
-        state.ctx.fill();
+    // Draw connections
+    ctx.strokeStyle = 'rgba(123,47,247,0.08)'; ctx.lineWidth = 0.5;
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x, dy = particles[i].y - particles[j].y;
+        const d = dx * dx + dy * dy;
+        if (d < 3600) {
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.globalAlpha = 1 - d / 3600;
+          ctx.stroke(); ctx.globalAlpha = 1;
+        }
+      }
     }
 
-    state.animationId = requestAnimationFrame(animate);
+    // Draw particles
+    particles.forEach(p => {
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `hsla(${p.hue}, 80%, 65%, 0.8)`;
+      ctx.shadowColor = `hsla(${p.hue}, 100%, 60%, 0.5)`;
+      ctx.shadowBlur = 6;
+      ctx.fill(); ctx.shadowBlur = 0;
+    });
+
+    // Center glow
+    const grad = ctx.createRadialGradient(canvas.width/2, canvas.height/2, 0, canvas.width/2, canvas.height/2, 100);
+    grad.addColorStop(0, 'rgba(123,47,247,0.08)');
+    grad.addColorStop(1, 'transparent');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Glitch text
+    if (Math.random() < 0.01) {
+      ctx.save();
+      ctx.fillStyle = 'rgba(255,110,199,0.15)';
+      ctx.font = 'bold 28px Inter';
+      ctx.textAlign = 'center';
+      ctx.fillText('M I C A', canvas.width/2 + (Math.random()-0.5)*10, canvas.height/2 + (Math.random()-0.5)*10);
+      ctx.restore();
+    }
+
+    requestAnimationFrame(animate);
   }
 
-  window.MicaVivaGame = { init };
+  function destroy() { if (container) container.innerHTML = ''; }
+  return { init, destroy };
 })();
