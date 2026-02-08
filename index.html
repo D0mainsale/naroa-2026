@@ -225,22 +225,50 @@
       </div>
   </div>
   
-  <!-- Audio Player: Spotify + Bandcamp fallback -->
-  <!-- ═══ SOUND EXPERIENCE ═══ -->
+  <!-- ═══ SOUND EXPERIENCE — SoundCloud ═══ -->
   <div class="audio-dock" id="audio-dock">
     <button class="audio-dock__toggle" id="audio-toggle" aria-label="Toggle Sound Experience">
       <div class="audio-dock__vinyl">
         <div class="vinyl-disc"><div class="vinyl-label"></div></div>
       </div>
       <div class="audio-dock__info">
-        <span class="audio-dock__title">SOUND EXPERIENCE</span>
+        <span class="audio-dock__title">THIS WAS IN RAINBOWS</span>
         <span class="audio-dock__artist">BORJA MOSKV</span>
       </div>
       <div class="equalizer">
         <span></span><span></span><span></span><span></span><span></span>
       </div>
     </button>
+    <!-- SoundCloud Panel -->
+    <div class="audio-dock__panel" id="audio-panel">
+      <iframe id="sc-player" title="This Was In Rainbows — Borja Moskv playlist"
+        width="100%" height="300"
+        scrolling="no" frameborder="no" allow="autoplay"
+        src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/borja-moskv/sets/this-was-in-rainbows&color=%23d4af37&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=true"
+        loading="lazy">
+      </iframe>
+    </div>
   </div>
+  <script>
+    // Audio dock toggle → open/close SoundCloud panel
+    (function() {
+      const toggle = document.getElementById('audio-toggle');
+      const panel = document.getElementById('audio-panel');
+      if (!toggle || !panel) return;
+      toggle.addEventListener('click', () => {
+        const isOpen = panel.classList.toggle('open');
+        toggle.classList.toggle('active', isOpen);
+        // Start playback on first open
+        if (isOpen && !panel.dataset.played) {
+          const iframe = document.getElementById('sc-player');
+          if (iframe) {
+            iframe.src = iframe.src.replace('auto_play=false', 'auto_play=true');
+            panel.dataset.played = 'true';
+          }
+        }
+      });
+    })();
+  </script>
 
   <div class="noise-overlay"></div>
 
@@ -817,6 +845,9 @@
     </figure>
   </div>
 
+  <!-- WebGL Scroll Shader — aurora background (Kimi K2.5) -->
+  <script src="js/webgl/scroll-shader.js" defer></script>
+  
   <script src="js/core/router.js"></script>
   <script src="js/core/ranking-system.js" defer></script>
   <script src="js/features/gallery.js"></script>
