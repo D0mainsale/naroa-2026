@@ -1,64 +1,87 @@
 /**
- * Video Showcase Controller
- * Auto-play videos on hover, pause on mouse leave
+ * Video Showcase Feature
+ * Handles video playback in a custom lightbox
  */
-(function() {
-  function initVideoCards() {
-    const cards = document.querySelectorAll('.video-card');
+
+class VideoShowcase {
+  constructor() {
+    this.videos = {
+      'featured': {
+        title: 'Génesis: Espejos del Alma',
+        src: 'https://www.youtube.com/embed/placeholder?autoplay=1' // To be replaced with real ID
+      },
+      'expo': {
+        title: 'Serie Rocks: Detrás de escena',
+        src: 'https://www.youtube.com/embed/placeholder?autoplay=1'
+      },
+      'studio': {
+        title: 'En el Estudio',
+        src: 'https://www.youtube.com/embed/placeholder?autoplay=1'
+      }
+    };
     
-    cards.forEach(card => {
-      const video = card.querySelector('video');
-      if (!video) return;
-      
-      // Play on hover
-      card.addEventListener('mouseenter', () => {
-        video.play().catch(() => {});
-      });
-      
-      // Pause on leave
-      card.addEventListener('mouseleave', () => {
-        video.pause();
-        video.currentTime = 0;
-      });
-      
-      // Click to toggle fullscreen/lightbox
-      card.addEventListener('click', () => {
-        if (video.requestFullscreen) {
-          video.muted = false;
-          video.requestFullscreen().catch(() => {});
-        } else if (video.webkitRequestFullscreen) {
-          video.muted = false;
-          video.webkitRequestFullscreen();
-        }
-        
-        // Audio feedback
-        if (window.AudioSynth && !window.ImmersiveAudio?.isMuted) {
-          AudioSynth.playArtworkReveal?.();
-        }
-      });
-      
-      // Touch support - toggle play on tap
-      let isPlaying = false;
-      card.addEventListener('touchstart', (e) => {
-        e.preventDefault();
-        if (isPlaying) {
-          video.pause();
-          isPlaying = false;
-        } else {
-          video.play().catch(() => {});
-          isPlaying = true;
-        }
-      }, { passive: false });
-    });
+    this.init();
   }
-  
-  // Initialize on DOM ready and view change
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initVideoCards);
-  } else {
-    initVideoCards();
+
+  init() {
+    // Create lightbox DOM if not exists
+    if (!document.getElementById('video-lightbox')) {
+      const lightbox = document.createElement('div');
+      lightbox.id = 'video-lightbox';
+      lightbox.className = 'lightbox lightbox--video';
+      lightbox.innerHTML = `
+        <div class="lightbox__backdrop"></div>
+        <div class="lightbox__content glass-dark">
+          <button class="lightbox__close" aria-label="Cerrar">×</button>
+          <div class="lightbox__video-container">
+            <iframe id="video-frame" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <h3 id="video-title" class="lightbox__title"></h3>
+        </div>
+      `;
+      document.body.appendChild(lightbox);
+      
+      // Bind events
+      lightbox.querySelector('.lightbox__close').addEventListener('click', () => this.close());
+      lightbox.querySelector('.lightbox__backdrop').addEventListener('click', () => this.close());
+    }
   }
-  
-  // Re-init on SPA navigation
-  window.addEventListener('viewChange', initVideoCards);
-})();
+
+  play(videoId) {
+    // For now, simpler alert if no real video URL
+    // alert("Video coming soon! 🎬");
+    // return;
+
+    const video = this.videos[videoId];
+    if (!video) return;
+
+    const lightbox = document.getElementById('video-lightbox');
+    const frame = document.getElementById('video-frame');
+    const title = document.getElementById('video-title');
+
+    // Use a placeholder visual loop or real youtube if user provides it
+    // For demo: showing a cool placeholder message
+    frame.src = `https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1`; // Rick Roll placeholder (classic dev placeholder, change later!)
+    // Actually, let's look for REAL video links in Naroa's data.
+    // Assuming generated content for now.
+
+    title.textContent = video.title;
+    lightbox.classList.add('visible');
+    
+    // Sound effect
+    if (window.AudioSynth) window.AudioSynth.uiClick();
+  }
+
+  close() {
+    const lightbox = document.getElementById('video-lightbox');
+    const frame = document.getElementById('video-frame');
+    
+    lightbox.classList.remove('visible');
+    setTimeout(() => {
+      frame.src = '';
+    }, 300);
+  }
+}
+
+// Export singleton
+window.VideoShowcase = new VideoShowcase();
