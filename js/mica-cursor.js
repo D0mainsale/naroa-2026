@@ -12,8 +12,9 @@ class MicaCursor {
     this.lastY = 0;
     this.currentCursorIndex = 0;
     
-    // Cursores disponibles
+    // Cursores disponibles — stone es el default principal
     this.cursors = [
+      { name: 'stone', small: 'stone-cursor-32.png', large: 'stone-cursor-48.png' },
       { name: 'risitas', small: 'risitas-32.png', large: 'risitas-48.png' },
       { name: 'limone', small: 'limone-cat-32.png', large: 'limone-cat-48.png' },
       { name: 'mica', small: 'mica-pointer-32.png', large: 'mica-pointer-48.png' }

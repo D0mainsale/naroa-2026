@@ -1,0 +1,235 @@
+/* ==========================================================================
+   INSTAGRAM FEED MODAL — PREMIUM GOLD EDITION
+   Embedded IG feed on click • Naroa Design System
+   ========================================================================== */
+
+/* ═══ Modal Base ═══ */
+.ig-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s cubic-bezier(0.2, 0.8, 0.2, 1),
+              visibility 0.4s;
+}
+
+.ig-modal--active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ═══ Backdrop ═══ */
+.ig-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  cursor: pointer;
+}
+
+/* ═══ Container ═══ */
+.ig-modal__container {
+  position: relative;
+  z-index: 1;
+  width: 90vw;
+  max-width: 540px;
+  height: 85vh;
+  max-height: 750px;
+  background: #111;
+  border-radius: 20px;
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  box-shadow: 
+    0 0 80px rgba(212, 175, 55, 0.08),
+    0 20px 60px rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transform: translateY(30px) scale(0.95);
+  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.ig-modal--active .ig-modal__container {
+  transform: translateY(0) scale(1);
+}
+
+/* ═══ Header ═══ */
+.ig-modal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.02);
+  flex-shrink: 0;
+}
+
+.ig-modal__profile {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.ig-modal__avatar {
+  font-size: 1.8rem;
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  border-radius: 50%;
+}
+
+.ig-modal__info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.ig-modal__username {
+  font-family: var(--font-family-sans, system-ui);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.ig-modal__subtitle {
+  font-family: var(--font-family-mono, monospace);
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.4);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* ═══ Actions ═══ */
+.ig-modal__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.ig-modal__follow-btn {
+  font-family: var(--font-family-mono, monospace);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #111;
+  background: var(--gold-metallic, #d4af37);
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.ig-modal__follow-btn:hover {
+  background: #f0c040;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+}
+
+.ig-modal__close {
+  background: none;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 1.5rem;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  padding: 0;
+  line-height: 1;
+}
+
+.ig-modal__close:hover {
+  color: var(--gold-metallic, #d4af37);
+  border-color: rgba(212, 175, 55, 0.4);
+  transform: rotate(90deg);
+}
+
+/* ═══ Content / Iframe ═══ */
+.ig-modal__content {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+  background: #fafafa;
+}
+
+.ig-modal__iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: #fafafa;
+}
+
+/* ═══ Instagram card override (button resets) ═══ */
+button.contact__card--instagram {
+  cursor: pointer;
+  font: inherit;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+button.contact__card--instagram::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, 
+    rgba(240, 148, 51, 0.05) 0%, 
+    rgba(220, 39, 67, 0.05) 50%, 
+    rgba(188, 24, 136, 0.05) 100%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  border-radius: inherit;
+}
+
+button.contact__card--instagram:hover::before {
+  opacity: 1;
+}
+
+button.contact__card--instagram:hover {
+  border-color: rgba(220, 39, 67, 0.3);
+}
+
+button.contact__card--instagram:hover .contact__icon {
+  color: #dc2743;
+  filter: drop-shadow(0 0 10px rgba(220, 39, 67, 0.4));
+}
+
+/* ═══ Responsive ═══ */
+@media (max-width: 600px) {
+  .ig-modal__container {
+    width: 95vw;
+    height: 90vh;
+    max-height: none;
+    border-radius: 16px;
+  }
+
+  .ig-modal__header {
+    padding: 0.75rem 1rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .ig-modal__follow-btn {
+    font-size: 0.65rem;
+    padding: 0.4rem 0.8rem;
+  }
+
+  .ig-modal__avatar {
+    width: 36px;
+    height: 36px;
+    font-size: 1.5rem;
+  }
+}

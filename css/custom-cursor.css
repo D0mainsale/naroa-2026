@@ -1,1 +1,98 @@
-/* Custom Cursor — DISABLED for minimalism. Use system cursor. */
+/**
+ * Stone Cursor — Naroa 2026
+ * Cursor de cuarzo ahumado con vetas doradas
+ * Inspirado en la textura mineral del arte de Naroa
+ */
+
+/* ═══ BASE: Stone cursor on all elements ═══ */
+html,
+body,
+* {
+  cursor: url('/assets/cursors/stone-cursor-32.png') 4 0, auto;
+}
+
+/* ═══ INTERACTIVE: Larger stone on hover ═══ */
+a,
+button,
+[role="button"],
+input[type="submit"],
+input[type="button"],
+select,
+label[for],
+.gallery-item,
+.gallery-massive__item,
+.game-card,
+.magnetic-btn,
+.hero__cta-circle,
+.hero__dot,
+.nav__link,
+.nav__toggle,
+.audio-dock__toggle,
+.rock-panel,
+.mica-toggle,
+.interactive {
+  cursor: url('/assets/cursors/stone-cursor-48.png') 6 0, pointer;
+}
+
+/* ═══ TEXT: Keep text cursor for inputs ═══ */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="search"],
+input[type="url"],
+input[type="tel"],
+input[type="number"],
+textarea,
+[contenteditable="true"] {
+  cursor: text !important;
+}
+
+/* ═══ GRAB: For draggable elements ═══ */
+.draggable,
+.lightbox__image,
+[draggable="true"] {
+  cursor: grab;
+}
+
+.draggable:active,
+.lightbox__image:active,
+[draggable="true"]:active {
+  cursor: grabbing;
+}
+
+/* ═══ REDUCED MOTION: Disable custom cursor ═══ */
+@media (prefers-reduced-motion: reduce) {
+  html, body, * {
+    cursor: auto !important;
+  }
+  a, button, [role="button"] {
+    cursor: pointer !important;
+  }
+}
+
+/* ═══ MOBILE: No custom cursor ═══ */
+@media (hover: none), (pointer: coarse) {
+  html, body, * {
+    cursor: auto !important;
+  }
+}
+
+/* ═══ Cursor glow trail (follows mouse via JS) ═══ */
+.cursor-stone-glow {
+  position: fixed;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.3s ease;
+  mix-blend-mode: screen;
+}
+
+.cursor-stone-glow--active {
+  width: 40px;
+  height: 40px;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.25) 0%, transparent 70%);
+}

@@ -25,8 +25,10 @@
       const [metadataRes, taxonomyRes] = await Promise.all([
         fetch('/data/database.json')
           .catch(() => fetch('data/database.json')), // Fallback for local
-        fetch('/data/artworks-taxonomy.json')
-          .catch(() => fetch('data/artworks-taxonomy.json'))  // Fallback for local
+        window.DataCache.get('data/artworks-taxonomy.json') // Primary source from cache
+          .then(data => new Response(JSON.stringify(data), { status: 200, headers: { 'Content-Type': 'application/json' } })) // Wrap in Response for consistency
+          .catch(() => fetch('/data/artworks-taxonomy.json')) // Fallback to fetch if cache fails
+          .catch(() => fetch('data/artworks-taxonomy.json'))  // Fallback for local path
       ]);
       
       if (metadataRes.ok) {
@@ -195,7 +197,7 @@
     item.innerHTML = `
       <div class="stitch-media-wrapper shimmer">
         <img 
-          data-src="/images/artworks/${artwork.originalId}.webp" 
+          data-src="${artwork.file.startsWith('/') ? artwork.file : '/images/artworks/' + artwork.file}" 
           alt="${artwork.title}"
           loading="lazy"
           class="stitch-media-content gallery__img--hq"

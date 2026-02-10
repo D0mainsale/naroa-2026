@@ -15,6 +15,13 @@
 - **SIN BOTONES** de navegación visibles
 - **SOLO MICA** - Un input de chat flotante que es la única interfaz
 
+### Fuentes de Conocimiento
+
+MICA se alimenta de:
+1.  **`data/naroa-knowledge-graph.json`**: Estructura mental de la artista (Series, Filosofía).
+2.  **`data/concepts.json`**: Datos conceptuales puros.
+3.  **`data/alma.md`**: Personalidad y tono de voz.
+
 ---
 
 ## 2. Flujo de Usuario

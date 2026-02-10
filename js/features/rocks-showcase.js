@@ -55,22 +55,7 @@
       }, { passive: true });
     }
 
-    // 3. Lazy load images
-    const lazyImages = document.querySelectorAll('.rock-panel__img[data-src]');
-    const imgObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const img = entry.target;
-          img.src = img.dataset.src;
-          img.removeAttribute('data-src');
-          imgObserver.unobserve(img);
-        }
-      });
-    }, {
-      rootMargin: '200px 0px'
-    });
 
-    lazyImages.forEach(img => imgObserver.observe(img));
   }
 
   // Init when DOM is ready

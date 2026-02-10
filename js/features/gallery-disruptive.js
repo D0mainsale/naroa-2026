@@ -88,9 +88,8 @@ const GalleryDisruptive = {
 
   async loadMetadata() {
     try {
-      const resp = await fetch('data/artworks-metadata.json');
-      if (resp.ok) {
-        const data = await resp.json();
+      const data = await window.DataCache.getArtworks();
+      if (data) {
         this.metadata = {};
         // Map by ID for quick lookup
         data.artworks.forEach(art => {

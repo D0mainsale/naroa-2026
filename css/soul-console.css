@@ -1,0 +1,175 @@
+/* Soul Console - NotebookLM Database Visualizer */
+:root {
+  --soul-bg: #0a0a0a;
+  --soul-text: #e0e0e0;
+  --soul-accent: #ff4081; /* Pink/Magenta for Soul */
+  --soul-gold: #d4af37;
+  --panel-width: 400px;
+}
+
+.soul-toggle {
+  position: fixed;
+  bottom: 2rem;
+  left: 5rem; /* Next to Phi Toggle */
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--soul-accent);
+  background: rgba(0,0,0,0.6);
+  color: var(--soul-accent);
+  display: none; /* SECRET: Activate via ?soul=1 or typing 'soul' */
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10000;
+  font-size: 20px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
+
+.soul-toggle:hover {
+  background: var(--soul-accent);
+  color: #fff;
+  transform: scale(1.1) rotate(90deg);
+  box-shadow: 0 0 15px var(--soul-accent);
+}
+
+.soul-panel {
+  position: fixed;
+  top: 0;
+  right: -100%; /* Hidden by default */
+  width: var(--panel-width);
+  height: 100vh;
+  background: rgba(10, 10, 10, 0.95);
+  border-left: 1px solid rgba(255, 64, 129, 0.3);
+  z-index: 9999;
+  transition: right 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  display: flex;
+  flex-direction: column;
+  box-shadow: -10px 0 30px rgba(0,0,0,0.8);
+}
+
+.soul-panel.active {
+  right: 0;
+}
+
+.soul-header {
+  padding: 1.5rem;
+  border-bottom: 1px solid rgba(255, 64, 129, 0.2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.soul-title {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  color: var(--soul-accent);
+  font-size: 1.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.soul-close {
+  background: none;
+  border: none;
+  color: var(--soul-text);
+  font-size: 1.5rem;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.soul-close:hover { opacity: 1; }
+
+.soul-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.5rem;
+}
+
+.soul-section {
+  margin-bottom: 2rem;
+  animation: fadeIn 0.5s ease backwards;
+}
+
+.soul-section h3 {
+  color: var(--soul-gold);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+  padding-bottom: 0.5rem;
+}
+
+.soul-data-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.soul-key { color: #888; }
+.soul-value { color: #eee; text-align: right; max-width: 60%; }
+
+.soul-tag-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.soul-tag {
+  background: rgba(255, 64, 129, 0.1);
+  border: 1px solid rgba(255, 64, 129, 0.3);
+  color: #ff80ab;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+}
+
+.soul-philosophy-card {
+  background: rgba(255, 255, 255, 0.03);
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  border-left: 2px solid var(--soul-gold);
+}
+
+.soul-philosophy-title {
+  color: #fff;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.soul-philosophy-text {
+  color: #ccc;
+  font-size: 0.9rem;
+  font-style: italic;
+  line-height: 1.4;
+}
+
+/* Response Scroll */
+.soul-response-preview {
+  background: #111;
+  padding: 1rem;
+  border-radius: 8px;
+  font-family: monospace;
+  font-size: 0.8rem;
+  color: #00e676; /* Terminal green */
+  border: 1px solid #333;
+  margin-top: 1rem;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 600px) {
+  :root { --panel-width: 100%; }
+}

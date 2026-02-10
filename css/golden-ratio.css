@@ -1,271 +1,97 @@
-/* ═══════════════════════════════════════════════════════════════
-   GOLDEN RATIO DESIGN SYSTEM — φ = 1.618
-   naroa.online — "El arte habla"
-   ═══════════════════════════════════════════════════════════════ */
-
 :root {
-  /* ─── φ Fibonacci Spacing Scale ─── */
-  --φ-3xs: 3px;
-  --φ-2xs: 5px;
-  --φ-xs:  8px;
-  --φ-sm:  13px;
-  --φ-md:  21px;
-  --φ-lg:  34px;
-  --φ-xl:  55px;
-  --φ-2xl: 89px;
-  --φ-3xl: 144px;
+  --phi: 1.61803398875;
+  --phi-inv: 0.61803398875;
 
-  /* ─── φ Typography Scale ─── */
-  --φ-text-xs:  13px;
-  --φ-text-sm:  16px;    /* 13 × 1.236 ≈ golden ratio^0.5 */
-  --φ-text-md:  21px;
-  --φ-text-lg:  34px;
-  --φ-text-xl:  55px;
-  --φ-text-2xl: 89px;
+  /* Golden Modular Scale (Base 1rem) */
+  --s-2: calc(1rem * var(--phi-inv) * var(--phi-inv)); /* ~0.38rem */
+  --s-1: calc(1rem * var(--phi-inv));                 /* ~0.618rem */
+  --s0:  1rem;                                        /* 16px */
+  --s1:  calc(1rem * var(--phi));                     /* ~1.618rem */
+  --s2:  calc(1rem * var(--phi) * var(--phi));        /* ~2.618rem */
+  --s3:  calc(1rem * var(--phi) * var(--phi) * var(--phi)); /* ~4.236rem */
+  --s4:  calc(1rem * var(--phi) * var(--phi) * var(--phi) * var(--phi)); /* ~6.854rem */
+  --s5:  calc(1rem * var(--phi) * var(--phi) * var(--phi) * var(--phi) * var(--phi)); /* ~11.09rem */
 
-  /* ─── φ Layout Proportions ─── */
-  --φ-major: 61.8%;
-  --φ-minor: 38.2%;
-  --φ-golden: 1.618;
-
-  /* ─── Breathing Palette ─── */
-  --gold-breath-start: rgba(212, 175, 55, 0.6);
-  --gold-breath-end: rgba(196, 155, 48, 0.4);
+  /* Golden Spacing */
+  --space-phi-sm: var(--s-1);
+  --space-phi-md: var(--s1);
+  --space-phi-lg: var(--s2);
+  --space-phi-xl: var(--s3);
 }
 
-/* ═══════════════════════════════════════════
-   PALETTE BREATHING — Gold pulses like breath
-   ═══════════════════════════════════════════ */
+/* Golden Typography Utility Classes */
+.text-phi-hero { font-size: var(--s5); line-height: 1.1; letter-spacing: -0.02em; }
+.text-phi-h1   { font-size: var(--s4); line-height: 1.2; letter-spacing: -0.01em; }
+.text-phi-h2   { font-size: var(--s3); line-height: 1.3; }
+.text-phi-h3   { font-size: var(--s2); line-height: 1.4; }
+.text-phi-body { font-size: var(--s0); line-height: var(--phi); } /* Perfect readability */
+.text-phi-small{ font-size: var(--s-1); line-height: var(--phi); }
 
-@keyframes goldBreath {
-  0%, 100% { opacity: 0.7; }
-  50% { opacity: 1; }
+/* Golden Grids & Layouts */
+.grid-golden-sidebar {
+  display: grid;
+  grid-template-columns: 1fr var(--phi)fr; /* Sidebar Left (small) */
+  gap: var(--space-phi-md);
 }
 
-@keyframes goldGlow {
-  0%, 100% { 
-    text-shadow: 0 0 8px rgba(212, 175, 55, 0.2);
-    filter: brightness(1);
-  }
-  50% { 
-    text-shadow: 0 0 21px rgba(212, 175, 55, 0.4);
-    filter: brightness(1.05);
-  }
+.grid-golden-main {
+  display: grid;
+  grid-template-columns: var(--phi)fr 1fr; /* Main Left (large) */
+  gap: var(--space-phi-md);
 }
 
-.breath { animation: goldBreath 5s ease-in-out infinite; }
-.glow-breath { animation: goldGlow 6s ease-in-out infinite; }
+/* Aspect Ratios */
+.aspect-golden-landscape { aspect-ratio: var(--phi) / 1; }
+.aspect-golden-portrait  { aspect-ratio: 1 / var(--phi); }
 
-/* ═══════════════════════════════════════════
-   SECTION REVEALS — "Abrir puertas"
-   Each section fades in like discovering rooms
-   ═══════════════════════════════════════════ */
-
-/* Sections visible by default — JS enhances with .will-reveal */
-.view {
-  opacity: 1;
-  transform: none;
+/* The Golden Toggle Button */
+.phi-toggle {
+  position: fixed;
+  bottom: 2rem;
+  left: 2rem;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--gold-metallic, #d4af37);
+  background: rgba(0,0,0,0.4);
+  color: var(--gold-metallic, #d4af37);
+  font-family: serif;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10000;
+  transition: all 0.3s ease;
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
 }
 
-/* Only hidden when JS marks them for reveal animation */
-.view.will-reveal {
-  opacity: 0;
-  transform: translateY(var(--φ-lg));
-  transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1),
-              transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+.phi-toggle:hover {
+  background: var(--gold-metallic, #d4af37);
+  color: #000;
+  transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
 }
 
-.view.will-reveal.revealed {
-  opacity: 1;
-  transform: translateY(0);
+.phi-toggle.active {
+  background: var(--gold-metallic, #d4af37);
+  color: #000;
 }
 
-@keyframes sectionChildReveal {
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* ═══════════════════════════════════════════
-   ZERO CHROME NAV — Disappears on scroll
-   ═══════════════════════════════════════════ */
-
-.site-nav,
-nav[class*="nav"],
-.nav-main {
-  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-              opacity 0.5s ease;
-}
-
-.nav-hidden {
-  transform: translateY(-100%);
-  opacity: 0;
-  pointer-events: none;
-}
-
-/* Show on hover near top edge */
-@media (hover: hover) {
-  .nav-hidden:hover,
-  body:has(.nav-edge-trigger:hover) .nav-hidden {
-    transform: translateY(0);
-    opacity: 1;
-    pointer-events: all;
-  }
-}
-
-/* Invisible trigger zone at top */
-.nav-edge-trigger {
+/* Golden Overlay Canvas */
+#golden-overlay {
   position: fixed;
   top: 0;
   left: 0;
-  right: 0;
-  height: var(--φ-lg);
-  z-index: 9998;
-}
-
-/* ═══════════════════════════════════════════
-   GAMES SECTION — Collapsed portal
-   ═══════════════════════════════════════════ */
-
-.view--games {
-  padding: var(--φ-3xl) var(--φ-xl);
-}
-
-.view--games .section-subtitle {
-  display: none;
-}
-
-/* Games grid — visible by default, JS can collapse later */
-.games-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--φ-md);
-  position: relative;
-}
-
-/* Golden portal button to expand */
-.games-grid::after {
-  content: '⊕ Explorar 21 Juegos';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  font-family: var(--font-family-mono, monospace);
-  font-size: var(--φ-text-xs);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--gold-metallic, #d4af37);
-  background: rgba(0, 0, 0, 0.8);
-  padding: var(--φ-xs) var(--φ-lg);
-  border: 1px solid rgba(212, 175, 55, 0.3);
-  border-radius: 34px 34px 8px 8px;
-  cursor: pointer;
-  z-index: 2;
-  transition: all 0.3s ease;
-}
-
-.games-grid.expanded {
-  max-height: none;
-  mask-image: none;
-  -webkit-mask-image: none;
-}
-
-.games-grid.expanded::after {
-  content: '⊖ Colapsar';
-}
-
-/* ═══════════════════════════════════════════
-   GALLERY MASONRY — Golden proportions
-   ═══════════════════════════════════════════ */
-
-.gallery-grid {
-  display: grid;
-  grid-template-columns: var(--φ-major) var(--φ-minor);
-  gap: var(--φ-sm);
-  padding: var(--φ-xl);
-}
-
-@media (max-width: 768px) {
-  .gallery-grid {
-    grid-template-columns: 1fr;
-    padding: var(--φ-md);
-    gap: var(--φ-xs);
-  }
-}
-
-/* ═══════════════════════════════════════════
-   KINETIC TYPOGRAPHY — Letter by letter reveal
-   ═══════════════════════════════════════════ */
-
-.kinetic-text {
-  overflow: hidden;
-}
-
-.kinetic-text .char {
-  display: inline-block;
-  opacity: 0;
-  transform: translateY(100%);
-  animation: charReveal 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-}
-
-@keyframes charReveal {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* ═══════════════════════════════════════════
-   LIQUID TRANSITIONS — Ink in water
-   ═══════════════════════════════════════════ */
-
-.liquid-transition {
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
+  width: 100vw;
+  height: 100vh;
   pointer-events: none;
-  background: radial-gradient(circle at var(--ink-x, 50%) var(--ink-y, 50%), 
-    rgba(0, 0, 0, 0.95) 0%, 
-    transparent 0%);
-  transition: background 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 9999;
+  opacity: 0;
+  transition: opacity 0.5s ease;
 }
 
-.liquid-transition.active {
-  background: radial-gradient(circle at var(--ink-x, 50%) var(--ink-y, 50%), 
-    rgba(0, 0, 0, 0.95) 200%, 
-    transparent 200%);
-}
-
-/* ═══════════════════════════════════════════
-   SECTION SPACING — All φ based
-   ═══════════════════════════════════════════ */
-
-.section-title {
-  font-size: var(--φ-text-lg);
-  letter-spacing: 0.15em;
-  margin-bottom: var(--φ-lg);
-  animation: goldGlow 6s ease-in-out infinite;
-}
-
-.section-subtitle {
-  font-size: var(--φ-text-xs);
-  letter-spacing: 0.2em;
-  margin-bottom: var(--φ-xl);
-  opacity: 0.5;
-}
-
-/* Consistent section padding */
-.view {
-  padding: var(--φ-3xl) var(--φ-xl);
-}
-
-.view--home {
-  padding: 0;
-}
-
-/* ═══════════════════════════════════════════
-   NOISE OVERLAY — Subtle, organic
-   ═══════════════════════════════════════════ */
-
-.noise-overlay {
-  opacity: 0.03;
-  mix-blend-mode: overlay;
+#golden-overlay.active {
+  opacity: 1;
 }

@@ -81,8 +81,7 @@ class InfiniteCanvas360 {
 
   async loadArtworks() {
     try {
-      const response = await fetch('data/artworks-metadata.json');
-      const data = await response.json();
+      const data = await window.DataCache.getArtworks();
       this.artworks = data.artworks || [];
       this.populateLayers();
     } catch (e) {

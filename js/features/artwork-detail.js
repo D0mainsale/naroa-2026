@@ -54,8 +54,7 @@ export class ArtworkDetail {
      * Carga los datos de la obra desde el JSON
      */
     async loadArtworkData() {
-        const response = await fetch('data/artworks-metadata.json');
-        const data = await response.json();
+        const data = await window.DataCache.getArtworks();
         this.allArtworks = data.artworks;
         
         this.artwork = this.allArtworks.find(a => a.id === this.artworkId);

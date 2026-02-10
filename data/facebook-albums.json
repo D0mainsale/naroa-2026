@@ -1,0 +1,40 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "description": "Lista completa de álbumes de Facebook y series temáticas",
+    "source": "NotebookLM Deep Analysis",
+    "generatedAt": "2026-02-09T07:18:00Z"
+  },
+  "albums": [
+    { "title": "Hugo Box", "url": "https://www.facebook.com/media/set/?set=a.1520934946052588&type=3", "category": "Series" },
+    { "title": "“El Poblema” (Cortometraje, 2025)", "url": "https://www.facebook.com/media/set/?set=a.1491643628981720&type=3", "category": "Audiovisual" },
+    { "title": "Naroa Retratada", "url": "https://www.facebook.com/media/set/?set=a.1169842333090477&type=3", "category": "Personal" },
+    { "title": "Espejos del Alma (Principal)", "url": "https://www.facebook.com/media/set/?set=a.148428161898571&type=3", "category": "Series" },
+    { "title": "Walking Gallery Bilbao Nov 2013", "url": "https://www.facebook.com/media/set/?set=a.559195427488507&type=3", "category": "Walking Gallery" },
+    { "title": "Walking Gallery Bilbao Art District 2017", "url": "https://www.facebook.com/media/set/?set=a.1552316321509741&type=3", "category": "Walking Gallery" },
+    { "title": "VI Aniversario Walking Gallery Bilbao 2017", "url": "https://www.facebook.com/media/set/?set=a.1622806844460688&type=3", "category": "Walking Gallery" },
+    { "title": "Walking Gallery Bilbao Fair Saturday 2021", "url": "https://www.facebook.com/media/set/?set=a.423448675801226&type=3", "category": "Walking Gallery" },
+    { "title": "Walking Gallery Bilbao Oct 2022", "url": "https://www.facebook.com/media/set/?set=a.659334275545997&type=3", "category": "Walking Gallery" },
+    { "title": "Artivismos", "url": "https://www.facebook.com/media/set/?set=a.867654163309297&type=3", "category": "Artivismo" },
+    { "title": "Artivismos viejunos", "url": "https://www.facebook.com/media/set/?set=a.1004454256295953&type=3", "category": "Artivismo" },
+    { "title": "Ajenjo Cam", "url": "https://www.facebook.com/media/set/?set=a.1308613517284733&type=3", "category": "Obras" },
+    { "title": "El Gato que es Kutxa", "url": "https://www.facebook.com/media/set/?set=a.1230045515141534&type=3", "category": "Obras" },
+    { "title": "Infusión de Berto", "url": "https://www.facebook.com/media/set/?set=a.1112397760239644&type=3", "category": "Obras" },
+    { "title": "Buena Fuente", "url": "https://www.facebook.com/media/set/?set=a.1111052607040826&type=3", "category": "Obras" },
+    { "title": "Marian de Miranda", "url": "https://www.facebook.com/media/set/?set=a.1087704452708975&type=3", "category": "Obras" },
+    { "title": "Jugar", "url": "https://www.facebook.com/media/set/?set=a.2548476735227023&type=3", "category": "Obras" },
+    { "title": "Utopía", "url": "https://www.facebook.com/media/set/?set=a.408244943988266&type=3", "category": "Obras" },
+    { "title": "Jaguar", "url": "https://www.facebook.com/media/set/?set=a.401714141308013&type=3", "category": "Obras" }
+  ],
+  "series_summary": [
+    "Walking Gallery Bilbao",
+    "Rocks (Iconos Culturales)",
+    "Tributos Musicales (Queen & Bowie)",
+    "Espejos del Alma",
+    "Artivismos",
+    "Facefood",
+    "En.lata (Conservas)",
+    "The Munsters",
+    "Bodas y Celebraciones"
+  ]
+}

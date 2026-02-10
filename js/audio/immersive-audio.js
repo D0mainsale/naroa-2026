@@ -93,10 +93,13 @@ const ImmersiveAudio = {
   // Start synthesized ambient
   startAmbient() {
     if (this.synth && !this.isMuted) {
+      // Ambient drone disabled per user request
+      /*
       this.ambientDrone = this.synth.createAmbientDrone();
       if (this.ambientDrone) {
         this.ambientDrone.start();
       }
+      */
     }
   },
 

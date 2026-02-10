@@ -1,0 +1,306 @@
+/* ═══════════════════════════════════════════
+   NOTCH — ISLA MÁGICA 
+   Dynamic Island-style navigation
+   Floating pill that morphs contextually
+   ═══════════════════════════════════════════ */
+
+.notch {
+  position: fixed;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 99999;
+
+  /* Pill shape */
+  background: rgba(8, 8, 12, 0.85);
+  -webkit-backdrop-filter: blur(24px) saturate(1.8);
+  backdrop-filter: blur(24px) saturate(1.8);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 28px;
+  
+  /* Size transitions */
+  min-width: 180px;
+  max-width: 90vw;
+  height: 48px;
+  padding: 0 20px;
+  
+  /* Flexbox centering */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  
+  /* Smooth morph */
+  transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  overflow: hidden;
+  cursor: pointer;
+  
+  /* Glow */
+  box-shadow: 
+    0 4px 24px rgba(0, 0, 0, 0.4),
+    0 0 0 0.5px rgba(255, 255, 255, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+/* ─── Expanded State ─── */
+.notch.expanded {
+  height: auto;
+  min-height: 56px;
+  max-height: 80vh;
+  border-radius: 24px;
+  padding: 12px 20px;
+  flex-wrap: wrap;
+  background: rgba(8, 8, 12, 0.92);
+}
+
+/* ─── Active glow pulse ─── */
+.notch::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 215, 0, 0.15) 0%,
+    transparent 30%,
+    transparent 70%,
+    rgba(139, 92, 246, 0.1) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.notch:hover::before,
+.notch.expanded::before {
+  opacity: 1;
+}
+
+/* ─── Current Section Label ─── */
+.notch__label {
+  font-family: 'Inter', 'SF Pro Display', -apple-system, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.85);
+  white-space: nowrap;
+  transition: all 0.3s ease;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.notch__label .notch__icon {
+  margin-right: 6px;
+  font-size: 14px;
+}
+
+/* ─── Dot indicator ─── */
+.notch__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #ffd700;
+  flex-shrink: 0;
+  animation: notch-pulse 3s ease-in-out infinite;
+  box-shadow: 0 0 8px rgba(255, 215, 0, 0.4);
+}
+
+@keyframes notch-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.7); }
+}
+
+/* ─── Nav Links (shown when expanded) ─── */
+.notch__nav {
+  display: none;
+  width: 100%;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 8px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.notch.expanded .notch__nav {
+  display: flex;
+}
+
+.notch.expanded .notch__dot {
+  display: none;
+}
+
+.notch__link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  color: rgba(255, 255, 255, 0.65);
+  text-decoration: none;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.notch__link:hover,
+.notch__link.active {
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.notch__link.active {
+  font-weight: 500;
+}
+
+.notch__link.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 20%;
+  bottom: 20%;
+  width: 3px;
+  border-radius: 2px;
+  background: linear-gradient(180deg, #ffd700, #ff6348);
+}
+
+.notch__link-icon {
+  font-size: 18px;
+  width: 24px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.notch__link-label {
+  flex: 1;
+}
+
+.notch__link-hint {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.25);
+  font-weight: 400;
+}
+
+/* ─── MICA Quick Input ─── */
+.notch__mica {
+  display: none;
+  width: 100%;
+  margin-top: 6px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.notch.expanded .notch__mica {
+  display: block;
+}
+
+.notch__mica-input {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  padding: 10px 14px;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 13px;
+  font-family: 'Inter', sans-serif;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.notch__mica-input::placeholder {
+  color: rgba(255, 255, 255, 0.2);
+}
+
+.notch__mica-input:focus {
+  border-color: rgba(255, 215, 0, 0.3);
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.05);
+}
+
+/* ─── Scroll Progress Ring ─── */
+.notch__progress {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  transform: rotate(-90deg);
+}
+
+.notch__progress-circle {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.08);
+  stroke-width: 2.5;
+}
+
+.notch__progress-bar {
+  fill: none;
+  stroke: #ffd700;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-dasharray: 44;
+  stroke-dashoffset: 44;
+  transition: stroke-dashoffset 0.2s ease;
+  filter: drop-shadow(0 0 3px rgba(255, 215, 0, 0.3));
+}
+
+/* ─── Close Button ─── */
+.notch__close {
+  display: none;
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  border: none;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 16px;
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.notch.expanded .notch__close {
+  display: flex;
+}
+
+.notch__close:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 640px) {
+  .notch {
+    top: 10px;
+    min-width: 160px;
+    height: 44px;
+    padding: 0 16px;
+    border-radius: 22px;
+  }
+  
+  .notch.expanded {
+    width: calc(100vw - 24px);
+    border-radius: 20px;
+  }
+  
+  .notch__label {
+    font-size: 12px;
+  }
+}
+
+/* ─── Reduced Motion ─── */
+@media (prefers-reduced-motion: reduce) {
+  .notch,
+  .notch__link,
+  .notch__dot {
+    transition: none;
+    animation: none;
+  }
+}

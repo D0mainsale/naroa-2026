@@ -34,33 +34,69 @@
 .mica-toggle--active::after { content: '×'; font-size: 28px; color: #111; font-weight: 300; }
 
 /* Panel - Glass Organic */
+/* Panel - ARTIST PALETTE STYLE */
 .mica-panel {
   position: fixed;
   bottom: 110px;
   right: 2rem;
   width: 380px;
   max-width: calc(100vw - 40px);
-  height: 550px;
+  height: 600px; /* Slightly taller for palette shape */
   max-height: calc(100vh - 160px);
-  background: rgba(15, 15, 15, 0.85);
-  border-radius: 24px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-  -webkit-backdrop-filter: blur(30px);
-  backdrop-filter: blur(30px);
+  
+  /* Palette Shape */
+  border-radius: 255px 40px 255px 40px / 40px 220px 40px 255px; /* Organic variation */
+  background: rgba(18, 18, 20, 0.88);
+  
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 
+    0 25px 70px rgba(0,0,0,0.6),
+    inset 0 0 40px rgba(0,0,0,0.3);
+    
+  -webkit-backdrop-filter: blur(35px);
+  backdrop-filter: blur(35px);
   z-index: 9998;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  overflow: visible; /* Needed for paint drips if added */
   opacity: 0;
-  transform: translateY(20px) scale(0.95);
+  transform: translateY(20px) scale(0.9) rotate(-2deg);
   pointer-events: none;
-  transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+  transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+  padding-bottom: 2rem; /* Give space at bottom */
+}
+
+/* Palette Thumb Hole (Top Right for Panel) */
+.mica-panel::before {
+  content: '';
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  width: 20px;
+  height: 28px;
+  border-radius: 60% 40% 70% 30% / 50%;
+  background: rgba(0,0,0,0.7);
+  box-shadow: inset 0 2px 5px rgba(0,0,0,0.9), 0 1px 0 rgba(255,255,255,0.1);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Palette Paint Stains */
+.mica-panel::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: 
+    radial-gradient(circle at 5% 90%, rgba(64, 224, 208, 0.08) 0%, transparent 80px),
+    radial-gradient(circle at 95% 10%, rgba(255, 0, 60, 0.08) 0%, transparent 60px);
+  z-index: -1;
 }
 
 .mica-panel--open {
   opacity: 1;
-  transform: translateY(0) scale(1);
+  transform: translateY(0) scale(1) rotate(0deg);
   pointer-events: auto;
 }
 

@@ -56,8 +56,8 @@
   async function loadTaxonomy() {
     if (taxonomy) return taxonomy;
     try {
-      const res = await fetch('data/artworks-taxonomy.json');
-      taxonomy = await res.json();
+      const data = await window.DataCache.get('data/artworks-taxonomy.json');
+      taxonomy = data;
       return taxonomy;
     } catch (e) {
       console.warn('[Lightbox] Could not load taxonomy:', e);

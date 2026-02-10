@@ -1,0 +1,491 @@
+{
+  "meta": {
+    "version": "2.0.0",
+    "description": "Catálogo completo de obras y series con metadatos detallados (Técnica, Año, Enlaces)",
+    "source": "NotebookLM Deep Analysis + User Golden Source",
+    "generatedAt": "2026-02-09T07:22:00Z"
+  },
+  "works": [
+    {
+      "titulo": "Asúcar (Celia Cruz)",
+      "serie_o_categoria": "DiviNos / Obras Maestras",
+      "tecnica": "Acrílico y collage (sobres de azúcar, envoltorios) sobre lienzo 3D",
+      "ano": "2020",
+      "enlace_album": "https://www.artelista.com/obra/4641097080360538-asucar.html",
+      "fuente_id": "[1], [2], [User]"
+    },
+    {
+      "titulo": "Paul Newmum",
+      "serie_o_categoria": "Iconos",
+      "tecnica": "Pintura sobre lienzo",
+      "ano": null,
+      "enlace_album": "https://naroa.artelista.com/",
+      "fuente_id": "[1], [2], [User]"
+    },
+    {
+      "titulo": "Mr. Fahrenheit (Freddie Mercury)",
+      "serie_o_categoria": "Tributos Musicales",
+      "tecnica": "Pintura sobre pizarra/tabla",
+      "ano": null,
+      "enlace_album": "https://www.facebook.com/media/set/?set=a.3432575976817090&type=3",
+      "fuente_id": "[3], [1], [2], [User]"
+    },
+    {
+      "titulo": "RockaGipsy (Lembrança da Bahia)",
+      "serie_o_categoria": "DiviNos",
+      "tecnica": "Acrílico y papel de seda sobre lienzo crudo",
+      "ano": null,
+      "enlace_album": "https://www.facebook.com/media/set/?set=a.989285339217554&type=3",
+      "fuente_id": "[User]"
+    },
+    {
+      "titulo": "Amy Rocks",
+      "serie_o_categoria": "Rocks",
+      "tecnica": "Acrílico y Posca sobre pizarra natural",
+      "ano": "2022",
+      "enlace_album": "https://www.facebook.com/media/set/?set=a.1571125317700217&type=3",
+      "fuente_id": "[3], [5], [User]"
+    },
+    {
+      "titulo": "Johnny Rocks",
+      "serie_o_categoria": "Rocks",
+      "tecnica": "Mixta (Estilo Pop)",
+      "ano": null,
+      "enlace_album": "https://www.facebook.com/media/set/?set=a.1562090265270389&type=3",
+      "fuente_id": "[3], [5], [User]"
+    },
+    {
+      "titulo": "Marilyn Rocks",
+      "serie_o_categoria": "Rocks",
+      "tecnica": "Mixta (Estilo Pop)",
+      "ano": null,
+      "enlace_album": "https://www.facebook.com/media/set/?set=a.1552149902931092&type=3",
+      "fuente_id": "[3], [5], [User]"
+    },
+    {
+      "titulo": "James Rocks",
+      "serie_o_categoria": "Rocks",
+      "tecnica": "Mixta (Estilo Pop)",
+      "ano": null,
+      "enlace_album": "https://www.facebook.com/media/set/?set=a.1543127323833350&type=3",
+      "fuente_id": "[3], [5], [User]"
+    },
+    {
+      "titulo": "Cantiflowers (Mario Moreno)",
+      "serie_o_categoria": "Vaivenes / DiviNos",
+      "tecnica": "Collage textil y acrílico",
+      "ano": null,
+      "enlace_album": "https://www.facebook.com/media/set/?set=a.3895610633846953&type=3",
+      "fuente_id": "[User]"
+    },
+    {
+      "titulo": "Mario Moreno",
+      "serie_o_categoria": "DiviNos",
+      "tecnica": "Pintura y collage",
+      "ano": null,
+      "enlace_album": "https://www.facebook.com/media/set/?set=a.1580369216775827&type=3",
+      "fuente_id": "[User]"
+    },
+    {
+      "titulo": "Entre Tantas Flores de Día",
+      "serie_o_categoria": "Vaivenes / Collage",
+      "tecnica": "Collage con textil y alambre de plata",
+      "ano": null,
+      "enlace_album": "https://www.facebook.com/media/set/?set=a.1577827357030013&type=3",
+      "fuente_id": "[User]"
+    },
+    {
+      "titulo": "“El Poblema” (Cortometraje)",
+      "serie_o_categoria": "Audiovisual",
+      "tecnica": "Cine / Video",
+      "ano": "2025",
+      "enlace_album": "https://www.facebook.com/media/set/?set=a.1491643628981720&type=3",
+      "fuente_id": "[34], [35], [User]"
+    },
+    {
+      "titulo": "Amor en Conserva",
+      "serie_o_categoria": "En.lata (Latas y Conservas)",
+      "tecnica": "Intervención en lata de conserva",
+      "ano": null,
+      "enlace_album": "https://www.facebook.com/media/set/?set=a.858798248932931&type=3",
+      "fuente_id": "[12], [15], [User]"
+    },
+    {
+      "titulo": "Dar la Lata",
+      "serie_o_categoria": "En.lata (Latas y Conservas)",
+      "tecnica": "Reciclaje artístico",
+      "ano": null,
+      "enlace_album": "https://www.facebook.com/media/set/?set=a.606818890797536&type=3",
+      "fuente_id": "[12], [14], [User]"
+    },
+    {
+      "titulo": "En.lata.das",
+      "serie_o_categoria": "En.lata (Latas y Conservas)",
+      "tecnica": "Reciclaje artístico",
+      "ano": null,
+      "enlace_album": "https://www.facebook.com/media/set/?set=a.460454262100667&type=3",
+      "fuente_id": "[12], [13], [User]"
+    },
+    {
+      "titulo": "Walking Gallery Bilbao 2022",
+      "serie_o_categoria": "Walking Gallery",
+      "tecnica": "Intervención urbana / Performance",
+      "ano": "2022",
+      "enlace_album": "https://www.facebook.com/media/set/?set=a.659334275545997&type=3",
+      "fuente_id": "[28], [7], [User]"
+    },
+    {
+      "titulo": "Walking Gallery Bilbao Fair Saturday",
+      "serie_o_categoria": "Walking Gallery",
+      "tecnica": "Intervención urbana",
+      "ano": "2021",
+      "enlace_album": "https://www.facebook.com/media/set/?set=a.423448675801226&type=3",
+      "fuente_id": "[28], [13], [User]"
+    },
+    {
+      "titulo": "Walking Gallery Bilbao VI Aniversario",
+      "serie_o_categoria": "Walking Gallery",
+      "tecnica": "Intervención urbana",
+      "ano": "2017",
+      "enlace_album": "https://www.facebook.com/media/set/?set=a.1622806844460688&type=3",
+      "fuente_id": "[28], [25], [User]"
+    },
+    {
+      "titulo": "Walking Gallery Bilbao Nov 2013",
+      "serie_o_categoria": "Walking Gallery",
+      "tecnica": "Intervención urbana",
+      "ano": "2013",
+      "enlace_album": "https://www.facebook.com/media/set/?set=a.559195427488507&type=3",
+      "fuente_id": "[28], [29], [User]"
+    },
+    {
+      "titulo": "Baroque Farrokh",
+      "serie_o_categoria": "Tributos Musicales (Queen)",
+      "tecnica": "Pintura",
+      "ano": null,
+      "enlace_album": "https://www.facebook.com/media/set/?set=a.4592656824142327&type=3",
+      "fuente_id": "[3], [6], [User]"
+    },
+    {
+      "titulo": "Starchild",
+      "serie_o_categoria": "Tributos Musicales (Bowie)",
+      "tecnica": "Pintura",
+      "ano": null,
+      "enlace_album": "https://www.facebook.com/media/set/?set=a.4609680609106615&type=3",
+      "fuente_id": "[3], [6], [11], [User]"
+    },
+    {
+      "titulo": "Tedás Queen",
+      "serie_o_categoria": "Tributos Musicales",
+      "tecnica": "Pintura",
+      "ano": null,
+      "enlace_album": "https://www.facebook.com/media/set/?set=a.584625063016919&type=3",
+      "fuente_id": "[3], [7], [User]"
+    },
+    {
+      "titulo": "Can-dy Queen",
+      "serie_o_categoria": "Tributos Musicales",
+      "tecnica": "Pintura",
+      "ano": null,
+      "enlace_album": "https://www.facebook.com/media/set/?set=a.504443464368413&type=3",
+      "fuente_id": "[3], [8], [User]"
+    },
+    {
+      "titulo": "El Cocinero Emplatado",
+      "serie_o_categoria": "Facefood",
+      "tecnica": "Fusión arte y gastronomía",
+      "ano": null,
+      "enlace_album": "https://www.facebook.com/media/set/?set=a.472343952840322&type=3",
+      "fuente_id": "[12], [19], [User]"
+    },
+    {
+      "titulo": "Piel de Chef",
+      "serie_o_categoria": "Facefood",
+      "tecnica": "Fusión arte y gastronomía",
+      "ano": null,
+      "enlace_album": "https://www.facebook.com/media/set/?set=a.989878624420183&type=3",
+      "fuente_id": "[12], [17], [User]"
+    },
+    {
+      "titulo": "Candy Wedding -original-",
+      "serie_o_categoria": "Bodas",
+      "tecnica": "Pintura decorativa",
+      "ano": null,
+      "enlace_album": "https://www.facebook.com/media/set/?set=a.1787825874625450&type=3",
+      "fuente_id": "[21], [22], [User]"
+    },
+    {
+      "titulo": "¡Viva la Novia!",
+      "serie_o_categoria": "Bodas",
+      "tecnica": "Pintura decorativa",
+      "ano": null,
+      "enlace_album": "https://www.facebook.com/media/set/?set=a.5808288599245804&type=3",
+      "fuente_id": "[21], [27], [User]"
+    },
+    {
+      "titulo": "Flores de Papel",
+      "serie_o_categoria": "Técnica Propia",
+      "tecnica": "Escultura en papel de cocina",
+      "ano": null,
+      "enlace_album": "https://www.facebook.com/media/set/?set=a.1039704190842335&type=3",
+      "fuente_id": "[10], [11], [User]"
+    },
+    {
+      "titulo": "I Got You Babe (Autorretrato Colectivo Covid)",
+      "serie_o_categoria": "Artivismos",
+      "tecnica": "Pintura / Proyecto social",
+      "ano": null,
+      "enlace_album": "https://www.facebook.com/media/set/?set=a.4820384624702878&type=3",
+      "fuente_id": "[19], [20], [User]"
+    },
+    {
+      "titulo": "Espejos del Alma",
+      "serie_o_categoria": "Espejos del Alma",
+      "tecnica": "Retrato",
+      "ano": "2015",
+      "enlace_album": "https://www.facebook.com/media/set/?set=a.148428161898571&type=3",
+      "fuente_id": "[3], [21], [30], [18], [31], [User]"
+    },
+    {
+      "titulo": "Artivismos",
+      "serie_o_categoria": "Artivismos",
+      "tecnica": "Arte social",
+      "ano": null,
+      "enlace_album": "https://www.facebook.com/media/set/?set=a.867654163309297&type=3",
+      "fuente_id": "[21], [31], [User]"
+    },
+    {
+      "titulo": "Akelarre 2019",
+      "serie_o_categoria": "Obras individuales",
+      "tecnica": "Mixta",
+      "ano": "2019",
+      "enlace_album": "https://www.facebook.com/media/set/?set=a.2799898800084814&type=3",
+      "fuente_id": "[32], [37], [User]"
+    },
+    {
+      "titulo": "Carnavales 2011",
+      "serie_o_categoria": "Obras individuales",
+      "tecnica": "Mixta",
+      "ano": "2011",
+      "enlace_album": "https://www.facebook.com/media/set/?set=a.1910243579050345&type=3",
+      "fuente_id": "[32], [41], [User]"
+    },
+    {
+      "titulo": "Viuda Negra",
+      "serie_o_categoria": "Obras individuales",
+      "tecnica": "Mixta",
+      "ano": null,
+      "enlace_album": "https://www.facebook.com/media/set/?set=a.669668994512525&type=3",
+      "fuente_id": "[User]"
+    },
+    {
+      "titulo": "Red Red Wine",
+      "serie_o_categoria": "Obras individuales",
+      "tecnica": "Mixta",
+      "ano": null,
+      "enlace_album": "https://www.facebook.com/media/set/?set=a.1069042964575124&type=3",
+      "fuente_id": "[User]"
+    },
+    {
+      "titulo": "Hugo Box",
+      "serie_o_categoria": "Obras individuales",
+      "tecnica": "Mixta / Caja",
+      "ano": null,
+      "enlace_album": "https://www.facebook.com/media/set/?set=a.1520934946052588&type=3",
+      "fuente_id": "[User]"
+    },
+    {
+      "titulo": "AmazOna",
+      "serie_o_categoria": "Mitología",
+      "tecnica": "Pintura sobre lienzo y reproducción",
+      "ano": null,
+      "enlace_album": "",
+      "fuente_id": "[4], [User]"
+    },
+    {
+      "titulo": "En.lata.2",
+      "serie_o_categoria": "Serie: En.lata (Latas y Conservas)",
+      "fuente_id": "[12], [13]"
+    },
+    {
+      "titulo": "Chaqueta de Cocinero, \"Goiri Eder\"",
+      "serie_o_categoria": "Serie: Facefood y Gastronomía",
+      "fuente_id": "[12], [16]"
+    },
+    {
+      "titulo": "Chaqueta de Cocinera, Yolanda",
+      "serie_o_categoria": "Serie: Facefood y Gastronomía",
+      "fuente_id": "[12], [17]"
+    },
+    {
+      "titulo": "Diego's Soul Kitchen Cook Jacket",
+      "serie_o_categoria": "Serie: Facefood y Gastronomía",
+      "fuente_id": "[12], [18]"
+    },
+    {
+      "titulo": "facefood: expos de quita y pon",
+      "serie_o_categoria": "Serie: Facefood y Gastronomía",
+      "fuente_id": "[12], [20]"
+    },
+    {
+      "titulo": "facefood en Algorta",
+      "serie_o_categoria": "Serie: Facefood y Gastronomía",
+      "fuente_id": "[12], [20]"
+    },
+    {
+      "titulo": "The Munsters",
+      "serie_o_categoria": "Serie: The Munsters",
+      "fuente_id": "[12], [18]"
+    },
+    {
+      "titulo": "The Munsters (with their new) Family",
+      "serie_o_categoria": "Serie: The Munsters",
+      "fuente_id": "[12], [17]"
+    },
+    {
+      "titulo": "Candy Wedding ft. Nissma de Benito",
+      "serie_o_categoria": "Serie: Bodas y Celebraciones",
+      "fuente_id": "[21], [23]"
+    },
+    {
+      "titulo": "Cuadro-Álbum Bodorrio (Susana)",
+      "serie_o_categoria": "Serie: Bodas y Celebraciones",
+      "fuente_id": "[21], [24]"
+    },
+    {
+      "titulo": "Cuadro-Álbum Bodorrio (Denis)",
+      "serie_o_categoria": "Serie: Bodas y Celebraciones",
+      "fuente_id": "[21], [25]"
+    },
+    {
+      "titulo": "La Boda de Mi Mejor Amigo",
+      "serie_o_categoria": "Serie: Bodas y Celebraciones",
+      "fuente_id": "[21], [26]"
+    },
+    {
+      "titulo": "Walking Gallery Bilbao Art District 2017",
+      "serie_o_categoria": "Serie: Walking Gallery",
+      "fuente_id": "[28], [10]"
+    },
+    {
+      "titulo": "Artivismos viejunos",
+      "serie_o_categoria": "Serie: Artivismos",
+      "fuente_id": "[21], [16]"
+    },
+    {
+      "titulo": "Naroa Retratada",
+      "serie_o_categoria": "Serie: Naroa / Autorretratos",
+      "fuente_id": "[32], [33]"
+    },
+    {
+      "titulo": "Naroa en CP Magazine Gold (Agosto 2021)",
+      "serie_o_categoria": "Serie: Naroa / Prensa",
+      "fuente_id": "[32], [31]"
+    },
+    {
+      "titulo": "Aaron",
+      "serie_o_categoria": "Obras Individuales / Álbumes",
+      "fuente_id": "[32], [36]"
+    },
+    {
+      "titulo": "Ajenjo Cam",
+      "serie_o_categoria": "Obras Individuales / Álbumes",
+      "fuente_id": "[32], [35]"
+    },
+    {
+      "titulo": "Al(a)ineado, el Gurú del Celo.fan",
+      "serie_o_categoria": "Obras Individuales / Álbumes",
+      "fuente_id": "[32], [38]"
+    },
+    {
+      "titulo": "Alfredita Krueger",
+      "serie_o_categoria": "Obras Individuales / Álbumes",
+      "fuente_id": "[32], [25]"
+    },
+    {
+      "titulo": "All Skull",
+      "serie_o_categoria": "Obras Individuales / Álbumes",
+      "fuente_id": "[32], [39]"
+    },
+    {
+      "titulo": "AmaLuz",
+      "serie_o_categoria": "Obras Individuales / Álbumes",
+      "fuente_id": "[32], [17]"
+    },
+    {
+      "titulo": "Amados Policro(a)mados",
+      "serie_o_categoria": "Obras Individuales / Álbumes",
+      "fuente_id": "[32], [16]"
+    },
+    {
+      "titulo": "Aquellos Maravillosos Años",
+      "serie_o_categoria": "Obras Individuales / Álbumes",
+      "fuente_id": "[32], [24]"
+    },
+    {
+      "titulo": "Audrey’s Lightning",
+      "serie_o_categoria": "Obras Individuales / Álbumes",
+      "fuente_id": "[32], [40]"
+    },
+    {
+      "titulo": "Aupas",
+      "serie_o_categoria": "Obras Individuales / Álbumes",
+      "fuente_id": "[32], [38]"
+    },
+    {
+      "titulo": "Bamboleos ('Vaivenes' en Fase 0)",
+      "serie_o_categoria": "Obras Individuales / Álbumes",
+      "fuente_id": "[32], [6]"
+    },
+    {
+      "titulo": "Banksy Box",
+      "serie_o_categoria": "Obras Individuales / Álbumes",
+      "fuente_id": "[32], [29]"
+    },
+    {
+      "titulo": "Bastón de Chamana & Broche de Gracias",
+      "serie_o_categoria": "Obras Individuales / Álbumes",
+      "fuente_id": "[32], [8]"
+    },
+    {
+      "titulo": "Bárbaro",
+      "serie_o_categoria": "Obras Individuales / Álbumes",
+      "fuente_id": "[32], [23]"
+    },
+    {
+      "titulo": "Beatriz de Pandora",
+      "serie_o_categoria": "Obras Individuales / Álbumes",
+      "fuente_id": "[32], [35]"
+    },
+    {
+      "titulo": "Beauty",
+      "serie_o_categoria": "Obras Individuales / Álbumes",
+      "fuente_id": "[32], [41]"
+    },
+    {
+      "titulo": "Bicéfalo",
+      "serie_o_categoria": "Obras Individuales / Álbumes",
+      "fuente_id": "[32], [26]"
+    },
+    {
+      "titulo": "Billy Saw",
+      "serie_o_categoria": "Obras Individuales / Álbumes",
+      "fuente_id": "[32], [39]"
+    },
+    {
+      "titulo": "Blanco, Negro y algo de Color",
+      "serie_o_categoria": "Obras Individuales / Álbumes",
+      "fuente_id": "[32], [42]"
+    },
+    {
+      "titulo": "Buena Fuente",
+      "serie_o_categoria": "Obras Individuales / Álbumes",
+      "fuente_id": "[32], [36]"
+    },
+    {
+      "titulo": "Cantinflowers",
+      "serie_o_categoria": "Obras Individuales / Álbumes",
+      "fuente_id": "[32], [6]"
+    }
+  ]
+}

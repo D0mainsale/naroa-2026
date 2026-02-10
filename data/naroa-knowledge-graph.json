@@ -1,0 +1,36 @@
+{
+  "artist": "Naroa Gutiérrez Gil",
+  "structure": {
+    "Series: Iconos Pop y Tributos": [
+      "Rocks (Amy, Johnny, Marilyn, James)",
+      "Musicales (Freddie Mercury, David Bowie, Celia Cruz)",
+      "Azúcar (Tributo a Celia Cruz)",
+      "DiviNos (Amy Rucks, Cantiflowers)"
+    ],
+    "Series: Espejos y Artivismo": [
+      "Espejos del Alma",
+      "Repóker de Reinas",
+      "Emakumeen arteaN",
+      "Artivismos"
+    ],
+    "Serie: Objetos y Gastronomía": [],
+    "Filosofía y Metodología": [
+      "Kintsugi: El problema como trampolín",
+      "Manipulación del Caos",
+      "Resignificación del bien mirar",
+      "Entrelazamiento Cuántico de materiales"
+    ],
+    "Técnicas y Materiales": {
+      "Soportes": ["Pizarra", "Lienzo 3D", "Papel cocina"],
+      "Medios": ["Acrílico", "Collage", "Mica mineral"],
+      "Textura": ["Lucha entre acrílico y cola"],
+      "Digital": ["NetArt e IA"]
+    },
+    "Proyectos y Espacios": [
+      "El ReCreo (Espacio para recreArte)",
+      "Siarte Leku (Exposiciones)",
+      "Politena Espacio de Arte",
+      "Harilka (Red sororal)"
+    ]
+  }
+}
