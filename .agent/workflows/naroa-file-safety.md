@@ -1,31 +1,24 @@
 ---
-description: REGLA DE SEGURIDAD — Nunca editar el index.html equivocado en naroa-2026
+description: REGLA DE SEGURIDAD — Archivos correctos en naroa-2026 (Vite project)
 ---
 
 # 🚨 Naroa File Safety Rule
 
-## Contexto Crítico
+## Entry Point
 
-El proyecto `naroa-2026` tiene **DOS archivos `index.html`**:
+**El `index.html` de Vite está en la RAÍZ:** `/Users/borjafernandezangulo/game/naroa-2026/index.html`
 
-| Archivo | Rol | ¿Editar? |
-|---------|-----|----------|
-| `/index.html` (raíz) | **ENTRY POINT DE VITE** — Este es el archivo activo | ✅ SÍ |
-| `/public/index.html` | Versión legacy/vieja — NO es servido por Vite | ❌ NUNCA |
+`public/index.html` fue ELIMINADO el 13/02/2026. Si reaparece, NO editarlo.
 
-## Regla Absoluta
+## Estructura Correcta
 
-**SIEMPRE editar `/index.html` en la RAÍZ del proyecto.** NUNCA editar `/public/index.html`.
+| Tipo | Path correcto |
+|------|---------------|
+| HTML entry | `./index.html` (raíz) |
+| CSS | `./css/` |
+| JS | `./js/` |
+| Assets estáticos | `./public/images/`, `./images/` |
 
-## Verificación Rápida
+## Imágenes
 
-Antes de editar cualquier `index.html` en naroa-2026, confirma:
-1. El path NO contiene `/public/`
-2. El archivo correcto es: `/Users/borjafernandezangulo/game/naroa-2026/index.html`
-
-## Contexto Adicional
-
-- Vite usa el `index.html` de la raíz como entry point
-- Los assets estáticos (imágenes, fonts) están en `/public/` y se sirven desde la raíz
-- Los CSS están en `/css/` (raíz), NO en `/public/css/`
-- Los JS están en `/js/` (raíz), NO en `/public/js/`
+**NUNCA generar imágenes AI para la web de Naroa.** Usar SIEMPRE las obras reales de la artista que ya están en `images/artworks/`.
