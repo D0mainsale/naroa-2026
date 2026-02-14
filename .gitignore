@@ -21,3 +21,6 @@ public/images/artworks/cantinflas-platos-source*.png
 
 # Cantinflas source (194MB)
 images/artworks/cantinflas-platos-source.png
+
+# Original uncompressed images backup (102MB)
+images/artworks/.originals/

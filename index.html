@@ -585,6 +585,10 @@
   <script src="js/features/gallery.js"></script>
   <script src="js/features/lightbox.js"></script>
   <script src="js/core/app.js"></script>
+  <script type="module">
+    import obs from './js/services/observability-service.js';
+    obs.init();
+  </script>
 
   <!-- Effects (deferred for performance) -->
   <script src="js/effects/kinetic-text.js" defer></script>

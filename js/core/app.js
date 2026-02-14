@@ -337,7 +337,8 @@
         module.exposicionesTimeline.init('exposiciones-container');
       }
     } catch (e) {
-      console.warn('[App] Exposiciones module not loaded:', e);
+      window.NaroaObs?.log('ERROR', 'Exposiciones module failed to load', { error: e });
+      console.error('[App] Exposiciones load error:', e);
     }
   }
 
@@ -348,7 +349,8 @@
         module.artworkDetail.init(artworkId);
       }
     } catch (e) {
-      console.warn('[App] Artwork Detail module not loaded:', e);
+      window.NaroaObs?.log('ERROR', 'Artwork Detail module failed to load', { id: artworkId, error: e });
+      console.error('[App] Artwork Detail load error:', e);
     }
   }
 
@@ -361,7 +363,8 @@
         if (fallback) fallback.style.display = 'none';
       }
     } catch (e) {
-      console.warn('[App] VideoCall Panel not loaded:', e);
+      window.NaroaObs?.log('ERROR', 'VideoCall Panel failed to load', { error: e });
+      console.error('[App] VideoCall Panel load error:', e);
     }
   }
 
@@ -372,7 +375,8 @@
         module.micaDashboard.init('mica-dashboard-container');
       }
     } catch (e) {
-      console.warn('[App] MICA Dashboard not loaded:', e);
+      window.NaroaObs?.log('ERROR', 'MICA Dashboard failed to load', { error: e });
+      console.error('[App] MICA Dashboard load error:', e);
     }
   }
 

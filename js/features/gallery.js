@@ -32,21 +32,22 @@
       ]);
       
       if (metadataRes.ok) {
-        const data = await metadataRes.json();
+        const rawData = await metadataRes.json();
         
-        // Map artworks from metadata — trust JSON as source of truth (no HEAD requests)
-        const seenFiles = new Set();
-        const seenBaseNames = new Set();
+        // Map artworks from metadata — handle flat array or object with 'artworks' key
+        // Trust JSON as source of truth (no HEAD requests)
+        const sourceArtworks = Array.isArray(rawData) ? rawData : (rawData.artworks || []);
         
-        ARTWORKS = data.artworks
+        ARTWORKS = sourceArtworks
           .map((art, index) => ({
             id: index + 1,
             title: art.title,
-            file: art.file, // Trust the filename from database.json
-            category: art.series.toLowerCase().replace(/\s+/g, '-'), // Normalize series to category ID (e.g. "Rocks" -> "rocks")
+            file: art.image ? art.image.replace('images/artworks/', '') : art.file, // Handle both 'image' (path) and legacy 'file' (filename)
+            category: (art.series || art.category || 'todos').toLowerCase().replace(/\s+/g, '-'), // Normalize series to category ID
             technique: art.technique,
             year: art.year,
-            originalId: art.id
+            originalId: art.id,
+            featured: art.featured
           }));
         
       }
