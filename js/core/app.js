@@ -204,17 +204,34 @@
 
   function initScrollSystems() {
     const scrollThread = document.getElementById('scroll-thread');
-    
-    // Scroll Progress Bar (Gold Thread)
+    const nav = document.getElementById('main-nav');
+    let ticking = false;
+
+    function onScrollUpdate() {
+      // Scroll Progress Bar (Gold Thread)
+      if (scrollThread) {
+        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (winScroll / height) * 100;
+        scrollThread.style.width = scrolled + "%";
+      }
+
+      // Nav scroll effect (compact on scroll)
+      if (nav) {
+        nav.classList.toggle('nav--scrolled', window.scrollY > 100);
+      }
+
+      ticking = false;
+    }
+
     window.addEventListener('scroll', () => {
-      if (!scrollThread) return;
-      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      const scrolled = (winScroll / height) * 100;
-      scrollThread.style.width = scrolled + "%";
+      if (!ticking) {
+        requestAnimationFrame(onScrollUpdate);
+        ticking = true;
+      }
     }, { passive: true });
 
-    // Scroll reveal for sections
+    // Scroll reveal for sections (IntersectionObserver — already efficient)
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -226,18 +243,6 @@
     document.querySelectorAll('.view[data-scroll-reveal]').forEach(section => {
       revealObserver.observe(section);
     });
-
-    // Nav scroll effect (compact on scroll)
-    const nav = document.getElementById('main-nav');
-    let lastScroll = 0;
-    
-    window.addEventListener('scroll', () => {
-      const currentScroll = window.scrollY;
-      if (nav) {
-        nav.classList.toggle('nav--scrolled', currentScroll > 100);
-      }
-      lastScroll = currentScroll;
-    }, { passive: true });
   }
 
   // ===========================================
@@ -376,7 +381,6 @@
   // ===========================================
 
   async function init() {
-    console.log('[Naroa 360°] Initializing...');
     
     // Load Gallery data
     if (window.Gallery) {
@@ -401,7 +405,6 @@
     if (window.initMagnet) window.initMagnet();
     if (window.Lightbox) window.Lightbox.init();
 
-    console.log('[Naroa 360°] Ready — scroll to explore ✨');
   }
 
   function initUIControls() {

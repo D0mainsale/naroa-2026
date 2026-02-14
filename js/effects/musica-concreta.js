@@ -266,9 +266,7 @@ class MusicaConcreta {
     this.layers.push(this.createNoiseLayer());
     this.layers.push(this.createGranularLayer());
     this.layers.push(this.createBellLayer());
-    
-    console.log('[MusicaConcreta] 🎵 Generative ambient started — 4 layers active');
-  }
+      }
 
   stop() {
     if (!this.isPlaying) return;
@@ -287,9 +285,7 @@ class MusicaConcreta {
       });
       this.layers = [];
     }, 2500);
-    
-    console.log('[MusicaConcreta] 🔇 Ambient stopped');
-  }
+      }
 
   toggle() {
     if (this.isPlaying) {

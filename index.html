@@ -595,6 +595,7 @@
   <script src="js/effects/wave-background.js" defer></script>
   <script src="js/effects/organic-particles.js" defer></script>
   <script src="js/effects/eyes-follow.js" defer></script>
+  <script src="js/effects/hero-parallax.js" defer></script>
 
   <!-- Core Systems (deferred) -->
   <script src="js/core/soty-effects.js" defer></script>
@@ -619,89 +620,8 @@
   <!-- Collector Mode -->
   <script src="js/features/kimi-ideas.js" defer></script>
 
-  <!-- Gallery Lightbox Inline (Progressive Enhancement) -->
+  <!-- Progressive Enhancement: Lazy Images + Header Reveal -->
   <script>
-    // Gallery click → Lightbox
-    document.querySelectorAll('.gallery-massive__item').forEach(item => {
-      item.addEventListener('click', () => {
-        const img = item.querySelector('img');
-        if (!img) return;
-        const lb = document.getElementById('lightbox');
-        const lbImg = document.getElementById('lightbox-img');
-        const lbCaption = document.getElementById('lightbox-caption');
-        lbImg.src = img.src;
-        lbImg.alt = img.alt;
-        lbCaption.textContent = item.querySelector('.gallery-massive__title')?.textContent || '';
-        lb.hidden = false;
-      });
-    });
-
-    // Gallery Hero click → Lightbox
-    const galleryHero = document.querySelector('.gallery-hero__artwork');
-    if (galleryHero) {
-      galleryHero.addEventListener('click', () => {
-        const img = galleryHero.querySelector('img');
-        if (!img) return;
-        const lb = document.getElementById('lightbox');
-        document.getElementById('lightbox-img').src = img.src;
-        document.getElementById('lightbox-caption').textContent =
-          galleryHero.querySelector('.gallery-hero__title')?.textContent || '';
-        lb.hidden = false;
-      });
-    }
-
-    // Close lightbox
-    document.getElementById('lightbox')?.addEventListener('click', (e) => {
-      if (e.target.closest('.lightbox__close') || e.target === e.currentTarget) {
-        e.currentTarget.hidden = true;
-      }
-    });
-
-    // Escape closes lightbox
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        document.getElementById('lightbox').hidden = true;
-      }
-    });
-
-    // Scroll progress bar
-    window.addEventListener('scroll', () => {
-      const scrollThread = document.getElementById('scroll-thread');
-      if (!scrollThread) return;
-      const winScroll = document.documentElement.scrollTop;
-      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      const scrolled = (winScroll / height) * 100;
-      scrollThread.style.width = scrolled + '%';
-    }, { passive: true });
-
-    // ══ Scroll Reveal: IntersectionObserver for .reveal elements ══
-    const revealObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          revealObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.15 });
-
-    document.querySelectorAll('.reveal, .reveal-left, .reveal-scale, .reveal-stagger').forEach(el => {
-      revealObserver.observe(el);
-    });
-
-    // ══ Gallery Reveal: IntersectionObserver ══
-    const galleryRevealObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          galleryRevealObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-
-    document.querySelectorAll('.gallery-reveal').forEach(el => {
-      galleryRevealObserver.observe(el);
-    });
-
     // ══ Lazy Images: Progressive blur-up ══
     document.querySelectorAll('.gallery-lazy img, .gallery-massive__img').forEach(img => {
       if (img.complete) {
@@ -723,8 +643,6 @@
     document.querySelectorAll('.view__header').forEach(el => {
       headerRevealObserver.observe(el);
     });
-
-    console.log('🎨 Naroa 2026 — Premium Edition Active');
   </script>
 
   <!-- Vite Module Entry Point -->

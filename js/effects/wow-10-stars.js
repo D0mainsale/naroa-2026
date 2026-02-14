@@ -310,7 +310,7 @@
         const mood = this.parseMood(text.toLowerCase());
         this.applyMood(mood);
         
-        console.log(`🌤️ Petrichor Mood: ${mood.label} → hue shift ${mood.hue}°`);
+
       } catch(e) {
         // Silent fail — use time-based fallback
         const hour = new Date().getHours();
@@ -375,7 +375,7 @@
             museum: 'Art Institute of Chicago'
           };
           
-          console.log(`✨ Serendipia: "${artwork.title}" by ${artwork.artist_title} (${artwork.date_display})`);
+
         }
       } catch(e) {
         // Silent fail — serendipity is never forced
@@ -554,7 +554,7 @@
       // Apply subtle filter to non-interactive content
       document.body.style.filter = palette.filter;
       
-      console.log(`⏰ Temporal Shift: ${period} (${hour}:00) → ${palette.accent}`);
+
     }
   };
 
@@ -580,7 +580,7 @@
     PetrichorMood.init();
     SerendipityEngine.init();
     
-    console.log('✨ 10 WOW Effects activated — Disruptivos hasta 2029');
+
   }
 
   if (document.readyState === 'loading') {

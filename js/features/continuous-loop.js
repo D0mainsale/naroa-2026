@@ -5,7 +5,7 @@
  */
 
 (function() {
-    console.log('∞ Starting Continuous Loop Cycle (6h)...');
+    // Continuous Loop Cycle started
 
     const STORAGE_KEY = 'naroa_loop_start';
     let startTime = localStorage.getItem(STORAGE_KEY);

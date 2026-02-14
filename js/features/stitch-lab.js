@@ -54,7 +54,6 @@ import stitchService from '../services/stitch-service.js';
       return;
     }
 
-    console.log(`🧵 Stitch Lab: Generating UI for "${prompt}"...`);
 
     try {
       const result = await stitchService.generateUI(prompt.trim(), {
@@ -67,7 +66,6 @@ import stitchService from '../services/stitch-service.js';
         }
       });
 
-      console.log('🧵 Stitch Lab Result:', result);
 
       if (result.mock) {
         showToast('🧵 Stitch Lab (mock): Resultado en consola', 'info');

@@ -123,15 +123,7 @@
     if (micaInput) {
       micaInput.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' && micaInput.value.trim()) {
-          if (query.toLowerCase().includes('juego') || query.toLowerCase().includes('sphere') || query.toLowerCase().includes('weaver')) {
-            if (window.MicaOrganicSphere) {
-              window.MicaOrganicSphere.open();
-              micaInput.value = '';
-              collapse();
-              return;
-            }
-          }
-            const query = micaInput.value.trim();
+          const query = micaInput.value.trim();
           if (query.toLowerCase().includes('juego') || query.toLowerCase().includes('sphere') || query.toLowerCase().includes('weaver')) {
             if (window.MicaOrganicSphere) {
               window.MicaOrganicSphere.open();
@@ -144,8 +136,6 @@
           // Dispatch to MICA if available
           if (window.MICA && window.MICA.processQuery) {
             window.MICA.processQuery(query);
-          } else {
-            console.log(`💬 MICA query: "${query}"`);
           }
           micaInput.value = '';
           collapse();
@@ -213,6 +203,7 @@
 
     const circumference = 2 * Math.PI * 7; // r=7
     progressBar.style.strokeDasharray = circumference;
+    let ticking = false;
     
     function update() {
       const scrollTop = window.scrollY;
@@ -220,9 +211,18 @@
       const progress = docHeight > 0 ? scrollTop / docHeight : 0;
       const offset = circumference - (progress * circumference);
       progressBar.style.strokeDashoffset = offset;
-      requestAnimationFrame(update);
+      ticking = false;
     }
-    requestAnimationFrame(update);
+
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(update);
+        ticking = true;
+      }
+    }, { passive: true });
+
+    // Initial update
+    update();
   }
 
   function observeSections() {
@@ -255,7 +255,6 @@
   function init() {
     createNotch();
     hideOldNav();
-    console.log('🏝️ Notch — Isla Mágica activated');
   }
 
   if (document.readyState === 'loading') {

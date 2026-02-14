@@ -40,7 +40,7 @@ class MicaCrisisEngine {
     }
 
     init() {
-        console.log('⚡ MICA CRISIS ENGINE: INITIALIZED');
+        // MICA Crisis Engine initialized
         this.injectStyles();
         this.setupDOM();
         this.bindEvents();

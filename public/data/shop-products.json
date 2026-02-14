@@ -1,0 +1,42 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "currency": "EUR",
+    "shipping": "Worldwide"
+  },
+  "products": [
+    {
+      "id": "print-amy-rocks",
+      "artworkId": "amy-rocks",
+      "name": "Amy Rocks - Limited Edition Print",
+      "type": "Giclée Print",
+      "size": "50x70cm",
+      "edition": "1/50",
+      "price": 120,
+      "available": true,
+      "image": "images/products/print-amy.webp"
+    },
+    {
+      "id": "print-james-rocks",
+      "artworkId": "james-rocks",
+      "name": "James Rocks - Limited Edition Print",
+      "type": "Giclée Print",
+      "size": "50x70cm",
+      "edition": "1/50",
+      "price": 120,
+      "available": true,
+      "image": "images/products/print-james.webp"
+    },
+    {
+      "id": "print-espejos",
+      "artworkId": "espejos-del-alma",
+      "name": "Espejos del Alma - Collector's Box",
+      "type": "Box Set",
+      "includes": ["Print Signed", "Certificate of Authenticity", "Making-of booklet"],
+      "edition": "1/10",
+      "price": 350,
+      "available": true,
+      "image": "images/products/box-espejos.webp"
+    }
+  ]
+}

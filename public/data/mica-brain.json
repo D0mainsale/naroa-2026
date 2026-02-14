@@ -1,0 +1,90 @@
+{
+  "profile": {
+    "name": "Naroa Gutiérrez Gil",
+    "role": "Artivista Plástica",
+    "location": "Bilbao / Sopela",
+    "philosophy": "Kintsugi: Transformar la adversidad en arte. Las cicatrices son parte de la historia, no algo a ocultar.",
+    "method": "Resignificación: Uso de materiales descartados (pizarra, latas, papel) para darles nueva vida noble."
+  },
+  "series": {
+    "divinos": {
+      "description": "Retratos sobre pizarra natural.",
+      "metaphor": "La pizarra como 'vuelta a casa'. El mineral mica en la pintura crea un 'latido' en los ojos.",
+      "technique": "Hiperrealismo sobre soporte rústico."
+    },
+    "vaivenes": {
+      "description": "Obra centrada en la sostenibilidad y el movimiento.",
+      "materials": "Textiles reciclados, cables."
+    },
+    "enlata": {
+      "description": "Arte en latas de conserva recicladas.",
+      "concept": "Contenido preservado, arte accesible."
+    },
+    "rocks": {
+      "description": "Iconos pop y culturales con mirada hiperrealista.",
+      "technique": "Acrílico con mica mineral en los ojos."
+    },
+    "cantinflas": {
+      "description": "Serie de 5 retratos del cómico mexicano Mario Moreno.",
+      "concept": "La brillante incoherencia como motor creativo."
+    },
+    "facefood": {
+      "description": "Conexión entre arte y gastronomía vasca.",
+      "technique": "Chaquetas de chef intervenidas artísticamente."
+    },
+    "tributos-musicales": {
+      "description": "Homenajes a iconos de la música: Queen, Bowie, etc.",
+      "technique": "Comunión visual inmersiva a través de los ojos."
+    }
+  },
+  "techniques": {
+    "rasgado": "Una 'lucha' física entre el acrílico y el pegamento que crea texturas rotas y orgánicas.",
+    "hyperrealism_as_bridge": "No es el fin, es el medio. Usar rostros conocidos (iconos) para conectar con la emoción del espectador.",
+    "mica_mineral": "El contrapunto celestial. Aporta el brillo y el latido a los ojos de los iconos."
+  },
+  "future_projects": {
+    "exhibition_2026": "DiviNos VaiVenes (Enero 2026, Bilbao)",
+    "film": "El Poblema (Cortometraje 2025)"
+  },
+  "mica_persona": {
+    "tone": "Empática, profunda, filosófica, pero con un toque 'canalla' o directo.",
+    "mission": "Guiar al usuario a través de sus propias turbulencias usando el arte como espejo."
+  },
+  "albums": {
+    "rocks": {
+      "amy": "https://www.facebook.com/media/set/?set=a.1571125317700217&type=3",
+      "johnny": "https://www.facebook.com/media/set/?set=a.1562090265270389&type=3",
+      "marilyn": "https://www.facebook.com/media/set/?set=a.1552149902931092&type=3",
+      "james": "https://www.facebook.com/media/set/?set=a.1543127323833350&type=3"
+    },
+    "cantinflas": "https://www.facebook.com/media/set/?set=a.1580369216775827&type=3",
+    "divinos": "https://www.facebook.com/media/set/?set=a.989285339217554&type=3",
+    "vaivenes": "https://www.facebook.com/media/set/?set=a.1577827357030013&type=3",
+    "enlata": {
+      "amor-en-conserva": "https://www.facebook.com/media/set/?set=a.858798248932931&type=3",
+      "dar-la-lata": "https://www.facebook.com/media/set/?set=a.606818890797536&type=3",
+      "enlatadas": "https://www.facebook.com/media/set/?set=a.460454262100667&type=3"
+    },
+    "tributos-musicales": {
+      "mr-fahrenheit": "https://www.facebook.com/media/set/?set=a.3432575976817090&type=3",
+      "baroque-farrokh": "https://www.facebook.com/media/set/?set=a.4592656824142327&type=3",
+      "starchild": "https://www.facebook.com/media/set/?set=a.4609680609106615&type=3"
+    },
+    "facefood": "https://www.facebook.com/media/set/?set=a.472343952840322&type=3",
+    "bodas": {
+      "candy-wedding": "https://www.facebook.com/media/set/?set=a.1787825874625450&type=3",
+      "viva-la-novia": "https://www.facebook.com/media/set/?set=a.5808288599245804&type=3"
+    },
+    "walking-gallery": {
+      "wg-2022": "https://www.facebook.com/media/set/?set=a.659334275545997&type=3",
+      "wg-2021": "https://www.facebook.com/media/set/?set=a.423448675801226&type=3"
+    },
+    "espejos-del-alma": "https://www.facebook.com/media/set/?set=a.148428161898571&type=3",
+    "artivismos": "https://www.facebook.com/media/set/?set=a.4820384624702878&type=3"
+  },
+  "notebooklm": {
+    "id": "5686048e-8cec-4af7-90dc-90125f22519a",
+    "synced": "2026-02-08T19:41:00Z",
+    "source": "NAROA GUTIÉRREZ GIL - ALBUMS LINKS"
+  }
+}
