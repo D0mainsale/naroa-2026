@@ -46,6 +46,7 @@
             category: (art.series || art.category || 'todos').toLowerCase().replace(/\s+/g, '-'), // Normalize series to category ID
             technique: art.technique,
             year: art.year,
+            description: art.description || art.altText || '', // SEO & Accessibility
             originalId: art.id,
             featured: art.featured
           }));
@@ -181,6 +182,7 @@
     item.className = 'gallery__item stitch-card';
     item.dataset.category = artwork.category;
     item.dataset.id = artwork.id;
+    if (artwork.description) item.dataset.description = artwork.description;
 
     // Series color from taxonomy
     const seriesInfo = TAXONOMY?.series?.[artwork.category];
@@ -195,25 +197,46 @@
     const isFeatured = artwork.featured || FEATURED_ARTWORK_IDS.includes(artwork.originalId);
 
     const baseName = artwork.file.replace('.webp', '');
-    item.innerHTML = `
-      <div class="stitch-media-wrapper shimmer">
-        <img 
-          data-src="${artwork.file.startsWith('/') ? artwork.file : '/images/artworks/' + artwork.file}" 
-          alt="${artwork.title}"
-          loading="lazy"
-          class="stitch-media-content gallery__img--hq"
-          onerror="this.style.display='none'; console.warn('Missing image:', this.dataset.src || this.src);"
-        >
-      </div>
-      ${isFeatured ? '<span class="stitch-badge stitch-badge--featured">★ Destacada</span>' : ''}
-      <div class="stitch-content">
-        <h3 class="stitch-title">${artwork.title}</h3>
-        <div class="stitch-subtitle">
-          <span>${artwork.technique || 'Obra original'}</span>
-          ${artwork.year ? `<span class="stitch-badge">${artwork.year}</span>` : ''}
+    const isPlaceholder = artwork.file.includes('placeholder');
+    
+    if (isPlaceholder) {
+      item.innerHTML = `
+        <div class="stitch-media-wrapper stitch-placeholder" style="background: linear-gradient(135deg, #111 0%, var(--series-color) 100%); opacity: 0.8;">
+          <div class="stitch-placeholder__content">
+            <span class="stitch-placeholder__icon">🎨</span>
+            <span class="stitch-placeholder__text">Próximamente</span>
+          </div>
         </div>
-      </div>
-    `;
+        ${isFeatured ? '<span class="stitch-badge stitch-badge--featured">★ Destacada</span>' : ''}
+        <div class="stitch-content">
+          <h3 class="stitch-title">${artwork.title}</h3>
+          <div class="stitch-subtitle">
+            <span>${artwork.technique || 'Obra original'}</span>
+            ${artwork.year ? `<span class="stitch-badge">${artwork.year}</span>` : ''}
+          </div>
+        </div>
+      `;
+    } else {
+      item.innerHTML = `
+        <div class="stitch-media-wrapper shimmer">
+          <img 
+            data-src="${artwork.file.startsWith('/') ? artwork.file : '/images/artworks/' + artwork.file}" 
+            alt="${artwork.description || artwork.title}"
+            loading="lazy"
+            class="stitch-media-content gallery__img--hq"
+            onerror="this.style.display='none'; console.warn('Missing image:', this.dataset.src || this.src);"
+          >
+        </div>
+        ${isFeatured ? '<span class="stitch-badge stitch-badge--featured">★ Destacada</span>' : ''}
+        <div class="stitch-content">
+          <h3 class="stitch-title">${artwork.title}</h3>
+          <div class="stitch-subtitle">
+            <span>${artwork.technique || 'Obra original'}</span>
+            ${artwork.year ? `<span class="stitch-badge">${artwork.year}</span>` : ''}
+          </div>
+        </div>
+      `;
+    }
 
     // Setup lazy loading
     const img = item.querySelector('img');

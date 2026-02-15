@@ -1,0 +1,258 @@
+[
+  {
+    "id": "asucar",
+    "title": "Asúcar (Celia Cruz)",
+    "series": "DiviNos / Obras Maestras",
+    "year": "2020",
+    "technique": "Acrílico y collage (sobres de azúcar, envoltorios) sobre lienzo 3D",
+    "altText": "Retrato vibrante de Celia Cruz en formato grande, integrando un collage de sobres de azúcar reales y colores saturados que homenajean el 'Sugar Blues'."
+  },
+  {
+    "id": "paul-newmum",
+    "title": "Paul Newmum",
+    "series": "Iconos",
+    "year": null,
+    "technique": "Pintura sobre lienzo",
+    "altText": "Retrato figurativo de Paul Newman capturando su mirada icónica, jugando con la familiaridad paternal en el título."
+  },
+  {
+    "id": "mr-fahrenheit",
+    "title": "Mr. Fahrenheit",
+    "series": "Tributos Musicales",
+    "year": null,
+    "technique": "Mixta sobre pizarra/tabla",
+    "altText": "Retrato energético de Freddie Mercury que busca transmitir la velocidad térmica de la canción 'Don't Stop Me Now', con colores rojo y oro."
+  },
+  {
+    "id": "rockagipsy",
+    "title": "RockaGipsy (Lembrança da Bahia)",
+    "series": "DiviNos",
+    "year": null,
+    "technique": "Acrílico y papel de seda sobre lienzo crudo",
+    "altText": "Retrato de Camarón de la Isla sobre lienzo sin imprimar, decorado con papel de seda de lunares para evocar la crudeza del flamenco."
+  },
+  {
+    "id": "amy-rocks",
+    "title": "Amy Rocks",
+    "series": "Rocks / DiviNos",
+    "year": "2022",
+    "technique": "Acrílico y Posca sobre pizarra natural",
+    "altText": "Retrato estilizado de Amy Winehouse pintado sobre una placa de pizarra negra, destacando el contraste con el soporte oscuro."
+  },
+  {
+    "id": "cantiflowers",
+    "title": "Cantiflowers",
+    "series": "Vaivenes",
+    "year": null,
+    "technique": "Collage textil y acrílico",
+    "altText": "Retrato de Mario Moreno 'Cantinflas' con elementos tridimensionales de flores textiles que rompen el plano del cuadro."
+  },
+  {
+    "id": "tissukaldeko-loreak",
+    "title": "Tissukaldeko Loreak",
+    "series": "Vaivenes",
+    "year": null,
+    "technique": "Escultura en papel de cocina",
+    "altText": "Rosas blancas esculpidas a mano amasando papel de cocina, simbolizando la belleza que no se marchita surgida de lo doméstico."
+  },
+  {
+    "id": "entre-tantas-flores",
+    "title": "Entre Tantas Flores",
+    "series": "Vaivenes",
+    "year": null,
+    "technique": "Collage con textil y alambre de plata",
+    "altText": "Retrato de Robe (Roberto Iniesta) integrado con elementos florales de tela y alambre, fusionando la figura con la naturaleza."
+  },
+  {
+    "id": "amor-en-conserva",
+    "title": "Amor en Conserva",
+    "series": "En.lata",
+    "year": null,
+    "technique": "Intervención en lata de conserva",
+    "altText": "Lata de comida industrial reciclada y convertida en objeto artístico que metafóricamente preserva emociones."
+  },
+  {
+    "id": "dar-la-lata",
+    "title": "Dar la Lata",
+    "series": "En.lata",
+    "year": null,
+    "technique": "Reciclaje artístico",
+    "altText": "Obra de la serie de reciclaje que utiliza envases metálicos reutilizados como soporte expresivo."
+  },
+  {
+    "id": "amazona",
+    "title": "AmazOna",
+    "series": "Mitología",
+    "year": null,
+    "technique": "Pintura sobre lienzo",
+    "altText": "Representación de una figura de diosa guerrera rodeada de flores diurnas y nocturnas, simbolizando el viaje personal."
+  },
+  {
+    "id": "johnny-rocks",
+    "title": "Johnny Rocks",
+    "series": "Rocks",
+    "year": null,
+    "technique": "Mixta (Estilo Pop)",
+    "altText": "Retrato pop estilizado de Johnny Depp con colores vivos y trazos definidos."
+  },
+  {
+    "id": "marilyn-rocks",
+    "title": "Marilyn Rocks",
+    "series": "Rocks",
+    "year": null,
+    "technique": "Mixta (Estilo Pop)",
+    "altText": "Reinterpretación moderna y colorida del icono de Marilyn Monroe bajo la estética 'Rocks'."
+  },
+  {
+    "id": "james-rocks",
+    "title": "James Rocks",
+    "series": "Rocks",
+    "year": null,
+    "technique": "Mixta (Estilo Pop)",
+    "altText": "Retrato pop art de James Dean, capturando su actitud rebelde con una paleta contemporánea."
+  },
+  {
+    "id": "baroque-farrokh",
+    "title": "Baroque Farrokh",
+    "series": "Tributos Musicales",
+    "year": null,
+    "technique": "Pintura",
+    "altText": "Retrato de Freddie Mercury con una estética ornamentada y barroca."
+  },
+  {
+    "id": "starchild",
+    "title": "Starchild",
+    "series": "Tributos Musicales",
+    "year": null,
+    "technique": "Pintura",
+    "altText": "Homenaje a David Bowie en su etapa Ziggy Stardust, destacando el maquillaje del rayo."
+  },
+  {
+    "id": "candy-wedding",
+    "title": "Candy Wedding",
+    "series": "Bodas",
+    "year": null,
+    "technique": "Pintura decorativa",
+    "altText": "Obra de temática nupcial con estilo dulce y festivo, destinada a celebración."
+  },
+  {
+    "id": "el-cocinero-emplatado",
+    "title": "El Cocinero Emplatado",
+    "series": "Facefood",
+    "year": null,
+    "technique": "Fusión arte y gastronomía",
+    "altText": "Obra que mezcla elementos culinarios y pintura, representando la figura de un chef."
+  },
+  {
+    "id": "piel-de-chef",
+    "title": "Piel de Chef",
+    "series": "Facefood",
+    "year": null,
+    "technique": "Mixta",
+    "altText": "Exploración artística de la indumentaria y la identidad gastronómica."
+  },
+  {
+    "id": "walking-gallery-bilbao-2022",
+    "title": "Walking Gallery Bilbao 2022",
+    "series": "Walking Gallery",
+    "year": "2022",
+    "technique": "Intervención urbana / Performance",
+    "altText": "Documentación artística de la participación en el evento de arte itinerante por las calles de Bilbao."
+  },
+  {
+    "id": "espejos-del-alma",
+    "title": "Espejos del Alma",
+    "series": "Espejos del Alma",
+    "year": "2015",
+    "technique": "Retrato",
+    "altText": "Serie de retratos introspectivos expuestos en el Café Lamiak."
+  },
+  {
+    "id": "i-got-you-babe",
+    "title": "I Got You Babe (Autorretrato Colectivo Covid)",
+    "series": "Artivismos",
+    "year": "2020",
+    "technique": "Pintura / Proyecto social",
+    "altText": "Obra colectiva realizada durante la pandemia que refleja la conexión social a distancia."
+  },
+  {
+    "id": "el-poblema",
+    "title": "“El Poblema”",
+    "series": "Audiovisual",
+    "year": "2025",
+    "technique": "Cortometraje / Cine",
+    "altText": "Proyecto audiovisual narrativo programado para 2025."
+  },
+  {
+    "id": "sistashark",
+    "title": "Sistashark",
+    "series": "Obras individuales",
+    "year": null,
+    "technique": "Mixta",
+    "altText": "Obra figurativa con elementos marinos y simbología de empoderamiento ('Sista'/Sister)."
+  },
+  {
+    "id": "viuda-negra",
+    "title": "Viuda Negra",
+    "series": "Obras individuales",
+    "year": null,
+    "technique": "Mixta",
+    "altText": "Composición oscura y simbólica referenciando a la figura de la viuda negra."
+  },
+  {
+    "id": "hugo-box",
+    "title": "Hugo Box",
+    "series": "Obras individuales",
+    "year": null,
+    "technique": "Mixta / Caja",
+    "altText": "Obra tridimensional contenida o en formato de caja intervenida."
+  },
+  {
+    "id": "pajarraca-azul",
+    "title": "Pajarraca Azul",
+    "series": "Obras individuales",
+    "year": null,
+    "technique": "Pintura",
+    "altText": "Representación colorida y expresiva de un ave azul con estilo desenfadado."
+  },
+  {
+    "id": "new-kidz-on-the-blocks",
+    "title": "New Kidz on the Blocks",
+    "series": "Obras individuales",
+    "year": null,
+    "technique": "Mixta",
+    "altText": "Obra que juega con la cultura pop y la estética de bloques o construcción."
+  },
+  {
+    "id": "tedas-queen",
+    "title": "Tedás Queen",
+    "series": "Tributos Musicales",
+    "year": null,
+    "technique": "Pintura",
+    "altText": "Homenaje a la banda Queen con un juego de palabras en el título."
+  },
+  {
+    "id": "can-dy-queen",
+    "title": "Can-dy Queen",
+    "series": "Tributos Musicales",
+    "year": null,
+    "technique": "Pintura",
+    "altText": "Retrato o composición inspirada en Queen con estética de colores dulces/candy."
+  },
+  {
+    "id": "la-pensadora-bag",
+    "title": "La Pensadora bag in London",
+    "series": "Vaivenes / Functional",
+    "year": null,
+    "technique": "Arte textil / Bolso intervenido",
+    "altText": "Bolso artístico fotografiado en Londres, parte de su serie de arte funcional."
+  },
+  {
+    "id": "el-abrazo-del-cielo",
+    "title": "El Abrazo del Cielo... en la Tierra",
+    "series": "Audiovisual / IA",
+    "year": null,
+    "technique": "Video animación con IA",
+    "altText": "Animación digital generada por IA a partir de la obra Cantiflowers, donde la pintura cobra movimiento."
+  }
+]

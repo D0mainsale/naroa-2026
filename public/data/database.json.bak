@@ -4,14 +4,13 @@
     "title": "Asúcar (Celia Cruz)",
     "series": "divinos",
     "year": 2020,
-    "technique": "Acrílico y collage (sobres de azúcar, envoltorios) sobre lienzo 3d",
+    "technique": "Acrílico y collage (sobres de azúcar, envoltorios) sobre lienzo 3D",
     "image": "images/artworks/celia-cruz-cantinflowers.webp",
     "altText": "Obra Asúcar (Celia Cruz) de Naroa Gutiérrez Gil",
     "metaDescription": "Asúcar (Celia Cruz) - Arte por Naroa Gutiérrez Gil. Acrílico y collage (sobres de azúcar, envoltorios) sobre lienzo 3D",
     "category": "DiviNos / Obras Maestras",
     "style": "Mixed Media",
-    "featured": true,
-    "description": "Retrato vibrante de Celia Cruz en formato grande, integrando un collage de sobres de azúcar reales y colores saturados que homenajean el 'Sugar Blues'."
+    "featured": true
   },
   {
     "id": "paul-newmum",
@@ -24,8 +23,7 @@
     "metaDescription": "Paul Newmum - Arte por Naroa Gutiérrez Gil. Pintura sobre lienzo",
     "category": "Iconos",
     "style": "Mixed Media",
-    "featured": true,
-    "description": "Retrato figurativo de Paul Newman capturando su mirada icónica, jugando con la familiaridad paternal en el título."
+    "featured": true
   },
   {
     "id": "mr-fahrenheit-freddie-mercury",
@@ -51,64 +49,59 @@
     "metaDescription": "RockaGipsy (Lembrança da Bahia) - Arte por Naroa Gutiérrez Gil. Acrílico y papel de seda sobre lienzo crudo",
     "category": "DiviNos",
     "style": "Mixed Media",
-    "featured": true,
-    "description": "Retrato de Camarón de la Isla sobre lienzo sin imprimar, decorado con papel de seda de lunares para evocar la crudeza del flamenco."
+    "featured": true
   },
   {
     "id": "amy-rocks",
     "title": "Amy Rocks",
     "series": "rocks",
     "year": 2022,
-    "technique": "Acrílico y posca sobre pizarra natural",
+    "technique": "Acrílico y Posca sobre pizarra natural",
     "image": "images/artworks/amy-rocks.webp",
     "altText": "Obra Amy Rocks de Naroa Gutiérrez Gil",
     "metaDescription": "Amy Rocks - Arte por Naroa Gutiérrez Gil. Acrílico y Posca sobre pizarra natural",
     "category": "Rocks",
     "style": "Mixed Media",
-    "featured": true,
-    "description": "Retrato estilizado de Amy Winehouse pintado sobre una placa de pizarra negra, destacando el contraste con el soporte oscuro."
+    "featured": true
   },
   {
     "id": "johnny-rocks",
     "title": "Johnny Rocks",
     "series": "rocks",
     "year": 2026,
-    "technique": "Mixta (estilo pop)",
+    "technique": "Mixta (Estilo Pop)",
     "image": "images/artworks/johnny-rocks-hq-4.webp",
     "altText": "Obra Johnny Rocks de Naroa Gutiérrez Gil",
     "metaDescription": "Johnny Rocks - Arte por Naroa Gutiérrez Gil. Mixta (Estilo Pop)",
     "category": "Rocks",
     "style": "Mixed Media",
-    "featured": true,
-    "description": "Retrato pop estilizado de Johnny Depp con colores vivos y trazos definidos."
+    "featured": true
   },
   {
     "id": "marilyn-rocks",
     "title": "Marilyn Rocks",
     "series": "rocks",
     "year": 2026,
-    "technique": "Mixta (estilo pop)",
+    "technique": "Mixta (Estilo Pop)",
     "image": "images/artworks/marilyn-rocks.webp",
     "altText": "Obra Marilyn Rocks de Naroa Gutiérrez Gil",
     "metaDescription": "Marilyn Rocks - Arte por Naroa Gutiérrez Gil. Mixta (Estilo Pop)",
     "category": "Rocks",
     "style": "Mixed Media",
-    "featured": true,
-    "description": "Reinterpretación moderna y colorida del icono de Marilyn Monroe bajo la estética 'Rocks'."
+    "featured": true
   },
   {
     "id": "james-rocks",
     "title": "James Rocks",
     "series": "rocks",
     "year": 2026,
-    "technique": "Mixta (estilo pop)",
+    "technique": "Mixta (Estilo Pop)",
     "image": "images/artworks/james-rocks-hq-3.webp",
     "altText": "Obra James Rocks de Naroa Gutiérrez Gil",
     "metaDescription": "James Rocks - Arte por Naroa Gutiérrez Gil. Mixta (Estilo Pop)",
     "category": "Rocks",
     "style": "Mixed Media",
-    "featured": true,
-    "description": "Retrato pop art de James Dean, capturando su actitud rebelde con una paleta contemporánea."
+    "featured": true
   },
   {
     "id": "cantiflowers-mario-moreno",
@@ -173,8 +166,7 @@
     "metaDescription": "Amor en Conserva - Arte por Naroa Gutiérrez Gil. Intervención en lata de conserva",
     "category": "En.lata (Latas y Conservas)",
     "style": "Mixed Media",
-    "featured": false,
-    "description": "Lata de comida industrial reciclada y convertida en objeto artístico que metafóricamente preserva emociones."
+    "featured": false
   },
   {
     "id": "dar-la-lata",
@@ -187,8 +179,7 @@
     "metaDescription": "Dar la Lata - Arte por Naroa Gutiérrez Gil. Reciclaje artístico",
     "category": "En.lata (Latas y Conservas)",
     "style": "Mixed Media",
-    "featured": false,
-    "description": "Obra de la serie de reciclaje que utiliza envases metálicos reutilizados como soporte expresivo."
+    "featured": false
   },
   {
     "id": "enlatadas",
@@ -208,14 +199,13 @@
     "title": "Walking Gallery Bilbao 2022",
     "series": "walking-gallery",
     "year": 2022,
-    "technique": "Intervención urbana / performance",
+    "technique": "Intervención urbana / Performance",
     "image": "images/artworks/placeholder.webp",
     "altText": "Obra Walking Gallery Bilbao 2022 de Naroa Gutiérrez Gil",
     "metaDescription": "Walking Gallery Bilbao 2022 - Arte por Naroa Gutiérrez Gil. Intervención urbana / Performance",
     "category": "Walking Gallery",
     "style": "Mixed Media",
-    "featured": false,
-    "description": "Documentación artística de la participación en el evento de arte itinerante por las calles de Bilbao."
+    "featured": false
   },
   {
     "id": "walking-gallery-bilbao-fair-saturday",
@@ -267,8 +257,7 @@
     "metaDescription": "Baroque Farrokh - Arte por Naroa Gutiérrez Gil. Pintura",
     "category": "Tributos Musicales (Queen)",
     "style": "Mixed Media",
-    "featured": false,
-    "description": "Retrato de Freddie Mercury con una estética ornamentada y barroca."
+    "featured": false
   },
   {
     "id": "starchild",
@@ -281,8 +270,7 @@
     "metaDescription": "Starchild - Arte por Naroa Gutiérrez Gil. Pintura",
     "category": "Tributos Musicales (Bowie)",
     "style": "Mixed Media",
-    "featured": false,
-    "description": "Homenaje a David Bowie en su etapa Ziggy Stardust, destacando el maquillaje del rayo."
+    "featured": false
   },
   {
     "id": "tedas-queen",
@@ -295,8 +283,7 @@
     "metaDescription": "Tedás Queen - Arte por Naroa Gutiérrez Gil. Pintura",
     "category": "Tributos Musicales",
     "style": "Mixed Media",
-    "featured": false,
-    "description": "Homenaje a la banda Queen con un juego de palabras en el título."
+    "featured": false
   },
   {
     "id": "can-dy-queen",
@@ -309,8 +296,7 @@
     "metaDescription": "Can-dy Queen - Arte por Naroa Gutiérrez Gil. Pintura",
     "category": "Tributos Musicales",
     "style": "Mixed Media",
-    "featured": false,
-    "description": "Retrato o composición inspirada en Queen con estética de colores dulces/candy."
+    "featured": false
   },
   {
     "id": "el-cocinero-emplatado",
@@ -323,8 +309,7 @@
     "metaDescription": "El Cocinero Emplatado - Arte por Naroa Gutiérrez Gil. Fusión arte y gastronomía",
     "category": "Facefood",
     "style": "Mixed Media",
-    "featured": false,
-    "description": "Obra que mezcla elementos culinarios y pintura, representando la figura de un chef."
+    "featured": false
   },
   {
     "id": "piel-de-chef",
@@ -337,8 +322,7 @@
     "metaDescription": "Piel de Chef - Arte por Naroa Gutiérrez Gil. Fusión arte y gastronomía",
     "category": "Facefood",
     "style": "Mixed Media",
-    "featured": false,
-    "description": "Exploración artística de la indumentaria y la identidad gastronómica."
+    "featured": false
   },
   {
     "id": "candy-wedding-original",
@@ -384,14 +368,13 @@
     "title": "I Got You Babe (Autorretrato Colectivo Covid)",
     "series": "artivismos",
     "year": 2026,
-    "technique": "Pintura / proyecto social",
+    "technique": "Pintura / Proyecto social",
     "image": "images/artworks/placeholder.webp",
     "altText": "Obra I Got You Babe (Autorretrato Colectivo Covid) de Naroa Gutiérrez Gil",
     "metaDescription": "I Got You Babe (Autorretrato Colectivo Covid) - Arte por Naroa Gutiérrez Gil. Pintura / Proyecto social",
     "category": "Artivismos",
     "style": "Mixed Media",
-    "featured": false,
-    "description": "Obra colectiva realizada durante la pandemia que refleja la conexión social a distancia."
+    "featured": false
   },
   {
     "id": "espejos-del-alma",
@@ -404,8 +387,7 @@
     "metaDescription": "Espejos del Alma - Arte por Naroa Gutiérrez Gil. Retrato",
     "category": "Espejos del Alma",
     "style": "Mixed Media",
-    "featured": false,
-    "description": "Serie de retratos introspectivos expuestos en el Café Lamiak."
+    "featured": false
   },
   {
     "id": "artivismos",
@@ -457,8 +439,7 @@
     "metaDescription": "Viuda Negra - Arte por Naroa Gutiérrez Gil. Mixta",
     "category": "Obras individuales",
     "style": "Mixed Media",
-    "featured": false,
-    "description": "Composición oscura y simbólica referenciando a la figura de la viuda negra."
+    "featured": false
   },
   {
     "id": "red-red-wine",
@@ -478,14 +459,13 @@
     "title": "Hugo Box",
     "series": "obras individuales",
     "year": 2026,
-    "technique": "Mixta / caja",
+    "technique": "Mixta / Caja",
     "image": "images/artworks/hugo-box.webp",
     "altText": "Obra Hugo Box de Naroa Gutiérrez Gil",
     "metaDescription": "Hugo Box - Arte por Naroa Gutiérrez Gil. Mixta / Caja",
     "category": "Obras individuales",
     "style": "Mixed Media",
-    "featured": false,
-    "description": "Obra tridimensional contenida o en formato de caja intervenida."
+    "featured": false
   },
   {
     "id": "amazona",
@@ -498,8 +478,7 @@
     "metaDescription": "AmazOna - Arte por Naroa Gutiérrez Gil. Pintura sobre lienzo y reproducción",
     "category": "Mitología",
     "style": "Mixed Media",
-    "featured": false,
-    "description": "Representación de una figura de diosa guerrera rodeada de flores diurnas y nocturnas, simbolizando el viaje personal."
+    "featured": false
   },
   {
     "id": "enlata2",
@@ -980,7 +959,6 @@
     "metaDescription": "Cantinflowers - Arte por Naroa Gutiérrez Gil. ",
     "category": "Obras Individuales / Álbumes",
     "style": "Mixed Media",
-    "featured": false,
-    "description": "Retrato de Mario Moreno 'Cantinflas' con elementos tridimensionales de flores textiles que rompen el plano del cuadro."
+    "featured": false
   }
 ]

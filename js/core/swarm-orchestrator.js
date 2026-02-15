@@ -106,7 +106,7 @@ class SwarmSentinel extends SwarmAgent {
           if (entry.duration > 50) this.log(`Slow task: ${entry.duration.toFixed(0)}ms ⚠️`);
         });
       });
-      try { obs.observe({ entryTypes: ['longtask'] }); } catch(e) {}
+      try { obs.observe({ entryTypes: ['longtask'] }); } catch(e) { /* longtask API not supported */ }
     }
   }
 }
@@ -155,10 +155,10 @@ class SwarmMemory extends SwarmAgent {
     this.restore();
   }
   save(key, value) {
-    try { sessionStorage.setItem(`swarm_${key}`, JSON.stringify(value)); } catch(e) {}
+    try { sessionStorage.setItem(`swarm_${key}`, JSON.stringify(value)); } catch(e) { /* sessionStorage unavailable (private browsing) */ }
   }
   recall(key) {
-    try { return JSON.parse(sessionStorage.getItem(`swarm_${key}`)); } catch(e) { return null; }
+    try { return JSON.parse(sessionStorage.getItem(`swarm_${key}`)); } catch(e) { /* corrupt data */ return null; }
   }
   restore() {
     const lastRoute = this.recall('lastRoute');

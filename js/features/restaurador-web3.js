@@ -111,6 +111,8 @@
    */
   async function uploadToIPFS(imageDataURL) {
     // Check for Pinata API key in localStorage or prompt
+    // SECURITY NOTE: Storing keys in localStorage is not secure for production apps with backend.
+    // This is a client-side only MVP. User assumes risk of local key storage.
     let apiKey = localStorage.getItem('pinata_api_key');
     let apiSecret = localStorage.getItem('pinata_api_secret');
 

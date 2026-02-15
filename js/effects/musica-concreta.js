@@ -279,9 +279,9 @@ class MusicaConcreta {
     // Cleanup after fade
     setTimeout(() => {
       this.layers.forEach(layer => {
-        if (layer.oscs) layer.oscs.forEach(o => { try { o.stop(); } catch(e) {} });
-        if (layer.source) try { layer.source.stop(); } catch(e) {}
-        if (layer.lfo) try { layer.lfo.stop(); } catch(e) {}
+        if (layer.oscs) layer.oscs.forEach(o => { try { o.stop(); } catch(e) { /* already stopped */ } });
+        if (layer.source) try { layer.source.stop(); } catch(e) { /* already stopped */ }
+        if (layer.lfo) try { layer.lfo.stop(); } catch(e) { /* already stopped */ }
       });
       this.layers = [];
     }, 2500);
