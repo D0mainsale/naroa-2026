@@ -38,6 +38,8 @@ import { transition as PageTransition } from './js/core/transitions.js';
 // Visual Effects & Premium Systems
 import { SOTYEffects } from './js/core/soty-effects.js';
 import { WOWEffects2026 } from './js/core/wow-effects-2026.js';
+import { KineticText } from './js/effects/kinetic-text.js';
+import { MagneticButton } from './js/effects/magnetic-button.js';
 import { ScrollToTop } from './js/features/scroll-to-top.js';
 import { SpotifyRotator } from './js/spotify-rotator.js';
 
@@ -96,7 +98,8 @@ class NaroaApp {
     r.register('#/archivo', () => this.systems.transitions.play(() => this.loadFeature('gallery', 'loadArchive')));
     r.register('#/contacto', () => this.systems.transitions.play(() => this.loadFeature('videocall', 'init', 'contacto-container')));
     
-    // Games Overlay
+    // Gallery & Featured
+    r.register('#/destacada', () => this.systems.transitions.play(() => r.showView('view-destacada')));
     r.register('#/juegos', () => this.systems.transitions.play(() => r.showView('view-juegos')));
     r.register('#/juego', () => this.systems.transitions.play(() => { 
       r.showView('view-juego'); 

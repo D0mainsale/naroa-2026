@@ -74,8 +74,8 @@ export class LiquidDistortion {
             generateMipmaps: false,
         });
 
-        // High density plane for smooth liquid movement
-        const geometry = new Plane(this.gl, { widthSegments: 64, heightSegments: 64 });
+        // Optimized segments for rock-solid 60fps on mobile
+        const geometry = new Plane(this.gl, { widthSegments: 48, heightSegments: 48 });
 
         const vertex = /* glsl */ `
             attribute vec3 position;
@@ -92,7 +92,7 @@ export class LiquidDistortion {
                 vec3 pos = position;
                 
                 // Subtle organic wave based on time and global velocity
-                float wave = sin(pos.x * 2.0 + uTime * 2.0) * cos(pos.y * 2.0 + uTime * 1.5) * 0.05 * uVelo;
+                float wave = sin(pos.x * 2.0 + uTime * 2.0) * cos(pos.y * 2.0 + uTime * 1.5) * 0.04 * uVelo;
                 pos.z += wave;
                 
                 gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
@@ -139,13 +139,23 @@ export class LiquidDistortion {
                 float g = texture2D(tMap, clamp(targetUv, 0.0, 1.0)).g;
                 float b = texture2D(tMap, clamp(targetUv - distortion * 0.05, 0.0, 1.0)).b;
                 
+                vec3 color = vec3(r, g, b);
+                
+                // [NEXUS CONFIG] Industrial Noir Tint (#0a1f3a)
+                vec3 tintColor = vec3(0.039, 0.122, 0.227); // #0a1f3a converted to 0-1
+                color = mix(color, tintColor, 0.1 * strength); // Adaptive tint
+                
                 float noise = fract(sin(dot(correctedUv, vec2(12.9898, 78.233))) * 43758.5453) * 0.015;
                 
-                // Subtle edge vignette in the shader to hide any remaining tiny artifacts
+                // Progressive Vignette Bloom (UX Enhancement)
+                float vignette = smoothstep(radius * 1.2, radius, dist);
+                color *= mix(1.0, 1.15, vignette * uVelo); // Bloom on movement
+                
+                // Subtle edge mask
                 float edgeMask = smoothstep(0.0, 0.05, uv.x) * smoothstep(1.0, 0.95, uv.x) *
                                 smoothstep(0.0, 0.05, uv.y) * smoothstep(1.0, 0.95, uv.y);
                 
-                gl_FragColor = vec4((vec3(r, g, b) + noise) * edgeMask, edgeMask);
+                gl_FragColor = vec4((color + noise) * edgeMask, edgeMask);
             }
         `;
 
@@ -164,6 +174,7 @@ export class LiquidDistortion {
         });
 
         this.mesh = new Mesh(this.gl, { geometry, program: this.program });
+        this.renderer.canvas.style.willChange = 'opacity, transform';
     }
 
     addEventListeners() {

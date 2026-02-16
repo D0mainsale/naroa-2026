@@ -11,6 +11,11 @@ class NaroaCursorSystem {
     this.canvas = this.createCanvas();
     this.ctx = this.canvas.getContext('2d');
     
+    // Pool de partículas para evitar GC
+    this.particlePool = [];
+    this.poolSize = 150;
+    this.initPool();
+
     this.variants = {
       default: this.cursorDefault.bind(this),
       tritone_trail: this.cursorTritoneTrail.bind(this),
@@ -46,6 +51,24 @@ class NaroaCursorSystem {
     this.animate();
   }
 
+  initPool() {
+    for (let i = 0; i < this.poolSize; i++) {
+        this.particlePool.push({
+            x: 0, y: 0,
+            vx: 0, vy: 0,
+            life: 0,
+            size: 0,
+            color: '#000',
+            alpha: 0,
+            active: false
+        });
+    }
+  }
+
+  getParticle() {
+    return this.particlePool.find(p => !p.active);
+  }
+
   resize() {
     this.canvas.width = window.innerWidth;
     this.canvas.height = window.innerHeight;
@@ -56,7 +79,9 @@ class NaroaCursorSystem {
     this.mouseY = e.clientY;
     
     // Ejecutar la variante activa
-    this.variants[this.activeVariant](e);
+    if (this.variants[this.activeVariant]) {
+        this.variants[this.activeVariant](e);
+    }
   }
 
   // VARIANTE 1: Default (ya existe con CSS)
@@ -68,39 +93,41 @@ class NaroaCursorSystem {
   cursorTritoneTrail(e) {
     const colors = ['#E5A47B', '#2E2E2E', '#F5F5DC']; // Naranja, Negro, Crema
     
-    this.trailParticles.push({
-      x: e.clientX,
-      y: e.clientY,
-      color: colors[Math.floor(Math.random() * colors.length)],
-      alpha: 1,
-      size: 8 + Math.random() * 4,
-      life: 1
-    });
-    
-    // Limitar partículas
-    if (this.trailParticles.length > 30) {
-      this.trailParticles.shift();
+    const p = this.getParticle();
+    if (p) {
+        p.active = true;
+        p.x = e.clientX;
+        p.y = e.clientY;
+        p.color = colors[Math.floor(Math.random() * colors.length)];
+        p.alpha = 1;
+        p.size = 8 + Math.random() * 4;
+        p.life = 1;
+        p.vx = 0;
+        p.vy = 0;
+        p.gravity = 0;
+        p.bounce = 0;
+        p.type = 'normal';
     }
   }
 
   // VARIANTE 3: Polvo Dorado (Mica Dust)
   cursorMicaDust(e) {
     for (let i = 0; i < 2; i++) {
-      this.trailParticles.push({
-        x: e.clientX + (Math.random() - 0.5) * 20,
-        y: e.clientY + (Math.random() - 0.5) * 20,
-        color: '#FFD700',
-        alpha: 0.8,
-        size: 2 + Math.random() * 3,
-        life: 1,
-        vx: (Math.random() - 0.5) * 2,
-        vy: Math.random() * 2 + 1, // Caen hacia abajo
-        gravity: 0.1
-      });
-    }
-    
-    if (this.trailParticles.length > 100) {
-      this.trailParticles.shift();
+      const p = this.getParticle();
+      if (p) {
+        p.active = true;
+        p.x = e.clientX + (Math.random() - 0.5) * 20;
+        p.y = e.clientY + (Math.random() - 0.5) * 20;
+        p.color = '#FFD700';
+        p.alpha = 0.8;
+        p.size = 2 + Math.random() * 3;
+        p.life = 1;
+        p.vx = (Math.random() - 0.5) * 2;
+        p.vy = Math.random() * 2 + 1; // Caen hacia abajo
+        p.gravity = 0.1;
+        p.bounce = 0;
+        p.type = 'normal';
+      }
     }
   }
 
@@ -112,67 +139,81 @@ class NaroaCursorSystem {
       case 'ENERGETIC':
         // Explosión radial
         for (let i = 0; i < 3; i++) {
-          const angle = Math.random() * Math.PI * 2;
-          this.trailParticles.push({
-            x: e.clientX,
-            y: e.clientY,
-            color: '#FFA500',
-            alpha: 1,
-            size: 6,
-            life: 1,
-            vx: Math.cos(angle) * 5,
-            vy: Math.sin(angle) * 5
-          });
+          const p = this.getParticle();
+          if (p) {
+            const angle = Math.random() * Math.PI * 2;
+            p.active = true;
+            p.x = e.clientX;
+            p.y = e.clientY;
+            p.color = '#FFA500';
+            p.alpha = 1;
+            p.size = 6;
+            p.life = 1;
+            p.vx = Math.cos(angle) * 5;
+            p.vy = Math.sin(angle) * 5;
+            p.gravity = 0;
+            p.bounce = 0;
+            p.type = 'normal';
+          }
         }
         break;
         
       case 'TIRED':
         // Movimiento lento y pesado
-        this.trailParticles.push({
-          x: e.clientX,
-          y: e.clientY,
-          color: '#6B6B6B',
-          alpha: 0.5,
-          size: 12,
-          life: 2, // Más duradero
-          vx: 0,
-          vy: 0.5
-        });
+        const pTired = this.getParticle();
+        if (pTired) {
+            pTired.active = true;
+            pTired.x = e.clientX;
+            pTired.y = e.clientY;
+            pTired.color = '#6B6B6B';
+            pTired.alpha = 0.5;
+            pTired.size = 12;
+            pTired.life = 2; // Más duradero
+            pTired.vx = 0;
+            pTired.vy = 0.5;
+            pTired.gravity = 0;
+            pTired.bounce = 0;
+            pTired.type = 'normal';
+        }
         break;
         
       case 'GRUMPY':
         // Repulsión agresiva
-        this.trailParticles.push({
-          x: e.clientX,
-          y: e.clientY,
-          color: '#FF0000',
-          alpha: 0.8,
-          size: 8,
-          life: 0.5,
-          vx: (Math.random() - 0.5) * 10,
-          vy: (Math.random() - 0.5) * 10
-        });
+        const pGrumpy = this.getParticle();
+        if (pGrumpy) {
+            pGrumpy.active = true;
+            pGrumpy.x = e.clientX;
+            pGrumpy.y = e.clientY;
+            pGrumpy.color = '#FF0000';
+            pGrumpy.alpha = 0.8;
+            pGrumpy.size = 8;
+            pGrumpy.life = 0.5;
+            pGrumpy.vx = (Math.random() - 0.5) * 10;
+            pGrumpy.vy = (Math.random() - 0.5) * 10;
+            pGrumpy.gravity = 0;
+            pGrumpy.bounce = 0;
+            pGrumpy.type = 'normal';
+        }
         break;
         
       case 'PLAYFUL':
         // Rebote elástico
-        this.trailParticles.push({
-          x: e.clientX,
-          y: e.clientY,
-          color: '#FF69B4',
-          alpha: 1,
-          size: 10,
-          life: 1,
-          vx: (Math.random() - 0.5) * 6,
-          vy: -Math.random() * 8, // Salta hacia arriba
-          gravity: 0.5,
-          bounce: 0.7
-        });
+        const pPlayful = this.getParticle();
+        if (pPlayful) {
+            pPlayful.active = true;
+            pPlayful.x = e.clientX;
+            pPlayful.y = e.clientY;
+            pPlayful.color = '#FF69B4';
+            pPlayful.alpha = 1;
+            pPlayful.size = 10;
+            pPlayful.life = 1;
+            pPlayful.vx = (Math.random() - 0.5) * 6;
+            pPlayful.vy = -Math.random() * 8; // Salta hacia arriba
+            pPlayful.gravity = 0.5;
+            pPlayful.bounce = 0.7;
+            pPlayful.type = 'normal';
+        }
         break;
-    }
-    
-    if (this.trailParticles.length > 80) {
-      this.trailParticles.shift();
     }
   }
 
@@ -183,14 +224,18 @@ class NaroaCursorSystem {
     
     if (artworkElement?.classList.contains('artwork-item')) {
       // Crear spotlight circular
-      this.trailParticles = [{
-        x: e.clientX,
-        y: e.clientY,
-        type: 'spotlight',
-        radius: 150,
-        alpha: 0.3,
-        color: '#FFD700'
-      }];
+      const p = this.getParticle();
+      if (p) {
+        p.active = true;
+        p.x = e.clientX;
+        p.y = e.clientY;
+        p.type = 'spotlight';
+        p.radius = 150;
+        p.alpha = 0.3;
+        p.color = '#FFD700';
+        p.life = 0.1; // Visual effect only lasts one frame per move, logic handled in loop
+        p.vx = 0; p.vy = 0; p.gravity = 0;
+      }
     }
   }
 
@@ -203,20 +248,20 @@ class NaroaCursorSystem {
     ];
     
     layers.forEach(layer => {
-      this.trailParticles.push({
-        x: e.clientX + (0.5 - layer.speed) * 20,
-        y: e.clientY + (0.5 - layer.speed) * 20,
-        color: layer.color,
-        alpha: layer.alpha,
-        size: layer.size,
-        life: 1,
-        layer: layer.speed
-      });
+      const p = this.getParticle();
+      if (p) {
+          p.active = true;
+        p.x = e.clientX + (0.5 - layer.speed) * 20;
+        p.y = e.clientY + (0.5 - layer.speed) * 20;
+        p.color = layer.color;
+        p.alpha = layer.alpha;
+        p.size = layer.size;
+        p.life = 1;
+        p.layer = layer.speed;
+        p.vx = 0; p.vy = 0; p.gravity = 0; p.bounce = 0;
+        p.type = 'normal';
+      }
     });
-    
-    if (this.trailParticles.length > 60) {
-      this.trailParticles.splice(0, 3);
-    }
   }
 
   // Loop de animación
@@ -225,12 +270,17 @@ class NaroaCursorSystem {
     
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     
-    // Actualizar y renderizar partículas
-    this.trailParticles = this.trailParticles.filter(p => {
+    // Actualizar y renderizar partículas usando el pool
+    // No usamos filter() ni map() para evitar allocations
+    
+    for (let i = 0; i < this.poolSize; i++) {
+        const p = this.particlePool[i];
+        if (!p.active) continue;
+
       // Actualizar física
-      if (p.vx !== undefined) p.x += p.vx;
-      if (p.vy !== undefined) p.y += p.vy;
-      if (p.gravity !== undefined) p.vy += p.gravity;
+      if (p.vx) p.x += p.vx;
+      if (p.vy) p.y += p.vy;
+      if (p.gravity) p.vy += p.gravity;
       
       // Rebote en el suelo
       if (p.bounce && p.y > this.canvas.height) {
@@ -239,8 +289,17 @@ class NaroaCursorSystem {
       }
       
       // Decaimiento de vida
-      p.life -= 0.02;
-      p.alpha = p.life;
+      if (p.type !== 'spotlight') {
+         p.life -= 0.02;
+         p.alpha = p.life;
+      } else {
+         p.life -= 0.5; // Spotlights decay fast as they are refreshed on move
+      }
+      
+      if (p.life <= 0) {
+          p.active = false;
+          continue;
+      }
       
       // Renderizar
       if (p.type === 'spotlight') {
@@ -257,9 +316,7 @@ class NaroaCursorSystem {
           : p.color;
         this.ctx.fill();
       }
-      
-      return p.life > 0;
-    });
+    }
   }
 
   // API pública

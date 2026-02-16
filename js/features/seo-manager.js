@@ -59,18 +59,18 @@ window.SeoManager = {
   },
 
   setMetaTag(name, content) {
-    // Handle standard meta name
+    // Try to find by name first
     let tag = document.querySelector(`meta[name="${name}"]`);
+    
+    // If not found, try property (for OG tags)
     if (!tag) {
-      // Handle Open Graph property
       tag = document.querySelector(`meta[property="${name}"]`);
     }
     
+    // Update existing or create new
     if (tag) {
       tag.setAttribute('content', content);
     } else {
-      // Create if missing (optional but good for robustness)
-      // Only for standard names for now to keep it simple, or OG properties
       const newTag = document.createElement('meta');
       if (name.startsWith('og:')) {
         newTag.setAttribute('property', name);
