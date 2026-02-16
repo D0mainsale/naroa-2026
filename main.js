@@ -67,6 +67,14 @@ class NaroaApp {
       await this.launch('Scroll', () => import('./js/core/scroll.js'));
       await this.launch('Cursor', () => import('./js/core/cursor.js'));
       
+      // Instantiate if they are classes
+      if (this.systems.Scroll?.SmoothScrollSystem) {
+        this.systems.Scroll = new this.systems.Scroll.SmoothScrollSystem();
+      }
+      if (this.systems.Cursor?.CursorSystem) {
+        this.systems.Cursor = new this.systems.Cursor.CursorSystem();
+      }
+      
       this.initLegacyModules();
       
       // Sync Logic
@@ -127,10 +135,14 @@ class NaroaApp {
           const target = document.getElementById(targetId);
           if (target) {
             this.systems.transitions.play(() => {
-              window.scrollTo({
-                top: target.offsetTop - 80,
-                behavior: 'instant'
-              });
+              if (this.systems.Scroll?.scrollTo) {
+                this.systems.Scroll.scrollTo(target.offsetTop - 80);
+              } else {
+                window.scrollTo({
+                  top: target.offsetTop - 80,
+                  behavior: 'instant'
+                });
+              }
               history.pushState(null, null, href);
             });
           }
