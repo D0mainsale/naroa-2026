@@ -249,5 +249,5 @@ class Router {
   }
 }
 
-// Export singleton
-window.Router = new Router();
+// Export class for orchestration
+export { Router };

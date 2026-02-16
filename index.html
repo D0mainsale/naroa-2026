@@ -180,10 +180,11 @@
 <!-- ... -->
 
   <!-- Design Award Core -->
-  <script type="module" src="js/core/scroll.js"></script>
-  <script type="module" src="js/effects/liquid-distortion.js"></script>
-  <script type="module" src="js/core/cursor.js"></script>
-  <script type="module" src="js/core/cursor.js"></script>
+  <script type="module" src="/main.js"></script>
+  <script type="module" src="/js/core/scroll.js"></script>
+  <script type="module" src="/js/effects/liquid-distortion.js"></script>
+  <script type="module" src="/js/core/cursor.js"></script>
+
   <link rel="stylesheet" href="css/naroa-palette.css">
   <link rel="stylesheet" href="css/typography-2026.css">
   <link rel="stylesheet" href="css/base.css">
@@ -327,24 +328,26 @@
   <!-- ═══ MICA NOTCH ══════════════════════════ -->
   <nav class="notch-container" aria-label="Navegación principal">
     <div class="notch">
-  <!-- ── NAVIGATION (Restore Premium) ── -->
+  <!-- ═══ NAVIGATION (Premium Notch Island) ═══ -->
   <nav class="nav" id="main-nav">
-    <div class="nav__logo">
-      <a href="#/" class="nav__brand">N</a>
-    </div>
-    
-    <ul class="nav__links">
-      <li><a href="#/" class="nav__link active">Home</a></li>
-      <li><a href="#/obra" class="nav__link">Obra</a></li>
-      <li><a href="#/sobre-mi" class="nav__link">Sobre mí</a></li>
-      <li><a href="#/contacto" class="nav__link nav__link--cta">Contacto</a></li>
-    </ul>
+    <div class="nav__inner">
+      <div class="nav__logo">
+        <a href="#/" class="nav__brand">N</a>
+      </div>
+      
+      <ul class="nav__links">
+        <li><a href="#/" class="nav__link active">Home</a></li>
+        <li><a href="#/obra" class="nav__link">Obra</a></li>
+        <li><a href="#/sobre-mi" class="nav__link">Sobre mí</a></li>
+        <li><a href="#/contacto" class="nav__link nav__link--cta">Contacto</a></li>
+      </ul>
 
-    <button class="nav__toggle" aria-label="Menu">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
+      <button class="nav__toggle" aria-label="Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
   </nav>
 
   <a href="#content" class="skip-to-content">Ir al contenido</a>

@@ -35,6 +35,7 @@ This workflow initializes the **Omniscient Architect** state. Use this to transf
 3. Commit result to Cortex Memory.
 
 // turbo-all
-## Initialization Command
 
-Execute: `task_boundary Mode=PLANNING TaskName="[ARKITETV-1] Genesis Initiation" TaskStatus="Building the Seed..." TaskSummary="Launching the ARKITETV-1 protocol. The system is reaching singularity."`
+## Initialization
+
+Execute: `task_boundary Mode=PLANNING TaskName="[ARK-GEN] Protocol Genesis" TaskStatus="Initializing Neural Seeds..." TaskSummary="Arkitetv-1 Genesis is online. The blueprint is perfect. The future is active."`
