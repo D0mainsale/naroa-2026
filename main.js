@@ -1,13 +1,11 @@
 /**
  * NAROA 2026 — Sovereign Orchestration Layer (v∞)
  * 
- * This module manages the lifecycle of all core systems.
- * It ensures technical sovereignty and aesthetic divinity.
- * 
- * @module main
+ * Este es el corazón del sistema. Unifica routing, rankings, IA y efectos
+ * en una única arquitectura modular y soberana.
  */
 
-// CSS Pipeline
+// CSS Pipeline (Vite)
 import './css/variables.css';
 import './css/naroa-palette.css';
 import './css/typography-2026.css';
@@ -31,22 +29,38 @@ import './css/nav.css';
 import './css/divinity-awards.css';
 import './css/mica-dust.css';
 
-// Feature Orchestrator
+// Core Systems
+import { Router } from './js/core/router.js';
+import { RankingSystem } from './js/core/ranking-system.js';
+import { MicaSystem } from './js/core/mica-orchestrator.js';
+import { initEnhancements } from './js/core/enhancements.js';
+
 class NaroaApp {
   constructor() {
     this.systems = {};
-    this.init();
+    this.boot();
   }
 
-  async init() {
+  async boot() {
     console.groupCollapsed('🌀 [NEXUS-V∞] Establishing Sovereignty');
     
     try {
-      // 1. Core Systems
+      // 1. Core Modules Initialization
+      this.systems.router = new Router();
+      this.systems.rankings = RankingSystem;
+      this.systems.mica = new MicaSystem();
+      
+      // 2. Routing Setup (Migrated from app.js)
+      this.setupRouting();
+      
+      // 3. Progressive Enhancements
+      initEnhancements();
+      
+      // 4. Global Effects
       await this.launch('Scroll', () => import('./js/core/scroll.js'));
       await this.launch('Cursor', () => import('./js/core/cursor.js'));
       
-      // 2. Structural Integrity
+      // Sync Logic
       this.ensurePremiumStructuralHarmony();
       
       console.log('✅ [APOTHEOSIS] System Soul active.');
@@ -57,31 +71,76 @@ class NaroaApp {
     console.groupEnd();
   }
 
-  /**
-   * Launch a system with lifecycle management.
-   */
+  setupRouting() {
+    const r = this.systems.router;
+
+    r.register('#/', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    r.register('#/galeria', () => this.loadFeature('gallery', 'loadArchive'));
+    r.register('#/archivo', () => this.loadFeature('gallery', 'loadArchive'));
+    r.register('#/contacto', () => this.loadFeature('videocall', 'init', 'contacto-container'));
+    
+    // Games Overlay
+    r.register('#/juegos', () => r.showView('view-juegos'));
+    r.register('#/juego', () => { r.showView('view-juego'); this.loadFeature('oca', 'init'); });
+    
+    // Auto-init router
+    r.init();
+    
+    // Navigation binding (smooth scroll)
+    this.bindNavigation();
+  }
+
+  async loadFeature(feature, method, ...args) {
+    const map = {
+      gallery: () => import('./js/features/gallery.js'),
+      videocall: () => import('./js/features/videocall-panel.js'),
+      oca: () => import('./js/features/oca-game.js'),
+      exposiciones: () => import('./js/features/exposiciones-timeline.js'),
+    };
+
+    if (map[feature]) {
+      const module = await map[feature]();
+      const instance = module.default || module[feature] || window[feature.charAt(0).toUpperCase() + feature.slice(1)];
+      if (instance && instance[method]) instance[method](...args);
+    }
+  }
+
+  bindNavigation() {
+    document.querySelectorAll('.nav__link').forEach(link => {
+      link.addEventListener('click', (e) => {
+        const href = link.getAttribute('href');
+        if (href.startsWith('#/')) {
+          e.preventDefault();
+          const targetId = `view-${href.replace('#/', '') || 'home'}`;
+          const target = document.getElementById(targetId);
+          if (target) {
+            window.scrollTo({
+              top: target.offsetTop - 80,
+              behavior: 'smooth'
+            });
+            history.pushState(null, null, href);
+          }
+        }
+      });
+    });
+  }
+
   async launch(name, importFn) {
     try {
       const module = await importFn();
       this.systems[name] = module.default || module;
-      console.log(`📡 [${name}] Active.`);
     } catch (e) {
       console.warn(`⚠️ [${name}] Launch inhibited:`, e);
     }
   }
 
-  /**
-   * Align with user's latest structural changes (Premium Notch).
-   */
   ensurePremiumStructuralHarmony() {
-    const navInner = document.querySelector('.nav__inner');
-    if (navInner) {
-      navInner.classList.add('divinity-active');
-    }
+    document.querySelector('.nav__inner')?.classList.add('divinity-active');
   }
 }
 
-// Global Manifestation
+// Singleton Manifestation
 window.Naroa = new NaroaApp();
+export default window.Naroa;
 
 

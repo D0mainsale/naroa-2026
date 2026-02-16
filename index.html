@@ -804,114 +804,18 @@
   </svg>
 
   <!-- ═══ SCRIPTS ════════════════════════════ -->
-  <!-- Core (order matters) -->
-  <script src="js/core/router.js"></script>
-  <script src="js/core/ranking-system.js"></script>
-  <script src="js/features/gallery.js"></script>
-  <script src="js/features/lightbox.js"></script>
-  <script src="js/core/app.js"></script>
-  <!-- MICA orchestrator loaded below after games -->
-  <script type="module">
-    import obs from './js/services/observability-service.js';
-    obs.init();
-  </script>
-
-  <script type="module" src="js/core/scroller.js"></script>
-  <script type="module" src="js/core/scroll.js"></script>
-  <script type="module" src="js/effects/liquid-distortion.js"></script>
-  <!-- Effects (deferred for performance) -->
+  <!-- External Dependencies (Global for now) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/openseadragon/4.1.0/openseadragon.min.js" defer></script>
+  
+  <!-- Legacy Effects & Systems (Deferred) -->
   <script src="js/effects/kinetic-text.js" defer></script>
   <script src="js/effects/magnetic-button.js" defer></script>
-  <script src="js/effects/reveal-observer.js" type="module" defer></script>
-  <script src="js/effects/cursor-trail.js" type="module" defer></script>
-  <script src="js/effects/cursor-spotlight.js" type="module" defer></script>
-  <script src="js/effects/palindrome-hero.js" type="module" defer></script>
-  <script src="js/effects/wave-background.js" type="module" defer></script>
-  <script src="js/effects/organic-particles.js" type="module" defer></script>
-  <script src="js/effects/eyes-follow.js" type="module" defer></script>
-  <script src="js/effects/hero-parallax.js" type="module" defer></script>
-
-  <!-- Core Systems (deferred) -->
   <script src="js/core/soty-effects.js" defer></script>
   <script src="js/core/wow-effects-2026.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/openseadragon/4.1.0/openseadragon.min.js" defer></script>
-  <script src="js/features/deep-zoom.js" defer></script>
   <script src="js/features/scroll-to-top.js" defer></script>
-
-  <!-- Games (deferred - load after DOM) -->
-  <script src="js/features/oca-game.js" defer></script>
-  <script src="js/features/tetris-game.js" defer></script>
-  <script src="js/features/memory-game.js" defer></script>
-  <script src="js/features/puzzle-game.js" defer></script>
-  <script src="js/features/snake-game.js" defer></script>
-  <script src="js/features/breakout-game.js" defer></script>
-  <script src="js/features/collage-game.js" defer></script>
-  <script src="js/features/reinas-game.js" defer></script>
-  <script src="js/features/mica-game.js" defer></script>
-  <script src="js/features/kintsugi-game.js" defer></script>
-
-  <!-- MICA BRAIN (AI Orchestrator) v7.0 — Portrait Sales Edition -->
-  <script src="js/core/mica-orchestrator.js?v=7" defer></script>
-
-  <!-- Spotify Rotator -->
   <script src="js/spotify-rotator.js" defer></script>
 
-  <!-- Collector Mode -->
-  <script src="js/features/kimi-ideas.js" defer></script>
-
-  <!-- Progressive Enhancement: Lazy Images + Header Reveal -->
-  <script>
-    // ══ Lazy Images: Progressive blur-up ══
-    document.querySelectorAll('.gallery-lazy img, .gallery-massive__img').forEach(img => {
-      if (img.complete) {
-        img.classList.add('loaded');
-      } else {
-        img.addEventListener('load', () => img.classList.add('loaded'), { once: true });
-      }
-    });
-
-    // ══ View Header Reveal ══
-    const headerRevealObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('revealed');
-        }
-      });
-    }, { threshold: 0.3 });
-
-    document.querySelectorAll('.view__header, .gallery-section-header').forEach(el => {
-      headerRevealObserver.observe(el);
-    });
-
-    // ══ Scroll Progress Indicator ══
-    const scrollProgress = document.getElementById('scroll-progress');
-    if (scrollProgress) {
-      let ticking = false;
-      let scrollTimeout;
-
-      window.addEventListener('scroll', () => {
-        // Add active scrolling class
-        scrollProgress.classList.add('scrolling');
-        clearTimeout(scrollTimeout);
-        scrollTimeout = setTimeout(() => {
-          scrollProgress.classList.remove('scrolling');
-        }, 150);
-
-        if (!ticking) {
-          requestAnimationFrame(() => {
-            const scrollTop = window.scrollY;
-            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-            const progress = docHeight > 0 ? scrollTop / docHeight : 0;
-            scrollProgress.style.transform = `scaleX(${progress})`;
-            ticking = false;
-          });
-          ticking = true;
-        }
-      }, { passive: true });
-    }
-  </script>
-
-  <!-- Vite Module Entry Point -->
+  <!-- Vite Module Entry Point (Sovereign Orchestration Layer) -->
   <script type="module" src="/main.js"></script>
 
 </body>
