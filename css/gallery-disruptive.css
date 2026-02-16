@@ -371,6 +371,9 @@
     transform var(--duration-base) var(--ease-expo-out);
   mix-blend-mode: screen;
   z-index: 2;
+  /* Hardware acceleration for Safari */
+  transform: translateZ(0);
+  will-change: transform, opacity;
 }
 
 /* Red channel */
@@ -383,6 +386,17 @@
 .gallery-massive__item::after {
   background: inherit;
   filter: url('#chromatic-blue');
+}
+
+/* Safari specific fallback - SVG filters can glitch */
+@media not all and (min-resolution:.001dpcm) { 
+  @supports (-webkit-appearance:none) {
+    .gallery-massive__item::before,
+    .gallery-massive__item::after {
+      filter: none;
+      mix-blend-mode: overlay;
+    }
+  }
 }
 
 .gallery-massive__item:hover::before {

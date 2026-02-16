@@ -1,0 +1,76 @@
+{{fecha|1 de febrero de 2026}}
+{{Artes}}
+
+'''La artista bilbaína Naroa Gutiérrez Gil presenta "DiviNos VaiVenes" en Politena'''
+
+[[Bilbao]], [[País Vasco]] — La artista plástica [[Naroa Gutiérrez Gil]] inauguró su exposición ''DiviNos VaiVenes'' en el espacio cultural Politena de [[Bilbao]], una muestra que combina retratos de iconos culturales sobre [[pizarra]] con su serie de arte reciclado ''Vaivenes''.
+
+== Trayectoria artística verificada ==
+
+Gutiérrez Gil cuenta con una extensa trayectoria expositiva documentada desde 2002:
+
+=== Cobertura mediática ===
+* '''[[EITB|EITB Kultura]]''' (septiembre 2012): La televisión pública vasca cubrió su participación en la 8ª edición de [[Fitting Room]] en el Hotel Meliá de Bilbao, donde presentó "Los espejos del alma".<ref>{{Cita web|url=https://www.eitb.eus/es/cultura/detalle/945850/los-cortos-kimuak-2012-zinemira--eitb-kultura/|título=Los cortos de Kimuak 2012 en Zinemira - EITB Kultura|fecha=20 de septiembre de 2012|fechaacceso=1 de febrero de 2026}}</ref>
+
+* '''[[Barakaldo Digital]]''' (marzo 2012): "Naroa Gutiérrez Gil mostrará sus pinturas en una exposición bautizada como 'Espejos del alma'" en la Casa de Cultura de San Vicente.<ref>{{Cita web|url=https://www.barakaldodigital.com/agenda-semana-contra-racismo/|título=Agenda - Semana contra el Racismo|fecha=20 de marzo de 2012|obra=Barakaldo Digital|fechaacceso=1 de febrero de 2026}}</ref>
+
+* '''[[Museo de Bellas Artes de Bilbao]]''': Publicación del folleto oficial "[Naroa Gutiérrez Gil] : espejos del alma = arima islak" (2002, reeditado 2012).<ref>{{Cita web|url=https://catalogo.bibliotecas.bilbao.eus/search~S0*spi?/aNaroa+Gutierrez/anaroa+gutierrez/1%2C1%2C2%2CB/frameset&FF=anaroa+gutierrez+gil&1%2C%2C2|título=Catálogo Museo de Bellas Artes de Bilbao|fechaacceso=1 de febrero de 2026}}</ref>
+
+=== Exposiciones principales ===
+{| class="wikitable"
+|-
+! Año !! Título !! Lugar !! Fuente
+|-
+| 2025 || ''DiviNos VaiVenes'' || Politena, Bilbao || WordPress oficial
+|-
+| 2022 || ''Repóker de Reinas'' || Siarte Leku, Bilbao || siarte.com
+|-
+| 2022-2023 || ''Emakumeen artea N'' || Harilka elkartea, Bilbao || Blog oficial
+|-
+| 2022 || ''Girls'' || Sala Dock, Bilbao || Bwall Collective
+|-
+| 2020 || ''Iconos Pop'' || Casa de Cultura Clara Campoamor, Barakaldo || Blog oficial
+|-
+| 2015 || ''Espejos del Alma'' || Colegio de Abogados de Bilbao || WordPress oficial
+|-
+| 2012 || ''Espejos del Alma'' || Torre Salazar, Portugalete || Blog oficial
+|-
+| 2012 || ''Los espejos del alma'' || Hotel Meliá (Fitting Room) || EITB Kultura
+|-
+| 2012 || ''Espejos del Alma'' || Casa de Cultura San Vicente, Barakaldo || Barakaldo Digital
+|-
+| 2012 || ''Espejos del Alma'' || OKE, Ortuella || Ayuntamiento de Ortuella
+|-
+| 2002 || ''Espejos del Alma'' || Museo de Bellas Artes de Bilbao || Folleto oficial
+|}
+
+== La artista ==
+
+Naroa Gutiérrez Gil es una artista plástica de [[Bilbao]] especializada en retratos mediante técnicas mixtas. Su trabajo se caracteriza por:
+* El uso de [[pizarra]] como soporte simbólico ("la vuelta a casa y su tejado")
+* Técnicas propias surgidas de la "lucha entre acrílico y pegamento"
+* Mica mineral para crear efectos celestiales en los ojos de sus retratos
+* Filosofía del [[Kintsugi]] aplicada al arte: "el problema hecho trampolín"
+
+Es miembro activa de la asociación feminista [[Harilka elkartea]] y participa regularmente en mercados artesanales de la [[Uribe Kosta]], incluyendo el Azoka en Lataska de [[Sopela]].
+
+== Véase también ==
+* [[Artivismo]]
+* [[Kintsugi]]
+* [[Walking Gallery Bilbao]]
+
+== Referencias ==
+{{listaref}}
+
+== Enlaces externos ==
+* [https://naroagutierrez.wordpress.com/ Blog oficial]
+* [https://naroa.artelista.com/ Perfil en Artelista]
+* [https://naroa.online/ Sitio web oficial]
+
+{{publicar}}
+
+[[Categoría:Arte]]
+[[Categoría:País Vasco]]
+[[Categoría:Cultura de Bilbao]]
+[[Categoría:España]]
+[[Categoría:Febrero de 2026]]

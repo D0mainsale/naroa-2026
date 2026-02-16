@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MICA CRISIS - 21 Minijuegos Absurdos | Naroa Gutiérrez Gil</title>
+  <link rel="stylesheet" href="css/incredible-crisis.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: #1a1a2e;
+      overflow-x: hidden;
+    }
+  </style>
+</head>
+<body>
+  <div id="game-container"></div>
+  
+  <script src="js/incredible-crisis-games.js"></script>
+  <script>
+    // Inicializar cuando DOM esté listo
+    document.addEventListener('DOMContentLoaded', () => {
+      const manager = new IncredibleCrisisManager();
+      manager.mostrarMenu();
+    });
+  </script>
+</body>
+</html>

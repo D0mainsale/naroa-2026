@@ -1,0 +1,401 @@
+/* ═══════════════════════════════════════════════════════════
+   NAROA — ENCARGO + CONTACTO
+   Handcrafted layout — nothing should feel like a template.
+   ═══════════════════════════════════════════════════════════ */
+
+/* ──── ENCARGO FLOW ──── */
+.encargo {
+  padding: 120px 24px 40px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.encargo__intro {
+  margin-bottom: 80px;
+}
+
+.encargo__headline {
+  font-size: clamp(2.4rem, 6vw, 4rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: #fff;
+  margin: 0 0 24px;
+}
+
+.encargo__headline em {
+  font-style: normal;
+  color: transparent;
+  background: linear-gradient(135deg, #d4af37 0%, #f5d061 50%, #d4af37 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: encargo-shimmer 4s ease-in-out infinite;
+}
+
+@keyframes encargo-shimmer {
+  0%, 100% { background-position: 0% center; }
+  50% { background-position: 100% center; }
+}
+
+.encargo__lead {
+  font-size: 1.15rem;
+  color: rgba(255, 255, 255, 0.55);
+  max-width: 540px;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* ──── TIMELINE: organic flowing steps ──── */
+.encargo__timeline {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* The vertical thread connecting moments */
+.encargo__timeline::before {
+  content: '';
+  position: absolute;
+  left: 23px;
+  top: 24px;
+  bottom: 24px;
+  width: 1px;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(212, 175, 55, 0.3) 15%,
+    rgba(212, 175, 55, 0.15) 50%,
+    rgba(212, 175, 55, 0.3) 85%,
+    transparent 100%
+  );
+}
+
+/* Each moment in the process */
+.momento {
+  position: relative;
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 0;
+  padding: 24px 0;
+}
+
+/* The dot on the thread */
+.momento__dot {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 6px;
+}
+
+.momento__dot::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #d4af37;
+  box-shadow: 0 0 12px rgba(212, 175, 55, 0.5);
+  transition: transform 0.3s var(--stitch-transition), box-shadow 0.3s var(--stitch-transition);
+}
+
+.momento:hover .momento__dot::before {
+  transform: scale(2.2);
+  box-shadow: 0 0 30px rgba(212, 175, 55, 0.9);
+}
+
+.momento__content {
+  padding-left: 8px;
+}
+
+.momento__when {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(212, 175, 55, 0.7);
+  margin-bottom: 8px;
+}
+
+.momento__text {
+  font-size: 1.05rem;
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 1.7;
+  margin: 0;
+  max-width: 520px;
+  transition: color 0.3s ease;
+}
+
+.momento:hover .momento__text {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.momento__text strong {
+  color: #fff;
+  font-weight: 600;
+}
+
+/* Stagger the moments slightly for organic feel */
+.momento:nth-child(even) {
+  padding-left: 16px;
+}
+
+/* ──── REVEAL SUPPORT ──── */
+.momento, .faq-item {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.momento.revealed, .faq-item.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ──── DIVIDER ──── */
+.encargo__divider {
+  width: 40px;
+  height: 1px;
+  background: rgba(212, 175, 55, 0.2);
+  border: none;
+  margin: 60px auto 60px 23px;
+}
+
+/* ──── CONTACTO ──── */
+.contacto {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 24px 100px;
+}
+
+.contacto__block {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: start;
+}
+
+
+
+.contacto__titulo {
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 800;
+  line-height: 1.1;
+  color: #fff;
+  margin: 0 0 20px;
+  letter-spacing: -0.02em;
+}
+
+.contacto__parrafo {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.5);
+  line-height: 1.7;
+  margin: 0 0 32px;
+}
+
+.contacto__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 36px;
+  background: #d4af37;
+  color: #0a0a0a;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-decoration: none;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  box-shadow: 0 2px 12px rgba(212, 175, 55, 0.25);
+  letter-spacing: 0.01em;
+}
+
+.contacto__cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(212, 175, 55, 0.4);
+  background: #e0be4a;
+}
+
+.contacto__cta:active {
+  transform: translateY(0);
+}
+
+.contacto__cta-arrow {
+  transition: transform 0.3s ease;
+}
+
+.contacto__cta:hover .contacto__cta-arrow {
+  transform: translateX(4px);
+}
+
+/* Right: minimal contact details */
+.contacto__datos {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  padding-top: 8px;
+}
+
+.dato {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.dato__label {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.25);
+}
+
+.dato__value {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a.dato__value:hover {
+  color: #d4af37;
+}
+
+/* ──── COLOFÓN ──── */
+.contacto__colofon {
+  margin-top: 80px;
+  padding-top: 32px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.contacto__firma {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.2);
+  font-style: italic;
+  line-height: 1.6;
+  margin: 0;
+  max-width: 420px;
+}
+
+/* ──── FAQ SECTION ──── */
+.view--faq {
+  padding: 120px 24px;
+}
+
+.faq-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.faq-title {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 60px;
+  text-align: center;
+  letter-spacing: -0.02em;
+}
+
+.faq-accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.faq-item {
+  background: var(--stitch-glass-bg, rgba(255, 255, 255, 0.03));
+  border: 1px solid var(--stitch-glass-border, rgba(255, 255, 255, 0.06));
+  -webkit-backdrop-filter: blur(var(--stitch-glass-blur, 12px));
+  backdrop-filter: blur(var(--stitch-glass-blur, 12px));
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.4s var(--stitch-transition);
+}
+
+.faq-item:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(212, 175, 55, 0.4);
+  transform: translateX(8px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.faq-trigger {
+  width: 100%;
+  padding: 24px;
+  background: none;
+  border: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+}
+
+.faq-trigger span {
+  font-size: 1.5rem;
+  color: #d4af37;
+  transition: transform 0.3s ease;
+}
+
+.faq-item.active .faq-trigger span {
+  transform: rotate(45deg);
+}
+
+.faq-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.faq-item.active .faq-content {
+  max-height: 200px;
+}
+
+.faq-content p {
+  padding: 0 24px 24px;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.6;
+}
+
+/* ──── RESPONSIVE ──── */
+@media (max-width: 768px) {
+  .encargo { padding: 80px 20px 24px; }
+  .encargo__intro { margin-bottom: 56px; }
+
+  .contacto { padding: 0 20px 60px; }
+  .contacto__block {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .contacto__colofon { margin-top: 56px; }
+  .encargo__divider { margin: 40px auto 40px 23px; }
+  
+  .view--faq { padding: 80px 20px; }
+}
+
+@media (max-width: 480px) {
+  .encargo__timeline::before {
+    left: 16px;
+  }
+
+  .momento {
+    grid-template-columns: 36px 1fr;
+  }
+
+  .momento:nth-child(even) {
+    padding-left: 8px;
+  }
+
+  .encargo__divider {
+    margin-left: 16px;
+  }
+}

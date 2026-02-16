@@ -27,7 +27,8 @@ const GalleryDisruptive = {
   revealObserver: null,
   rafId: null,
   
-  // Zoom/Pan state
+  // Event Handlers Storage
+  handlers: {},
   zoom: {
     scale: 1,
     panning: false,
@@ -64,7 +65,10 @@ const GalleryDisruptive = {
   // ═════════════════════════════════════════════════════════════════════════════
 
   init() {
-    if (this.initialized) return;
+    if (this.initialized) {
+      console.warn('GalleryDisruptive already initialized, cleaning up first...');
+      this.destroy();
+    }
     this.initialized = true;
 
     // Load metadata first for premium experience
@@ -734,33 +738,34 @@ const GalleryDisruptive = {
 
     const layers = parallaxContainer.querySelectorAll('.gallery-parallax__layer');
     
-    const updateParallax = () => {
-      const scrollY = window.scrollY;
-      const windowHeight = window.innerHeight;
-      
-      layers.forEach((layer, i) => {
-        const speed = parseFloat(layer.style.getPropertyValue('--parallax-speed')) || (1 - i * 0.25);
-        const rect = layer.getBoundingClientRect();
-        
-        // Only animate when in viewport
-        if (rect.top < windowHeight && rect.bottom > 0) {
-          const yPos = scrollY * speed * 0.1;
-          layer.style.transform = `translateY(${yPos}px)`;
-        }
-      });
-      
-      this.parallax.ticking = false;
-    };
-
-    window.addEventListener('scroll', () => {
+    // Define handler
+    this.handlers.handleParallaxScroll = () => {
       if (!this.parallax.ticking) {
-        this.rafId = requestAnimationFrame(updateParallax);
+        this.rafId = requestAnimationFrame(() => {
+          const scrollY = window.scrollY;
+          const windowHeight = window.innerHeight;
+          
+          layers.forEach((layer, i) => {
+            const speed = parseFloat(layer.style.getPropertyValue('--parallax-speed')) || (1 - i * 0.25);
+            const rect = layer.getBoundingClientRect();
+            
+            // Only animate when in viewport
+            if (rect.top < windowHeight && rect.bottom > 0) {
+              const yPos = scrollY * speed * 0.1;
+              layer.style.transform = `translateY(${yPos}px)`;
+            }
+          });
+          
+          this.parallax.ticking = false;
+        });
         this.parallax.ticking = true;
       }
-    }, { passive: true });
+    };
+
+    window.addEventListener('scroll', this.handlers.handleParallaxScroll, { passive: true });
 
     // Initial call
-    updateParallax();
+    this.handlers.handleParallaxScroll();
   },
 
   // ═════════════════════════════════════════════════════════════════════════════
@@ -882,10 +887,11 @@ const GalleryDisruptive = {
     });
     
     // Track mouse movement
-    document.addEventListener('mousemove', (e) => {
+    this.handlers.handleCursorMove = (e) => {
       targetX = e.clientX;
       targetY = e.clientY;
-    }, { passive: true });
+    };
+    document.addEventListener('mousemove', this.handlers.handleCursorMove, { passive: true });
   },
 
   // ═════════════════════════════════════════════════════════════════════════════
@@ -893,9 +899,9 @@ const GalleryDisruptive = {
   // ═════════════════════════════════════════════════════════════════════════════
 
   setupKeyboardNav() {
-    document.addEventListener('keydown', (e) => {
+    this.handlers.handleGlobalKeydown = (e) => {
       // Lightbox keyboard navigation
-      if (this.lightbox.classList.contains('active')) {
+      if (this.lightbox && this.lightbox.classList.contains('active')) {
         switch (e.key) {
           case 'Escape':
             e.preventDefault();
@@ -936,14 +942,14 @@ const GalleryDisruptive = {
             break;
         }
       }
-      
+
       // Gallery grid keyboard navigation
       const focusedItem = document.activeElement;
       if (focusedItem?.classList.contains('gallery-massive__item')) {
         const items = Array.from(document.querySelectorAll('.gallery-massive__item'));
         const currentIdx = items.indexOf(focusedItem);
         const cols = window.innerWidth > 1024 ? 4 : window.innerWidth > 768 ? 3 : 2;
-        
+
         switch (e.key) {
           case 'ArrowRight':
             e.preventDefault();
@@ -967,7 +973,9 @@ const GalleryDisruptive = {
             break;
         }
       }
-    });
+    };
+
+    document.addEventListener('keydown', this.handlers.handleGlobalKeydown);
   },
 
   // ═════════════════════════════════════════════════════════════════════════════
@@ -1067,27 +1075,54 @@ const GalleryDisruptive = {
   // ═════════════════════════════════════════════════════════════════════════════
 
   destroy() {
+    // 1. Remove Global Listeners
+    if (this.handlers.handleParallaxScroll) {
+      window.removeEventListener('scroll', this.handlers.handleParallaxScroll);
+      this.handlers.handleParallaxScroll = null;
+    }
+
+    if (this.handlers.handleGlobalKeydown) {
+      document.removeEventListener('keydown', this.handlers.handleGlobalKeydown);
+      this.handlers.handleGlobalKeydown = null;
+    }
+
+    if (this.handlers.handleCursorMove) {
+      document.removeEventListener('mousemove', this.handlers.handleCursorMove);
+      this.handlers.handleCursorMove = null;
+    }
+
+    // 2. Stop Animation Loops
     if (this.rafId) {
       cancelAnimationFrame(this.rafId);
+      this.rafId = null;
     }
     
+    // 3. Disconnect Observers
     if (this.revealObserver) {
       this.revealObserver.disconnect();
+      this.revealObserver = null;
     }
     
     if (this.observer) {
       this.observer.disconnect();
+      this.observer = null;
     }
     
+    // 4. Remove DOM Elements
     if (this.lightbox) {
       this.lightbox.remove();
+      this.lightbox = null;
     }
     
     if (this.cursor) {
       this.cursor.remove();
+      this.cursor = null;
     }
     
+    // 5. Reset State
+    this.artworks = [];
     this.initialized = false;
+    console.log('[GalleryDisruptive] Destroyed and cleaned up.');
   }
 };
 
