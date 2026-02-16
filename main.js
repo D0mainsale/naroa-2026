@@ -35,6 +35,11 @@ import { RankingSystem } from './js/core/ranking-system.js';
 import { MicaSystem } from './js/core/mica-orchestrator.js';
 import { initEnhancements } from './js/core/enhancements.js';
 import { transition as PageTransition } from './js/core/transitions.js';
+// Visual Effects & Premium Systems
+import { SOTYEffects } from './js/core/soty-effects.js';
+import { WOWEffects2026 } from './js/core/wow-effects-2026.js';
+import { ScrollToTop } from './js/features/scroll-to-top.js';
+import { SpotifyRotator } from './js/spotify-rotator.js';
 
 class NaroaApp {
   constructor() {
@@ -62,6 +67,8 @@ class NaroaApp {
       await this.launch('Scroll', () => import('./js/core/scroll.js'));
       await this.launch('Cursor', () => import('./js/core/cursor.js'));
       
+      this.initLegacyModules();
+      
       // Sync Logic
       this.ensurePremiumStructuralHarmony();
       
@@ -83,7 +90,10 @@ class NaroaApp {
     
     // Games Overlay
     r.register('#/juegos', () => this.systems.transitions.play(() => r.showView('view-juegos')));
-    r.register('#/juego', () => this.systems.transitions.play(() => { r.showView('view-juego'); this.loadFeature('oca', 'init'); }));
+    r.register('#/juego', () => this.systems.transitions.play(() => { 
+      r.showView('view-juego'); 
+      this.loadFeature('restaurador-game', 'init'); 
+    }));
     
     // Auto-init router
     r.init();
@@ -96,7 +106,7 @@ class NaroaApp {
     const map = {
       gallery: () => import('./js/features/gallery.js'),
       videocall: () => import('./js/features/videocall-panel.js'),
-      oca: () => import('./js/features/oca-game.js'),
+      'restaurador-game': () => import('./js/features/restaurador-game.js'),
       exposiciones: () => import('./js/features/exposiciones-timeline.js'),
     };
 
@@ -141,10 +151,36 @@ class NaroaApp {
   ensurePremiumStructuralHarmony() {
     document.querySelector('.nav__inner')?.classList.add('divinity-active');
   }
+
+  initLegacyModules() {
+    // Initialize premium effects now that they are modules
+    const kt = new KineticText({
+      maxDist: 150,
+      influence: 0.15,
+      staggerDelay: 0.02
+    }).init('.kinetic-text');
+    
+    const mb = new MagneticButton({
+      attraction: 0.2
+    }).init('.magnetic-btn');
+
+    this.systems.kineticText = kt;
+    this.systems.magneticButton = mb;
+
+    // SOTY & WOW Libraries
+    SOTYEffects.initAll();
+    WOWEffects2026.initAll();
+
+    // Specific Premium Components
+    ScrollToTop.init();
+    this.systems.spotify = new SpotifyRotator();
+
+    // Liquid Distortion (Dynamic Import)
+    this.launch('LiquidDistortion', () => import('./js/effects/liquid-distortion.js'));
+  }
 }
 
 // Singleton Manifestation
 window.Naroa = new NaroaApp();
-export default window.Naroa;
 
 

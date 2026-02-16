@@ -17,7 +17,8 @@
 - [x] **Wave 3: Micro-Interactions**
    - [x] Magnetic Notch (Spring physics in `notch-island.js`)
    - [x] Custom Cursor (Glow trail in `js/core/cursor.js`)
-- [/] **Wave 4: Polish & Transitions**
-   - [ ] Implement Cinematic Page Transitions (GSAP + Clip-path)
-   - [ ] Add Performance Optimizations (Lazy loading, WebGL cleanup)
-   - [ ] Final QA & Award-Ready Audit
+- [x] **Wave 4: Polish & Transitions**
+   - [x] Implement Cinematic Page Transitions (GSAP + Clip-path)
+   - [x] Add Performance Optimizations (Lazy loading, WebGL cleanup)
+   - [x] Final QA & Award-Ready Audit
+   - [x] Unified ESM Orchestration (Legacy cleanup)
