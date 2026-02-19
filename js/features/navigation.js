@@ -56,8 +56,7 @@
         const id = entry.target.id;
         // Map view IDs to routes (e.g. view-home -> #/)
         let hash = '#/';
-        if (id === 'view-gallery') hash = '#/galeria';
-        else if (id === 'view-archivo') hash = '#/galeria';
+        if (id === 'view-archivo') hash = '#/galeria';
         else if (id === 'view-exposiciones') hash = '#/exposiciones';
         else if (id === 'view-about') hash = '#/about';
         else if (id === 'view-contacto') hash = '#/contacto';

@@ -20,7 +20,6 @@ class SwarmNavigator extends SwarmAgent {
     super('Navigator');
     this.viewMap = {
       'view-home':      { x: 0, y: 0 },
-      'view-gallery':   { x: '100vw', y: 0 },
       'view-archivo':   { x: '100vw', y: 0 },
       'view-about':     { x: 0, y: '100vh' },
       'view-contacto':  { x: '100vw', y: '100vh' },

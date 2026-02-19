@@ -54,7 +54,12 @@
 </head>
 <body>
   <!-- Navigation - HIDDEN (MICA is the interface) -->
-  <nav class="nav nav--hidden" aria-hidden="true"></nav>
+  <nav class="nav nav--hidden" id="main-nav" aria-hidden="true">
+    <button class="nav__toggle" id="nav-toggle" aria-label="Menú">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav__links"></div>
+  </nav>
 
   <!-- TRINITY OVERLAYS -->
   <div class="page-transition-overlay" id="page-curtain">
@@ -62,7 +67,7 @@
   </div>
   
   <div class="scroll-progress-container">
-      <div class="scroll-progress-bar" id="scroll-thread">
+      <div class="scroll-progress-bar" id="scroll-progress">
           <div class="scroll-progress-thread"></div>
       </div>
   </div>
@@ -89,6 +94,9 @@
     </div>
   </main>
 
+  <!-- Artwork Detail Overlay -->
+  <div class="view game-view" id="view-obra"></div>
+
   <!-- Lightbox -->
   <div class="lightbox" id="lightbox" hidden>
     <button class="lightbox__close" aria-label="Cerrar">&times;</button>
@@ -106,9 +114,6 @@
   <!-- Gallery Disruptive 2.0: SVG Filters -->
   <svg class="svg-filters-hidden" aria-hidden="true">
     <defs>
-      <filter id="chromatic-red" x="-20%" y="-20%" width="140%" height="140%">
-        <feColorMatrix type="matrix" values="1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0"/>
-      </filter>
       <filter id="chromatic-blue" x="-20%" y="-20%" width="140%" height="140%">
         <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 0"/>
       </filter>
